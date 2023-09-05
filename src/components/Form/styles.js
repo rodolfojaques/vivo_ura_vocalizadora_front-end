@@ -29,6 +29,7 @@ padding-bottom: 1.5rem;
         gap: 1.5rem;
 
         margin-top: 1.5rem;
+        padding: .3rem;
 
         div{
             display: flex;
@@ -39,7 +40,7 @@ padding-bottom: 1.5rem;
 
             input{
                 height: 3rem;
-                width: 100%;
+                width: 90%;
                 padding-left: .5rem;
 
                 &::placeholder{
@@ -54,10 +55,8 @@ padding-bottom: 1.5rem;
     }
 
     figure{
-        width: 3rem;
-        height: 3rem;
-        border-radius: 100%;
-
+        width: 2.5rem;
+        height: 2.5rem;
         display: flex;
         justify-content: center;
         align-items: center;

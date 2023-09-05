@@ -1,8 +1,9 @@
 import { FormStl } from "./styles";
 
-function FormComponent({children,title}){
+function FormComponent({children,title,onSubmit}){
+
     return (
-        <FormStl>
+        <FormStl onSubmit={onSubmit}>
             <header className="title">
                 <h2>{title}</h2>
             </header>

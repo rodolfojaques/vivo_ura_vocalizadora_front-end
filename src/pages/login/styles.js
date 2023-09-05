@@ -23,10 +23,26 @@ export const LoginStl = styled.main`
 
         font-weight: bold;
         font-size: large;
+
+        &:hover{
+            cursor: pointer;
+            opacity: .7;
+        }
     }
 
-    .imgPass{
+    .container_err{
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+    }
+
+    .msg_error{
+        color: red;
+        font-size: x-small;
+    }
+
+    /* .imgPass{
         width: 3.8rem;
         height: 3.8rem;
-    }
+    } */
 `

@@ -41,6 +41,19 @@ export const LoginStl = styled.main`
         font-size: x-small;
     }
 
+    .company{
+        color: gray;
+
+        height: 2rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .3rem;
+
+        margin-top: 1.5rem;
+    }
+
     /* .imgPass{
         width: 3.8rem;
         height: 3.8rem;

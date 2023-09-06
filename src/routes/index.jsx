@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "../pages/login/index.jsx";
 import PageAdmin from "../pages/admin/index.jsx";
+import ListaDeAlarmes from "../pages/listaDeAlarmes/index.jsx";
 
 function Routes(){
     return (
@@ -10,6 +11,9 @@ function Routes(){
             </Route>
             <Route path="/admin" exact>
                 <PageAdmin/>
+            </Route>  
+            <Route path="/list-alarmes" exact>
+                <ListaDeAlarmes />
             </Route>            
         </Switch>
     )

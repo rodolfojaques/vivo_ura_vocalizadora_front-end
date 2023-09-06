@@ -17,7 +17,7 @@ function Header(){
             {!!clickMenu?
             <ModalMenu onPointerLeave={()=> setClickMenu(!clickMenu)} setClickMenu={setClickMenu} clickMenu={clickMenu} title={"Menu"}>
                 <ul  className="lista_menu">
-                    <li className="item_modal-menu">
+                    <li onClick={()=> history.push('/list-alarmes')} className="item_modal-menu">
                         <p className="str_item_menu">Lista de Alarmes</p>
                     </li>
                     <li className="item_modal-menu">

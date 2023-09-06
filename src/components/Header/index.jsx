@@ -3,6 +3,9 @@ import { HeaderStl } from "./styles"
 import ModalMenu from "../ModalMenu"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+
+import * as Icon from "react-bootstrap-icons"
+
 function Header(){
     const [ clickMenu, setClickMenu ] = useState(false)
     const [ clickAdm, setClickAdm ] = useState(false)
@@ -12,8 +15,8 @@ function Header(){
     return (
         <HeaderStl style={{position: "relative"}}>
             {!!clickMenu?
-            <ModalMenu title={"Menu"}>
-                <ul className="lista_menu">
+            <ModalMenu onPointerLeave={()=> setClickMenu(!clickMenu)} setClickMenu={setClickMenu} clickMenu={clickMenu} title={"Menu"}>
+                <ul  className="lista_menu">
                     <li className="item_modal-menu">
                         <p className="str_item_menu">Lista de Alarmes</p>
                     </li>
@@ -33,23 +36,23 @@ function Header(){
             </ModalMenu> : ""           
             }
             {!!clickAdm?
-            <ModalMenu typeModal={"adm"} title={"Menu"}>
+            <ModalMenu onPointerLeave={()=> setClickAdm(!clickAdm)} typeModal={"adm"} title={"Admin"}>
                 <ul className="list_admBtn">
                     <li onClick={()=> history.push("/")} className="item_modal-menu">
-                        <p className="str_item_menu">Logout</p>
+                        <p className="str_item_menu"><Icon.BoxArrowLeft  size={30}/>Logout</p>
                     </li>                    
                 </ul>
             </ModalMenu> : ""           
             }            
             <div className="container_menu-logo">
-                <button onClick={()=>setClickMenu(!clickMenu)} className="btn_menu">M</button>
+                <button onPointerEnter={()=>setClickMenu(!clickMenu)} onClick={()=>setClickMenu(!clickMenu)} className="btn_menu"><Icon.List size={50} /></button>
                 <div className="logo_str">
                     <p className="ura">Ura</p>
                     <p className="vocal">Vocalizadora</p>
                 </div>
             </div>
-            <button onClick={()=> setClickAdm(!clickAdm)} className="status_admin">
-                Admin <span className="seta_btn"> v</span>
+            <button onPointerEnter={()=> setClickAdm(!clickAdm)} onClick={()=>setClickAdm(!clickAdm)} className="status_admin">
+                Admin <Icon.ChevronDown  size={20}/>
             </button>
         </HeaderStl>
     )

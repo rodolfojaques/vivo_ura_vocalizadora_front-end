@@ -1,11 +1,8 @@
 import FormComponent from "../../components/Form"
-import ident from "../../assets/cardId.png"
-import pass from "../../assets/padlokPass.png"
-import logo from "../../assets/logoProv.png"
-
-import * as Icon from "react-bootstrap-icons"
-
 import { LoginStl } from "./styles"
+
+import logo from "../../assets/logoProv.png"
+import * as Icon from "react-bootstrap-icons"
 
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
@@ -50,7 +47,7 @@ function Login(){
                     <div className="inputs">
                         <label htmlFor="" className="labelInput">
                             <figure>
-                                <img src={pass} alt="" className="imgPass" />
+                                <Icon.UnlockFill size={35} />
                             </figure>                            
                         </label>                        
                         <div className="container_err">
@@ -61,7 +58,8 @@ function Login(){
                     </div>                    
                     <input type="submit" className="submit" value="Enter"/>
                 </form>
-            </FormComponent>            
+            </FormComponent> 
+            <span className="company"><Icon.CCircle size={16}/> Techsolutio 2023</span>           
         </LoginStl>
 
     )

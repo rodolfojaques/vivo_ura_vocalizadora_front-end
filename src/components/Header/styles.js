@@ -6,23 +6,29 @@ export const HeaderStl = styled.header`
     align-items: center;
     padding: 0 1rem;
 
-    height: 8vh;
+    height: 5rem;
 
     box-shadow: 0 0 2px 0;
 
     .container_menu-logo{
         display: flex;
+        justify-content: center;
         gap: .5rem;
-        align-items: baseline;
+        align-items: center;
 
-        max-height: 3rem;
+        max-height: 5rem;
 
         .btn_menu{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
             background-color: white;
             color: purple;
 
             border-style: none;
             border: solid purple 3px;
+            border-radius: 5px;
 
             font-weight: bold;
             font-size: x-large;
@@ -32,6 +38,7 @@ export const HeaderStl = styled.header`
 
             &:hover{
                 cursor: pointer;
+                
             }
 
             &:active{
@@ -47,7 +54,6 @@ export const HeaderStl = styled.header`
         .ura{
             font-weight: 900;
             font-size: 40px;
-
             height: 2.33rem;
         }
 
@@ -68,7 +74,11 @@ export const HeaderStl = styled.header`
 
         width: 8rem;
         height: 3rem;
-        padding-left: 28px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-left: 10px;
 
         font-size: large;
 

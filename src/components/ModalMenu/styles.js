@@ -4,7 +4,7 @@ export const ModalMenuStl = styled.div`
     background-color: ${({typeModal})=> typeModal==="adm"? "#FFF":"purple"};
 
     width: ${({typeModal})=> typeModal==="adm"? "200px":"280px"};
-    height: ${({typeModal})=> typeModal==="adm"? "10rem":"100vh"};
+    height: ${({typeModal})=> typeModal==="adm"? "8rem":"100vh"};
 
     display: flex;
     flex-direction: column;
@@ -44,10 +44,10 @@ export const ModalMenuStl = styled.div`
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        gap: 5rem;
-        padding: ${({typeModal})=> typeModal==="adm"? ".8rem":"3rem .8rem"};
+        gap: .65rem;
+        padding: ${({typeModal})=> typeModal==="adm"? "1rem .8rem":"1rem .8rem"};
 
-        width: 90%;
+        width: 100%;
         height: ${({typeModal})=> typeModal==="adm"? "4rem":"47rem"};
 
         font-size: larger;

@@ -17,7 +17,7 @@ function Header(){
             {!!clickMenu?
             <ModalMenu onPointerLeave={()=> setClickMenu(!clickMenu)} setClickMenu={setClickMenu} clickMenu={clickMenu} title={"Menu"}>
                 <ul  className="lista_menu">
-                    <li onClick={()=> history.push('/list-alarmes')} className="item_modal-menu">
+                    <li onClick={()=> history.push('/lista-alarmes')} className="item_modal-menu">
                         <p className="str_item_menu">Lista de Alarmes</p>
                     </li>
                     <li className="item_modal-menu">
@@ -36,8 +36,11 @@ function Header(){
             </ModalMenu> : ""           
             }
             {!!clickAdm?
-            <ModalMenu onPointerLeave={()=> setClickAdm(!clickAdm)} typeModal={"adm"} title={"Admin"}>
+            <ModalMenu onPointerLeave={()=> setClickAdm(!clickAdm)} typeModal={"adm"}>
                 <ul className="list_admBtn">
+                    <li className="item_modal-menu">
+                        <p className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
+                    </li> 
                     <li onClick={()=> history.push("/")} className="item_modal-menu">
                         <p className="str_item_menu"><Icon.BoxArrowLeft  size={30}/>Logout</p>
                     </li>                    

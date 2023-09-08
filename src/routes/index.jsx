@@ -9,10 +9,10 @@ function Routes(){
             <Route path="/" exact>
                 <Login/>
             </Route>
-            <Route path="/admin" exact>
+            <Route path="/home" exact>
                 <PageAdmin/>
             </Route>  
-            <Route path="/list-alarmes" exact>
+            <Route path="/lista-alarmes" exact>
                 <ListaDeAlarmes />
             </Route>            
         </Switch>

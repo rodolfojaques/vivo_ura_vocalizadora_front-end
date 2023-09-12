@@ -2,7 +2,42 @@ import styled from "styled-components";
 
 export const ListaDeAlarmesStl = styled.main`
 .cabListAlarm{
-    padding-left: 3rem; /**retirar (provisório) */
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    padding: 0 3rem;
+
+    margin-bottom: 2rem;
+
+    .quantidade_linhas{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: .3rem;
+
+        width: 7rem;
+
+        .quant_lin_label{
+            font-size: small;
+            font-weight: bold;
+        }
+
+        #quant_lin{
+            width: 6rem;
+            height: 2rem;
+            padding: 0rem .3rem;
+
+            border-style: none;
+            border: solid gray 1px;
+            border-radius: 5px;
+
+            background-color: white;
+
+            color: gray;
+        }
+    }
 }
 `
 

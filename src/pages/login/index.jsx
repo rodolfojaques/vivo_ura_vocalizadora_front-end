@@ -24,7 +24,7 @@ function Login(){
     })
 
     const formSchema = data => {
-        history.push('/admin')
+        history.push('/home')
     }
 
     return(

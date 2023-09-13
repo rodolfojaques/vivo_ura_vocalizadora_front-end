@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
-// import TableZebComponent from "../../components/TableZeb";
 import TableComponent from "../../components/tableReact";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
 
@@ -9,6 +8,7 @@ import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
 function ListaDeAlarmes(){
 
     const [ linhas, setLinhas ] = useState(5)
+    const [ arrMock, setArrMock ] = useState([])
 
     const mockJson = [{
         "ID_EVENTO": "5491159",
@@ -20,7 +20,7 @@ function ListaDeAlarmes(){
         "TIPO_REDE_COD": 501,
         "TIPO_REDE_COD_INT": 501,
         "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
+        "ESTADO": "RS",
         "LOCALIDADE_COD": 41628,
         "MUNICIPIO": "SWW",
         "LOCALIDADE": "SWW",
@@ -58,7 +58,7 @@ function ListaDeAlarmes(){
         "RPA_STATUS": 2,
         "SIGITM_FLUXO": 1,
         "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
+        "TIPO_TA": "Manutenção",
         "TIPO_REDE_COD": 501,
         "TIPO_REDE_COD_INT": 501,
         "TIPO_REDE": "Energia",
@@ -100,11 +100,11 @@ function ListaDeAlarmes(){
         "RPA_STATUS": 2,
         "SIGITM_FLUXO": 1,
         "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
+        "TIPO_TA": "Suporte",
         "TIPO_REDE_COD": 501,
         "TIPO_REDE_COD_INT": 501,
         "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
+        "ESTADO": "SP",
         "LOCALIDADE_COD": 41628,
         "MUNICIPIO": "SWW",
         "LOCALIDADE": "SWW",
@@ -146,7 +146,7 @@ function ListaDeAlarmes(){
         "TIPO_REDE_COD": 501,
         "TIPO_REDE_COD_INT": 501,
         "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
+        "ESTADO": "RS",
         "LOCALIDADE_COD": 41628,
         "MUNICIPIO": "SWW",
         "LOCALIDADE": "SWW",
@@ -163,7 +163,7 @@ function ListaDeAlarmes(){
         10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
         04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
         de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
+        "TIPO_FALHA": "QUEDA DE LUZ",
         "TIPO_AFETACAO": "Sem Afetação de Serviço",
         "EQUIPAMENTO": "USCC",
         "TIPO_CORRENTE_ELETRICA": "Contínua",
@@ -188,7 +188,7 @@ function ListaDeAlarmes(){
         "TIPO_REDE_COD": 501,
         "TIPO_REDE_COD_INT": 501,
         "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
+        "ESTADO": "SP",
         "LOCALIDADE_COD": 41628,
         "MUNICIPIO": "SWW",
         "LOCALIDADE": "SWW",
@@ -205,7 +205,7 @@ function ListaDeAlarmes(){
         10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
         04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
         de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
+        "TIPO_FALHA": "SEM ENERGIA",
         "TIPO_AFETACAO": "Sem Afetação de Serviço",
         "EQUIPAMENTO": "USCC",
         "TIPO_CORRENTE_ELETRICA": "Contínua",
@@ -452,6 +452,90 @@ function ListaDeAlarmes(){
         []
     );
 
+    useEffect(()=>{
+        setArrMock(mockJson)
+    },[])
+
+    const handleValueChange = (event,arr) => {
+        const value = event.target.value || "";
+        
+        const newArrMock = arr.filter((obj) => {
+
+            if(obj?.TIPO_TA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_REDE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ESTADO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.LOCALIDADE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.SITE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_ALARME?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.CLASSIFICACAO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ID_EVENTO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ID_EQUIPAMENTO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RPA_STATUS?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.SIGITM_FLUXO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_BILHETE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_REDE_COD?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_REDE_COD_INT?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.LOCALIDADE_COD?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.MUNICIPIO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ID_SITE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.SEQUENCIA_ALARME?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.EMPRESA_MANUTENCAO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ALARME?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_FALHA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_AFETACAO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.EQUIPAMENTO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_CORRENTE_ELETRICA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.CAPACIDADE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.DATA_APRESENTACAO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.FABRICANTE?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.MODELO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.SALAS_AFETADAS?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.HISTORICO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;            
+            } else if(obj?.HISTORICO_TIPO?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_PLANTA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TIPO_PLANTA_COD?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.TA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.ELEMENTO_SIGLA?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            }
+        })
+        setArrMock(newArrMock)
+    };
+
     return (
         <ListaDeAlarmesStl>
             <Header />
@@ -535,23 +619,23 @@ function ListaDeAlarmes(){
                                 </label>
                                 <select className="campos_dropDown">
                                     <option value="ultimos alarmes">...</option>
-                                </select>                            
+                                </select>
+                                <input  type="submit" className="btn_filtrar" value={"Filtrar"} />                            
                             </div>                            
                         </div>
                         
                     </div>
                     <div className="pesquisa_btnSubmit">
-                        <input type="text" className="barra_pesquisa" />
-                        <input type="submit" className="btn_filtrar" value={"Filtrar"} />
+                        <input onChange={(event)=> handleValueChange(event,mockJson)} placeholder="Pesquisar" type="text" className="barra_pesquisa" />
+                        
                     </div>
                 </FormListAlarmStl>
                 <div className="quantidade_linhas">
                     <label htmlFor="" className="quant_lin_label">Mostrar linhas</label>
-                    <input onChange={(e)=> setLinhas(Number(e.target.value))} type="number" min={1} name="quant_line" id="quant_lin" placeholder="Qtn linhas"/>
+                    <input onChange={(e)=> setLinhas(Number(e.target.value))} type="number" min={1} name="quant_line" id="quant_lin" placeholder="Qtd linhas"/>
                 </div>
             </div>
-            {/* <TableZebComponent obj={mockJson}/> */}
-            <TableComponent columns={columns} data={mockJson} exibirLinhas={linhas}/>
+            <TableComponent columns={columns} data={arrMock} exibirLinhas={linhas}/>
         </ListaDeAlarmesStl>
     )
 }

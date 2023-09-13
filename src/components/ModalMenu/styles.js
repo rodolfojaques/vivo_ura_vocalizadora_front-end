@@ -16,6 +16,7 @@ export const ModalMenuStl = styled.div`
     z-index: 50;
 
     box-shadow: 0 0 3px 0;
+    color: ${({typeModal})=> typeModal==="adm"? "black":"white"};
     
 
     .title_modal-menu{

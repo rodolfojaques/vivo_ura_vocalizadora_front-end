@@ -3,6 +3,7 @@ import { TableStl } from "./styles"
 import { useTable, usePagination } from "react-table";
 
 function TableComponent({columns,data,exibirLinhas}){
+    
     const {
         getTableProps,
         getTableBodyProps,
@@ -15,12 +16,14 @@ function TableComponent({columns,data,exibirLinhas}){
         gotoPage,
         nextPage,
         previousPage,
-        setPageSize,
+        setPageSize
     } = useTable({
         columns,
         data,
-        initialState: { pageIndex: 0, pageSize: 5 }, // Define o estado inicial da página e o tamanho da página
-    }, usePagination);
+        initialState: { pageIndex: 0, pageSize: 5 },
+    },
+    usePagination
+    );
 
     useEffect(()=>{
         setPageSize(exibirLinhas || 5)

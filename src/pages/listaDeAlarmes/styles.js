@@ -193,7 +193,25 @@ export const FormListAlarmStl = styled.section`
 
             color: gray;
         }
-        
+
+        .btn_filtrar{
+            background-color: purple;
+            color: #FFF;
+            border-style: none;
+            margin-top: .9rem;
+
+            width: 7rem;
+            height: 2rem;
+            border-radius: 5px;
+
+            font-weight: bold;
+            font-size: medium;
+            cursor: pointer;
+
+            &:active{                
+                opacity: .7;
+            }
+        }
     }
     
     .pesquisa_btnSubmit{
@@ -202,7 +220,7 @@ export const FormListAlarmStl = styled.section`
 
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-end;
         padding-left: 1rem;
         gap: 1rem;
 
@@ -219,24 +237,5 @@ export const FormListAlarmStl = styled.section`
 
             color: gray;
         }
-
-        .btn_filtrar{
-            background-color: purple;
-            color: #FFF;
-            border-style: none;
-
-            width: 7rem;
-            height: 2rem;
-            border-radius: 5px;
-
-            font-weight: bold;
-            font-size: medium;
-            cursor: pointer;
-
-            &:active{                
-                opacity: .7;
-            }
-        }
-
     }
 `

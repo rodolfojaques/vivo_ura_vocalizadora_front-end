@@ -3,6 +3,7 @@ import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import TableComponent from "../../components/tableReact";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
+import { arrSite, mockJson, arrEstado, arrTipoAlarme, ultAlarmesEm } from "../../utils/pagListaAlarmes";
 
 
 function ListaDeAlarmes(){
@@ -10,301 +11,9 @@ function ListaDeAlarmes(){
     const [ linhas, setLinhas ] = useState(5)
     const [ arrMock, setArrMock ] = useState([])
 
-    const mockJson = [{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "RS",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Manutenção",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Suporte",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "SP",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "RS",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "QUEDA DE LUZ",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "SP",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM ENERGIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    },{
-        "ID_EVENTO": "5491159",
-        "ID_EQUIPAMENTO": 7759,
-        "RPA_STATUS": 2,
-        "SIGITM_FLUXO": 1,
-        "TIPO_BILHETE": "SG-INFRA",
-        "TIPO_TA": "Infraestrutura",
-        "TIPO_REDE_COD": 501,
-        "TIPO_REDE_COD_INT": 501,
-        "TIPO_REDE": "Energia",
-        "ESTADO": "PR",
-        "LOCALIDADE_COD": 41628,
-        "MUNICIPIO": "SWW",
-        "LOCALIDADE": "SWW",
-        "ID_SITE": 40748,
-        "SITE": "Z65",
-        "SEQUENCIA_ALARME": 1466,
-        "EMPRESA_MANUTENCAO": "TELEFONICA",
-        "TIPO_ALARME": "Fonte sem gerência",
-        "CLASSIFICACAO": "MAJORITARIO",
-        "ALARME": `Falha Identificada na Plataforma de Alarmes - SGINFRA -
-        https://maestro.vivo.com.br/sginfra/#/fcc/7759\r\nUF: PR - Site:
-        PR.SWW.O1A85\r\nTipo: FCC\r\nNome: V2.PR.SWW.O1A85.GAB.FCC Fabricante:
-        LINEAGE POWER - Modelo: QS841E V-1.4 - IP: 10.241.22.105 - GATEWAY:
-        10.241.22.126\r\nAlarme Identificado: Fonte sem gerência\r\nData de Início:
-        04/04/2023 16:40:00\r\nAlarme presente está sendo externalizado pelo novo processo
-        de supervisão de alarmes pelas Fontes dos Sites`,
-        "TIPO_FALHA": "SEM GERENCIA",
-        "TIPO_AFETACAO": "Sem Afetação de Serviço",
-        "EQUIPAMENTO": "USCC",
-        "TIPO_CORRENTE_ELETRICA": "Contínua",
-        "CAPACIDADE": 0,
-        "DATA_APRESENTACAO": "2023-04-04T16:40:00Z",
-        "FABRICANTE": "-",
-        "MODELO": "-",
-        "SALAS_AFETADAS": 1,
-        "HISTORICO": null,
-        "HISTORICO_TIPO": "Sistema",
-        "TIPO_PLANTA": "Fixa Integrada V2",
-        "TIPO_PLANTA_COD": 6,
-        "TA": 298746663,
-        "ELEMENTO_SIGLA": "Outros"
-    }]
+    useEffect(()=>{
+        setArrMock(mockJson)
+    },[]) 
 
     const columns = useMemo(
         ()=> [ 
@@ -386,7 +95,18 @@ function ListaDeAlarmes(){
                 },
                 {
                 Header: "Alarme",
-                accessor: "ALARME"
+                accessor: "ALARME",
+                Cell: ({ value }) => (
+                    <a
+                        href={`#/${value}`}
+                        onClick={(e) => {
+                        e.preventDefault();
+                        alert(value);
+                      }}
+                    >
+                      Detalhes do alarme
+                    </a>
+                  ),
                 },
                 {
                 Header: "Tipo Falha",
@@ -451,10 +171,6 @@ function ListaDeAlarmes(){
             ],
         []
     );
-
-    useEffect(()=>{
-        setArrMock(mockJson)
-    },[])
 
     const handleValueChange = (event,arr) => {
         const value = event.target.value || "";
@@ -548,7 +264,7 @@ function ListaDeAlarmes(){
                                 Tipo TA
                             </label>
                             <select className="campos_dropDown">
-                                <option value="tipo-ta">...</option>
+                                <option value="infraestrutura">Infraestrutura</option>
                             </select>                            
                         </div>
                         <div className="divDrop_down">
@@ -556,7 +272,7 @@ function ListaDeAlarmes(){
                                 Tipo Rede
                             </label>
                             <select className="campos_dropDown">
-                                <option value="tipo-rede">...</option>
+                                <option value="climatizacao">Climatização</option>
                             </select>
                         </div>
                         <div className="divDrop_down">
@@ -564,7 +280,9 @@ function ListaDeAlarmes(){
                                 Estado
                             </label>
                             <select className="campos_dropDown">
-                                <option value="estado">...</option>
+                                {
+                                    arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                
                             </select>
                         </div>
                         <div className="divDrop_down">
@@ -580,7 +298,9 @@ function ListaDeAlarmes(){
                                 Site
                             </label>
                             <select className="campos_dropDown">
-                                <option value="site">...</option>
+                                {
+                                    arrSite.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                
                             </select>
                         </div>
                         <div className="divDrop_down">
@@ -588,7 +308,7 @@ function ListaDeAlarmes(){
                                 Tipo Alarme
                             </label>
                             <select className="campos_dropDown">
-                                <option value="tipo-alarme">...</option>
+                                {arrTipoAlarme.map((item,i)=> <option key={i} value={item}>{item}</option>)}
                             </select>                        
                         </div>
                         <div className="divDrop_down">
@@ -615,10 +335,12 @@ function ListaDeAlarmes(){
                             </div>
                             <div className="horas">
                                 <label htmlFor="" className="label_dropDown">
-                                    Ultimos alarmes em:
+                                    Ultimos alarmes em
                                 </label>
                                 <select className="campos_dropDown">
-                                    <option value="ultimos alarmes">...</option>
+                                    {
+                                        ultAlarmesEm.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    }                                    
                                 </select>
                                 <input  type="submit" className="btn_filtrar" value={"Filtrar"} />                            
                             </div>                            

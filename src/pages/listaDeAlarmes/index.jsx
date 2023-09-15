@@ -255,7 +255,7 @@ function ListaDeAlarmes(){
     return (
         <ListaDeAlarmesStl>
             <Header />
-            <CaminhoComponent />
+            <CaminhoComponent path={'Lista de Alarmes'}/>
             <div className="cabListAlarm">
                 <FormListAlarmStl>
                     <div className="campos_principais">

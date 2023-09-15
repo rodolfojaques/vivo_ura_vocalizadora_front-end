@@ -6741,3 +6741,60 @@ export const ultAlarmesEm = [
     '18 horas', '19 horas', '20 horas', '21 horas', 
     '22 horas', '23 horas', '24 horas', '48 horas', 
 ]
+
+export const mockJsonUsers = [
+    {
+        "id": 0,
+        "nome": "Ricardo",
+        "RE": "0001",
+        "email": "ric@mail.com",
+        "tel_cel": "990009999",
+        "area": "Admin",
+        "perfil": "Admin"
+    },
+    {
+        "id": 1,
+        "nome": "Paulo",
+        "RE": "0002",
+        "email": "paulo@mail.com",
+        "tel_cel": "990009988",
+        "area": "Operador",
+        "perfil": "Operador"
+    },
+    {
+        "id": 2,
+        "nome": "Jessica",
+        "RE": "0003",
+        "email": "jes@mail.com",
+        "tel_cel": "990009977",
+        "area": "Admin",
+        "perfil": "Admin"
+    },
+    {
+        "id": 3,
+        "nome": "Lucas",
+        "RE": "0004",
+        "email": "lucas@mail.com",
+        "tel_cel": "990008899",
+        "area": "UserAdm",
+        "perfil": "UserAdm"
+    },
+    {
+        "id": 4,
+        "nome": "José",
+        "RE": "0005",
+        "email": "ze@mail.com",
+        "tel_cel": "990009999",
+        "area": "Admin",
+        "perfil": "Admin"
+    },
+    {
+        "id": 5,
+        "nome": "Paula",
+        "RE": "0006",
+        "email": "paula@mail.com",
+        "tel_cel": "990009999",
+        "area": "Operador",
+        "perfil": "Operador"
+    }
+]

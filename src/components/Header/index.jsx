@@ -29,7 +29,7 @@ function Header(){
                     <li className="item_modal-menu">
                         <p className="str_item_menu">Grupos de Alarmes</p>
                     </li>
-                    <li className="item_modal-menu">
+                    <li onClick={()=> history.push("/usuarios")} className="item_modal-menu">
                         <p className="str_item_menu">Usuários</p>
                     </li>                
                 </ul>

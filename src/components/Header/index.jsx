@@ -20,13 +20,13 @@ function Header(){
                     <li onClick={()=> history.push('/lista-alarmes')} className="item_modal-menu">
                         <p className="str_item_menu">Lista de Alarmes</p>
                     </li>
-                    <li className="item_modal-menu">
+                    <li onClick={()=> history.push('/grupos-atuacao')} className="item_modal-menu">
                         <p className="str_item_menu">Grupos de Atuação</p>
                     </li>
-                    <li className="item_modal-menu">
+                    <li onClick={()=> history.push('/associacao')} className="item_modal-menu">
                         <p className="str_item_menu">Associação</p>
                     </li>
-                    <li className="item_modal-menu">
+                    <li onClick={()=> history.push('/grupos-alarmes')} className="item_modal-menu">
                         <p className="str_item_menu">Grupos de Alarmes</p>
                     </li>
                     <li onClick={()=> history.push("/usuarios")} className="item_modal-menu">

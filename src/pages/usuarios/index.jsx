@@ -14,6 +14,7 @@ function PaginaUsuarios(){
     const [mockUsers, setMockUsers] = useState([])
     const [dadosUsers, setDadosUsers] = useState({})
     const [openModal, setOpenModal] = useState(false)
+    const [openModalEdit, setOpenModalEdit] = useState(false)
     const [openModalExclude, setOpenModalExclude] = useState(false)
 
     useEffect(()=>{
@@ -31,7 +32,10 @@ function PaginaUsuarios(){
             accessor: "id",
             Cell: ({ value }) => (
                 <span
-                    onClick={(e) => alert(value)}
+                    onClick={(e) => {
+                        setDadosUsers(mockJsonUsers.filter((user)=> user.id === value))
+                        setOpenModalEdit(!openModalEdit)
+                      }}
                 >
                   <Icon.Tools size={16} color="rgba(0, 130, 255, 1)"/>
                 </span>
@@ -75,8 +79,7 @@ function PaginaUsuarios(){
                 </span>
               ),
             },
-        ],
-        []
+        ],[]
     )
 
     return (
@@ -89,7 +92,8 @@ function PaginaUsuarios(){
                 </button>
             </div>
             <TableUserComponent columns={columns} data={mockUsers} />
-            {openModal? <ModalFormCadastro  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
+            {openModal? <ModalFormCadastro title={"Cadastrar Usuário"}  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
+            {openModalEdit? <ModalFormCadastro title={"Editar Usuário"} dadosUsers={dadosUsers} openModalEdit={openModalEdit} setOpenModalEdit={setOpenModalEdit}/>:<></>}
             {openModalExclude? <ModalExcludeComponent dadosUsers={dadosUsers}  openModalExclude={openModalExclude} setOpenModalExclude={setOpenModalExclude}/>:<></>}
         </PaginaUsuariosStl>
     )

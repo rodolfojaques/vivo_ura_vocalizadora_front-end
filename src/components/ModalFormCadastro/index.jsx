@@ -92,7 +92,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Nome
                                 </label>
-                                <input type="text" className="campos" placeholder="Nome do usuário..." {...register("nome")} value={dadosUsers[0].nome}/>
+                                <input type="text" className="campos" placeholder="Nome do usuário..." {...register("nome")} defaultValue={dadosUsers[0].nome}/>
                             </div>
                                 {errors?.nome?.message?
                                     <span className="msg_error">{errors.nome?.message}</span>:""}
@@ -102,7 +102,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     RE
                                 </label>
-                                <input type="text" className="campos" placeholder="RE do usuário..." {...register("RE")} value={dadosUsers[0].RE}/>
+                                <input type="text" className="campos" placeholder="RE do usuário..." {...register("RE")} defaultValue={dadosUsers[0].RE}/>
                             </div>
                                 {errors?.RE?.message?
                                     <span className="msg_error">{errors.RE?.message}</span>:""}
@@ -112,7 +112,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     E-mail
                                 </label>
-                                <input type="text" className="campos" placeholder="E-mail do usuário..." {...register("email")} value={dadosUsers[0].email}/>
+                                <input type="text" className="campos" placeholder="E-mail do usuário..." {...register("email")} defaultValue={dadosUsers[0].email}/>
                             </div>
                                 {errors?.email?.message?
                                     <span className="msg_error">{errors.email?.message}</span>:""}
@@ -122,7 +122,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Tel/Cel
                                 </label>
-                                <input type="text" className="campos" placeholder="Tel/Cel do usuário..." {...register("tel_cel")} value={dadosUsers[0].tel_cel}/>
+                                <input type="text" className="campos" placeholder="Tel/Cel do usuário..." {...register("tel_cel")} defaultValue={dadosUsers[0].tel_cel}/>
                             </div>
                                 {errors?.tel_cel?.message?
                                     <span className="msg_error">{errors.tel_cel?.message}</span>:""}
@@ -132,7 +132,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Perfil
                                 </label>
-                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} value={dadosUsers[0].perfil}/>
+                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={dadosUsers[0].perfil}/>
                             </div>
                                 {errors?.perfil?.message?
                                     <span className="msg_error">{errors.perfil?.message}</span>:""}

@@ -6,12 +6,15 @@ import { mockJsonUsers } from "../../utils/pagListaAlarmes";
 import { PaginaUsuariosStl } from "./styles";
 import * as Icon from "react-bootstrap-icons"
 import ModalFormCadastro from "../../components/ModalFormCadastro";
+import ModalExcludeComponent from "../../components/ModalExclude";
 
 
 function PaginaUsuarios(){
 
     const [mockUsers, setMockUsers] = useState([])
+    const [dadosUsers, setDadosUsers] = useState({})
     const [openModal, setOpenModal] = useState(false)
+    const [openModalExclude, setOpenModalExclude] = useState(false)
 
     useEffect(()=>{
         mockJsonUsers.map(
@@ -28,10 +31,7 @@ function PaginaUsuarios(){
             accessor: "id",
             Cell: ({ value }) => (
                 <span
-                    onClick={(e) => alert(JSON.stringify(mockUsers.filter(
-                        (user)=> user.id === value
-                    )))} // Função de clique para a ação de edição
-                    // onClick={(e)=> alert('oi')}
+                    onClick={(e) => alert(value)}
                 >
                   <Icon.Tools size={16} color="rgba(0, 130, 255, 1)"/>
                 </span>
@@ -66,9 +66,10 @@ function PaginaUsuarios(){
             accessor: "id-exclude",
             Cell: ({ value }) => (
                 <span
-                  onClick={(e) => alert(JSON.stringify(mockUsers.filter(
-                    (user)=> user.id === value
-                )))} // Função de clique para a ação de edição
+                  onClick={(e) => {
+                    setDadosUsers(mockJsonUsers.filter((user)=> user.id === value))
+                    setOpenModalExclude(!openModalExclude)
+                  }}
                 >
                   <Icon.XCircleFill size={16} color="red"/>
                 </span>
@@ -88,7 +89,8 @@ function PaginaUsuarios(){
                 </button>
             </div>
             <TableUserComponent columns={columns} data={mockUsers} />
-            {openModal? <ModalFormCadastro />:<></>}
+            {openModal? <ModalFormCadastro  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
+            {openModalExclude? <ModalExcludeComponent dadosUsers={dadosUsers}  openModalExclude={openModalExclude} setOpenModalExclude={setOpenModalExclude}/>:<></>}
         </PaginaUsuariosStl>
     )
 }

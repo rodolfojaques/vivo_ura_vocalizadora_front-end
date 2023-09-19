@@ -1,4 +1,5 @@
 import CaminhoComponent from "../../components/Caminho";
+import ContainerGruposComponente from "../../components/ContainerGrupos";
 import Header from "../../components/Header";
 import { GruposDeAlarmesStl } from "./styles";
 
@@ -7,7 +8,7 @@ function GruposDeAlarmes(){
         <GruposDeAlarmesStl>
             <Header />
             <CaminhoComponent path={"Grupos de alarmes"} />
-            Grupos de Alarmes
+            <ContainerGruposComponente />
         </GruposDeAlarmesStl>
     )
 }

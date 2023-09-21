@@ -5,7 +5,7 @@ export const ContainerGruposStl = styled.section`
     border: solid gray;
     border-radius: 5px;
 
-    height: 70vh;
+    height: 80vh;
     width: 90%;
 
     margin: 1rem auto 0 auto;
@@ -37,7 +37,30 @@ export const ContainerGruposStl = styled.section`
     }
 
     .str_grup{
-        margin-left: 2.7rem;
+        margin-left: 1.3rem;
         font-weight: 500;
+
+        .sg{
+            font-size: x-small;
+            font-weight: 600;
+            color: purple;
+        }
+    }
+
+    .list_grupos{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        padding: .5rem;
+
+        max-height: 62vh;
+        max-width: 50%;
+        min-width: 10rem;
+
+        overflow-x: auto;
+        box-shadow: 0 0 2px 0 purple;
+        border-radius: 5px;
     }
 `

@@ -4,14 +4,15 @@ function ContainerGruposComponente({
     children,
     openModalAlarm,
     setOpenModalAlarm,
-    listaGruposAlarmes, 
-    setListaGruposAlarmes
+    gruposAlarmes, 
+    setGruposAlarmes
 }){
     return (
         <ContainerGruposStl>
             <button onClick={()=>setOpenModalAlarm(!openModalAlarm)} className="btn_novoGrupo">Novo Grupo</button>
-            <h3 className="str_grup">Grupos <span className="sg">SG-INFRA</span></h3>
-            <ul className="list_grupos">{children}</ul>
+            <section className="container_SG_DL">
+                {children}
+            </section>
         </ContainerGruposStl>
     )
 }

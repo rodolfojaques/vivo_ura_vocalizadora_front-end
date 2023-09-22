@@ -36,31 +36,12 @@ export const ContainerGruposStl = styled.section`
         }
     }
 
-    .str_grup{
-        margin-left: 1.3rem;
-        font-weight: 500;
-
-        .sg{
-            font-size: x-small;
-            font-weight: 600;
-            color: purple;
-        }
-    }
-
-    .list_grupos{
+    .container_SG_DL{
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 1rem;
+        justify-content: space-between;
 
-        padding: .5rem;
 
-        max-height: 62vh;
-        max-width: 50%;
-        min-width: 10rem;
-
-        overflow-x: auto;
-        box-shadow: 0 0 2px 0 purple;
-        border-radius: 5px;
+        width: 100%;
     }
+
 `

@@ -9,8 +9,8 @@ import { useState } from "react";
 function ModalGruposAlarmesComponente({
     openModalAlarm,
     setOpenModalAlarm,
-    listaGruposAlarmes,
-    setListaGruposAlarmes
+    gruposAlarmes,
+    setGruposAlarmes
 }){
     const [ID] = useState(Math.random())
 
@@ -31,7 +31,7 @@ function ModalGruposAlarmesComponente({
         data["id"] = ID + data.nomeGrupo + ID
         console.log(data);
         
-        setListaGruposAlarmes([...listaGruposAlarmes,data])
+        setGruposAlarmes([...gruposAlarmes,data])
         setOpenModalAlarm(!openModalAlarm)
     }
 
@@ -104,6 +104,17 @@ function ModalGruposAlarmesComponente({
                         </label>
                         <select className="campos campos_dropDown" {...register("localidade")}>
                             <option value="localidade">...</option>                               
+                        </select>
+                    </div>
+                </div>
+                <div className="container_campos">
+                    <div className="container_intern_camp">
+                        <label htmlFor="" className="label_campos">
+                            Setor
+                        </label>
+                        <select className="campos campos_dropDown" >
+                            <option value="sg_infra">SG-INFRA</option> 
+                            <option value="dl_tems">DL-TEMS</option>                               
                         </select>
                     </div>
                 </div>

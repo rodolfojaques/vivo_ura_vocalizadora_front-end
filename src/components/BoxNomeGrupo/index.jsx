@@ -23,30 +23,30 @@ function BoxNomeGrupoComponente({
                     tipoGrupo === "atuação"? 
                     <div onClick={()=> setOpenInfos(!openInfos)} className="container_box box1">
                         <p className="nome">{nome}</p>
-                        <p className="ttl_p">Nome 1: <span className="info_span">{grupo.nome1}</span></p>
-                        <p className="ttl_p">Contato 1: <span className="info_span">{grupo.contato1}</span></p>
-                        <p className="ttl_p">RE 1: <span className="info_span">{grupo.RE1}</span></p>
-                        <p className="ttl_p">Cargo 1: <span className="info_span">{grupo.cargo1}</span></p>
+                        <p className="ttl_p">Contato 1: <span className="info_span">{grupo.nome1}</span></p>
+                        <p className="ttl_p">Fone: <span className="info_span">{grupo.contato1}</span></p>
+                        <p className="ttl_p">RE: <span className="info_span">{grupo.RE1}</span></p>
+                        <p className="ttl_p">Cargo: <span className="info_span">{grupo.cargo1}</span></p>
                         <hr />
-                        <p className="ttl_p">Nome 2: <span className="info_span">{grupo.nome2}</span></p>
-                        <p className="ttl_p">Contato 2: <span className="info_span">{grupo.contato2}</span></p>
-                        <p className="ttl_p">RE 2: <span className="info_span">{grupo.RE2}</span></p>
-                        <p className="ttl_p">Cargo 2: <span className="info_span">{grupo.cargo2}</span></p>
+                        <p className="ttl_p">Contato 2: <span className="info_span">{grupo.nome2}</span></p>
+                        <p className="ttl_p">Fone: <span className="info_span">{grupo.contato2}</span></p>
+                        <p className="ttl_p">RE: <span className="info_span">{grupo.RE2}</span></p>
+                        <p className="ttl_p">Cargo: <span className="info_span">{grupo.cargo2}</span></p>
                         <hr />
-                        <p className="ttl_p">Nome 3: <span className="info_span">{grupo.nome3}</span></p>
-                        <p className="ttl_p">Contato 3: <span className="info_span">{grupo.contato3}</span></p>
-                        <p className="ttl_p">RE 3: <span className="info_span">{grupo.RE3}</span></p>
-                        <p className="ttl_p">Cargo 3: <span className="info_span">{grupo.cargo3}</span></p>
+                        <p className="ttl_p">Contato 3: <span className="info_span">{grupo.nome3}</span></p>
+                        <p className="ttl_p">Fone: <span className="info_span">{grupo.contato3}</span></p>
+                        <p className="ttl_p">RE: <span className="info_span">{grupo.RE3}</span></p>
+                        <p className="ttl_p">Cargo: <span className="info_span">{grupo.cargo3}</span></p>
                         <hr />
-                        <p className="ttl_p">Nome 4: <span className="info_span">{grupo.nome4}</span></p>
-                        <p className="ttl_p">Contato 4: <span className="info_span">{grupo.contato4}</span></p>
-                        <p className="ttl_p">RE 4: <span className="info_span">{grupo.RE4}</span></p>
-                        <p className="ttl_p">Cargo 4: <span className="info_span">{grupo.cargo4}</span></p>
+                        <p className="ttl_p">Contato 4: <span className="info_span">{grupo.nome4}</span></p>
+                        <p className="ttl_p">Fone: <span className="info_span">{grupo.contato4}</span></p>
+                        <p className="ttl_p">RE: <span className="info_span">{grupo.RE4}</span></p>
+                        <p className="ttl_p">Cargo: <span className="info_span">{grupo.cargo4}</span></p>
                         <hr />
-                        <p className="ttl_p">Nome 5: <span className="info_span">{grupo.nome5}</span></p>
-                        <p className="ttl_p">Contato 5: <span className="info_span">{grupo.contato5}</span></p>
-                        <p className="ttl_p">RE 5: <span className="info_span">{grupo.RE5}</span></p>
-                        <p className="ttl_p">Cargo 5: <span className="info_span">{grupo.cargo5}</span></p>
+                        <p className="ttl_p">Contato 5: <span className="info_span">{grupo.nome5}</span></p>
+                        <p className="ttl_p">Fone: <span className="info_span">{grupo.contato5}</span></p>
+                        <p className="ttl_p">RE: <span className="info_span">{grupo.RE5}</span></p>
+                        <p className="ttl_p">Cargo: <span className="info_span">{grupo.cargo5}</span></p>
                     </div>
                     :
                     <div onClick={()=> setOpenInfos(!openInfos)} className="container_box box1">

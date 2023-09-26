@@ -17,6 +17,8 @@ function ModalGruposAtuacaoComponente({
     const [ open4, setOpen4 ] = useState(false)
     const [ open5, setOpen5 ] = useState(false)
 
+    const [ ID, setID ] = useState(Math.random())
+
     const schema = yup.object().shape({
         nomeGrupo: yup.string().required("*Campo obrigatório"),
         RE1: yup.string(),
@@ -46,8 +48,11 @@ function ModalGruposAtuacaoComponente({
     })
 
     const formSchema = data => {
-        gruposAtuacaoMock.push(data)
+        
+        data["id"] = ID + data.nomeGrupo + ID
         console.log(data);
+        gruposAtuacaoMock.push(data)
+        
         setOpenModalGruposAtuacao(!openModalGruposAtuacao)
     }
 

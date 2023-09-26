@@ -11,10 +11,14 @@ export const BoxNomeGrupoStl = styled.li`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: .5rem;
+        gap: .3rem;
         padding: .8rem;
 
         min-width: 10rem;
+
+        hr{
+            width: 100%;
+        }
         
         .nome{
             font-weight: 900;

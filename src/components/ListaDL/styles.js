@@ -38,7 +38,7 @@ width: 49%;
 
     padding: .5rem;
 
-    height: 58vh;
+    height: 57vh;
     width: 100%;
 
     overflow-x: auto;

@@ -53,6 +53,7 @@ function GruposDeAlarmes(){
             <Header />
             <CaminhoComponent path={"Grupos de alarmes"} />
             <ContainerGruposComponente 
+            tipoGrupo={"alarmes"}
             openModalAlarm={openModalAlarm} 
             setOpenModalAlarm={setOpenModalAlarm}
             gruposAlarmes={gruposAlarmes}

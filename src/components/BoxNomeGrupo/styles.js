@@ -11,7 +11,7 @@ export const BoxNomeGrupoStl = styled.li`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: .7rem;
+        gap: .5rem;
         padding: .8rem;
 
         min-width: 10rem;
@@ -19,6 +19,8 @@ export const BoxNomeGrupoStl = styled.li`
         .nome{
             font-weight: 900;
             margin: 0 auto;
+
+            cursor: pointer;
         }
         
         .ttl_p{
@@ -47,6 +49,8 @@ export const BoxNomeGrupoStl = styled.li`
         .nome{
             font-size: small;
             font-weight: 600;
+
+            cursor: pointer;
         }        
     }
 

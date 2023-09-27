@@ -15,8 +15,62 @@ function GruposDeAtuacao(){
     const [openModalExclude, setOpenModalExclude] = useState(false)
     const [grupoSelecionado, setGrupoSelecionado] = useState({})
 
+    const [grupoAtuacao, setGrupoAtuacao] = useState(gruposAtuacaoMock)
+
     const deleteOnClick = (grp)=> {
     }
+    
+    const handleValueChange = (event,arr) => {
+        const value = event.target.value || "";
+        
+        const newListaAlarmes = arr.filter((obj) => {
+
+            if(obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RE1?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.nome1?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.contato1?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.cargo1?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RE2?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.nome2?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.contato2?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.cargo2?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RE3?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.nome3?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.contato3?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.cargo3?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RE4?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.nome4?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.contato4?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.cargo4?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.RE5?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.nome5?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.contato5?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            } else if(obj?.cargo5?.toString().toLowerCase().includes(value.toLowerCase())){
+                return obj;
+            }
+        })
+        setGrupoAtuacao(newListaAlarmes)       
+    };
 
     return(
         <GruposDeAtuacaoStl>
@@ -27,9 +81,13 @@ function GruposDeAtuacao(){
             openModalGruposAtuacao={openModalGruposAtuacao}
             setOpenModalGruposAtuacao={setOpenModalGruposAtuacao}
             >
-                <ListaSG>
+                <ListaSG
+                tipoPag={"atuação"}
+                handleValueChange={handleValueChange}
+                gruposAtuacaoMock={gruposAtuacaoMock}
+                >
                     {
-                        gruposAtuacaoMock.map((grupo,i)=> <BoxNomeGrupoComponente
+                        grupoAtuacao.map((grupo,i)=> <BoxNomeGrupoComponente
                         key={i} 
                         tipoGrupo={"atuação"} 
                         nome={grupo.nomeGrupo} 
@@ -46,6 +104,8 @@ function GruposDeAtuacao(){
             {
                 !!openModalGruposAtuacao?
                 <ModalGruposAtuacaoComponente 
+                grupoAtuacao={grupoAtuacao}
+                setGrupoAtuacao={setGrupoAtuacao}
                 openModalGruposAtuacao={openModalGruposAtuacao}
                 setOpenModalGruposAtuacao={setOpenModalGruposAtuacao}
                 />

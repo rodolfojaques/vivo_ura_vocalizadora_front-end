@@ -4,10 +4,10 @@ import { ModalGruposAtuacaoStl } from "./styles";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { gruposAtuacaoMock } from "../../utils/grupos";
-
 
 function ModalGruposAtuacaoComponente({
+    grupoAtuacao,
+    setGrupoAtuacao,
     openModalGruposAtuacao, 
     setOpenModalGruposAtuacao
 }){
@@ -17,7 +17,7 @@ function ModalGruposAtuacaoComponente({
     const [ open4, setOpen4 ] = useState(false)
     const [ open5, setOpen5 ] = useState(false)
 
-    const [ ID, setID ] = useState(Math.random())
+    const [ ID ] = useState(Math.random())
 
     const schema = yup.object().shape({
         nomeGrupo: yup.string().required("*Campo obrigatório"),
@@ -51,7 +51,7 @@ function ModalGruposAtuacaoComponente({
         
         data["id"] = ID + data.nomeGrupo + ID
         console.log(data);
-        gruposAtuacaoMock.push(data)
+        setGrupoAtuacao([...grupoAtuacao,data])
         
         setOpenModalGruposAtuacao(!openModalGruposAtuacao)
     }
@@ -66,7 +66,12 @@ function ModalGruposAtuacaoComponente({
                 <div className="contCampos_nome">
                     <label htmlFor="" className="label_campos">Nome do Grupo</label>
                     <input type="text" className="campos" placeholder="Nome do grupo..." {...register("nomeGrupo")} />
+                    
                 </div>
+                {
+                    errors?.nomeGrupo?.message?
+                        <span className="msg_error">{errors.nomeGrupo?.message}</span>:""
+                }
                 {
                     !!open1?
                     <div className="contCampos_open">

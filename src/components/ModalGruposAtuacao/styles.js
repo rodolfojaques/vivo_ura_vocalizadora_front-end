@@ -30,6 +30,15 @@ export const ModalGruposAtuacaoStl = styled.div`
             justify-content: flex-end;
             align-items: center;
             gap: .5rem;
+
+
+        }
+
+        .msg_error{
+            color: red;
+            font-size: small;
+
+            margin-left: 4.5rem;
         }
 
         .contCampos_open{

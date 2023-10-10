@@ -41,6 +41,9 @@ function Header(){
                     <li className="item_modal-menu">
                         <p className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
                     </li> 
+                    <li className="item_modal-menu">
+                        <p className="edit-senha"><Icon.ListCheck size={30} />Alterar plantões</p>
+                    </li> 
                     <li onClick={()=> history.push("/")} className="item_modal-menu">
                         <p className="str_item_menu"><Icon.BoxArrowLeft  size={30}/>Logout</p>
                     </li>                    

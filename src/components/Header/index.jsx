@@ -1,16 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { HeaderStl } from "./styles"
 import ModalMenu from "../ModalMenu"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 
 import * as Icon from "react-bootstrap-icons"
+import { UserContext } from "../../providers/user"
 
 function Header(){
     const [ clickMenu, setClickMenu ] = useState(false)
     const [ clickAdm, setClickAdm ] = useState(false)
 
     const history = useHistory()
+
+    const {usuario} = useContext(UserContext)
 
     return (
         <HeaderStl style={{position: "relative"}}>
@@ -41,7 +44,7 @@ function Header(){
                     <li className="item_modal-menu">
                         <p className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
                     </li> 
-                    <li onClick={()=> history.push("/")} className="item_modal-menu">
+                    <li onClick={()=> {localStorage.clear();history.push("/")}} className="item_modal-menu">
                         <p className="str_item_menu"><Icon.BoxArrowLeft  size={30}/>Logout</p>
                     </li>                    
                 </ul>
@@ -55,7 +58,7 @@ function Header(){
                 </div>
             </div>
             <button onPointerEnter={()=> setClickAdm(!clickAdm)} onClick={()=>setClickAdm(!clickAdm)} className="status_admin">
-                Admin <Icon.ChevronDown  size={20}/>
+                {usuario?.user?.nome} <Icon.ChevronDown  size={20}/>
             </button>
         </HeaderStl>
     )

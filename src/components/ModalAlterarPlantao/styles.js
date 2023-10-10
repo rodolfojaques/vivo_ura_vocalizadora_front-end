@@ -18,7 +18,7 @@ export const ModalWrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0;
+  top: -246px;
   z-index: 10;
 `;
 

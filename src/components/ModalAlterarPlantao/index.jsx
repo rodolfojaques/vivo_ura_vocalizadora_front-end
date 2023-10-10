@@ -29,8 +29,8 @@ function ModalAlterarPlantao({ setAlterarPlantao }) {
             <label htmlFor="T3">Turno 3</label>
             <input type="radio" id="T3" name="plantao" value="T3" checked />
           </div>
-          <div className="div-radio"></div>
-          <div className="div-radio"></div>
+          <button type="submit">Alterar</button>
+          <button>Cancelar</button>
         </FormModal>
       </ModalContainer>
     </ModalWrapper>

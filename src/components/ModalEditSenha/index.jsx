@@ -24,7 +24,6 @@ function ModalEditSenha(){
     })
 
     const formSchema = data => {
-        console.log(data.password)
         axios.patch(`${baseURL}/usuario/update/${
             usuario?.user?.id}`,{
                 password:data.password},{

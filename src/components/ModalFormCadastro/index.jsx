@@ -3,8 +3,29 @@ import { ModalFormCadastroStl } from "./styles";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../providers/user";
+import axios from "axios";
 
 function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOpenModalEdit, dadosUsers}){
+
+    const [user, setUser] = useState({})
+
+    const {baseURL, usuario} = useContext(UserContext)
+
+    useEffect(()=>{
+        axios.get(`${baseURL}/usuario/${dadosUsers}`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }}
+        )
+        .then(res => {
+            console.log(res.data)
+            setUser(res.data)
+        })
+        .catch(err => console.error(err))        
+    },[])
 
     const schema = yup.object().shape({
         nome: yup.string().required("*Campo obrigatório"),
@@ -92,7 +113,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Nome
                                 </label>
-                                <input type="text" className="campos" placeholder="Nome do usuário..." {...register("nome")} defaultValue={dadosUsers[0].nome}/>
+                                <input type="text" className="campos" placeholder="Nome do usuário..." {...register("nome")} defaultValue={user.nome}/>
                             </div>
                                 {errors?.nome?.message?
                                     <span className="msg_error">{errors.nome?.message}</span>:""}
@@ -102,7 +123,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     RE
                                 </label>
-                                <input type="text" className="campos" placeholder="RE do usuário..." {...register("RE")} defaultValue={dadosUsers[0].RE}/>
+                                <input type="text" className="campos" placeholder="RE do usuário..." {...register("RE")} defaultValue={user.RE}/>
                             </div>
                                 {errors?.RE?.message?
                                     <span className="msg_error">{errors.RE?.message}</span>:""}
@@ -112,7 +133,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     E-mail
                                 </label>
-                                <input type="text" className="campos" placeholder="E-mail do usuário..." {...register("email")} defaultValue={dadosUsers[0].email}/>
+                                <input type="text" className="campos" placeholder="E-mail do usuário..." {...register("email")} defaultValue={user.email}/>
                             </div>
                                 {errors?.email?.message?
                                     <span className="msg_error">{errors.email?.message}</span>:""}
@@ -122,7 +143,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Tel/Cel
                                 </label>
-                                <input type="text" className="campos" placeholder="Tel/Cel do usuário..." {...register("tel_cel")} defaultValue={dadosUsers[0].tel_cel}/>
+                                <input type="text" className="campos" placeholder="Tel/Cel do usuário..." {...register("tel_cel")} defaultValue={user.tel_cel}/>
                             </div>
                                 {errors?.tel_cel?.message?
                                     <span className="msg_error">{errors.tel_cel?.message}</span>:""}
@@ -132,7 +153,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Perfil
                                 </label>
-                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={dadosUsers[0].perfil}/>
+                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/>
                             </div>
                                 {errors?.perfil?.message?
                                     <span className="msg_error">{errors.perfil?.message}</span>:""}

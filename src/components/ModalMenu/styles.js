@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const ModalMenuStl = styled.div`
     background-color: ${({typeModal})=> typeModal==="adm"? "#FFF":"purple"};
 
-    width: ${({typeModal})=> typeModal==="adm"? "200px":"280px"};
-    height: ${({typeModal})=> typeModal==="adm"? "8rem":"100vh"};
+    width: ${({typeModal})=> typeModal==="adm"? "220px":"280px"};
+    height: ${({typeModal})=> typeModal==="adm"? "11rem":"100vh"};
 
     display: flex;
     flex-direction: column;

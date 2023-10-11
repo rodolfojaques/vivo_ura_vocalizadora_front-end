@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import TableUserComponent from "../../components/TableUsuarios";
@@ -7,21 +7,34 @@ import { PaginaUsuariosStl } from "./styles";
 import * as Icon from "react-bootstrap-icons"
 import ModalFormCadastro from "../../components/ModalFormCadastro";
 import ModalExcludeComponent from "../../components/ModalExclude";
+import axios from "axios";
+import { UserContext } from "../../providers/user";
 
 
 function PaginaUsuarios(){
 
-    const [mockUsers, setMockUsers] = useState([])
+    const [users, setUsers] = useState([])
     const [dadosUsers, setDadosUsers] = useState({})
     const [openModal, setOpenModal] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [openModalExclude, setOpenModalExclude] = useState(false)
 
+    const {baseURL,usuario} = useContext(UserContext)
+
     useEffect(()=>{
-        mockJsonUsers.map(
-            (user)=> user['id-exclude'] = user.id
-        )
-        setMockUsers(mockJsonUsers)
+        axios.get(`${baseURL}/usuario`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }})
+        .then(res => {
+            res.data.map((obj)=>{
+                obj["id_exclude"] = obj.id
+            })
+            console.log(res.data);
+            setUsers(res.data)
+        })
+        .catch(err => console.log(err))
     },[])
 
     const columns = useMemo(
@@ -33,9 +46,9 @@ function PaginaUsuarios(){
             Cell: ({ value }) => (
                 <span
                     onClick={(e) => {
-                        setDadosUsers(mockJsonUsers.filter((user)=> user.id === value))
+                        setDadosUsers(value)
                         setOpenModalEdit(!openModalEdit)
-                      }}
+                    }}
                 >
                   <Icon.Tools size={16} color="rgba(0, 130, 255, 1)"/>
                 </span>
@@ -58,20 +71,16 @@ function PaginaUsuarios(){
             accessor: "tel_cel"
             },
             {
-            Header: "Area",
-            accessor: "area"
-            },
-            {
             Header: "Perfil",
             accessor: "perfil"
             },
             {
             Header: "Excluir",
-            accessor: "id-exclude",
+            accessor: "id_exclude",
             Cell: ({ value }) => (
                 <span
                   onClick={(e) => {
-                    setDadosUsers(mockJsonUsers.filter((user)=> user.id === value))
+                    setDadosUsers(value)
                     setOpenModalExclude(!openModalExclude)
                   }}
                 >
@@ -91,7 +100,7 @@ function PaginaUsuarios(){
                     Novo Usuário
                 </button>
             </div>
-            <TableUserComponent columns={columns} data={mockUsers} />
+            <TableUserComponent columns={columns} data={users} />
             {openModal? <ModalFormCadastro title={"Cadastrar Usuário"}  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
             {openModalEdit? <ModalFormCadastro title={"Editar Usuário"} dadosUsers={dadosUsers} openModalEdit={openModalEdit} setOpenModalEdit={setOpenModalEdit}/>:<></>}
             {openModalExclude? <ModalExcludeComponent dadosUsers={dadosUsers}  openModalExclude={openModalExclude} setOpenModalExclude={setOpenModalExclude}/>:<></>}

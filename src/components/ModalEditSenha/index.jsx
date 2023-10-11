@@ -28,7 +28,6 @@ function ModalEditSenha() {
   });
 
   const formSchema = (data) => {
-    console.log(data.password);
     axios
       .patch(
         `${baseURL}/usuario/update/${usuario?.user?.id}`,
@@ -49,54 +48,42 @@ function ModalEditSenha() {
       .catch((err) => console.log(err));
   };
 
-  return (
-    <ModalEditSenhaStl>
-      <h2 className="title">Editar Senha</h2>
-      <form onSubmit={handleSubmit(formSchema)} className="form_edit">
-        <div className="container">
-          <label htmlFor="" className="label_input">
-            Nova Senha
-          </label>
-          <input
-            type="password"
-            className="input_senha"
-            placeholder="Digite sua nova senha"
-            {...register("password")}
-          />
-          {errors?.password?.message ? (
-            <span className="error">{errors?.password?.message}*</span>
-          ) : (
-            <></>
-          )}
-        </div>
-        <div className="container">
-          <label htmlFor="" className="label_input">
-            Confirme a Senha
-          </label>
-          <input
-            type="password"
-            className="input_senha"
-            placeholder="Confirme sua nova senha"
-            {...register("confirmPassword")}
-          />
-          {errors?.confirmPassword?.message ? (
-            <span className="error">{errors?.confirmPassword?.message}*</span>
-          ) : (
-            <></>
-          )}
-        </div>
-        <div className="btn_form_cadastro">
-          <button
-            onClick={() => setEditSenha(!editSenha)}
-            className="btn fechar"
-          >
-            Fechar
-          </button>
-          <input className="btn salvar" type="submit" value="Salvar" />
-        </div>
-      </form>
-    </ModalEditSenhaStl>
-  );
+
+  return(
+      <ModalEditSenhaStl>
+          <h2 className="title">Editar Senha</h2>
+          <form onSubmit={handleSubmit(formSchema)} className="form_edit">
+              <div className="container">
+                  <label htmlFor="" className="label_input">Nova Senha</label>
+                  <input type="password" className="input_senha" 
+                  placeholder="Digite sua nova senha"
+                  {...register("password")}
+                  />
+                  {
+                      errors?.password?.message?
+                      <span className="error">{errors?.password?.message}*</span>
+                      :<></>
+                  }
+              </div>
+              <div className="container">
+                  <label htmlFor="" className="label_input">Confirme a Senha</label>
+                  <input type="password" className="input_senha" 
+                  placeholder="Confirme sua nova senha"
+                  {...register("confirmPassword")}
+                  />
+                  {
+                      errors?.confirmPassword?.message?
+                      <span className="error">{errors?.confirmPassword?.message}*</span>
+                      :<></>
+                  }
+              </div>
+              <div className="btn_form_cadastro">
+                  <button onClick={()=> setEditSenha(!editSenha)} className="btn fechar">Fechar</button>
+                  <input className="btn salvar" type="submit" value="Salvar" />
+              </div>
+          </form>
+      </ModalEditSenhaStl>
+  )
 }
 
 export default ModalEditSenha;

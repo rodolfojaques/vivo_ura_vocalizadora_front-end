@@ -7,11 +7,15 @@ function UserProvider({ children }) {
 
   const [ usuario, setUsuario ] = useState(JSON.parse(localStorage.getItem("usuario")))
 
+  const [ editSenha, setEditSenha ] = useState(false)
+
   return (
       <UserContext.Provider value={{
         baseURL,
         usuario,
-        setUsuario
+        setUsuario,
+        editSenha, 
+        setEditSenha
       }}>
         {children}
       </UserContext.Provider>

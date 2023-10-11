@@ -10,12 +10,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../../providers/user";
+
 function Login(){
 
     const history = useHistory()
+    const { baseURL,setUsuario } = useContext(UserContext);
 
     const schema = yup.object().shape({
-        user: yup.string().required("*Campo obrigatório"),
+        RE: yup.string().required("*Campo obrigatório"),
         password: yup.string().required("*Campo obrigatório"),
     })
 
@@ -24,7 +29,14 @@ function Login(){
     })
 
     const formSchema = data => {
-        history.push('/home')
+
+        axios.post(`${baseURL}/login`,data)
+        .then(res => {
+            localStorage.setItem("usuario",JSON.stringify(res.data))
+            setUsuario(res.data)
+            history.push('/home')
+        })
+        .catch(err => console.error(err)) 
     }
 
     return(
@@ -39,9 +51,9 @@ function Login(){
                             </figure>                            
                         </label>
                         <div className="container_err">
-                            <input type="text" className="admin" placeholder="Insira seu usuário..." {...register("user")}/>
-                            {errors?.user?.message?
-                            <span className="msg_error">{errors.user?.message}</span>:""}                            
+                            <input type="text" className="admin" placeholder="Insira seu usuário..." {...register("RE")}/>
+                            {errors?.RE?.message?
+                            <span className="msg_error">{errors.RE?.message}</span>:""}                            
                         </div>                        
                     </div>
                     <div className="inputs">

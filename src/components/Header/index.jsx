@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 import * as Icon from "react-bootstrap-icons"
 import { UserContext } from "../../providers/user"
+import ModalEditSenha from "../ModalEditSenha"
 
 function Header(){
     const [ clickMenu, setClickMenu ] = useState(false)
@@ -13,7 +14,11 @@ function Header(){
 
     const history = useHistory()
 
-    const {usuario} = useContext(UserContext)
+    const {
+        usuario,
+        editSenha,
+        setEditSenha
+    } = useContext(UserContext)
 
     return (
         <HeaderStl style={{position: "relative"}}>
@@ -42,14 +47,18 @@ function Header(){
             <ModalMenu onPointerLeave={()=> setClickAdm(!clickAdm)} typeModal={"adm"}>
                 <ul className="list_admBtn">
                     <li className="item_modal-menu">
-                        <p className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
+                        <p onClick={()=> setEditSenha(!editSenha)} className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
                     </li> 
                     <li onClick={()=> {localStorage.clear();history.push("/")}} className="item_modal-menu">
                         <p className="str_item_menu"><Icon.BoxArrowLeft  size={30}/>Logout</p>
                     </li>                    
                 </ul>
             </ModalMenu> : ""           
-            }            
+            } 
+            {
+                !!editSenha?
+                <ModalEditSenha />:<></>
+            }           
             <div className="container_menu-logo">
                 <button onPointerEnter={()=>setClickMenu(!clickMenu)} onClick={()=>setClickMenu(!clickMenu)} className="btn_menu"><Icon.List size={50} /></button>
                 <div className="logo_str">

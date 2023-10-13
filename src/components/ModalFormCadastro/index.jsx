@@ -70,6 +70,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
         !!data.email? data.email = data.email : data.email = user.email
         !!data.tel_cel? data.tel_cel = data.tel_cel : data.tel_cel = user.tel_cel
         !!data.perfil? data.perfil = data.perfil : data.perfil = user.perfil
+        delete data?.password
         
         axios.patch(`${baseURL}/usuario/update/${idUser}`,data,{
             headers:{

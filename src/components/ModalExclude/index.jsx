@@ -3,15 +3,15 @@ import { ModalExcludeStl } from "./styles";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 
-function ModalExcludeComponent({dadosUsers, openModalExclude, setOpenModalExclude}){
+function ModalExcludeComponent({idUser, openModalExclude, setOpenModalExclude}){
 
     const [user, setUser] = useState({})
 
     const {baseURL, usuario} = useContext(UserContext)
 
     useEffect(()=>{
-        console.log(dadosUsers);
-        axios.get(`${baseURL}/usuario/${dadosUsers}`,{
+        console.log(idUser);
+        axios.get(`${baseURL}/usuario/${idUser}`,{
             headers:{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${usuario?.token}`
@@ -24,6 +24,20 @@ function ModalExcludeComponent({dadosUsers, openModalExclude, setOpenModalExclud
         .catch(err => console.error(err))        
     },[])
 
+    const excludeUsuario = () => {
+        axios.delete(`${baseURL}/usuario/delete/${idUser}`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }}
+        )
+        .then(res => {
+            console.log(res.data)
+            setOpenModalExclude(!openModalExclude)
+        })
+        .catch(err => console.error(err))
+    }
+
     return (
         <ModalExcludeStl>
             <h2 className="atencao">Atenção</h2>
@@ -33,7 +47,7 @@ function ModalExcludeComponent({dadosUsers, openModalExclude, setOpenModalExclud
             </p>
             <div className="btns">
                 <button onClick={()=> setOpenModalExclude(!openModalExclude)} className="btn voltar">Voltar</button>
-                <button className="btn excluir">Excluir</button>                
+                <button onClick={()=> excludeUsuario()} className="btn excluir">Excluir</button>                
             </div>
         </ModalExcludeStl>
     )

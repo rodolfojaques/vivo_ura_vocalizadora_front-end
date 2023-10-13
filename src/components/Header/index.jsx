@@ -12,15 +12,15 @@ import ModalAlterarPlantao from "../ModalAlterarPlantao";
 function Header() {
   const [clickMenu, setClickMenu] = useState(false);
   const [clickAdm, setClickAdm] = useState(false);
-  const [alterarPlantao, setAlterarPlantao] = useState(false);
-
 
   const history = useHistory()
 
   const {
       usuario,
       editSenha,
-      setEditSenha
+      setEditSenha,
+      alterarPlantao,
+      setAlterarPlantao
   } = useContext(UserContext)
 
   return (
@@ -56,7 +56,7 @@ function Header() {
                       <p onClick={()=> setEditSenha(!editSenha)} className="edit-senha"><Icon.Pencil size={30} />Editar Senha</p>
                   </li>
                   <li className="item_modal-menu">
-                    <p className="edit-senha" onClick={() => setAlterarPlantao(true)}>
+                    <p className="edit-senha" onClick={() => setAlterarPlantao(!alterarPlantao)}>
                       <Icon.ListCheck size={30} />
                       Alterar plantões
                     </p>

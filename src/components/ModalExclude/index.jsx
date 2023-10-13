@@ -3,11 +3,15 @@ import { ModalExcludeStl } from "./styles";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 
-function ModalExcludeComponent({idUser, openModalExclude, setOpenModalExclude}){
+function ModalExcludeComponent({openModalExclude, setOpenModalExclude}){
 
     const [user, setUser] = useState({})
 
-    const {baseURL, usuario} = useContext(UserContext)
+    const {
+        baseURL, 
+        usuario,
+        idUser
+    } = useContext(UserContext)
 
     useEffect(()=>{
         console.log(idUser);

@@ -202,7 +202,7 @@ function ModalGruposAtuacaoComponente({
             <option value="gestor">Gestor</option>
             <option value="operador">Operador</option>
           </select>
-          <button className="btn_manual">Inserir Manualmente</button>
+          <button className="btn_invisivel"></button>
         </div>
         <div className="contCampos">
           <label htmlFor="" className="label_campos">
@@ -217,7 +217,7 @@ function ModalGruposAtuacaoComponente({
             <option value="gestor">Gestor</option>
             <option value="operador">Operador</option>
           </select>
-          <button className="btn_manual">Inserir Manualmente</button>
+          <button className="btn_invisivel"></button>
         </div>
 
         <div className="contCampos">
@@ -233,7 +233,7 @@ function ModalGruposAtuacaoComponente({
             <option value="gestor">Gestor</option>
             <option value="operador">Operador</option>
           </select>
-          <button className="btn_manual">Inserir Manualmente</button>
+          <button className="btn_invisivel"></button>
         </div>
         <div className="btn_form">
           <button

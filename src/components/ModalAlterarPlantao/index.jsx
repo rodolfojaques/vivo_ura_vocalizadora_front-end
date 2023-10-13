@@ -1,12 +1,42 @@
 import { FormModal, ModalContainer, ModalWrapper, TitleModal } from "./styles";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { UserContext } from "../../providers/user";
+import axios from "axios";
 
-function ModalAlterarPlantao({ setAlterarPlantao }) {
+
+function ModalAlterarPlantao({ idUser }) {
   const [dateTurns, setDateTurns] = useState([]);
 
+  const {
+    baseURL,
+    usuario,
+    alterarPlantao,
+    setAlterarPlantao
+  } = useContext(UserContext)
+
+  idUser = idUser || usuario.user.id
+
+  useEffect(()=>{
+    axios.get(`${baseURL}/usuario/${idUser}`,{
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${usuario?.token}`
+        }}
+    )
+    .then(res => {
+        console.log(res.data)
+
+        res.data.datas.map(data => {
+          setDateTurns([...dateTurns,{date: new Date(data.dia), turn: data.turno}])
+        })
+    })
+    .catch(err => console.error(err))
+  },[])
+
   const handleDateChange = (date) => {
+
     const newDateTurn = {
       date: date,
       turn: "",
@@ -24,12 +54,28 @@ function ModalAlterarPlantao({ setAlterarPlantao }) {
     dateTurns.splice(index, 1);
     setDateTurns([...dateTurns]);
   };
+
+  const createPlantoes = () => {
+    console.log(dateTurns);
+
+    dateTurns.map(data => {
+
+      axios.post(`${baseURL}/datas/register/${idUser}`,{dia:data.date, turno:data.turn},{
+          headers:{
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${usuario?.token}`
+          }})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))      
+    })
+  }
+
   return (
     <ModalWrapper>
       <ModalContainer>
         <TitleModal>
           <h2>Alterar plantões</h2>
-          <span onClick={() => setAlterarPlantao(false)}>X</span>
+          <span onClick={() => setAlterarPlantao(!alterarPlantao)}>X</span>
         </TitleModal>
         <FormModal>
           <p>Para alterar o plantão, selecione uma data e um turno.</p>
@@ -65,7 +111,10 @@ function ModalAlterarPlantao({ setAlterarPlantao }) {
             ))}
           </section>
           <div className="div-buttons">
-            <button className="btn alterar" type="submit">
+            <button onClick={(e)=> {
+              e.preventDefault()
+              createPlantoes()
+              }} className="btn alterar" type="submit">
               Alterar
             </button>
             <button className="btn cancelar">Cancelar</button>

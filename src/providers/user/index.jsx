@@ -9,13 +9,21 @@ function UserProvider({ children }) {
 
   const [ editSenha, setEditSenha ] = useState(false)
 
+  const [alterarPlantao, setAlterarPlantao] = useState(false);
+
+  const [idUser, setIdUser] = useState({})
+
   return (
       <UserContext.Provider value={{
         baseURL,
         usuario,
         setUsuario,
         editSenha, 
-        setEditSenha
+        setEditSenha,
+        alterarPlantao, 
+        setAlterarPlantao,
+        idUser, 
+        setIdUser
       }}>
         {children}
       </UserContext.Provider>

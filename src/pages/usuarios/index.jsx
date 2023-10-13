@@ -9,17 +9,24 @@ import ModalFormCadastro from "../../components/ModalFormCadastro";
 import ModalExcludeComponent from "../../components/ModalExclude";
 import axios from "axios";
 import { UserContext } from "../../providers/user";
+import ModalAlterarPlantao from "../../components/ModalAlterarPlantao";
 
 
 function PaginaUsuarios(){
 
     const [users, setUsers] = useState([])
-    const [idUser, setIdUser] = useState({})
     const [openModal, setOpenModal] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [openModalExclude, setOpenModalExclude] = useState(false)
 
-    const {baseURL,usuario} = useContext(UserContext)    
+    const {
+        baseURL,
+        usuario,
+        alterarPlantao, 
+        setAlterarPlantao,
+        idUser, 
+        setIdUser
+    } = useContext(UserContext)    
 
     useEffect(()=>{
         axios.get(`${baseURL}/usuario`,{
@@ -30,6 +37,7 @@ function PaginaUsuarios(){
         .then(res => {
             res.data.map((obj)=>{
                 obj["id_exclude"] = obj.id
+                obj["id_edit"] = obj.id
             })
             console.log(res.data);
             setUsers(res.data)
@@ -51,6 +59,20 @@ function PaginaUsuarios(){
                     }}
                 >
                   <Icon.Tools size={16} color="rgba(0, 130, 255, 1)"/>
+                </span>
+              ),
+            },        
+            {
+            Header: "Editar Plantões",
+            accessor: "id_edit",
+            Cell: ({ value }) => (
+                <span
+                    onClick={(e) => {
+                        setIdUser(value)
+                        setAlterarPlantao(!alterarPlantao)
+                    }}
+                >
+                  <Icon.ListCheck size={16} color="#129f67"/>
                 </span>
               ),
             },
@@ -104,6 +126,7 @@ function PaginaUsuarios(){
             {openModal? <ModalFormCadastro title={"Cadastrar Usuário"}  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
             {openModalEdit? <ModalFormCadastro title={"Editar Usuário"} idUser={idUser} openModalEdit={openModalEdit} setOpenModalEdit={setOpenModalEdit}/>:<></>}
             {openModalExclude? <ModalExcludeComponent idUser={idUser}  openModalExclude={openModalExclude} setOpenModalExclude={setOpenModalExclude}/>:<></>}
+            {alterarPlantao? <ModalAlterarPlantao idUser={idUser}/>:<></>}
         </PaginaUsuariosStl>
     )
 }

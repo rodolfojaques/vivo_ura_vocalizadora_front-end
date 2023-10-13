@@ -7,11 +7,15 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 
-function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOpenModalEdit, idUser}){
+function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOpenModalEdit}){
 
     const [user, setUser] = useState({})
 
-    const {baseURL, usuario} = useContext(UserContext)
+    const {
+        baseURL, 
+        usuario,
+        idUser
+    } = useContext(UserContext)
 
     useEffect(()=>{
         axios.get(`${baseURL}/usuario/${idUser}`,{

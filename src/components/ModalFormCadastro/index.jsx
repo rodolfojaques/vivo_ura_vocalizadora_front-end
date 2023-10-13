@@ -7,14 +7,14 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 
-function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOpenModalEdit, dadosUsers}){
+function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOpenModalEdit, idUser}){
 
     const [user, setUser] = useState({})
 
     const {baseURL, usuario} = useContext(UserContext)
 
     useEffect(()=>{
-        axios.get(`${baseURL}/usuario/${dadosUsers}`,{
+        axios.get(`${baseURL}/usuario/${idUser}`,{
             headers:{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${usuario?.token}`
@@ -27,12 +27,22 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
         .catch(err => console.error(err))        
     },[])
 
-    const schema = yup.object().shape({
+    
+    
+    const schema = !!openModal ? yup.object().shape({
         nome: yup.string().required("*Campo obrigatório"),
         RE: yup.string().required("*Campo obrigatório"),
         email: yup.string().email("Formato de e-mail inválido").required("*Campo obrigatório"),
         tel_cel: yup.string().required("*Campo obrigatório"),
         perfil: yup.string().required("*Campo obrigatório"),
+    })
+    :
+    yup.object().shape({
+        nome: yup.string(),
+        RE: yup.string(),
+        email: yup.string().email("Formato de e-mail inválido"),
+        tel_cel: yup.string(),
+        perfil: yup.string(),
     })
 
     const {register, handleSubmit, formState: { errors }} = useForm({
@@ -40,7 +50,38 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
     })
 
     const formSchema = data => {
-        console.log(data)
+        axios.post(`${baseURL}/usuario/register`,data,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }}
+        )
+        .then(res => {
+            console.log(res.data)
+            setOpenModal(!openModal)
+            
+        })
+        .catch(err => console.error(err))
+    }
+
+    const schemaUpdate = data => {
+        !!data.nome? data.nome = data.nome : data.nome = user.nome
+        !!data.RE? data.RE = data.RE : data.RE = user.RE
+        !!data.email? data.email = data.email : data.email = user.email
+        !!data.tel_cel? data.tel_cel = data.tel_cel : data.tel_cel = user.tel_cel
+        !!data.perfil? data.perfil = data.perfil : data.perfil = user.perfil
+        
+        axios.patch(`${baseURL}/usuario/update/${idUser}`,data,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }}
+        )
+        .then(res => {
+            console.log(res.data)
+            setOpenModalEdit(!openModalEdit)            
+        })
+        .catch(err => console.error(err))
     }
 
     return(
@@ -107,7 +148,7 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                         </div>
                     </form>
                     :
-                    <form onSubmit={handleSubmit(formSchema)} action="" className="form_cadastro">
+                    <form onSubmit={handleSubmit(schemaUpdate)} action="" className="form_cadastro">
                         <div className="container_campos">
                             <div className="container_intern_camp">
                                 <label htmlFor="" className="label_campos">

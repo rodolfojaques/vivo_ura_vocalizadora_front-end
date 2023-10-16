@@ -18,9 +18,6 @@ function ModalGruposAtuacaoComponente({
   const [open2, setOpen2] = useState(false);
   const [users, setUsers] = useState([]);
   const [selects, setSelects] = useState([]);
-  // const [ open3, setOpen3 ] = useState(false)
-  // const [ open4, setOpen4 ] = useState(false)
-  // const [ open5, setOpen5 ] = useState(false)
 
   const [ID] = useState(Math.random());
 
@@ -215,26 +212,6 @@ function ModalGruposAtuacaoComponente({
             </button>
           </div>
         )}
-        {/* <div className="contCampos">
-          <label htmlFor="" className="label_campos">
-            Contato 3
-          </label>
-          <select
-            className="campos campos_line2 campos_dropDown"
-            {...register("contato4")}
-            defaultValue={"Contato"}
-          >
-            <option value="Contato" disabled>
-              Contato
-            </option>
-            {users.map((elem) => (
-              <option key={elem.id} value={elem.nome}>
-                {`${elem.nome}, RE: ${elem.RE}`}
-              </option>
-            ))}
-          </select>
-          <button className="btn_invisivel"></button>
-        </div> */}
         {selects.map((elem, index) => (
           <div key={index} className="contCampos">
             <label htmlFor="" className="label_campos">

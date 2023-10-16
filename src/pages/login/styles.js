@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const LoginStl = styled.main`
     .logo_login{
         width: 100%;
-        max-width: 504px;
+        max-width: 450px;
     }
 
     display: flex;

@@ -47,8 +47,14 @@ export const HeaderStl = styled.header`
         }
 
         .logo_str{
+            height: 5rem;
+
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
+            gap: .5rem;
+
+            padding-bottom: .9rem;
         }
 
         .ura{

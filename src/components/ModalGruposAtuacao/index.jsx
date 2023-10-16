@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { ModalGruposAtuacaoStl } from "./styles";
+import { useContext, useState } from "react";
+import { DivButtonAddContatos, ModalGruposAtuacaoStl } from "./styles";
 
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import { UserContext } from "../../providers/user";
+import { useEffect } from "react";
 
 function ModalGruposAtuacaoComponente({
   grupoAtuacao,
@@ -13,11 +16,15 @@ function ModalGruposAtuacaoComponente({
 }) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [selects, setSelects] = useState([]);
   // const [ open3, setOpen3 ] = useState(false)
   // const [ open4, setOpen4 ] = useState(false)
   // const [ open5, setOpen5 ] = useState(false)
 
   const [ID] = useState(Math.random());
+
+  const { usuario, baseURL } = useContext(UserContext);
 
   const schema = yup.object().shape({
     nomeGrupo: yup.string().required("*Campo obrigatório"),
@@ -58,6 +65,25 @@ function ModalGruposAtuacaoComponente({
 
     setOpenModalGruposAtuacao(!openModalGruposAtuacao);
   };
+
+  const adicionarSelect = () => {
+    setSelects([...selects, users]);
+  };
+
+  const allUsers = async () => {
+    try {
+      const response = await axios.get(`${baseURL}/usuario`, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setUsers(response.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    allUsers();
+  }, []);
 
   return (
     <ModalGruposAtuacaoStl>
@@ -189,22 +215,58 @@ function ModalGruposAtuacaoComponente({
             </button>
           </div>
         )}
-        <div className="contCampos">
+        {/* <div className="contCampos">
           <label htmlFor="" className="label_campos">
             Contato 3
           </label>
           <select
             className="campos campos_line2 campos_dropDown"
             {...register("contato4")}
+            defaultValue={"Contato"}
           >
-            <option value="admin">Admin</option>
-            <option value="userAdm">UserAdm</option>
-            <option value="gestor">Gestor</option>
-            <option value="operador">Operador</option>
+            <option value="Contato" disabled>
+              Contato
+            </option>
+            {users.map((elem) => (
+              <option key={elem.id} value={elem.nome}>
+                {`${elem.nome}, RE: ${elem.RE}`}
+              </option>
+            ))}
           </select>
           <button className="btn_invisivel"></button>
-        </div>
-        <div className="contCampos">
+        </div> */}
+        {selects.map((elem, index) => (
+          <div key={index} className="contCampos">
+            <label htmlFor="" className="label_campos">
+              Contato {index + 3}
+            </label>
+            <select
+              className="campos campos_line2 campos_dropDown"
+              {...register("contato4")}
+              defaultValue={"Contato"}
+            >
+              <option value="Contato" disabled>
+                Contato
+              </option>
+              {elem.map((opt) => (
+                <option key={opt.id} value={opt.nome}>
+                  {`${opt.nome}, RE: ${opt.RE}`}
+                </option>
+              ))}
+            </select>
+            <button className="btn_invisivel"></button>
+          </div>
+        ))}
+        <DivButtonAddContatos>
+          <button
+            type="button"
+            className="btn_add"
+            onClick={() => adicionarSelect()}
+          >
+            Adicionar novo contato
+          </button>
+        </DivButtonAddContatos>
+        {/* <div className="contCampos">
           <label htmlFor="" className="label_campos">
             Contato 4
           </label>
@@ -234,7 +296,7 @@ function ModalGruposAtuacaoComponente({
             <option value="operador">Operador</option>
           </select>
           <button className="btn_invisivel"></button>
-        </div>
+        </div> */}
         <div className="btn_form">
           <button
             onClick={() => setOpenModalGruposAtuacao(!openModalGruposAtuacao)}

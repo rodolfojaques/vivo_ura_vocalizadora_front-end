@@ -154,23 +154,52 @@ export const ModalGruposAtuacaoStl = styled.div`
   }
 
   .btn_invisivel {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+
+    font-size: x-small;
+    font-weight: 600;
+
+    width: 5rem;
+
+    background-color: transparent;
+    color: transparent;
+    border-style: none;
+    border-radius: 5px;
+
+    height: 1.6rem;
+
+    pointer-events: none;
+  }
+`;
+
+export const DivButtonAddContatos = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  .btn_add {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
 
-  font-size: x-small;
-  font-weight: 600;
+    font-size: x-small;
+    font-weight: 600;
 
-  width: 5rem;
+    width: 9rem;
 
-  background-color: transparent;
-  color: transparent;
-  border-style: none;
-  border-radius: 5px;
+    background-color: purple;
+    color: white;
+    border-style: none;
+    border-radius: 5px;
 
-  height: 1.6rem;
+    height: 1.8rem;
 
-  pointer-events: none;
-}
+    cursor: pointer;
+    &:active {
+      opacity: 0.5;
+    }
+  }
 `;

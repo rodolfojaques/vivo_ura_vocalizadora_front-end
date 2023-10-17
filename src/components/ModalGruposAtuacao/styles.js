@@ -23,6 +23,15 @@ export const ModalGruposAtuacaoStl = styled.div`
     justify-content: center;
     gap: 1rem;
 
+    .div_fields {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+
     .contCampos_nome {
       display: flex;
       justify-content: flex-end;
@@ -153,7 +162,7 @@ export const ModalGruposAtuacaoStl = styled.div`
     font-size: x-small;
   }
 
-  .btn_invisivel {
+  .btn_remover {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -164,14 +173,17 @@ export const ModalGruposAtuacaoStl = styled.div`
 
     width: 5rem;
 
-    background-color: transparent;
-    color: transparent;
+    background-color: red;
+    color: white;
     border-style: none;
     border-radius: 5px;
 
     height: 1.6rem;
+    cursor: pointer;
 
-    pointer-events: none;
+    &:active {
+      opacity: 0.5;
+    }
   }
 `;
 

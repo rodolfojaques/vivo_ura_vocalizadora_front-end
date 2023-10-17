@@ -22,10 +22,11 @@ function PaginaUsuarios(){
     const {
         baseURL,
         usuario,
-        alterarPlantao, 
-        setAlterarPlantao,
+        alterarPlantaoPagUser, 
+        setAlterarPlantaoPagUser,
         idUser, 
-        setIdUser
+        setIdUser,
+        setUsuarioClicado
     } = useContext(UserContext)    
 
     useEffect(()=>{
@@ -68,8 +69,8 @@ function PaginaUsuarios(){
             Cell: ({ value }) => (
                 <span
                     onClick={(e) => {
-                        setIdUser(value)
-                        setAlterarPlantao(!alterarPlantao)
+                        setIdUser(value)                        
+                        setAlterarPlantaoPagUser(!alterarPlantaoPagUser)
                     }}
                 >
                   <Icon.ListCheck size={16} color="#129f67"/>
@@ -126,7 +127,7 @@ function PaginaUsuarios(){
             {openModal? <ModalFormCadastro title={"Cadastrar Usuário"}  openModal={openModal} setOpenModal={setOpenModal}/>:<></>}
             {openModalEdit? <ModalFormCadastro title={"Editar Usuário"} idUser={idUser} openModalEdit={openModalEdit} setOpenModalEdit={setOpenModalEdit}/>:<></>}
             {openModalExclude? <ModalExcludeComponent idUser={idUser}  openModalExclude={openModalExclude} setOpenModalExclude={setOpenModalExclude}/>:<></>}
-            {alterarPlantao? <ModalAlterarPlantao idUser={idUser}/>:<></>}
+            {alterarPlantaoPagUser? <ModalAlterarPlantao idUser={idUser}/>:<></>}
         </PaginaUsuariosStl>
     )
 }

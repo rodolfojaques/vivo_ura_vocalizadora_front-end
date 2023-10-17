@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { UserContext } from "../../providers/user";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 function ModalGruposAtuacaoComponente({
   grupoAtuacao,
@@ -18,8 +19,6 @@ function ModalGruposAtuacaoComponente({
   const [selects, setSelects] = useState([]);
   const [idUser, setIdUser] = useState([]);
 
-  console.log(idUser);
-
   const [ID] = useState(Math.random());
 
   const { usuario, baseURL } = useContext(UserContext);
@@ -27,25 +26,11 @@ function ModalGruposAtuacaoComponente({
   const schema = yup.object().shape({
     nomeGrupo: yup.string().required("*Campo obrigatório"),
     RE1: yup.string(),
-    nome1: yup.string(),
-    contato1: yup.string(),
-    cargo1: yup.string(),
+    nome1: yup.string().required("*Campo obrigatório"),
+    contato1: yup.string().required("*Campo obrigatório"),
     RE2: yup.string(),
-    nome2: yup.string(),
-    contato2: yup.string(),
-    cargo2: yup.string(),
-    RE3: yup.string(),
-    nome3: yup.string(),
-    contato3: yup.string(),
-    cargo3: yup.string(),
-    RE4: yup.string(),
-    nome4: yup.string(),
-    contato4: yup.string(),
-    cargo4: yup.string(),
-    RE5: yup.string(),
-    nome5: yup.string(),
-    contato5: yup.string(),
-    cargo5: yup.string(),
+    nome2: yup.string().required("*Campo obrigatório"),
+    contato2: yup.string().required("*Campo obrigatório"),
   });
 
   const {
@@ -56,11 +41,45 @@ function ModalGruposAtuacaoComponente({
     resolver: yupResolver(schema),
   });
 
-  const formSchema = (data) => {
-    data["id"] = ID + data.nomeGrupo + ID;
-    console.log(data);
-    setGrupoAtuacao([...grupoAtuacao, data]);
+  const formSchema = async (data) => {
+    const grupoAtuacao = {
+      nomeGrupo: data.nomeGrupo,
+      gerente1: data.nome1,
+      contato_ger1: data.contato1,
+      gerente2: data.nome2,
+      contato_ger2: data.contato2,
+    };
 
+    try {
+      const create = await axios.post(
+        `${baseURL}/grupos-atuacao/register`,
+        grupoAtuacao,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${usuario.token}`,
+          },
+        }
+      );
+      const grupoDeAtuacaoId = {
+        grupoAtuacao: create.data.id,
+      };
+      idUser.forEach(async (elem) => {
+        await axios.patch(
+          `${baseURL}/usuario/update/${elem}`,
+          grupoDeAtuacaoId,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${usuario.token}`,
+            },
+          }
+        );
+      });
+      toast.success("Grupo de Atuação criado com sucesso!");
+    } catch (error) {
+      console.log(error);
+    }
     setOpenModalGruposAtuacao(!openModalGruposAtuacao);
   };
 
@@ -137,6 +156,13 @@ function ModalGruposAtuacaoComponente({
                 placeholder="Nome completo..."
                 {...register("nome1")}
               />
+              {errors?.gerente1?.message ? (
+                <span className="msg_error_gerentes">
+                  {errors.gerente1?.message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <div className="line_2">
               <input
@@ -151,6 +177,13 @@ function ModalGruposAtuacaoComponente({
                 placeholder="Número de contato..."
                 {...register("contato1")}
               />
+              {errors?.contato1?.message ? (
+                <span className="msg_error_gerentes">
+                  {errors.contato1?.message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="contCampos_open">
@@ -164,6 +197,13 @@ function ModalGruposAtuacaoComponente({
                 placeholder="Nome completo..."
                 {...register("nome2")}
               />
+              {errors?.gerente2?.message ? (
+                <span className="msg_error_gerentes">
+                  {errors.gerente2?.message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <div className="line_2">
               <input
@@ -178,6 +218,13 @@ function ModalGruposAtuacaoComponente({
                 placeholder="Número de contato..."
                 {...register("contato2")}
               />
+              {errors?.contato2?.message ? (
+                <span className="msg_error_gerentes">
+                  {errors.contato2?.message}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           {selects.map((elem, index) => (

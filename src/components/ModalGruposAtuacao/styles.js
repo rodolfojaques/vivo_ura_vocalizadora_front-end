@@ -46,6 +46,12 @@ export const ModalGruposAtuacaoStl = styled.div`
       margin-left: 4.5rem;
     }
 
+    .msg_error_gerentes {
+      color: red;
+      font-size: small;
+    }
+
+
     .contCampos_open {
       display: flex;
       flex-direction: column;

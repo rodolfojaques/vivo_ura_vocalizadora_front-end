@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { DivButtonAddContatos, ModalGruposAtuacaoStl } from "./styles";
 
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { UserContext } from "../../providers/user";
@@ -18,6 +18,9 @@ function ModalGruposAtuacaoComponente({
   const [open2, setOpen2] = useState(false);
   const [users, setUsers] = useState([]);
   const [selects, setSelects] = useState([]);
+  const [idUser, setIdUser] = useState([]);
+
+  console.log(idUser);
 
   const [ID] = useState(Math.random());
 
@@ -69,6 +72,8 @@ function ModalGruposAtuacaoComponente({
 
   const removeSelect = (index) => {
     selects.splice(index, 1);
+    idUser.splice(index, 1);
+    setIdUser([...idUser]);
     setSelects([...selects]);
   };
 
@@ -86,6 +91,17 @@ function ModalGruposAtuacaoComponente({
   useEffect(() => {
     allUsers();
   }, []);
+
+  const handleChange = (index, selectedUserId) => {
+    const updatedIdUser = [...idUser];
+    updatedIdUser[index] = selectedUserId;
+    setIdUser(updatedIdUser);
+  };
+
+  const removeUserSelected = (selectedUserID) => {
+    const index = users.filter((user) => user.id !== selectedUserID);
+    setUsers(index);
+  };
 
   return (
     <ModalGruposAtuacaoStl>
@@ -225,14 +241,18 @@ function ModalGruposAtuacaoComponente({
               </label>
               <select
                 className="campos campos_line2 campos_dropDown"
-                {...register("contato4")}
+                {...register(`contato${index + 3}`)}
                 defaultValue={"Contato"}
+                onChange={(e) => {
+                  removeUserSelected(parseInt(e.target.value));
+                  handleChange(index, parseInt(e.target.value));
+                }}
               >
                 <option value="Contato" disabled>
                   Contato
                 </option>
                 {elem.map((opt) => (
-                  <option key={opt.id} value={opt.nome}>
+                  <option key={opt.id} value={opt.id}>
                     {`${opt.nome}, RE: ${opt.RE}`}
                   </option>
                 ))}
@@ -247,7 +267,11 @@ function ModalGruposAtuacaoComponente({
             </div>
           ))}
           <DivButtonAddContatos>
-            <button className="btn_add" onClick={() => adicionarSelect()}>
+            <button
+              type="button"
+              className="btn_add"
+              onClick={() => adicionarSelect()}
+            >
               Adicionar novo contato
             </button>
           </DivButtonAddContatos>

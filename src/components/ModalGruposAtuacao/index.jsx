@@ -14,8 +14,6 @@ function ModalGruposAtuacaoComponente({
   openModalGruposAtuacao,
   setOpenModalGruposAtuacao,
 }) {
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
   const [users, setUsers] = useState([]);
   const [selects, setSelects] = useState([]);
   const [idUser, setIdUser] = useState([]);
@@ -128,112 +126,60 @@ function ModalGruposAtuacaoComponente({
           ""
         )}
         <div className="div_fields">
-          {!!open1 ? (
-            <div className="contCampos_open">
-              <div className="line_1">
-                <label htmlFor="" className="label_campos">
-                  Contato 1
-                </label>
-                <input
-                  type="text"
-                  className="campos"
-                  placeholder="Nome completo..."
-                  {...register("nome1")}
-                />
-              </div>
-              <div className="line_2">
-                <input
-                  type="text"
-                  className="campos campos_line2"
-                  placeholder="RE... (opcional)"
-                  {...register("RE1")}
-                />
-                <input
-                  type="text"
-                  className="campos campos_line2"
-                  placeholder="Número de contato..."
-                  {...register("contato1")}
-                />
-                <select
-                  className="campos campos_line2 campos_dropDown"
-                  {...register("cargo1")}
-                >
-                  <option value="admin">Admin</option>
-                  <option value="userAdm">UserAdm</option>
-                  <option value="gestor">Gestor</option>
-                  <option value="operador">Operador</option>
-                </select>
-              </div>
-            </div>
-          ) : (
-            <div className="contCampos">
+          <div className="contCampos_open">
+            <div className="line_1">
               <label htmlFor="" className="label_campos">
-                Contato 1
+                Gerente 1
               </label>
               <input
                 type="text"
                 className="campos"
-                placeholder="RE do contato..."
+                placeholder="Nome completo..."
+                {...register("nome1")}
+              />
+            </div>
+            <div className="line_2">
+              <input
+                type="text"
+                className="campos campos_line2"
+                placeholder="RE... (opcional)"
                 {...register("RE1")}
               />
-              <button onClick={() => setOpen1(!open1)} className="btn_manual">
-                Inserir Manualmente
-              </button>
+              <input
+                type="text"
+                className="campos campos_line2"
+                placeholder="Número de contato..."
+                {...register("contato1")}
+              />
             </div>
-          )}
-          {!!open2 ? (
-            <div className="contCampos_open">
-              <div className="line_1">
-                <label htmlFor="" className="label_campos">
-                  Contato 2
-                </label>
-                <input
-                  type="text"
-                  className="campos"
-                  placeholder="Nome completo..."
-                  {...register("nome2")}
-                />
-              </div>
-              <div className="line_2">
-                <input
-                  type="text"
-                  className="campos campos_line2"
-                  placeholder="RE... (opcional)"
-                  {...register("RE2")}
-                />
-                <input
-                  type="text"
-                  className="campos campos_line2"
-                  placeholder="Número de contato..."
-                  {...register("contato2")}
-                />
-                <select
-                  className="campos campos_line2 campos_dropDown"
-                  {...register("cargo2")}
-                >
-                  <option value="admin">Admin</option>
-                  <option value="userAdm">UserAdm</option>
-                  <option value="gestor">Gestor</option>
-                  <option value="operador">Operador</option>
-                </select>
-              </div>
-            </div>
-          ) : (
-            <div className="contCampos">
+          </div>
+          <div className="contCampos_open">
+            <div className="line_1">
               <label htmlFor="" className="label_campos">
-                Contato 2
+                Gerente 2
               </label>
               <input
                 type="text"
                 className="campos"
-                placeholder="RE do contato..."
+                placeholder="Nome completo..."
+                {...register("nome2")}
+              />
+            </div>
+            <div className="line_2">
+              <input
+                type="text"
+                className="campos campos_line2"
+                placeholder="RE... (opcional)"
                 {...register("RE2")}
               />
-              <button onClick={() => setOpen2(!open2)} className="btn_manual">
-                Inserir Manualmente
-              </button>
+              <input
+                type="text"
+                className="campos campos_line2"
+                placeholder="Número de contato..."
+                {...register("contato2")}
+              />
             </div>
-          )}
+          </div>
           {selects.map((elem, index) => (
             <div key={index} className="contCampos">
               <label htmlFor="" className="label_campos">

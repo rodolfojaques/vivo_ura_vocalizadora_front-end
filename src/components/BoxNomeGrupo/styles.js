@@ -35,6 +35,17 @@ export const BoxNomeGrupoStl = styled.li`
         font-weight: 500;
       }
     }
+
+    .space_icon {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .custom-icon {
+      cursor: pointer;
+    }
   }
 
   .box2 {
@@ -68,12 +79,15 @@ export const BoxNomeGrupoStl = styled.li`
 export const DivButtonAddContato = styled.div`
   width: 100%;
   margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   button {
     font-family: "Poppins", sans-serif;
     font-size: small;
     font-weight: bold;
     border: none;
-    width: 100%;
+    width: 70%;
     height: 28px;
     background-color: darkorange;
     border-radius: 8px;

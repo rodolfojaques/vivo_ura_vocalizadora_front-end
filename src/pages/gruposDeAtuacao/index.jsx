@@ -13,6 +13,7 @@ import axios from "axios";
 import { useContext } from "react";
 import UserProvider, { UserContext } from "../../providers/user";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 function GruposDeAtuacao() {
   const [openModalGruposAtuacao, setOpenModalGruposAtuacao] = useState(false);
@@ -21,8 +22,6 @@ function GruposDeAtuacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
-
-  const deleteOnClick = (grp) => {};
 
   const handleValueChange = (event, arr) => {
     const value = event.target.value || "";
@@ -127,9 +126,19 @@ function GruposDeAtuacao() {
       setGrupoAtuacao(response.data);
     } catch (error) {}
   };
+  const deleteOnClick = async (grupo) => {
+    try {
+      await axios.delete(`${baseURL}/grupos-atuacao/delete/${grupo.id}`, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      toast.success("Grupo de atuação excluído com sucesso!");
+    } catch (error) {}
+  };
   useEffect(() => {
     allGroupsAtuacao();
-  }, []);
+  }, [openModalExclude]);
 
   return (
     <GruposDeAtuacaoStl>

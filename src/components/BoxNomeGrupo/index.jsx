@@ -16,7 +16,7 @@ function BoxNomeGrupoComponente({
   const [openInfos, setOpenInfos] = useState(false);
 
   //   console.log(nome);
-  //   console.log(grupo);
+  console.log(grupo);
   //   console.log(tipoGrupo);
 
   return (
@@ -28,13 +28,8 @@ function BoxNomeGrupoComponente({
             className="container_box box1"
           >
             <p className="nome">{nome}</p>
-            <p className="ttl_p space_icon">
-              Gerente 1: {grupo.gerente1}
-              <Icon.XCircleFill
-                size={16}
-                className="custom-icon"
-                color="darkorange"
-              />
+            <p className="ttl_p">
+              Gerente 1: <span className="info_span">{grupo.gerente1}</span>
             </p>
             <p className="ttl_p">
               Fone: <span className="info_span">{grupo.contato_ger1}</span>
@@ -46,13 +41,8 @@ function BoxNomeGrupoComponente({
               Cargo: <span className="info_span">{grupo.cargo1}</span>
             </p>
             <hr />
-            <p className="ttl_p space_icon">
-              Gerente 2: {grupo.gerente2}
-              <Icon.XCircleFill
-                size={16}
-                className="custom-icon"
-                color="darkorange"
-              />
+            <p className="ttl_p">
+              Gerente 2: <span className="info_span">{grupo.gerente2}</span>
             </p>
             <p className="ttl_p">
               Fone: <span className="info_span">{grupo.contato_ger2}</span>

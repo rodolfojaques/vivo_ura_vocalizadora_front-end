@@ -23,6 +23,18 @@ function GruposDeAtuacao() {
 
   const { baseURL, usuario } = useContext(UserContext);
 
+  const deleteOnClick = async (grupo) => {
+    try {
+      await axios.delete(`${baseURL}/grupos-atuacao/delete/${grupo.id}`, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+
+      toast.success("Grupo de atuação excluído com sucesso!");
+    } catch (error) {}
+  };
+
   const handleValueChange = (event, arr) => {
     const value = event.target.value || "";
 
@@ -126,19 +138,9 @@ function GruposDeAtuacao() {
       setGrupoAtuacao(response.data);
     } catch (error) {}
   };
-  const deleteOnClick = async (grupo) => {
-    try {
-      await axios.delete(`${baseURL}/grupos-atuacao/delete/${grupo.id}`, {
-        headers: {
-          Authorization: `Bearer ${usuario.token}`,
-        },
-      });
-      toast.success("Grupo de atuação excluído com sucesso!");
-    } catch (error) {}
-  };
   useEffect(() => {
     allGroupsAtuacao();
-  }, [openModalExclude]);
+  }, [openModalExclude, openModalGruposAtuacao]);
 
   return (
     <GruposDeAtuacaoStl>

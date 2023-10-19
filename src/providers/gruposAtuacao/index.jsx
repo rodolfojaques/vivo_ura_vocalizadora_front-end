@@ -10,7 +10,8 @@ function GrupoAtuacaoProvider({ children }) {
   const [deleteUser, setDeleteUser] = useState(false);
   const [addContato, setAddContato] = useState(false);
   const [nameUserAndRe, setNameUserAndRe] = useState({});
-
+  const [idGrupo, setIdGrupo] = useState(0);
+  const [openInfos, setOpenInfos] = useState(false);
   const { baseURL, usuario } = useContext(UserContext);
 
   const deleteUserReq = async (id) => {
@@ -30,6 +31,27 @@ function GrupoAtuacaoProvider({ children }) {
     } catch (error) {}
   };
 
+  const addUserGrupoAtuacao = (idUser) => {
+    try {
+      const grupoDeAtuacaoId = {
+        grupoAtuacao: idGrupo,
+      };
+      idUser.forEach(async (elem) => {
+        await axios.patch(
+          `${baseURL}/usuario/update/${elem}`,
+          grupoDeAtuacaoId,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${usuario.token}`,
+            },
+          }
+        );
+      });
+      toast.success("Usuário adicionado ao grupo!");
+    } catch (error) {}
+  };
+
   return (
     <GrupoAtuacaoContext.Provider
       value={{
@@ -40,6 +62,11 @@ function GrupoAtuacaoProvider({ children }) {
         deleteUserReq,
         nameUserAndRe,
         setNameUserAndRe,
+        idGrupo,
+        setIdGrupo,
+        addUserGrupoAtuacao,
+        openInfos,
+        setOpenInfos,
       }}
     >
       {children}

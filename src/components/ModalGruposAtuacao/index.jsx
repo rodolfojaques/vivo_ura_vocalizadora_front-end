@@ -22,7 +22,8 @@ function ModalGruposAtuacaoComponente({
   const [userDeletado, setUserDeletado] = useState([]);
 
   const { usuario, baseURL } = useContext(UserContext);
-  const { addContato, setAddContato } = useContext(GrupoAtuacaoContext);
+  const { addContato, setAddContato, addUserGrupoAtuacao } =
+    useContext(GrupoAtuacaoContext);
 
   const schema = yup.object().shape({
     nomeGrupo: yup.string().required("*Campo obrigatório"),
@@ -41,6 +42,11 @@ function ModalGruposAtuacaoComponente({
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const formAddContato = (idsUsers) => {
+    addUserGrupoAtuacao(idsUsers);
+    setAddContato(!addContato);
+  };
 
   const formSchema = async (data) => {
     const grupoAtuacao = {
@@ -127,7 +133,9 @@ function ModalGruposAtuacaoComponente({
         <ModalGruposAtuacaoStl>
           <h2 className="title">Adicionar novos contatos</h2>
           <form
-            onSubmit={handleSubmit(formSchema)}
+            onSubmit={() => {
+              formAddContato(idUser);
+            }}
             action=""
             className="form_gp_atuacao"
           >

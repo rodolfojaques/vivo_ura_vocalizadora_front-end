@@ -14,14 +14,15 @@ function BoxNomeGrupoComponente({
   openModalExclude,
   setOpenModalExclude,
 }) {
-  const [openInfos, setOpenInfos] = useState(false);
-
   const {
     deleteUser,
     setDeleteUser,
     setNameUserAndRe,
     setAddContato,
     addContato,
+    setIdGrupo,
+    openInfos,
+    setOpenInfos,
   } = useContext(GrupoAtuacaoContext);
 
   console.log(deleteUser);
@@ -94,6 +95,7 @@ function BoxNomeGrupoComponente({
                 type="button"
                 onClick={() => {
                   setAddContato(!addContato);
+                  setIdGrupo(grupo.id);
                 }}
               >
                 Adicionar Contato

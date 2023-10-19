@@ -11,9 +11,10 @@ import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
 import ModalExcludeGruposComponent from "../../components/ModalExcludeGrupos";
 import axios from "axios";
 import { useContext } from "react";
-import UserProvider, { UserContext } from "../../providers/user";
+import { UserContext } from "../../providers/user";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 
 function GruposDeAtuacao() {
   const [openModalGruposAtuacao, setOpenModalGruposAtuacao] = useState(false);
@@ -22,6 +23,7 @@ function GruposDeAtuacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
+  const { deleteUser } = useContext(GrupoAtuacaoContext);
 
   const deleteOnClick = async (grupo) => {
     try {
@@ -140,7 +142,7 @@ function GruposDeAtuacao() {
   };
   useEffect(() => {
     allGroupsAtuacao();
-  }, [openModalExclude, openModalGruposAtuacao]);
+  }, [openModalExclude, openModalGruposAtuacao, deleteUser]);
 
   return (
     <GruposDeAtuacaoStl>
@@ -182,6 +184,16 @@ function GruposDeAtuacao() {
         <></>
       )}
       {!!openModalExclude ? (
+        <ModalExcludeGruposComponent
+          deleteOnClick={deleteOnClick}
+          openModalExclude={openModalExclude}
+          setOpenModalExclude={setOpenModalExclude}
+          grupo={grupoSelecionado}
+        />
+      ) : (
+        <></>
+      )}
+      {!!deleteUser ? (
         <ModalExcludeGruposComponent
           deleteOnClick={deleteOnClick}
           openModalExclude={openModalExclude}

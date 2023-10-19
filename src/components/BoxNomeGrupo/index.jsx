@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BoxNomeGrupoStl, DivButtonAddContato } from "./styles";
 import * as Icon from "react-bootstrap-icons";
+import { UserContext } from "../../providers/user";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 
 function BoxNomeGrupoComponente({
   nome,
@@ -15,9 +19,10 @@ function BoxNomeGrupoComponente({
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
-  //   console.log(nome);
-  console.log(grupo);
-  //   console.log(tipoGrupo);
+  const { deleteUserReq, deleteUser, setDeleteUser, setNameUserAndRe } =
+    useContext(GrupoAtuacaoContext);
+
+  console.log(deleteUser);
 
   return (
     <BoxNomeGrupoStl>
@@ -63,6 +68,14 @@ function BoxNomeGrupoComponente({
                       size={16}
                       className="custom-icon"
                       color="darkorange"
+                      onClick={() => {
+                        setDeleteUser(!deleteUser);
+                        setNameUserAndRe({
+                          id: elem.id,
+                          nome: elem.nome,
+                          RE: elem.RE,
+                        });
+                      }}
                     />
                   </p>
                   <p className="ttl_p">

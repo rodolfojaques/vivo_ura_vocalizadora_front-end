@@ -25,8 +25,6 @@ function BoxNomeGrupoComponente({
     setOpenInfos,
   } = useContext(GrupoAtuacaoContext);
 
-  console.log(deleteUser);
-
   return (
     <BoxNomeGrupoStl>
       {!!openInfos ? (

@@ -1,9 +1,6 @@
 import { useContext, useState } from "react";
 import { BoxNomeGrupoStl, DivButtonAddContato } from "./styles";
 import * as Icon from "react-bootstrap-icons";
-import { UserContext } from "../../providers/user";
-import axios from "axios";
-import { toast } from "react-toastify";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 
 function BoxNomeGrupoComponente({
@@ -19,8 +16,13 @@ function BoxNomeGrupoComponente({
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
-  const { deleteUserReq, deleteUser, setDeleteUser, setNameUserAndRe } =
-    useContext(GrupoAtuacaoContext);
+  const {
+    deleteUser,
+    setDeleteUser,
+    setNameUserAndRe,
+    setAddContato,
+    addContato,
+  } = useContext(GrupoAtuacaoContext);
 
   console.log(deleteUser);
 
@@ -88,7 +90,14 @@ function BoxNomeGrupoComponente({
                 </div>
               ))}
             <DivButtonAddContato>
-              <button type="button">Adicionar Contato</button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAddContato(!addContato);
+                }}
+              >
+                Adicionar Contato
+              </button>
             </DivButtonAddContato>
           </div>
         ) : (

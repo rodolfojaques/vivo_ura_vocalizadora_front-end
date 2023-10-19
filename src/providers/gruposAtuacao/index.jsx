@@ -8,6 +8,7 @@ export const GrupoAtuacaoContext = createContext();
 
 function GrupoAtuacaoProvider({ children }) {
   const [deleteUser, setDeleteUser] = useState(false);
+  const [addContato, setAddContato] = useState(false);
   const [nameUserAndRe, setNameUserAndRe] = useState({});
 
   const { baseURL, usuario } = useContext(UserContext);
@@ -34,6 +35,8 @@ function GrupoAtuacaoProvider({ children }) {
       value={{
         deleteUser,
         setDeleteUser,
+        addContato,
+        setAddContato,
         deleteUserReq,
         nameUserAndRe,
         setNameUserAndRe,

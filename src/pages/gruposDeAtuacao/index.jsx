@@ -23,7 +23,8 @@ function GruposDeAtuacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
-  const { deleteUser } = useContext(GrupoAtuacaoContext);
+  const { deleteUser, addContato, setAddContato } =
+    useContext(GrupoAtuacaoContext);
 
   const deleteOnClick = async (grupo) => {
     try {
@@ -182,6 +183,14 @@ function GruposDeAtuacao() {
         />
       ) : (
         <></>
+      )}
+      {addContato && (
+        <ModalGruposAtuacaoComponente
+          grupoAtuacao={grupoAtuacao}
+          setGrupoAtuacao={setGrupoAtuacao}
+          openModalGruposAtuacao={openModalGruposAtuacao}
+          setOpenModalGruposAtuacao={setOpenModalGruposAtuacao}
+        />
       )}
       {!!openModalExclude ? (
         <ModalExcludeGruposComponent

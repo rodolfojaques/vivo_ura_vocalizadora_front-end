@@ -1,6 +1,8 @@
 import CaminhoComponent from "../../components/Caminho";
 import ContainerGruposComponente from "../../components/ContainerGrupos";
 import Header from "../../components/Header";
+import ListaDL from "../../components/ListaDL";
+import ListaSG from "../../components/ListaSG";
 import { AssociacaoStl } from "./styles";
 
 function Associacao() {
@@ -8,9 +10,10 @@ function Associacao() {
     <AssociacaoStl>
       <Header />
       <CaminhoComponent path={"Associação"} />
-      <ContainerGruposComponente
-        tipoGrupo={"associacao"}
-      ></ContainerGruposComponente>
+      <ContainerGruposComponente tipoGrupo={"associacao"}>
+        <ListaSG></ListaSG>
+        <ListaDL></ListaDL>
+      </ContainerGruposComponente>
     </AssociacaoStl>
   );
 }

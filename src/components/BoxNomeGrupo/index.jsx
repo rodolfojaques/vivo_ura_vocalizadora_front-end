@@ -167,16 +167,26 @@ function BoxNomeGrupoComponente({
                 })}
               </span>
             </p>
-            <button
-              className="btn_add_tipo"
-              onClick={(e) => {
-                e.preventDefault();
-                setIdGpAlarme(grupo.id);
-                setOpenTipoAlarme(!openTipoAlarme);
-              }}
-            >
-              Novo Tipo de Alarme
-            </button>
+            {tipoAssociacao === "associacao" ? (
+              <>
+                <DivButtonAddContato>
+                  <button type="button" onClick={() => {}}>
+                    Adicionar Grupo de atuação
+                  </button>
+                </DivButtonAddContato>
+              </>
+            ) : (
+              <button
+                className="btn_add_tipo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIdGpAlarme(grupo.id);
+                  setOpenTipoAlarme(!openTipoAlarme);
+                }}
+              >
+                Novo Tipo de Alarme
+              </button>
+            )}
           </div>
         )
       ) : (

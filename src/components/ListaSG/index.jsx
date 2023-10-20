@@ -4,6 +4,7 @@ function ListaSG({
   children,
   tipoPag,
   handleValueChange,
+  gruposAlarmes,
   gruposAlarmesMock,
   gruposAtuacaoMock,
 }) {
@@ -30,7 +31,7 @@ function ListaSG({
             onChange={(event) => {
               tipoPag === "atuação"
                 ? handleValueChange(event, gruposAtuacaoMock)
-                : handleValueChange(event, gruposAlarmesMock);
+                : handleValueChange(event, gruposAlarmes);
             }}
           />
           <h3 className="str_grup_sg">

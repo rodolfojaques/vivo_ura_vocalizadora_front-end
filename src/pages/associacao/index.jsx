@@ -51,6 +51,7 @@ function Associacao() {
               key={i}
               nome={grupo.nomeGrupo}
               grupo={grupo}
+              tipoAssociacao={"associacao"}
               //   openModalExclude={openModalExclude}
               //   setOpenModalExclude={setOpenModalExclude}
               //   grupoSelecionado={grupoSelecionado}
@@ -65,6 +66,7 @@ function Associacao() {
               tipoGrupo={"atuação"}
               nome={grupo.nomeGrupo}
               grupo={grupo}
+              tipoAssociacao={"associacao"}
               //   openModalExclude={openModalExclude}
               //   setOpenModalExclude={setOpenModalExclude}
               //   grupoSelecionado={grupoSelecionado}

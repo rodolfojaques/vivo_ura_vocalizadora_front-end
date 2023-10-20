@@ -7,6 +7,7 @@ function BoxNomeGrupoComponente({
   nome,
   grupo,
   tipoGrupo,
+  tipoAssociacao,
   listaGruposAlarmes,
   setListaGruposAlarmes,
   grupoSelecionado,
@@ -70,19 +71,23 @@ function BoxNomeGrupoComponente({
                 <div key={elem.id} className="div_fields_contacts">
                   <p className="ttl_p space_icon">
                     Contato 3: {elem.nome}{" "}
-                    <Icon.XCircleFill
-                      size={16}
-                      className="custom-icon"
-                      color="darkorange"
-                      onClick={() => {
-                        setDeleteUser(!deleteUser);
-                        setNameUserAndRe({
-                          id: elem.id,
-                          nome: elem.nome,
-                          RE: elem.RE,
-                        });
-                      }}
-                    />
+                    {tipoAssociacao === "associacao" ? (
+                      <></>
+                    ) : (
+                      <Icon.XCircleFill
+                        size={16}
+                        className="custom-icon"
+                        color="darkorange"
+                        onClick={() => {
+                          setDeleteUser(!deleteUser);
+                          setNameUserAndRe({
+                            id: elem.id,
+                            nome: elem.nome,
+                            RE: elem.RE,
+                          });
+                        }}
+                      />
+                    )}
                   </p>
                   <p className="ttl_p">
                     Fone: <span className="info_span">{elem.tel_cel}</span>
@@ -93,17 +98,21 @@ function BoxNomeGrupoComponente({
                   <hr />
                 </div>
               ))}
-            <DivButtonAddContato>
-              <button
-                type="button"
-                onClick={() => {
-                  setAddContato(!addContato);
-                  setIdGrupo(grupo.id);
-                }}
-              >
-                Adicionar Contato
-              </button>
-            </DivButtonAddContato>
+            {tipoAssociacao === "associacao" ? (
+              <></>
+            ) : (
+              <DivButtonAddContato>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAddContato(!addContato);
+                    setIdGrupo(grupo.id);
+                  }}
+                >
+                  Adicionar Contato
+                </button>
+              </DivButtonAddContato>
+            )}
           </div>
         ) : (
           <div
@@ -131,6 +140,11 @@ function BoxNomeGrupoComponente({
             <p className="ttl_p">
               Localidade: <span className="info_span">{grupo.localidade}</span>
             </p>
+            <DivButtonAddContato>
+              <button type="button" onClick={() => {}}>
+                Adicionar Grupo de atuação
+              </button>
+            </DivButtonAddContato>
           </div>
         )
       ) : (
@@ -144,14 +158,18 @@ function BoxNomeGrupoComponente({
           >
             {nome}
           </p>
-          <Icon.XCircleFill
-            color="darkorange"
-            className="custom-icon"
-            onClick={() => {
-              setOpenModalExclude(!openModalExclude);
-              setGrupoSelecionado(grupo);
-            }}
-          />
+          {tipoAssociacao === "associacao" ? (
+            <></>
+          ) : (
+            <Icon.XCircleFill
+              color="darkorange"
+              className="custom-icon"
+              onClick={() => {
+                setOpenModalExclude(!openModalExclude);
+                setGrupoSelecionado(grupo);
+              }}
+            />
+          )}
         </div>
       )}
     </BoxNomeGrupoStl>

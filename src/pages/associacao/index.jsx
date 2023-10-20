@@ -11,7 +11,7 @@ function Associacao() {
       <Header />
       <CaminhoComponent path={"Associação"} />
       <ContainerGruposComponente tipoGrupo={"associacao"}>
-        <ListaSG></ListaSG>
+        <ListaSG tipoPag={"associacao"}></ListaSG>
         <ListaDL></ListaDL>
       </ContainerGruposComponente>
     </AssociacaoStl>

@@ -74,6 +74,29 @@ export const BoxNomeGrupoStl = styled.li`
     align-items: flex-start;
     gap: 6px;
   }
+
+  .btn_add_tipo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: .3rem;
+
+    color: white;
+    background-color: darkorange;
+
+    border-style: none;
+    border-radius: 5px;
+
+    font-size: small;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    &:active{
+      opacity: .6;
+    }
+  }
 `;
 
 export const DivButtonAddContato = styled.div`

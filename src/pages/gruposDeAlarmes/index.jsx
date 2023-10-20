@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import ContainerGruposComponente from "../../components/ContainerGrupos";
 import Header from "../../components/Header";
@@ -9,21 +9,49 @@ import ModalExcludeGruposComponent from "../../components/ModalExcludeGrupos";
 import ListaSG from "../../components/ListaSG";
 import ListaDL from "../../components/ListaDL";
 import { gruposAlarmesMock } from "../../utils/grupos";
+import { UserContext } from "../../providers/user";
+import axios from "axios";
+import ModalTiposAlarmesComponente from "../../components/ModalTiposAlarmes";
 
 function GruposDeAlarmes(){
     const [grupoSelecionado, setGrupoSelecionado] = useState({})
     const [openModalAlarm, setOpenModalAlarm] = useState(false)
     const [openModalExclude, setOpenModalExclude] = useState(false)
 
+    const [openTipoAlarme, setOpenTipoAlarme] = useState(false);
+    const [idGpAlarme, setIdGpAlarme] = useState(0);
+
     const [gruposAlarmes, setGruposAlarmes] = useState([])
+    const [gruposAlarmesInicial, setGruposAlarmesInicial] = useState([])
+
+    const {
+        baseURL,
+        usuario
+    } = useContext(UserContext)
 
     useEffect(()=> {
-        setGruposAlarmes(gruposAlarmesMock)
-    },[])
+        axios.get(`${baseURL}/grupos-alarmes`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }})
+        .then(res => {
+            setGruposAlarmes(res.data)
+            setGruposAlarmesInicial(res.data)
+        })
+        .catch(err => console.log(err))
+    },[openModalExclude,openModalAlarm,openTipoAlarme])
 
     const deleteOnClick = (grp)=> {
-        const newList = gruposAlarmes.filter((grupo)=> grupo.id !== grp.id)
-        setGruposAlarmes(newList)
+        axios.delete(`${baseURL}/grupos-alarmes/delete/${grp.id}`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }})
+        .then(res => {
+            console.log(res.status);
+        })
+        .catch(err => console.log(err))
     }
 
     const handleValueChange = (event,arr) => {
@@ -33,15 +61,15 @@ function GruposDeAlarmes(){
 
             if(obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
-            } else if(obj?.UF?.toString().toLowerCase().includes(value.toLowerCase())){
+            } else if(obj?.tiposAlarmes?.uf?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
-            } else if(obj?.site?.toString().toLowerCase().includes(value.toLowerCase())){
+            } else if(obj?.tiposAlarmes?.site?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
-            } else if(obj?.tipoAlarme?.toString().toLowerCase().includes(value.toLowerCase())){
+            } else if(obj?.tiposAlarmes?.tipoAlarme?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
-            } else if(obj?.classificacao?.toString().toLowerCase().includes(value.toLowerCase())){
+            } else if(obj?.tiposAlarmes?.classificacao?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
-            } else if(obj?.localidade?.toString().toLowerCase().includes(value.toLowerCase())){
+            } else if(obj?.tiposAlarmes?.localidade?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
             }
         })
@@ -61,7 +89,7 @@ function GruposDeAlarmes(){
             >
                 <ListaSG 
                 handleValueChange={handleValueChange}
-                gruposAlarmes={gruposAlarmes}
+                gruposAlarmes={gruposAlarmesInicial}
                 gruposAlarmesMock={gruposAlarmesMock}
                 >
                     {
@@ -74,6 +102,10 @@ function GruposDeAlarmes(){
                         setGrupoSelecionado={setGrupoSelecionado}
                         openModalExclude={openModalExclude}
                         setOpenModalExclude={setOpenModalExclude}
+                        openTipoAlarme = {openTipoAlarme} 
+                        setOpenTipoAlarme = {setOpenTipoAlarme} 
+                        idGpAlarme = {idGpAlarme} 
+                        setIdGpAlarme = {setIdGpAlarme}
                         />)
                         :<></>
                     }                    
@@ -95,6 +127,15 @@ function GruposDeAlarmes(){
                 setOpenModalExclude={setOpenModalExclude}
                 grupo={grupoSelecionado}              
                 /> : <></>
+            }
+            {
+                !!openTipoAlarme?
+                <ModalTiposAlarmesComponente 
+                openTipoAlarme = {openTipoAlarme} 
+                setOpenTipoAlarme = {setOpenTipoAlarme} 
+                idGpAlarme = {idGpAlarme} 
+                setIdGpAlarme = {setIdGpAlarme}
+                />:<></>
             }            
         </GruposDeAlarmesStl>
     )

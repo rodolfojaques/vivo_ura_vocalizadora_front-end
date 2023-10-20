@@ -12,7 +12,7 @@ function Associacao() {
       <CaminhoComponent path={"Associação"} />
       <ContainerGruposComponente tipoGrupo={"associacao"}>
         <ListaSG tipoPag={"associacao"}></ListaSG>
-        <ListaDL></ListaDL>
+        <ListaDL grupoAtuacao={"ATUAÇÃO"}></ListaDL>
       </ContainerGruposComponente>
     </AssociacaoStl>
   );

@@ -13,6 +13,10 @@ function BoxNomeGrupoComponente({
   setGrupoSelecionado,
   openModalExclude,
   setOpenModalExclude,
+  openTipoAlarme, 
+  setOpenTipoAlarme,
+  idGpAlarme, 
+  setIdGpAlarme
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
@@ -115,22 +119,39 @@ function BoxNomeGrupoComponente({
           >
             <p className="nome">{nome}</p>
             <p className="ttl_p">
-              UF: <span className="info_span">{grupo.UF}</span>
+              UF: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
+                return `${tipo.uf}  /  `
+              })}</span>
             </p>
             <p className="ttl_p">
-              Site: <span className="info_span">{grupo.site}</span>
+              Site: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
+                return `${tipo.site}  /  `
+              })}</span>
             </p>
             <p className="ttl_p">
               Tipo de alarme:{" "}
-              <span className="info_span">{grupo.tipoAlarme}</span>
+              <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
+                return `${tipo.tipoAlarme}  /  `
+              })}</span>
             </p>
             <p className="ttl_p">
               Classificação:{" "}
-              <span className="info_span">{grupo.classificacao}</span>
+              <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
+                return `${tipo.classificacao}  /  `
+              })}</span>
             </p>
             <p className="ttl_p">
-              Localidade: <span className="info_span">{grupo.localidade}</span>
+              Localidade: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
+                return `${tipo.localidade}  /  `
+              })}</span>
             </p>
+            <button className="btn_add_tipo"
+            onClick={(e)=>{
+              e.preventDefault()
+              setIdGpAlarme(grupo.id)
+              setOpenTipoAlarme(!openTipoAlarme)
+            }}
+            >Novo Tipo de Alarme</button>
           </div>
         )
       ) : (

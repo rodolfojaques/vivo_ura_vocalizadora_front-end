@@ -14,6 +14,8 @@ function BoxNomeGrupoComponente({
   openModalExclude,
   setOpenModalExclude,
 }) {
+  const [openInfos, setOpenInfos] = useState(false);
+
   const {
     deleteUser,
     setDeleteUser,
@@ -21,8 +23,8 @@ function BoxNomeGrupoComponente({
     setAddContato,
     addContato,
     setIdGrupo,
-    openInfos,
-    setOpenInfos,
+    openInfosUp,
+    setOpenInfosUp,
   } = useContext(GrupoAtuacaoContext);
 
   return (
@@ -30,7 +32,10 @@ function BoxNomeGrupoComponente({
       {!!openInfos ? (
         tipoGrupo === "atuação" ? (
           <div
-            onClick={() => setOpenInfos(!openInfos)}
+            onClick={() => {
+              setOpenInfos(!openInfos);
+              setOpenInfosUp(!openInfosUp);
+            }}
             className="container_box box1"
           >
             <p className="nome">{nome}</p>
@@ -102,7 +107,10 @@ function BoxNomeGrupoComponente({
           </div>
         ) : (
           <div
-            onClick={() => setOpenInfos(!openInfos)}
+            onClick={() => {
+              setOpenInfos(!openInfos);
+              setOpenInfosUp(!openInfosUp);
+            }}
             className="container_box box1"
           >
             <p className="nome">{nome}</p>
@@ -130,6 +138,7 @@ function BoxNomeGrupoComponente({
           <p
             onClick={() => {
               setOpenInfos(!openInfos);
+              setOpenInfosUp(!openInfosUp);
             }}
             className="nome"
           >

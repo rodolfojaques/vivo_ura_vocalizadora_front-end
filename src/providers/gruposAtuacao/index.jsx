@@ -11,14 +11,14 @@ function GrupoAtuacaoProvider({ children }) {
   const [addContato, setAddContato] = useState(false);
   const [nameUserAndRe, setNameUserAndRe] = useState({});
   const [idGrupo, setIdGrupo] = useState(0);
-  const [openInfos, setOpenInfos] = useState(false);
+  const [openInfosUp, setOpenInfosUp] = useState(false);
   const { baseURL, usuario } = useContext(UserContext);
 
   const deleteUserReq = async (id) => {
     try {
       await axios.patch(
         `${baseURL}/usuario/update/${id}`,
-        { grupoAtuacao: null },
+        { gruposAtuacao: null },
         {
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ function GrupoAtuacaoProvider({ children }) {
   const addUserGrupoAtuacao = (idUser) => {
     try {
       const grupoDeAtuacaoId = {
-        grupoAtuacao: idGrupo,
+        gruposAtuacao: idGrupo,
       };
       idUser.forEach(async (elem) => {
         await axios.patch(
@@ -65,8 +65,8 @@ function GrupoAtuacaoProvider({ children }) {
         idGrupo,
         setIdGrupo,
         addUserGrupoAtuacao,
-        openInfos,
-        setOpenInfos,
+        openInfosUp,
+        setOpenInfosUp,
       }}
     >
       {children}

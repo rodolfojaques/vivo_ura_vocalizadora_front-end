@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { DivButtonAddContatos, ModalGruposAtuacaoStl } from "./styles";
 
 import * as yup from "yup";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { UserContext } from "../../providers/user";

@@ -38,7 +38,6 @@ function GrupoAtuacaoProvider({ children }) {
       const grupoDeAtuacaoId = {
         gruposAtuacao: idGrupoAtuacao,
       };
-      console.log(idGrupoAtuacao);
       idUser.forEach(async (elem) => {
         await axios.patch(
           `${baseURL}/usuario/update/${elem}`,

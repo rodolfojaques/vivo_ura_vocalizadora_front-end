@@ -33,7 +33,6 @@ function GruposDeAtuacao() {
           Authorization: `Bearer ${usuario.token}`,
         },
       });
-
       toast.success("Grupo de atuação excluído com sucesso!");
     } catch (error) {}
   };

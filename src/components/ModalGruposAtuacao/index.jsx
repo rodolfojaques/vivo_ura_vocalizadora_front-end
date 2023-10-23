@@ -22,8 +22,13 @@ function ModalGruposAtuacaoComponente({
   const [userDeletado, setUserDeletado] = useState([]);
 
   const { usuario, baseURL } = useContext(UserContext);
-  const { addContato, setAddContato, addUserGrupoAtuacao } =
-    useContext(GrupoAtuacaoContext);
+  const {
+    addContato,
+    setAddContato,
+    addUserGrupoAtuacao,
+    setIdGrupo,
+    idGrupo,
+  } = useContext(GrupoAtuacaoContext);
 
   const schema = yup.object().shape({
     nomeGrupo: yup.string().required("*Campo obrigatório"),
@@ -44,7 +49,7 @@ function ModalGruposAtuacaoComponente({
   });
 
   const formAddContato = (idsUsers) => {
-    addUserGrupoAtuacao(idsUsers);
+    addUserGrupoAtuacao(idsUsers, idGrupo);
     setAddContato(!addContato);
   };
 
@@ -58,7 +63,7 @@ function ModalGruposAtuacaoComponente({
     };
 
     try {
-      const create = await axios.post(
+      const response = await axios.post(
         `${baseURL}/grupos-atuacao/register`,
         grupoAtuacao,
         {
@@ -68,21 +73,9 @@ function ModalGruposAtuacaoComponente({
           },
         }
       );
-      const grupoDeAtuacaoId = {
-        grupoAtuacao: create.data.id,
-      };
-      idUser.forEach(async (elem) => {
-        await axios.patch(
-          `${baseURL}/usuario/update/${elem}`,
-          grupoDeAtuacaoId,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${usuario.token}`,
-            },
-          }
-        );
-      });
+      setIdGrupo(response.data.id);
+      addUserGrupoAtuacao(idUser, response.data.id);
+
       toast.success("Grupo de Atuação criado com sucesso!");
     } catch (error) {
       console.log(error);

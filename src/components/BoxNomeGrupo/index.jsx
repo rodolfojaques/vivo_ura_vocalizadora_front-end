@@ -188,6 +188,7 @@ function BoxNomeGrupoComponente({
                     setOpenTipoAlarme(!openTipoAlarme);
                   }}>Novo Tipo de Alarme </button>
                 <button 
+                  style={{backgroundColor: "red"}}
                   className="btn_add_tipo"
                   onClick={(e)=>{
                     e.preventDefault()

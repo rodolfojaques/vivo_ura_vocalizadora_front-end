@@ -35,13 +35,13 @@ function GrupoAtuacaoProvider({ children }) {
 
   const addUserGrupoAtuacao = (idUser, idGrupoAtuacao) => {
     try {
-      const grupoDeAtuacaoId = {
-        gruposAtuacao: idGrupoAtuacao,
-      };
       idUser.forEach(async (elem) => {
-        await axios.patch(
-          `${baseURL}/usuario/update/${elem}`,
-          grupoDeAtuacaoId,
+        let data = {
+          userId: elem,
+        };
+        await axios.post(
+          `${baseURL}/grupos-atuacao/add-user/${idGrupoAtuacao}`,
+          data,
           {
             headers: {
               "Content-Type": "application/json",

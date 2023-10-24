@@ -14,16 +14,16 @@ function GrupoAtuacaoProvider({ children }) {
   const [openInfosUp, setOpenInfosUp] = useState(false);
   const { baseURL, usuario } = useContext(UserContext);
 
-  console.log(idGrupo);
-
-  const deleteUserReq = async (id) => {
+  const deleteUserReq = async (id, grupoId) => {
+    const data = {
+      userId: id,
+    };
     try {
       await axios.patch(
-        `${baseURL}/usuario/update/${id}`,
-        { gruposAtuacao: null },
+        `${baseURL}/grupos-atuacao/delete-user/${grupoId}`,
+        data,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${usuario.token}`,
           },
         }

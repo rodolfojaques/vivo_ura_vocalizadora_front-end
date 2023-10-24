@@ -30,7 +30,7 @@ function ModalExcludeGruposComponent({
             <button
               onClick={() => {
                 setDeleteUser(!deleteUser);
-                deleteUserReq(nameUserAndRe.id);
+                deleteUserReq(nameUserAndRe.id, nameUserAndRe.grupo);
               }}
               className="btn excluir"
             >

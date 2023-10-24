@@ -14,13 +14,12 @@ function BoxNomeGrupoComponente({
   setGrupoSelecionado,
   openModalExclude,
   setOpenModalExclude,
-  openTipoAlarme,  
+  openTipoAlarme,
   setOpenTipoAlarme,
-  openExcludeAlarme, 
+  openExcludeAlarme,
   setOpenExcludeAlarme,
-  idGpAlarme, 
-  setIdGpAlarme
-
+  idGpAlarme,
+  setIdGpAlarme,
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
@@ -91,6 +90,7 @@ function BoxNomeGrupoComponente({
                             id: elem.id,
                             nome: elem.nome,
                             RE: elem.RE,
+                            grupo: grupo.id,
                           });
                         }}
                       />
@@ -186,15 +186,20 @@ function BoxNomeGrupoComponente({
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
                     setOpenTipoAlarme(!openTipoAlarme);
-                  }}>Novo Tipo de Alarme </button>
-                <button 
+                  }}
+                >
+                  Novo Tipo de Alarme{" "}
+                </button>
+                <button
                   className="btn_add_tipo"
-                  onClick={(e)=>{
-                    e.preventDefault()
-                    setIdGpAlarme(grupo.id)
-                    setOpenExcludeAlarme(!openExcludeAlarme)
-                }}
-                >Excluir Tipo de Alarme</button>              
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIdGpAlarme(grupo.id);
+                    setOpenExcludeAlarme(!openExcludeAlarme);
+                  }}
+                >
+                  Excluir Tipo de Alarme
+                </button>
               </>
             )}
           </div>

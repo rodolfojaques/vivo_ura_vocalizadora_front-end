@@ -45,9 +45,6 @@ console.log(idGpAlarme);
             setOpenTipoAlarme(!openTipoAlarme)
         })
         .catch(err => console.log(err))
-        
-        // setGruposAlarmes([...gruposAlarmes,data])
-        // setOpenTipoAlarme(!openTipoAlarme)
     }
 
     return(

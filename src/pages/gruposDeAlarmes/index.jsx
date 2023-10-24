@@ -12,6 +12,7 @@ import { gruposAlarmesMock } from "../../utils/grupos";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 import ModalTiposAlarmesComponente from "../../components/ModalTiposAlarmes";
+import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
 
 function GruposDeAlarmes(){
     const [grupoSelecionado, setGrupoSelecionado] = useState({})
@@ -19,6 +20,7 @@ function GruposDeAlarmes(){
     const [openModalExclude, setOpenModalExclude] = useState(false)
 
     const [openTipoAlarme, setOpenTipoAlarme] = useState(false);
+    const [openExcludeAlarme, setOpenExcludeAlarme] = useState(false);
     const [idGpAlarme, setIdGpAlarme] = useState(0);
 
     const [gruposAlarmes, setGruposAlarmes] = useState([])
@@ -106,6 +108,8 @@ function GruposDeAlarmes(){
                         setOpenTipoAlarme = {setOpenTipoAlarme} 
                         idGpAlarme = {idGpAlarme} 
                         setIdGpAlarme = {setIdGpAlarme}
+                        openExcludeAlarme = {openExcludeAlarme} 
+                        setOpenExcludeAlarme = {setOpenExcludeAlarme}
                         />)
                         :<></>
                     }                    
@@ -133,6 +137,15 @@ function GruposDeAlarmes(){
                 <ModalTiposAlarmesComponente 
                 openTipoAlarme = {openTipoAlarme} 
                 setOpenTipoAlarme = {setOpenTipoAlarme} 
+                idGpAlarme = {idGpAlarme} 
+                setIdGpAlarme = {setIdGpAlarme}
+                />:<></>
+            } 
+            {
+                !!openExcludeAlarme?
+                <ModalExcludeTipoAlarmeComponent 
+                openExcludeAlarme = {openExcludeAlarme} 
+                setOpenExcludeAlarme = {setOpenExcludeAlarme} 
                 idGpAlarme = {idGpAlarme} 
                 setIdGpAlarme = {setIdGpAlarme}
                 />:<></>

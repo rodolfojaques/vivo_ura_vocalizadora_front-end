@@ -1,10 +1,13 @@
+import AssociacaoProvider from "./associacao";
 import GrupoAtuacaoProvider from "./gruposAtuacao";
 import UserProvider from "./user";
 
 function Providers({ children }) {
   return (
     <UserProvider>
-      <GrupoAtuacaoProvider>{children}</GrupoAtuacaoProvider>
+      <GrupoAtuacaoProvider>
+        <AssociacaoProvider>{children}</AssociacaoProvider>
+      </GrupoAtuacaoProvider>
     </UserProvider>
   );
 }

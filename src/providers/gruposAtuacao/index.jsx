@@ -14,6 +14,8 @@ function GrupoAtuacaoProvider({ children }) {
   const [openInfosUp, setOpenInfosUp] = useState(false);
   const { baseURL, usuario } = useContext(UserContext);
 
+  console.log(idGrupo);
+
   const deleteUserReq = async (id) => {
     try {
       await axios.patch(
@@ -31,10 +33,10 @@ function GrupoAtuacaoProvider({ children }) {
     } catch (error) {}
   };
 
-  const addUserGrupoAtuacao = (idUser) => {
+  const addUserGrupoAtuacao = (idUser, idGrupoAtuacao) => {
     try {
       const grupoDeAtuacaoId = {
-        gruposAtuacao: idGrupo,
+        gruposAtuacao: idGrupoAtuacao,
       };
       idUser.forEach(async (elem) => {
         await axios.patch(

@@ -7,6 +7,7 @@ function BoxNomeGrupoComponente({
   nome,
   grupo,
   tipoGrupo,
+  tipoAssociacao,
   listaGruposAlarmes,
   setListaGruposAlarmes,
   grupoSelecionado,
@@ -19,6 +20,7 @@ function BoxNomeGrupoComponente({
   setOpenExcludeAlarme,
   idGpAlarme, 
   setIdGpAlarme
+
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
@@ -76,19 +78,23 @@ function BoxNomeGrupoComponente({
                 <div key={elem.id} className="div_fields_contacts">
                   <p className="ttl_p space_icon">
                     Contato 3: {elem.nome}{" "}
-                    <Icon.XCircleFill
-                      size={16}
-                      className="custom-icon"
-                      color="darkorange"
-                      onClick={() => {
-                        setDeleteUser(!deleteUser);
-                        setNameUserAndRe({
-                          id: elem.id,
-                          nome: elem.nome,
-                          RE: elem.RE,
-                        });
-                      }}
-                    />
+                    {tipoAssociacao === "associacao" ? (
+                      <></>
+                    ) : (
+                      <Icon.XCircleFill
+                        size={16}
+                        className="custom-icon"
+                        color="darkorange"
+                        onClick={() => {
+                          setDeleteUser(!deleteUser);
+                          setNameUserAndRe({
+                            id: elem.id,
+                            nome: elem.nome,
+                            RE: elem.RE,
+                          });
+                        }}
+                      />
+                    )}
                   </p>
                   <p className="ttl_p">
                     Fone: <span className="info_span">{elem.tel_cel}</span>
@@ -99,17 +105,21 @@ function BoxNomeGrupoComponente({
                   <hr />
                 </div>
               ))}
-            <DivButtonAddContato>
-              <button
-                type="button"
-                onClick={() => {
-                  setAddContato(!addContato);
-                  setIdGrupo(grupo.id);
-                }}
-              >
-                Adicionar Contato
-              </button>
-            </DivButtonAddContato>
+            {tipoAssociacao === "associacao" ? (
+              <></>
+            ) : (
+              <DivButtonAddContato>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAddContato(!addContato);
+                    setIdGrupo(grupo.id);
+                  }}
+                >
+                  Adicionar Contato
+                </button>
+              </DivButtonAddContato>
+            )}
           </div>
         ) : (
           <div
@@ -121,46 +131,72 @@ function BoxNomeGrupoComponente({
           >
             <p className="nome">{nome}</p>
             <p className="ttl_p">
-              UF: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
-                return `${tipo.uf}  /  `
-              })}</span>
+              UF:{" "}
+              <span className="info_span">
+                {grupo.tiposAlarmes.map((tipo) => {
+                  return `${tipo.uf}  /  `;
+                })}
+              </span>
             </p>
             <p className="ttl_p">
-              Site: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
-                return `${tipo.site}  /  `
-              })}</span>
+              Site:{" "}
+              <span className="info_span">
+                {grupo.tiposAlarmes.map((tipo) => {
+                  return `${tipo.site}  /  `;
+                })}
+              </span>
             </p>
             <p className="ttl_p">
               Tipo de alarme:{" "}
-              <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
-                return `${tipo.tipoAlarme}  /  `
-              })}</span>
+              <span className="info_span">
+                {grupo.tiposAlarmes.map((tipo) => {
+                  return `${tipo.tipoAlarme}  /  `;
+                })}
+              </span>
             </p>
             <p className="ttl_p">
               Classificação:{" "}
-              <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
-                return `${tipo.classificacao}  /  `
-              })}</span>
+              <span className="info_span">
+                {grupo.tiposAlarmes.map((tipo) => {
+                  return `${tipo.classificacao}  /  `;
+                })}
+              </span>
             </p>
             <p className="ttl_p">
-              Localidade: <span className="info_span">{grupo.tiposAlarmes.map((tipo)=>{
-                return `${tipo.localidade}  /  `
-              })}</span>
+              Localidade:{" "}
+              <span className="info_span">
+                {grupo.tiposAlarmes.map((tipo) => {
+                  return `${tipo.localidade}  /  `;
+                })}
+              </span>
             </p>
-            <button className="btn_add_tipo"
-            onClick={(e)=>{
-              e.preventDefault()
-              setIdGpAlarme(grupo.id)
-              setOpenTipoAlarme(!openTipoAlarme)
-            }}
-            >Novo Tipo de Alarme</button>
-            <button className="btn_add_tipo"
-            onClick={(e)=>{
-              e.preventDefault()
-              setIdGpAlarme(grupo.id)
-              setOpenExcludeAlarme(!openExcludeAlarme)
-            }}
-            >Excluir Tipo de Alarme</button>
+            {tipoAssociacao === "associacao" ? (
+              <>
+                <DivButtonAddContato>
+                  <button type="button" onClick={() => {}}>
+                    Adicionar Grupo de atuação
+                  </button>
+                </DivButtonAddContato>
+              </>
+            ) : (
+              <button
+                className="btn_add_tipo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIdGpAlarme(grupo.id);
+                  setOpenTipoAlarme(!openTipoAlarme);
+                }}
+              >
+                Novo Tipo de Alarme
+              </button>
+              <button className="btn_add_tipo"
+              onClick={(e)=>{
+                e.preventDefault()
+                setIdGpAlarme(grupo.id)
+                setOpenExcludeAlarme(!openExcludeAlarme)
+              }}
+              >Excluir Tipo de Alarme</button>
+            )}
           </div>
         )
       ) : (
@@ -174,14 +210,18 @@ function BoxNomeGrupoComponente({
           >
             {nome}
           </p>
-          <Icon.XCircleFill
-            color="darkorange"
-            className="custom-icon"
-            onClick={() => {
-              setOpenModalExclude(!openModalExclude);
-              setGrupoSelecionado(grupo);
-            }}
-          />
+          {tipoAssociacao === "associacao" ? (
+            <></>
+          ) : (
+            <Icon.XCircleFill
+              color="darkorange"
+              className="custom-icon"
+              onClick={() => {
+                setOpenModalExclude(!openModalExclude);
+                setGrupoSelecionado(grupo);
+              }}
+            />
+          )}
         </div>
       )}
     </BoxNomeGrupoStl>

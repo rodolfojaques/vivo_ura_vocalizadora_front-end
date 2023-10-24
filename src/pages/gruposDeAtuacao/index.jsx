@@ -6,7 +6,6 @@ import { GruposDeAtuacaoStl } from "./styles";
 import ModalGruposAtuacaoComponente from "../../components/ModalGruposAtuacao";
 import ListaSG from "../../components/ListaSG";
 import ListaDL from "../../components/ListaDL";
-import { gruposAtuacaoMock } from "../../utils/grupos";
 import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
 import ModalExcludeGruposComponent from "../../components/ModalExcludeGrupos";
 import axios from "axios";
@@ -21,6 +20,7 @@ function GruposDeAtuacao() {
   const [openModalExclude, setOpenModalExclude] = useState(false);
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
+  const [grupoAtuacaoFiltered, setGrupoAtuacaoFiltered] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
   const { deleteUser, addContato, openInfosUp } =
@@ -33,7 +33,6 @@ function GruposDeAtuacao() {
           Authorization: `Bearer ${usuario.token}`,
         },
       });
-
       toast.success("Grupo de atuação excluído com sucesso!");
     } catch (error) {}
   };
@@ -47,83 +46,25 @@ function GruposDeAtuacao() {
       ) {
         return obj;
       } else if (
-        obj?.RE1?.toString().toLowerCase().includes(value.toLowerCase())
+        obj?.gerente1?.toString().toLowerCase().includes(value.toLowerCase())
       ) {
         return obj;
       } else if (
-        obj?.nome1?.toString().toLowerCase().includes(value.toLowerCase())
+        obj?.gerente2?.toString().toLowerCase().includes(value.toLowerCase())
       ) {
         return obj;
       } else if (
-        obj?.contato1?.toString().toLowerCase().includes(value.toLowerCase())
+        obj?.contato_ger1
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
       ) {
         return obj;
       } else if (
-        obj?.cargo1?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.RE2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.nome2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.cargo2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.RE3?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.nome3?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato3?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.cargo3?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.RE4?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.nome4?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato4?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.cargo4?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.RE5?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.nome5?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato5?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.cargo5?.toString().toLowerCase().includes(value.toLowerCase())
+        obj?.contato_ger1
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
       ) {
         return obj;
       }
@@ -139,6 +80,7 @@ function GruposDeAtuacao() {
         },
       });
       setGrupoAtuacao(response.data);
+      setGrupoAtuacaoFiltered(response.data);
     } catch (error) {}
   };
   useEffect(() => {
@@ -163,7 +105,7 @@ function GruposDeAtuacao() {
         <ListaSG
           tipoPag={"atuação"}
           handleValueChange={handleValueChange}
-          gruposAtuacaoMock={gruposAtuacaoMock}
+          gruposAtuacaoMock={grupoAtuacaoFiltered}
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoComponente

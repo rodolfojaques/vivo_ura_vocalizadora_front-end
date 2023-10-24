@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { createContext, useState } from "react";
 
 export const UserContext = createContext();

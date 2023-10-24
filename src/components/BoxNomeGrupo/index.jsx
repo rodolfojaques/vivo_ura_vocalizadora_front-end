@@ -179,23 +179,23 @@ function BoxNomeGrupoComponente({
                 </DivButtonAddContato>
               </>
             ) : (
-              <button
-                className="btn_add_tipo"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIdGpAlarme(grupo.id);
-                  setOpenTipoAlarme(!openTipoAlarme);
+              <>
+                <button
+                  className="btn_add_tipo"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIdGpAlarme(grupo.id);
+                    setOpenTipoAlarme(!openTipoAlarme);
+                  }}>Novo Tipo de Alarme </button>
+                <button 
+                  className="btn_add_tipo"
+                  onClick={(e)=>{
+                    e.preventDefault()
+                    setIdGpAlarme(grupo.id)
+                    setOpenExcludeAlarme(!openExcludeAlarme)
                 }}
-              >
-                Novo Tipo de Alarme
-              </button>
-              <button className="btn_add_tipo"
-              onClick={(e)=>{
-                e.preventDefault()
-                setIdGpAlarme(grupo.id)
-                setOpenExcludeAlarme(!openExcludeAlarme)
-              }}
-              >Excluir Tipo de Alarme</button>
+                >Excluir Tipo de Alarme</button>              
+              </>
             )}
           </div>
         )

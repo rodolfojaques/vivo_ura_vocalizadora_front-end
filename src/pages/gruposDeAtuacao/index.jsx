@@ -21,6 +21,7 @@ function GruposDeAtuacao() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
   const [grupoAtuacaoFiltered, setGrupoAtuacaoFiltered] = useState([]);
+  const [stateGrupo, setStateGrupo] = useState(false);
 
   const { baseURL, usuario } = useContext(UserContext);
   const { deleteUser, addContato, openInfosUp } =
@@ -34,6 +35,7 @@ function GruposDeAtuacao() {
         },
       });
       toast.success("Grupo de atuação excluído com sucesso!");
+      setStateGrupo(!stateGrupo);
     } catch (error) {}
   };
 
@@ -91,6 +93,7 @@ function GruposDeAtuacao() {
     deleteUser,
     addContato,
     openInfosUp,
+    stateGrupo,
   ]);
 
   return (

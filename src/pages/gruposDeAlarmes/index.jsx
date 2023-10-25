@@ -42,7 +42,7 @@ function GruposDeAlarmes(){
             setGruposAlarmesInicial(res.data)
         })
         .catch(err => console.log(err))
-    },[openModalExclude,openModalAlarm,openTipoAlarme])
+    },[openModalExclude,openModalAlarm,openTipoAlarme,openExcludeAlarme])
 
     const deleteOnClick = (grp)=> {
         axios.delete(`${baseURL}/grupos-alarmes/delete/${grp.id}`,{

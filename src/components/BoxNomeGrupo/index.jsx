@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { BoxNomeGrupoStl, DivButtonAddContato } from "./styles";
 import * as Icon from "react-bootstrap-icons";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
+import { AssociacaoContext } from "../../providers/associacao";
 
 function BoxNomeGrupoComponente({
   nome,
@@ -33,6 +34,9 @@ function BoxNomeGrupoComponente({
     openInfosUp,
     setOpenInfosUp,
   } = useContext(GrupoAtuacaoContext);
+
+  const { grupoAssociacaoAdd, setGrupoAssociacaoAdd } =
+    useContext(AssociacaoContext);
 
   return (
     <BoxNomeGrupoStl>
@@ -173,7 +177,12 @@ function BoxNomeGrupoComponente({
             {tipoAssociacao === "associacao" ? (
               <>
                 <DivButtonAddContato>
-                  <button type="button" onClick={() => {}}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
+                    }}
+                  >
                     Adicionar Grupo de atuação
                   </button>
                 </DivButtonAddContato>
@@ -186,11 +195,12 @@ function BoxNomeGrupoComponente({
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
                     setOpenTipoAlarme(!openTipoAlarme);
-                 }}>
-                    Novo Tipo de Alarme 
+                  }}
+                >
+                  Novo Tipo de Alarme
                 </button>
-                <button 
-                  style={{backgroundColor: "red"}}
+                <button
+                  style={{ backgroundColor: "red" }}
                   className="btn_add_tipo"
                   onClick={(e) => {
                     e.preventDefault();

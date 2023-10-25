@@ -10,11 +10,16 @@ import { UserContext } from "../../providers/user";
 import { useEffect } from "react";
 import { useState } from "react";
 import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
+import { AssociacaoContext } from "../../providers/associacao";
+import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
+import { set } from "react-hook-form";
 
 function Associacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
   const [grupoAlarme, setGrupoAlarme] = useState([]);
   const { baseURL, usuario } = useContext(UserContext);
+  const { grupoAssociacaoAdd, setGrupoAssociacaoAdd, setGrupoAtuacaoAss } =
+    useContext(AssociacaoContext);
   const allGroupsAtuacao = async () => {
     try {
       const response = await axios.get(`${baseURL}/grupos-atuacao`, {
@@ -23,6 +28,7 @@ function Associacao() {
         },
       });
       setGrupoAtuacao(response.data);
+      setGrupoAtuacaoAss(response.data);
     } catch (error) {}
   };
 
@@ -75,6 +81,12 @@ function Associacao() {
           ))}
         </ListaDL>
       </ContainerGruposComponente>
+      {grupoAssociacaoAdd && (
+        <ModalExcludeTipoAlarmeComponent
+          grupoAssosc={grupoAssociacaoAdd}
+          setGrupoAssosc={setGrupoAssociacaoAdd}
+        />
+      )}
     </AssociacaoStl>
   );
 }

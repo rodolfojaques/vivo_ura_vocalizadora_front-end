@@ -35,8 +35,14 @@ function BoxNomeGrupoComponente({
     setOpenInfosUp,
   } = useContext(GrupoAtuacaoContext);
 
-  const { grupoAssociacaoAdd, setGrupoAssociacaoAdd } =
-    useContext(AssociacaoContext);
+  const {
+    grupoAssociacaoAdd,
+    setGrupoAssociacaoAdd,
+    removeAssociacao,
+    setRemoveAssociacao,
+  } = useContext(AssociacaoContext);
+
+  console.log(removeAssociacao);
 
   return (
     <BoxNomeGrupoStl>
@@ -189,7 +195,7 @@ function BoxNomeGrupoComponente({
                     className="excluir"
                     type="button"
                     onClick={() => {
-                      // setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
+                      setRemoveAssociacao(!removeAssociacao);
                     }}
                   >
                     Remover Grupo de atuação

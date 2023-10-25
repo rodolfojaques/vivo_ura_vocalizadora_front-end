@@ -7,6 +7,7 @@ export const AssociacaoContext = createContext();
 function AssociacaoProvider({ children }) {
   const [grupoAssociacaoAdd, setGrupoAssociacaoAdd] = useState(false);
   const [grupoAtuacaoAss, setGrupoAtuacaoAss] = useState([]);
+  const [removeAssociacao, setRemoveAssociacao] = useState(false);
   return (
     <AssociacaoContext.Provider
       value={{
@@ -14,6 +15,8 @@ function AssociacaoProvider({ children }) {
         setGrupoAssociacaoAdd,
         grupoAtuacaoAss,
         setGrupoAtuacaoAss,
+        removeAssociacao,
+        setRemoveAssociacao,
       }}
     >
       {children}

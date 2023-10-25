@@ -16,7 +16,8 @@ function ModalExcludeTipoAlarmeComponent({
   setIdGpAlarme,
 }) {
   const { baseURL, usuario } = useContext(UserContext);
-  const { grupoAtuacaoAss } = useContext(AssociacaoContext);
+  const { grupoAtuacaoAss, removeAssociacao, setRemoveAssociacao } =
+    useContext(AssociacaoContext);
 
   const [alarmes, setAlarmes] = useState([]);
   const [tipoSelec, setTipoSelec] = useState([]);
@@ -77,12 +78,7 @@ function ModalExcludeTipoAlarmeComponent({
             >
               Voltar
             </button>
-            <button
-              onClick={() => excluirTipoAlarme()}
-              className="btn adicionar"
-            >
-              Adicionar
-            </button>
+            <button className="btn adicionar">Adicionar</button>
           </div>
         </ModalExcludeTipoAlarmesStl>
       ) : (
@@ -113,6 +109,35 @@ function ModalExcludeTipoAlarmeComponent({
             </button>
           </div>
         </ModalExcludeTipoAlarmesStl>
+      )}
+      {removeAssociacao ? (
+        <ModalExcludeTipoAlarmesStl>
+          <h2 className="title">Remover Grupo de Atuação</h2>
+          <select
+            onChange={(e) => setGrupo(e.target.value)}
+            name=""
+            id=""
+            className="tipos"
+          >
+            <option>...</option>
+            {grupoAtuacaoAss.map((grupo, i) => (
+              <option key={i} className="options" value={grupo.id}>
+                {grupo.nomeGrupo}
+              </option>
+            ))}
+          </select>
+          <div className="btns">
+            <button
+              onClick={() => setRemoveAssociacao(!removeAssociacao)}
+              className="btn voltar"
+            >
+              Voltar
+            </button>
+            <button className="btn excluir">Excluir</button>
+          </div>
+        </ModalExcludeTipoAlarmesStl>
+      ) : (
+        <></>
       )}
     </>
   );

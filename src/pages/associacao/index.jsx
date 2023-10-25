@@ -18,8 +18,12 @@ function Associacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
   const [grupoAlarme, setGrupoAlarme] = useState([]);
   const { baseURL, usuario } = useContext(UserContext);
-  const { grupoAssociacaoAdd, setGrupoAssociacaoAdd, setGrupoAtuacaoAss } =
-    useContext(AssociacaoContext);
+  const {
+    grupoAssociacaoAdd,
+    setGrupoAssociacaoAdd,
+    setGrupoAtuacaoAss,
+    removeAssociacao,
+  } = useContext(AssociacaoContext);
   const allGroupsAtuacao = async () => {
     try {
       const response = await axios.get(`${baseURL}/grupos-atuacao`, {
@@ -82,6 +86,12 @@ function Associacao() {
         </ListaDL>
       </ContainerGruposComponente>
       {grupoAssociacaoAdd && (
+        <ModalExcludeTipoAlarmeComponent
+          grupoAssosc={grupoAssociacaoAdd}
+          setGrupoAssosc={setGrupoAssociacaoAdd}
+        />
+      )}
+      {removeAssociacao && (
         <ModalExcludeTipoAlarmeComponent
           grupoAssosc={grupoAssociacaoAdd}
           setGrupoAssosc={setGrupoAssociacaoAdd}

@@ -1,4 +1,4 @@
-import { arrEstado, arrSite, arrTipoAlarme } from "../../utils/pagListaAlarmes";
+import { arrEstado, arrSite, siglaSite, arrTipoAlarme, localidade } from "../../utils/pagListaAlarmes";
 import { ModalTiposAlarmesStl } from "./styles";
 
 import * as yup from 'yup';
@@ -72,7 +72,7 @@ console.log(idGpAlarme);
                         </label>
                         <select className="campos campos_dropDown" {...register("site")}>
                             {
-                                arrSite.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                siglaSite.map((item,i)=> <option key={i} value={item}>{item}</option>)
                             }                                
                         </select>
                     </div>
@@ -95,7 +95,10 @@ console.log(idGpAlarme);
                             Classificação
                         </label>
                         <select className="campos campos_dropDown" {...register("classificacao")}>
-                            <option value="classificacao">...</option>                                
+                                <option value="MAJORITARIO">MAJORITARIO</option>
+                                <option value="MINORITARIO">MINORITARIO</option>
+                                <option value="CRITICO">CRITICO</option>
+                                <option value="MESA DE CONTROLE">MESA DE CONTROLE</option>                                
                         </select>
                     </div>
                 </div>
@@ -105,7 +108,9 @@ console.log(idGpAlarme);
                             Localidade
                         </label>
                         <select className="campos campos_dropDown" {...register("localidade")}>
-                            <option value="localidade">...</option>                               
+                            {
+                                localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                            }                               
                         </select>
                     </div>
                 </div>

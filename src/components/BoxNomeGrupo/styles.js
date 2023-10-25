@@ -75,12 +75,12 @@ export const BoxNomeGrupoStl = styled.li`
     gap: 6px;
   }
 
-  .btn_add_tipo{
+  .btn_add_tipo {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: .3rem;
+    padding: 0.3rem;
 
     color: white;
     background-color: darkorange;
@@ -93,8 +93,8 @@ export const BoxNomeGrupoStl = styled.li`
 
     cursor: pointer;
 
-    &:active{
-      opacity: .6;
+    &:active {
+      opacity: 0.6;
     }
   }
 `;
@@ -103,14 +103,16 @@ export const DivButtonAddContato = styled.div`
   width: 100%;
   margin-top: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   button {
     font-family: "Poppins", sans-serif;
     font-size: small;
     font-weight: bold;
     border: none;
-    width: 70%;
+    width: 80%;
     height: 28px;
     background-color: darkorange;
     border-radius: 8px;
@@ -123,5 +125,9 @@ export const DivButtonAddContato = styled.div`
     :hover {
       filter: brightness(0.9);
     }
+  }
+
+  .excluir {
+    background-color: red;
   }
 `;

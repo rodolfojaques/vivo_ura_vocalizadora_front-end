@@ -185,6 +185,15 @@ function BoxNomeGrupoComponente({
                   >
                     Adicionar Grupo de atuação
                   </button>
+                  <button
+                    className="excluir"
+                    type="button"
+                    onClick={() => {
+                      // setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
+                    }}
+                  >
+                    Remover Grupo de atuação
+                  </button>
                 </DivButtonAddContato>
               </>
             ) : (

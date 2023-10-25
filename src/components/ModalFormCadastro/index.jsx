@@ -142,7 +142,13 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Perfil
                                 </label>
-                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")}/>
+                                <select className="campos" {...register("perfil")}>
+                                    <option value="Operador">Operador</option>
+                                    <option value="Gestor">Gestor</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="UserAdm">UserAdm</option>
+                                </select>
+                                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")}/> */}
                             </div>
                                 {errors?.perfil?.message?
                                     <span className="msg_error">{errors.perfil?.message}</span>:""}
@@ -199,7 +205,13 @@ function ModalFormCadastro({title, openModal, setOpenModal, openModalEdit, setOp
                                 <label htmlFor="" className="label_campos">
                                     Perfil
                                 </label>
-                                <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/>
+                                <select className="campos" {...register("perfil")} defaultValue={user.perfil}>
+                                    <option value="Operador">Operador</option>
+                                    <option value="Gestor">Gestor</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="UserAdm">UserAdm</option>
+                                </select>
+                                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}
                             </div>
                                 {errors?.perfil?.message?
                                     <span className="msg_error">{errors.perfil?.message}</span>:""}

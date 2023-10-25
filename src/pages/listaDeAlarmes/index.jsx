@@ -1,18 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import TableComponent from "../../components/tableReact";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
-import { arrSite, mockJson, arrEstado, arrTipoAlarme, ultAlarmesEm } from "../../utils/pagListaAlarmes";
+import { arrSite, siglaSite, mockJson, arrEstado, arrTipoAlarme, ultAlarmesEm, localidade } from "../../utils/pagListaAlarmes";
+import axios from "axios";
+import { UserContext } from "../../providers/user";
 
 
 function ListaDeAlarmes(){
+    const {
+        baseURL,
+        usuario
+    } = useContext(UserContext)
 
     const [ linhas, setLinhas ] = useState(5)
-    const [ arrMock, setArrMock ] = useState([])
+    const [ arrAlarm, setArrAlarm ] = useState([])
+    const [ arrAlarmInit, setArrAlarmInit ] = useState([])
 
     useEffect(()=>{
-        setArrMock(mockJson)
+        axios.get(`${baseURL}/alarmes`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${usuario?.token}`
+            }})
+        .then(res => {
+            setArrAlarm(res.data)
+            setArrAlarmInit(res.data)
+        })
+        .catch(err => console.log(err))        
     },[]) 
 
     const columns = useMemo(
@@ -175,7 +191,7 @@ function ListaDeAlarmes(){
     const handleValueChange = (event,arr) => {
         const value = event.target.value || "";
         
-        const newArrMock = arr.filter((obj) => {
+        const newArrAlarm = arr.filter((obj) => {
 
             if(obj?.TIPO_TA?.toString().toLowerCase().includes(value.toLowerCase())){
                 return obj;
@@ -249,7 +265,7 @@ function ListaDeAlarmes(){
                 return obj;
             }
         })
-        setArrMock(newArrMock)
+        setArrAlarm(newArrAlarm)
     };
 
     return (
@@ -290,7 +306,9 @@ function ListaDeAlarmes(){
                                 Localidade
                             </label>
                             <select className="campos_dropDown">
-                                <option value="localidade">...</option>
+                                {
+                                    localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }
                             </select>
                         </div>
                         <div className="divDrop_down">
@@ -299,7 +317,7 @@ function ListaDeAlarmes(){
                             </label>
                             <select className="campos_dropDown">
                                 {
-                                    arrSite.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    siglaSite.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                
                             </select>
                         </div>
@@ -316,7 +334,10 @@ function ListaDeAlarmes(){
                                 Classificação
                             </label>
                             <select className="campos_dropDown">
-                                <option value="classificacao">...</option>
+                                <option value="MAJORITARIO">MAJORITARIO</option>
+                                <option value="MINORITARIO">MINORITARIO</option>
+                                <option value="CRITICO">CRITICO</option>
+                                <option value="MESA DE CONTROLE">MESA DE CONTROLE</option>
                             </select>
                         </div>
                     </div>
@@ -348,7 +369,7 @@ function ListaDeAlarmes(){
                         
                     </div>
                     <div className="pesquisa_btnSubmit">
-                        <input onChange={(event)=> handleValueChange(event,mockJson)} placeholder="Pesquisar" type="text" className="barra_pesquisa" />
+                        <input onChange={(event)=> handleValueChange(event,arrAlarmInit)} placeholder="Pesquisar" type="text" className="barra_pesquisa" />
                         
                     </div>
                 </FormListAlarmStl>
@@ -357,7 +378,7 @@ function ListaDeAlarmes(){
                     <input onChange={(e)=> setLinhas(Number(e.target.value))} type="number" min={1} name="quant_line" id="quant_lin" placeholder="Qtd linhas"/>
                 </div>
             </div>
-            <TableComponent columns={columns} data={arrMock} exibirLinhas={linhas}/>
+            <TableComponent columns={columns} data={arrAlarm} exibirLinhas={linhas}/>
         </ListaDeAlarmesStl>
     )
 }

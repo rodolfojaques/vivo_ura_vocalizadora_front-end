@@ -25,6 +25,7 @@ function Associacao() {
     setGrupoAssociacaoAdd,
     setGrupoAtuacaoAss,
     removeAssociacao,
+    addDelete,
   } = useContext(AssociacaoContext);
 
   const allGroupsAtuacao = async () => {
@@ -54,7 +55,7 @@ function Associacao() {
   useEffect(() => {
     allGroupsAtuacao();
     allGroupsAlarme();
-  }, []);
+  }, [addDelete]);
 
   const handleValueChange = (event, arr) => {
     const value = event.target.value || "";

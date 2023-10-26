@@ -14,6 +14,7 @@ function AssociacaoProvider({ children }) {
   const [idGrupoAtuacao, setIdGrupoAtuacao] = useState(0);
   const [idGrupoAlarme, setIdGrupoAlarme] = useState(0);
   const [listGrupoAlarme, setListGrupoAlarme] = useState([]);
+  const [addDelete, setAddDelete] = useState(false);
 
   const { baseURL, usuario } = useContext(UserContext);
 
@@ -32,6 +33,7 @@ function AssociacaoProvider({ children }) {
           },
         }
       );
+      setAddDelete(!addDelete);
       toast.success("Grupo de atuação adicionado!");
     } catch (error) {}
   };
@@ -51,6 +53,7 @@ function AssociacaoProvider({ children }) {
           },
         }
       );
+      setAddDelete(!addDelete);
       toast.success("Grupo de atuação deletado!");
     } catch (error) {}
   };
@@ -85,6 +88,7 @@ function AssociacaoProvider({ children }) {
         listGrupoAlarme,
         setListGrupoAlarme,
         listOneGrupoAlarme,
+        addDelete,
       }}
     >
       {children}

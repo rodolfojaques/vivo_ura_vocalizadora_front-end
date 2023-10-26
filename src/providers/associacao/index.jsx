@@ -13,6 +13,7 @@ function AssociacaoProvider({ children }) {
   const [removeAssociacao, setRemoveAssociacao] = useState(false);
   const [idGrupoAtuacao, setIdGrupoAtuacao] = useState(0);
   const [idGrupoAlarme, setIdGrupoAlarme] = useState(0);
+  const [listGrupoAlarme, setListGrupoAlarme] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
 
@@ -54,6 +55,18 @@ function AssociacaoProvider({ children }) {
     } catch (error) {}
   };
 
+  const listOneGrupoAlarme = async (idGrupo) => {
+    try {
+      const response = await axios.get(`${baseURL}/grupos-alarmes/${idGrupo}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setListGrupoAlarme(response.data.gruposAtuacao);
+    } catch (error) {}
+  };
+
   return (
     <AssociacaoContext.Provider
       value={{
@@ -69,6 +82,9 @@ function AssociacaoProvider({ children }) {
         idGrupoAlarme,
         setIdGrupoAlarme,
         deleteGrupoAtuacaoAss,
+        listGrupoAlarme,
+        setListGrupoAlarme,
+        listOneGrupoAlarme,
       }}
     >
       {children}

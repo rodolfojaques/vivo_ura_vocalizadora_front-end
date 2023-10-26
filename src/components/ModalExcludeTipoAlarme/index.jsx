@@ -24,6 +24,8 @@ function ModalExcludeTipoAlarmeComponent({
     setIdGrupoAtuacao,
     addGrupoAtuacaoAss,
     idGrupoAlarme,
+    listGrupoAlarme,
+    deleteGrupoAtuacaoAss,
   } = useContext(AssociacaoContext);
 
   const [alarmes, setAlarmes] = useState([]);
@@ -43,7 +45,6 @@ function ModalExcludeTipoAlarmeComponent({
       })
       .catch((err) => console.error(err));
   }, []);
-
   const excluirTipoAlarme = () => {
     axios
       .delete(`${baseURL}/tipos-alarmes/delete/${tipoSelec}`, {
@@ -134,7 +135,7 @@ function ModalExcludeTipoAlarmeComponent({
             className="tipos"
           >
             <option>...</option>
-            {grupoAtuacaoAss.map((grupo, i) => (
+            {listGrupoAlarme.map((grupo, i) => (
               <option key={i} className="options" value={grupo.id}>
                 {grupo.nomeGrupo}
               </option>
@@ -147,7 +148,15 @@ function ModalExcludeTipoAlarmeComponent({
             >
               Voltar
             </button>
-            <button className="btn excluir">Excluir</button>
+            <button
+              className="btn excluir"
+              onClick={() => {
+                deleteGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao);
+                setRemoveAssociacao(!removeAssociacao);
+              }}
+            >
+              Excluir
+            </button>
           </div>
         </ModalExcludeTipoAlarmesStl>
       ) : (

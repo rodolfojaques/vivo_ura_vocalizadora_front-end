@@ -41,6 +41,7 @@ function BoxNomeGrupoComponente({
     removeAssociacao,
     setRemoveAssociacao,
     setIdGrupoAlarme,
+    listOneGrupoAlarme,
   } = useContext(AssociacaoContext);
   return (
     <BoxNomeGrupoStl>
@@ -203,6 +204,8 @@ function BoxNomeGrupoComponente({
                     type="button"
                     onClick={() => {
                       setRemoveAssociacao(!removeAssociacao);
+                      setIdGrupoAlarme(grupo.id);
+                      listOneGrupoAlarme(grupo.id);
                     }}
                   >
                     Remover Grupo de atuação

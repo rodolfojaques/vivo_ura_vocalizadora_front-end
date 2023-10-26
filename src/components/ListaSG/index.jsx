@@ -15,6 +15,9 @@ function ListaSG({
             type="text"
             className="pesquisa_sg"
             placeholder="Pesquisar..."
+            onChange={(event) => {
+              handleValueChange(event, gruposAlarmesMock);
+            }}
           />
           <h3 className="str_grup_sg">
             Grupos de <span className="sg">ALARMES</span>

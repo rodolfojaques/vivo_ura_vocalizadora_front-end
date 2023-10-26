@@ -1,15 +1,42 @@
 import { ListaDLStl } from "./styles";
 
-function ListaDL({ children, grupoAtuacao }) {
+function ListaDL({
+  children,
+  grupoAtuacao,
+  handleValueChange,
+  grupoAtuacaoInicial,
+}) {
   return (
-    <ListaDLStl>
-      <input type="text" className="pesquisa_dl" placeholder="Pesquisar..." />
-      <h3 className="str_grup_dl">
-        Grupos {grupoAtuacao ? "de " : null}
-        <span className="dl">{grupoAtuacao ? grupoAtuacao : "DL-TEMS"}</span>
-      </h3>
-      <ul className="list_grupos_dl">{children}</ul>
-    </ListaDLStl>
+    <>
+      {grupoAtuacao === "ATUAÇÃO" ? (
+        <ListaDLStl>
+          <input
+            type="text"
+            className="pesquisa_dl"
+            placeholder="Pesquisar..."
+            onChange={(event) => {
+              handleValueChange(event, grupoAtuacaoInicial);
+            }}
+          />
+          <h3 className="str_grup_dl">
+            Grupos de <span className="dl">{grupoAtuacao}</span>
+          </h3>
+          <ul className="list_grupos_dl">{children}</ul>
+        </ListaDLStl>
+      ) : (
+        <ListaDLStl>
+          <input
+            type="text"
+            className="pesquisa_dl"
+            placeholder="Pesquisar..."
+          />
+          <h3 className="str_grup_dl">
+            Grupos <span className="dl">DL-TEMS</span>
+          </h3>
+          <ul className="list_grupos_dl">{children}</ul>
+        </ListaDLStl>
+      )}
+    </>
   );
 }
 

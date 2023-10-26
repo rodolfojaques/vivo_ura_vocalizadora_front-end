@@ -17,6 +17,8 @@ function UserProvider({ children }) {
 
   const [idUser, setIdUser] = useState({});
 
+  const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
+
   return (
     <UserContext.Provider
       value={{
@@ -33,6 +35,7 @@ function UserProvider({ children }) {
         setAlterarPlantaoPagUser,
         idUser,
         setIdUser,
+        usuarioLocal,
       }}
     >
       {children}

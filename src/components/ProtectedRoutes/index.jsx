@@ -5,7 +5,7 @@ import { UserContext } from "../../providers/user";
 const ProtectedRoutes = () => {
   const { usuario } = useContext(UserContext);
 
-  return usuario.token ? <Outlet /> : <Navigate to="/" />;
+  return usuario?.token ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoutes;

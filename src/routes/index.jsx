@@ -7,6 +7,7 @@ import GruposDeAtuacao from "../pages/gruposDeAtuacao/index.jsx";
 import Associacao from "../pages/associacao/index.jsx";
 import GruposDeAlarmes from "../pages/gruposDeAlarmes/index.jsx";
 import ProtectedRoutes from "../components/ProtectedRoutes/index.jsx";
+import ProtectedRoutesAdm from "../components/ProtectedRouteAdmin/index.jsx";
 
 function RoutesMain() {
   return (
@@ -18,7 +19,9 @@ function RoutesMain() {
         <Route path="/grupos-atuacao" element={<GruposDeAtuacao />} />
         <Route path="/associacao" element={<Associacao />} />
         <Route path="/grupos-alarmes" element={<GruposDeAlarmes />} />
-        <Route path="/usuarios" element={<PaginaUsuarios />} />
+        <Route element={<ProtectedRoutesAdm />}>
+          <Route path="/usuarios" element={<PaginaUsuarios />} />
+        </Route>
       </Route>
     </Routes>
   );

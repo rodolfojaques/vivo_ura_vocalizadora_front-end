@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { HeaderStl } from "./styles";
 import ModalMenu from "../ModalMenu";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../../providers/user";
 import ModalEditSenha from "../ModalEditSenha";
@@ -13,7 +13,7 @@ function Header() {
   const [clickMenu, setClickMenu] = useState(false);
   const [clickAdm, setClickAdm] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     usuario,
@@ -38,31 +38,31 @@ function Header() {
         >
           <ul className="lista_menu">
             <li
-              onClick={() => history.push("/lista-alarmes")}
+              onClick={() => navigate("/lista-alarmes")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Lista de Alarmes</p>
             </li>
             <li
-              onClick={() => history.push("/grupos-atuacao")}
+              onClick={() => navigate("/grupos-atuacao")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Grupos de Atuação</p>
             </li>
             <li
-              onClick={() => history.push("/associacao")}
+              onClick={() => navigate("/associacao")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Associação</p>
             </li>
             <li
-              onClick={() => history.push("/grupos-alarmes")}
+              onClick={() => navigate("/grupos-alarmes")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Grupos de Alarmes</p>
             </li>
             <li
-              onClick={() => history.push("/usuarios")}
+              onClick={() => navigate("/usuarios")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Usuários</p>
@@ -99,7 +99,7 @@ function Header() {
             <li
               onClick={() => {
                 localStorage.clear();
-                history.push("/");
+                navigate("/");
               }}
               className="item_modal-menu"
             >

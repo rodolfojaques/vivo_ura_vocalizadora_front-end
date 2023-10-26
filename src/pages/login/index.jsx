@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import { useContext } from "react";
@@ -16,7 +16,7 @@ import { UserContext } from "../../providers/user";
 import { toast } from "react-toastify";
 
 function Login() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { baseURL, setUsuario } = useContext(UserContext);
 
   const schema = yup.object().shape({
@@ -39,7 +39,7 @@ function Login() {
         localStorage.setItem("usuario", JSON.stringify(res.data));
         setUsuario(res.data);
         toast.success("Login realizado com sucesso!");
-        history.push("/home");
+        navigate("/home");
       })
       .catch((err) => {
         console.error(err);

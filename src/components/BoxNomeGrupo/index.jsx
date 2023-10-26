@@ -40,10 +40,8 @@ function BoxNomeGrupoComponente({
     setGrupoAssociacaoAdd,
     removeAssociacao,
     setRemoveAssociacao,
+    setIdGrupoAlarme,
   } = useContext(AssociacaoContext);
-
-  console.log(removeAssociacao);
-
   return (
     <BoxNomeGrupoStl>
       {!!openInfos ? (
@@ -180,6 +178,14 @@ function BoxNomeGrupoComponente({
                 })}
               </span>
             </p>
+            <p className="ttl_p">
+              Grupos de Atuação:{" "}
+              <span className="info_span">
+                {grupo.gruposAtuacao.map((grupo) => {
+                  return `${grupo.nomeGrupo}  /  `;
+                })}
+              </span>
+            </p>
             {tipoAssociacao === "associacao" ? (
               <>
                 <DivButtonAddContato>
@@ -187,6 +193,7 @@ function BoxNomeGrupoComponente({
                     type="button"
                     onClick={() => {
                       setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
+                      setIdGrupoAlarme(grupo.id);
                     }}
                   >
                     Adicionar Grupo de atuação

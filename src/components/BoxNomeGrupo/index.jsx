@@ -3,6 +3,7 @@ import { BoxNomeGrupoStl, DivButtonAddContato } from "./styles";
 import * as Icon from "react-bootstrap-icons";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import { AssociacaoContext } from "../../providers/associacao";
+import { UserContext } from "../../providers/user";
 
 function BoxNomeGrupoComponente({
   nome,
@@ -43,6 +44,8 @@ function BoxNomeGrupoComponente({
     setIdGrupoAlarme,
     listOneGrupoAlarme,
   } = useContext(AssociacaoContext);
+
+  const { role } = useContext(UserContext);
   return (
     <BoxNomeGrupoStl>
       {!!openInfos ? (
@@ -89,20 +92,26 @@ function BoxNomeGrupoComponente({
                     {tipoAssociacao === "associacao" ? (
                       <></>
                     ) : (
-                      <Icon.XCircleFill
-                        size={16}
-                        className="custom-icon"
-                        color="darkorange"
-                        onClick={() => {
-                          setDeleteUser(!deleteUser);
-                          setNameUserAndRe({
-                            id: elem.id,
-                            nome: elem.nome,
-                            RE: elem.RE,
-                            grupo: grupo.id,
-                          });
-                        }}
-                      />
+                      <>
+                        {role ? (
+                          <></>
+                        ) : (
+                          <Icon.XCircleFill
+                            size={16}
+                            className="custom-icon"
+                            color="darkorange"
+                            onClick={() => {
+                              setDeleteUser(!deleteUser);
+                              setNameUserAndRe({
+                                id: elem.id,
+                                nome: elem.nome,
+                                RE: elem.RE,
+                                grupo: grupo.id,
+                              });
+                            }}
+                          />
+                        )}
+                      </>
                     )}
                   </p>
                   <p className="ttl_p">
@@ -119,6 +128,7 @@ function BoxNomeGrupoComponente({
             ) : (
               <DivButtonAddContato>
                 <button
+                  disabled={role}
                   type="button"
                   onClick={() => {
                     setAddContato(!addContato);
@@ -191,6 +201,7 @@ function BoxNomeGrupoComponente({
               <>
                 <DivButtonAddContato>
                   <button
+                    disabled={role}
                     type="button"
                     onClick={() => {
                       setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
@@ -200,6 +211,7 @@ function BoxNomeGrupoComponente({
                     Adicionar Grupo de atuação
                   </button>
                   <button
+                    disabled={role}
                     className="excluir"
                     type="button"
                     onClick={() => {
@@ -216,6 +228,7 @@ function BoxNomeGrupoComponente({
               <>
                 <button
                   className="btn_add_tipo"
+                  disabled={role}
                   onClick={(e) => {
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
@@ -225,6 +238,7 @@ function BoxNomeGrupoComponente({
                   Novo Tipo de Alarme
                 </button>
                 <button
+                  disabled={role}
                   style={{ backgroundColor: "red" }}
                   className="btn_add_tipo"
                   onClick={(e) => {
@@ -253,14 +267,20 @@ function BoxNomeGrupoComponente({
           {tipoAssociacao === "associacao" ? (
             <></>
           ) : (
-            <Icon.XCircleFill
-              color="darkorange"
-              className="custom-icon"
-              onClick={() => {
-                setOpenModalExclude(!openModalExclude);
-                setGrupoSelecionado(grupo);
-              }}
-            />
+            <>
+              {role ? (
+                <> </>
+              ) : (
+                <Icon.XCircleFill
+                  color="darkorange"
+                  className="custom-icon"
+                  onClick={() => {
+                    setOpenModalExclude(!openModalExclude);
+                    setGrupoSelecionado(grupo);
+                  }}
+                />
+              )}
+            </>
           )}
         </div>
       )}

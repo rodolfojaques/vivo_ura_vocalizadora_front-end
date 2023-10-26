@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { createContext, useState } from "react";
 
 export const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const baseURL = "http://localhost:3000";
+  const baseURL = "http://10.215.19.183:443";
 
   const [usuario, setUsuario] = useState(
     JSON.parse(localStorage.getItem("usuario"))
@@ -14,8 +15,17 @@ function UserProvider({ children }) {
 
   const [alterarPlantao, setAlterarPlantao] = useState(false);
   const [alterarPlantaoPagUser, setAlterarPlantaoPagUser] = useState(false);
+  const [role, setRole] = useState(false);
 
   const [idUser, setIdUser] = useState({});
+
+  useEffect(() => {
+    if (usuario?.user?.perfil?.toLowerCase() === "operador") {
+      setRole(true);
+    } else {
+      setRole(false);
+    }
+  }, []);
 
   return (
     <UserContext.Provider
@@ -33,6 +43,8 @@ function UserProvider({ children }) {
         setAlterarPlantaoPagUser,
         idUser,
         setIdUser,
+        role,
+        setRole,
       }}
     >
       {children}

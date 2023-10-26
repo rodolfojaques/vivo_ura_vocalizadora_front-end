@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { ContainerGruposStl } from "./styles";
+import { UserContext } from "../../providers/user";
+import { useEffect } from "react";
 
 function ContainerGruposComponente({
   children,
@@ -16,6 +19,8 @@ function ContainerGruposComponente({
     }
   };
 
+  const { role } = useContext(UserContext);
+
   return (
     <>
       {tipoGrupo === "associacao" ? (
@@ -24,7 +29,11 @@ function ContainerGruposComponente({
         </ContainerGruposStl>
       ) : (
         <ContainerGruposStl>
-          <button onClick={() => openOnclick()} className="btn_novoGrupo">
+          <button
+            disabled={role}
+            onClick={() => openOnclick()}
+            className="btn_novoGrupo"
+          >
             Novo Grupo
           </button>
           <section className="container_SG_DL">{children}</section>

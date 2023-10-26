@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from "react";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function ModalTiposAlarmesComponente({
     openTipoAlarme,
@@ -15,7 +16,7 @@ function ModalTiposAlarmesComponente({
     gruposAlarmes,
     setGruposAlarmes
 }){
-console.log(idGpAlarme);
+
     const {
         baseURL,
         usuario
@@ -41,7 +42,7 @@ console.log(idGpAlarme);
                 'Authorization': `Bearer ${usuario?.token}`
             }})
         .then(res => {
-            console.log(res.data);
+            toast.success("Tipo de Alarme adicionado com sucesso!")
             setOpenTipoAlarme(!openTipoAlarme)
         })
         .catch(err => console.log(err))

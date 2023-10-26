@@ -19,15 +19,7 @@ function ContainerGruposComponente({
     }
   };
 
-  const { role, setRole, usuario } = useContext(UserContext);
-
-  useEffect(() => {
-    if (usuario.user?.perfil?.toLowerCase() === "operador") {
-      setRole(true);
-    } else {
-      setRole(false);
-    }
-  }, [usuario]);
+  const { role } = useContext(UserContext);
 
   return (
     <>

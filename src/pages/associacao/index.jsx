@@ -12,11 +12,13 @@ import { useState } from "react";
 import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
 import { AssociacaoContext } from "../../providers/associacao";
 import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
-import { set } from "react-hook-form";
 
 function Associacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
+  const [gruposAtuacaoInicial, setGruposAtuacaoInicial] = useState([]);
   const [grupoAlarme, setGrupoAlarme] = useState([]);
+  const [gruposAlarmesInicial, setGruposAlarmesInicial] = useState([]);
+
   const { baseURL, usuario } = useContext(UserContext);
   const {
     grupoAssociacaoAdd,
@@ -24,6 +26,7 @@ function Associacao() {
     setGrupoAtuacaoAss,
     removeAssociacao,
   } = useContext(AssociacaoContext);
+
   const allGroupsAtuacao = async () => {
     try {
       const response = await axios.get(`${baseURL}/grupos-atuacao`, {
@@ -33,6 +36,7 @@ function Associacao() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoAss(response.data);
+      setGruposAtuacaoInicial(response.data);
     } catch (error) {}
   };
 
@@ -44,32 +48,120 @@ function Associacao() {
         },
       });
       setGrupoAlarme(response.data);
+      setGruposAlarmesInicial(response.data);
     } catch (error) {}
   };
   useEffect(() => {
     allGroupsAtuacao();
     allGroupsAlarme();
   }, []);
+
+  const handleValueChange = (event, arr) => {
+    const value = event.target.value || "";
+
+    const newListaAlarmes = arr.filter((obj) => {
+      if (
+        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.tiposAlarmes?.uf
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.tiposAlarmes?.site
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.tiposAlarmes?.tipoAlarme
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.tiposAlarmes?.classificacao
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.tiposAlarmes?.localidade
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      }
+    });
+    setGrupoAlarme(newListaAlarmes);
+  };
+
+  const handleValueChangeAtuacao = (event, arr) => {
+    const value = event.target.value || "";
+
+    const newListaAlarmes = arr.filter((obj) => {
+      if (
+        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.gerente1?.toString().toLowerCase().includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.gerente2?.toString().toLowerCase().includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.contato_ger1
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      } else if (
+        obj?.contato_ger1
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      ) {
+        return obj;
+      }
+    });
+    setGrupoAtuacao(newListaAlarmes);
+  };
   return (
     <AssociacaoStl>
       <Header />
       <CaminhoComponent path={"Associação"} />
       <ContainerGruposComponente tipoGrupo={"associacao"}>
-        <ListaSG tipoPag={"associacao"}>
+        <ListaSG
+          tipoPag={"associacao"}
+          handleValueChange={handleValueChange}
+          gruposAlarmesMock={gruposAlarmesInicial}
+        >
           {grupoAlarme.map((grupo, i) => (
             <BoxNomeGrupoComponente
               key={i}
               nome={grupo.nomeGrupo}
               grupo={grupo}
               tipoAssociacao={"associacao"}
-              //   openModalExclude={openModalExclude}
-              //   setOpenModalExclude={setOpenModalExclude}
-              //   grupoSelecionado={grupoSelecionado}
-              //   setGrupoSelecionado={setGrupoSelecionado}
             />
           ))}
         </ListaSG>
-        <ListaDL grupoAtuacao={"ATUAÇÃO"}>
+        <ListaDL
+          grupoAtuacao={"ATUAÇÃO"}
+          handleValueChange={handleValueChangeAtuacao}
+          grupoAtuacaoInicial={gruposAtuacaoInicial}
+        >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoComponente
               key={i}
@@ -77,10 +169,6 @@ function Associacao() {
               nome={grupo.nomeGrupo}
               grupo={grupo}
               tipoAssociacao={"associacao"}
-              //   openModalExclude={openModalExclude}
-              //   setOpenModalExclude={setOpenModalExclude}
-              //   grupoSelecionado={grupoSelecionado}
-              //   setGrupoSelecionado={setGrupoSelecionado}
             />
           ))}
         </ListaDL>

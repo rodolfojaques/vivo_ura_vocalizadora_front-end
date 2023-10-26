@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, useState } from "react";
 
 export const UserContext = createContext();
@@ -14,10 +15,17 @@ function UserProvider({ children }) {
 
   const [alterarPlantao, setAlterarPlantao] = useState(false);
   const [alterarPlantaoPagUser, setAlterarPlantaoPagUser] = useState(false);
+  const [role, setRole] = useState(false);
 
   const [idUser, setIdUser] = useState({});
 
-  const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
+  useEffect(() => {
+    if (usuario?.user?.perfil?.toLowerCase() === "operador") {
+      setRole(true);
+    } else {
+      setRole(false);
+    }
+  }, []);
 
   return (
     <UserContext.Provider
@@ -35,7 +43,8 @@ function UserProvider({ children }) {
         setAlterarPlantaoPagUser,
         idUser,
         setIdUser,
-        usuarioLocal,
+        role,
+        setRole,
       }}
     >
       {children}

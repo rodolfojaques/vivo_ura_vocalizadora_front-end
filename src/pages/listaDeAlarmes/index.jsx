@@ -16,27 +16,45 @@ import axios from "axios";
 import { UserContext } from "../../providers/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 
 function ListaDeAlarmes() {
   const { baseURL, usuario } = useContext(UserContext);
-
+  const {
+    filterAlarmes,
+    arrAlarmInit,
+    setArrAlarmInit,
+    arrAlarm,
+    setArrAlarm,
+  } = useContext(ListaDeAlarmesContext);
   const [linhas, setLinhas] = useState(5);
-  const [arrAlarm, setArrAlarm] = useState([]);
-  const [arrAlarmInit, setArrAlarmInit] = useState([]);
+
+  const dataFilterFirstRender = {
+    TIPO_TA: null,
+    TIPO_REDE: null,
+    ESTADO: null,
+    LOCALIDADE: null,
+    SITE: null,
+    TIPO_ALARME: null,
+    CLASSIFICACAO: null,
+    DATA_INICIO: null,
+    DATA_FIM: null,
+  };
 
   useEffect(() => {
     axios
-      .get(`${baseURL}/alarmes`, {
+      .post(`${baseURL}/history-alarmes`, dataFilterFirstRender, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${usuario?.token}`,
         },
       })
       .then((res) => {
         setArrAlarm(res.data);
         setArrAlarmInit(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   const columns = useMemo(
@@ -203,7 +221,7 @@ function ListaDeAlarmes() {
   } = useForm({});
 
   const formSchema = (data) => {
-    console.log(data);
+    filterAlarmes(data);
   };
 
   const handleValueChange = (event, arr) => {
@@ -399,7 +417,8 @@ function ListaDeAlarmes() {
                 Tipo TA
               </label>
               <select className="campos_dropDown" {...register("TIPO_TA")}>
-                <option value="infraestrutura">Infraestrutura</option>
+                <option value={null}>{null}</option>
+                <option value="Infraestrutura">Infraestrutura</option>
               </select>
             </div>
             <div className="divDrop_down">
@@ -407,7 +426,8 @@ function ListaDeAlarmes() {
                 Tipo Rede
               </label>
               <select className="campos_dropDown" {...register("TIPO_REDE")}>
-                <option value="climatizacao">Climatização</option>
+                <option value={null}>{null}</option>
+                <option value="Climatização">Climatização</option>
               </select>
             </div>
             <div className="divDrop_down">
@@ -415,6 +435,7 @@ function ListaDeAlarmes() {
                 Estado
               </label>
               <select className="campos_dropDown" {...register("ESTADO")}>
+                <option value={null}>{null}</option>
                 {arrEstado.map((item, i) => (
                   <option key={i} value={item}>
                     {item}
@@ -427,6 +448,7 @@ function ListaDeAlarmes() {
                 Localidade
               </label>
               <select className="campos_dropDown" {...register("LOCALIDADE")}>
+                <option value={null}>{null}</option>
                 {localidade.map((item, i) => (
                   <option key={i} value={item}>
                     {item}
@@ -439,6 +461,7 @@ function ListaDeAlarmes() {
                 Site
               </label>
               <select className="campos_dropDown" {...register("SITE")}>
+                <option value={null}>{null}</option>
                 {siglaSite.map((item, i) => (
                   <option key={i} value={item}>
                     {item}
@@ -451,6 +474,7 @@ function ListaDeAlarmes() {
                 Tipo Alarme
               </label>
               <select className="campos_dropDown" {...register("TIPO_ALARME")}>
+                <option value={null}>{null}</option>
                 {arrTipoAlarme.map((item, i) => (
                   <option key={i} value={item}>
                     {item}
@@ -466,6 +490,7 @@ function ListaDeAlarmes() {
                 className="campos_dropDown"
                 {...register("CLASSIFICACAO")}
               >
+                <option value={null}>{null}</option>
                 <option value="MAJORITARIO">MAJORITARIO</option>
                 <option value="MINORITARIO">MINORITARIO</option>
                 <option value="CRITICO">CRITICO</option>
@@ -497,7 +522,7 @@ function ListaDeAlarmes() {
                 </div>
               </div>
               <div className="horas">
-                {/* <label htmlFor="" className="label_dropDown">
+                <label htmlFor="" className="label_dropDown">
                   Ultimos alarmes em
                 </label>
                 <select className="campos_dropDown">
@@ -506,7 +531,7 @@ function ListaDeAlarmes() {
                       {item}
                     </option>
                   ))}
-                </select> */}
+                </select>
                 <input
                   type="submit"
                   className="btn_filtrar"

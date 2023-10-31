@@ -88,6 +88,7 @@ function ModalAlterarPlantao({ idUser }) {
     })
 
     dateTurnsSubmmit.forEach((data)=>{
+      console.log(data);
 
       const data2 = new Date(data.dia.toDateString())
       data.dia = data2.toISOString()
@@ -141,12 +142,13 @@ function ModalAlterarPlantao({ idUser }) {
                 <div className="div-select-turn">
                   <label>Selecione o turno:</label>
                   <select
-                    value={dateTurn.turno}
+                    default={"T3"}
                     onChange={(event) => {
                       handleTurnChange(event, index)
                       handleTurnChangeSub(event, index)
                     }}
                   >
+                    <option value="T3">Selecione...</option>
                     <option value="T1">T1</option>
                     <option value="T2">T2</option>
                     <option value="T3">T3</option>

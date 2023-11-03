@@ -127,6 +127,13 @@ export const FormModal = styled.form`
     justify-content: flex-start;
     flex-direction: column;
 
+    padding: .5rem;
+    border-radius: 5px;
+
+    &:hover{
+      background-color: antiquewhite;
+    }
+
     p {
       display: flex;
       justify-content: space-between;

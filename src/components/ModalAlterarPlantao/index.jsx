@@ -138,22 +138,30 @@ function ModalAlterarPlantao({ idUser }) {
                     Remover
                   </button>
                 </p>
-
-                <div className="div-select-turn">
-                  <label>Selecione o turno:</label>
-                  <select
-                    default={"T3"}
-                    onChange={(event) => {
-                      handleTurnChange(event, index)
-                      handleTurnChangeSub(event, index)
-                    }}
-                  >
-                    <option value="T3">Selecione...</option>
-                    <option value="T1">T1</option>
-                    <option value="T2">T2</option>
-                    <option value="T3">T3</option>
-                  </select>
-                </div>
+                {
+                  !!dateTurn.id ? 
+                  <div className="info_turn">
+                    <p className="turn">
+                      Turno: {dateTurn.turno}
+                    </p>
+                  </div>
+                  :
+                  <div className="div-select-turn">
+                    <label>Selecione o turno:</label>
+                    <select
+                      default={"T3"}
+                      onChange={(event) => {
+                        handleTurnChange(event, index)
+                        handleTurnChangeSub(event, index)
+                      }}
+                    >
+                      <option value="T3">Selecione...</option>
+                      <option value="T1">T1</option>
+                      <option value="T2">T2</option>
+                      <option value="T3">T3</option>
+                    </select>
+                  </div>                  
+                }
               </div>
             ))}
           </section>

@@ -149,46 +149,39 @@ function BoxNomeGrupoComponente({
             className="container_box box1"
           >
             <p className="nome">{nome}</p>
-            <p className="ttl_p">
-              UF:{" "}
-              <span className="info_span">
-                {grupo.tiposAlarmes.map((tipo) => {
-                  return `${tipo.uf}  /  `;
-                })}
-              </span>
-            </p>
-            <p className="ttl_p">
-              Site:{" "}
-              <span className="info_span">
-                {grupo.tiposAlarmes.map((tipo) => {
-                  return `${tipo.site}  /  `;
-                })}
-              </span>
-            </p>
-            <p className="ttl_p">
-              Tipo de alarme:{" "}
-              <span className="info_span">
-                {grupo.tiposAlarmes.map((tipo) => {
-                  return `${tipo.tipoAlarme}  /  `;
-                })}
-              </span>
-            </p>
-            <p className="ttl_p">
-              Classificação:{" "}
-              <span className="info_span">
-                {grupo.tiposAlarmes.map((tipo) => {
-                  return `${tipo.classificacao}  /  `;
-                })}
-              </span>
-            </p>
-            <p className="ttl_p">
-              Localidade:{" "}
-              <span className="info_span">
-                {grupo.tiposAlarmes.map((tipo) => {
-                  return `${tipo.localidade}  /  `;
-                })}
-              </span>
-            </p>
+            <div className="infos_tipos">
+              <div className="chaves">
+                <p className="ttl_p">
+                  UF:{" "}
+                </p>
+                <p className="ttl_p">
+                  Site:{" "}
+                </p>
+                <p className="ttl_p">
+                  Tipo de alarme:{" "}
+                </p>
+                <p className="ttl_p">
+                  Classificação:{" "}
+                </p>
+                <p className="ttl_p">
+                  Localidade:{" "}
+                </p>                
+              </div>
+              <div className="box_valores">
+                {
+                  grupo.tiposAlarmes.map((tipo)=> {
+                    return<div className="alm_tipo_infos">
+                            <p className="info_tp_alm">{tipo.uf}</p>
+                            <p className="info_tp_alm">{tipo.site}</p>
+                            <p className="info_tp_alm">{tipo.tipoAlarme}</p>
+                            <p className="info_tp_alm">{tipo.classificacao}</p>
+                            <p className="info_tp_alm">{tipo.localidade}</p>
+                          </div>
+                  })
+                }
+                
+              </div>              
+            </div>
             <p className="ttl_p">
               Grupos de Atuação:{" "}
               <span className="info_span">

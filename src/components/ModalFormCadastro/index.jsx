@@ -314,9 +314,10 @@ function ModalFormCadastro({
                 {...register("perfil")}
                 defaultValue={user.perfil}
               >
-                <option value="Admin">Admin</option>
+                <option value={user.perfil}></option>
                 <option value="Operador">Operador</option>
                 <option value="Gestor">Gestor</option>
+                <option value="Admin">Admin</option>
                 <option value="UserAdm">UserAdm</option>
               </select>
               {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}

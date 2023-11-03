@@ -25,7 +25,7 @@ function UserProvider({ children }) {
     } else {
       setRole(false);
     }
-  }, []);
+  }, [usuario]);
 
   return (
     <UserContext.Provider

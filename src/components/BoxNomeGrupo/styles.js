@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BoxNomeGrupoStl = styled.li`
   .box1 {
-    background-color: blue;
+    background-color: rgba(0,130,255,1);
     color: white;
 
     border-radius: 5px;
@@ -14,6 +14,7 @@ export const BoxNomeGrupoStl = styled.li`
     padding: 0.8rem;
 
     min-width: 10rem;
+    max-width: 20rem;
 
     hr {
       width: 100%;
@@ -48,8 +49,59 @@ export const BoxNomeGrupoStl = styled.li`
     }
   }
 
+  .infos_tipos{
+    border: solid white;
+    border-radius: 5px;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    .chaves{
+      padding: .5rem;
+      width: 6rem;
+      max-height: 7rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .5rem;
+    }
+
+    .box_valores{
+      max-width: 65%;
+      overflow-x: auto;
+
+      display: flex;
+      padding: .25rem;
+      gap: .3rem;
+
+      .alm_tipo_infos{
+        background-color: orange;
+        display: flex;
+        flex-direction: column;
+        padding: .25rem;
+        gap: .5rem;
+        
+        max-height: 7rem;
+        border-radius: 5px;
+        
+        .info_tp_alm{
+          font-size: x-small;
+          font-weight: 600;
+
+          display: flex;
+          min-width: 5rem;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+
+
   .box2 {
-    background-color: blue;
+    background-color: rgba(0,130,255,1);
     color: white;
 
     border-radius: 5px;

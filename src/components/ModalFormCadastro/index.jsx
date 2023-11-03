@@ -77,14 +77,16 @@ function ModalFormCadastro({
         toast.success("Usuário cadastrado com sucesso!");
       })
       .catch((err) => {
-        console.error(err);
-        toast.error("Usuário sem permissão para esta ação!");
+        if (err.response.status === 400) {
+          toast.error("Usuário já existente, RE e e-mail devem ser únicos!");
+        } else {
+          toast.error("Usuário sem permissão para esta ação!");
+        }
       });
   };
 
   const schemaUpdate = (data) => {
     !!data.nome ? (data.nome = data.nome) : (data.nome = user.nome);
-    !!data.RE ? (data.RE = data.RE) : (data.RE = user.RE);
     !!data.email ? (data.email = data.email) : (data.email = user.email);
     !!data.tel_cel
       ? (data.tel_cel = data.tel_cel)
@@ -251,10 +253,10 @@ function ModalFormCadastro({
                 RE
               </label>
               <input
+                disabled
                 type="text"
                 className="campos"
                 placeholder="RE do usuário..."
-                {...register("RE")}
                 defaultValue={user.RE}
               />
             </div>
@@ -312,9 +314,9 @@ function ModalFormCadastro({
                 {...register("perfil")}
                 defaultValue={user.perfil}
               >
+                <option value="Admin">Admin</option>
                 <option value="Operador">Operador</option>
                 <option value="Gestor">Gestor</option>
-                <option value="Admin">Admin</option>
                 <option value="UserAdm">UserAdm</option>
               </select>
               {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}

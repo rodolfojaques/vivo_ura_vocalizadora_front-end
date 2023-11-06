@@ -18,7 +18,6 @@ function ModalExcludeComponent({ openModalExclude, setOpenModalExclude }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => console.error(err));
@@ -33,7 +32,6 @@ function ModalExcludeComponent({ openModalExclude, setOpenModalExclude }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         toast.success("Usuário excluído com sucesso!");
         setOpenModalExclude(!openModalExclude);
       })

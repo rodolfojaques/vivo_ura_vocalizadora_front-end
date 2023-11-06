@@ -22,7 +22,7 @@ function ListaDeAlarmesProvider({ children }) {
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
     };
-    console.log(dataFilter);
+
     axios
       .post(`${baseURL}/history-alarmes`, dataFilter, {
         headers: {
@@ -32,7 +32,6 @@ function ListaDeAlarmesProvider({ children }) {
       .then((res) => {
         setArrAlarm(res.data);
         setArrAlarmInit(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);

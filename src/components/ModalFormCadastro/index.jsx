@@ -28,7 +28,6 @@ function ModalFormCadastro({
         },
       })
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => {
@@ -72,7 +71,6 @@ function ModalFormCadastro({
         },
       })
       .then((res) => {
-        console.log(res.data);
         setOpenModal(!openModal);
         toast.success("Usuário cadastrado com sucesso!");
       })
@@ -102,7 +100,6 @@ function ModalFormCadastro({
         },
       })
       .then((res) => {
-        console.log(res.data);
         setOpenModalEdit(!openModalEdit);
         toast.success("Usuário atualizado com sucesso!");
       })

@@ -49,7 +49,6 @@ function PaginaUsuarios() {
           obj["id_exclude"] = obj.id;
           obj["id_edit"] = obj.id;
         });
-        console.log(res.data);
         setUsers(res.data);
       })
       .catch((err) => console.log(err));

@@ -88,7 +88,6 @@ function ModalAlterarPlantao({ idUser }) {
     })
 
     dateTurnsSubmmit.forEach((data)=>{
-      console.log(data);
 
       const data2 = new Date(data.dia.toDateString())
       data.dia = data2.toISOString()

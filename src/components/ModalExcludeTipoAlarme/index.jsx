@@ -40,7 +40,6 @@ function ModalExcludeTipoAlarmeComponent({
         },
       })
       .then((res) => {
-        console.log(res.data.tiposAlarmes);
         setAlarmes(res.data.tiposAlarmes);
       })
       .catch((err) => console.error(err));

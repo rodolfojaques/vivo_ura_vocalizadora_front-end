@@ -35,7 +35,6 @@ function ModalTiposAlarmesComponente({
     })
 
     const formSchema = data => {
-        console.log(data);
         axios.post(`${baseURL}/tipos-alarmes/register/${idGpAlarme}`,data,{
             headers:{
                 'Content-Type': 'application/json',

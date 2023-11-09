@@ -8,7 +8,6 @@ import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
 import ModalExcludeGruposComponent from "../../components/ModalExcludeGrupos";
 import ListaSG from "../../components/ListaSG";
 import ListaDL from "../../components/ListaDL";
-import { gruposAlarmesMock } from "../../utils/grupos";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 import ModalTiposAlarmesComponente from "../../components/ModalTiposAlarmes";
@@ -119,7 +118,6 @@ function GruposDeAlarmes() {
         <ListaSG
           handleValueChange={handleValueChange}
           gruposAlarmes={gruposAlarmesInicial}
-          gruposAlarmesMock={gruposAlarmesMock}
         >
           {gruposAlarmes ? (
             gruposAlarmes.map((grupo, i) => (

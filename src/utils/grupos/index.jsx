@@ -2,16 +2,16 @@
  * TOCANTINS
  */
 
-const TO_localidade = ["PMJ"]
+export const TO_localidade = ["PMJ"]
 
-const TO_site = ["PMJ","TOP","PDN"]
+export const TO_site = ["PMJ","TOP","PDN"]
 
 /////////////
 /**
  * SÃO PAULO
  */
 
-const SP_localArray = [
+export const SP_localArray = [
 'PDA',
 'PLA',
 'PTF',
@@ -1565,9 +1565,9 @@ const SP_localArray = [
 'ABS',
 'BGP'
 ]
-const SP_localidade = [...new Set(SP_localArray)]
+export const SP_localidade = [...new Set(SP_localArray)]
 
-const SP_site = [
+export const SP_site = [
 'AP',
 'ML',
 'MF',
@@ -3127,8 +3127,8 @@ const SP_site = [
  * SERGIPE
  */
 
-const SE_localidade = ['AJU','INN']
-const SE_site = [
+export const SE_localidade = ['AJU','INN']
+export const SE_site = [
 'G25',
 'G24',
 'G21',
@@ -3176,7 +3176,7 @@ const SE_site = [
  * SANTA CATARINA
  */
 
-const SC_localArray = [
+export const SC_localArray = [
 'SOO',
 'SOO',
 'TRO',
@@ -3608,9 +3608,9 @@ const SC_localArray = [
 'JVE',
 'BNU'
 ]
-const SC_localidade = [...new Set(SC_localArray)]
+export const SC_localidade = [...new Set(SC_localArray)]
 
-const SC_site = [
+export const SC_site = [
     'Z39',
     'FNS',
     'Z99',
@@ -4048,7 +4048,7 @@ const SC_site = [
  * RIO GRANDE DO SUL
  */
 
-const RS_localArray = [
+export const RS_localArray = [
     'SLE',
     'EPO',
     'SUV',
@@ -4645,9 +4645,9 @@ const RS_localArray = [
     'IBR',
     'RIP',    
 ]
-const RS_localidade = [...new Set(RS_localArray)]
+export const RS_localidade = [...new Set(RS_localArray)]
 
-const RS_site = [
+export const RS_site = [
     'Z55',
     'EPO',
     'SUV',
@@ -5250,9 +5250,9 @@ const RS_site = [
  * RIO GRANDE DO NORTE
  */
 
-const RN_localidade = ['NTL']
+export const RN_localidade = ['NTL']
 
-const RN_site = [
+export const RN_site = [
     'G30',
     'G38',
     'G35',
@@ -5288,25 +5288,25 @@ const RN_site = [
  * RONDONIA
  */
 
-const RO_localidade = ['PVO','VHA']
+export const RO_localidade = ['PVO','VHA']
 
-const RO_site =['TIR','VLN','GET']
+export const RO_site =['TIR','VLN','GET']
 
 //////////////
 /**
  * RORAIMA
  */
 
-const RR_localidade = ['BVA']
+export const RR_localidade = ['BVA']
 
-const RR_site = ['CTR']
+export const RR_site = ['CTR']
 
 //////////////
 /**
  * RIO DE JANEIRO
  */
 
-const RJ_localArray = [
+export const RJ_localArray = [
     'RJO',
     'RJO',
     'RJO',
@@ -5668,9 +5668,9 @@ const RJ_localArray = [
     'RJO',
     'RJO'    
 ]
-const RJ_localidade = [...new Set(RJ_localArray)]
+export const RJ_localidade = [...new Set(RJ_localArray)]
 
-const RJ_site = [
+export const RJ_site = [
     'RBD',
     'K57',
     'K63',
@@ -6038,7 +6038,7 @@ const RJ_site = [
  * PARANÁ
  */
 
-const PR_localArray = [
+export const PR_localArray = [
     'PGO',
     'CSC',
     'CSC',
@@ -6839,9 +6839,9 @@ const PR_localArray = [
     'CAK',
     'CTA' 
 ]
-const PR_localidade = [...new Set(PR_localArray)]
+export const PR_localidade = [...new Set(PR_localArray)]
 
-const PR_site = [
+export const PR_site = [
     'PGG',
     'CSC',
     'CGT',
@@ -7664,7 +7664,7 @@ const PR_site = [
  * PIAUÍ
  */
 
-const PI_localArray = [
+export const PI_localArray = [
     'PNA',
     'SRN',
     'BLH',
@@ -7682,9 +7682,9 @@ const PI_localArray = [
     'ANT',
     'CRA'    
 ]
-const PI_localidade = [...new Set(PI_localArray)]
+export const PI_localidade = [...new Set(PI_localArray)]
 
-const PI_site = [
+export const PI_site = [
     'BEP',
     'SRN',
     'XBA',
@@ -7708,7 +7708,7 @@ const PI_site = [
  * PERNANBUCO
  */
 
-const PE_localArray = [
+export const PE_localArray = [
     'CRU',
     'CRU',
     'CRU',
@@ -7897,9 +7897,9 @@ const PE_localArray = [
     'RCE',
     'RCE' 
 ]
-const PE_localidade = [...new Set(PE_localArray)]
+export const PE_localidade = [...new Set(PE_localArray)]
 
-const PE_site = [
+export const PE_site = [
     'T06',
     'T07',
     'V72',
@@ -8094,7 +8094,7 @@ const PE_site = [
  * PARAÍBA
  */
 
-const PB_localArray = [
+export const PB_localArray = [
     'CGE',
     'CGE',
     'CGE',
@@ -8187,9 +8187,9 @@ const PB_localArray = [
     'SRI',
     'JPA'   
 ]
-const PB_localidade = [...new Set(PB_localArray)]
+export const PB_localidade = [...new Set(PB_localArray)]
 
-const PB_site = [
+export const PB_site = [
     'G21',
     'G35',
     'G14',
@@ -8288,7 +8288,7 @@ const PB_site = [
  * PARÁ
  */
 
-const PA_localArray = [
+export const PA_localArray = [
     'BLM',
     'BLM',
     'ATM',
@@ -8317,9 +8317,9 @@ const PA_localArray = [
     'CAH',
     'BLM'    
 ]
-const PA_localidade = [...new Set(PA_localArray)]
+export const PA_localidade = [...new Set(PA_localArray)]
 
-const PA_site = [
+export const PA_site = [
     'ABL',
     'BGB',
     'ATM',
@@ -8354,7 +8354,7 @@ const PA_site = [
  * MATO GROSSO
  */
 
-const MT_localArray = [
+export const MT_localArray = [
     'CBA',
     'CBA',
     'CBA',
@@ -8465,9 +8465,9 @@ const MT_localArray = [
     'CDZ',
     'IUZ'
 ]
-const MT_localidade = [...new Set(MT_localArray)]
+export const MT_localidade = [...new Set(MT_localArray)]
 
-const MT_site = [
+export const MT_site = [
     'MSS',
     'CCC',
     'RCL',
@@ -8584,7 +8584,7 @@ const MT_site = [
  * MATO GROSSO DO SUL
  */
 
-const MS_localArray = [
+export const MS_localArray = [
     'PPR',
     'PPR',
     'PPR',
@@ -8800,9 +8800,9 @@ const MS_localArray = [
     'FSU',
     'CPE'  
 ]
-const MS_localidade = [...new Set(MS_localArray)]
+export const MS_localidade = [...new Set(MS_localArray)]
 
-const MS_site = [
+export const MS_site = [
     'BUN',
     'PFI',
     'PPC',
@@ -9025,7 +9025,7 @@ const MS_site = [
  * MINAS GERAIS
  */
 
-const MG_localArray = [
+export const MG_localArray = [
     'BHE',
     'BHE',
     'CRF',
@@ -9542,9 +9542,9 @@ const MG_localArray = [
     'MRE',
     'CMD'    
 ]
-const MG_localidade = [...new Set(MG_localArray)]
+export const MG_localidade = [...new Set(MG_localArray)]
 
-const MG_site = [
+export const MG_site = [
     'BHF',
     'SAG',
     'K26',
@@ -10067,7 +10067,7 @@ const MG_site = [
  * MARANHÃO
  */
 
-const MA_localArray = [
+export const MA_localArray = [
     'ITZ',
     'MTES',
     'SLS',
@@ -10094,9 +10094,9 @@ const MA_localArray = [
     'STY',
     'SLS'   
 ]
-const MA_localidade = [...new Set(MA_localArray)]
+export const MA_localidade = [...new Set(MA_localArray)]
 
-const MA_site = [
+export const MA_site = [
     'JUR',
     'MTE',
     'CM2',
@@ -10129,7 +10129,7 @@ const MA_site = [
  * GOIAS
  */
 
-const GO_localArray = [
+export const GO_localArray = [
     'ACG',
     'ACG',
     'ANS',
@@ -10453,9 +10453,9 @@ const GO_localArray = [
     'CXC',
     'MIH'    
 ]
-const GO_localidade = [...new Set(GO_localArray)]
+export const GO_localidade = [...new Set(GO_localArray)]
 
-const GO_site = [
+export const GO_site = [
     'JA2',
     'VSZ',
     'GAN',
@@ -10802,7 +10802,7 @@ const GO_site = [
  * ESPIRITO SANTO
  */
 
-const ES_localArray = [
+export const ES_localArray = [
     'VTA',
     'LNS',
     'CNA',
@@ -10988,9 +10988,9 @@ const ES_localArray = [
     'PKO',
     'SMT'   
 ]
-const ES_localidade = [...new Set(ES_localArray)]
+export const ES_localidade = [...new Set(ES_localArray)]
 
-const ES_site = [
+export const ES_site = [
     'BFE',
     'G24',
     'G25',
@@ -11183,9 +11183,9 @@ const ES_site = [
  */
 
 
-const DF_localidade = ['BSA','TAGA']
+export const DF_localidade = ['BSA','TAGA']
 
-const DF_site = [
+export const DF_site = [
     'GBS',
     'IAS',
     'BSX',
@@ -11482,7 +11482,7 @@ const DF_site = [
  * CEARÁ
  */
 
-const CE_localidade = [
+export const CE_localidade = [
     'FLA',
     'JNE',
     'MCW',
@@ -11491,7 +11491,7 @@ const CE_localidade = [
     'QXM'
 ]
 
-const CE_site = [
+export const CE_site = [
     'V43',
     'V83',
     'G33',
@@ -11683,7 +11683,7 @@ const CE_site = [
  * BAHIA
  */
 
-const BA_localArray = [
+export const BA_localArray = [
     'SDR',
     'LFS',
     'LFS',
@@ -11955,9 +11955,9 @@ const BA_localArray = [
     'SEH',
     'SDR'  
 ]
-const BA_localidade = [...new Set(BA_localArray)]
+export const BA_localidade = [...new Set(BA_localArray)]
 
-const BA_site = [
+export const BA_site = [
     'T49',
     'G92',
     'G06',
@@ -12235,18 +12235,18 @@ const BA_site = [
  * AMAPA
  */
 
-const AP_localidade = ['MPA']
+export const AP_localidade = ['MPA']
 
-const AP_site = ['LAG']
+export const AP_site = ['LAG']
 
 //////////////
 /**
  * AMASONAS
  */
 
-const AM_localidade = ['MNS']
+export const AM_localidade = ['MNS']
 
-const AM_site = [
+export const AM_site = [
     'SIL',
     'DPD',
     'LD1',
@@ -12273,9 +12273,9 @@ const AM_site = [
  * ALAGOAS
  */
 
-const AL_localidade = ['MCO']
+export const AL_localidade = ['MCO']
 
-const AL_site = [
+export const AL_site = [
     'G56',
     'A13',
     'G04',
@@ -12357,7 +12357,7 @@ const AL_site = [
  * ACRE
  */
 
-const AC_localArray = [
+export const AC_localArray = [
     'EPT',
     'CPXB',
     'CZU',
@@ -12389,9 +12389,9 @@ const AC_localArray = [
     'MLI',
     'PCY'    
 ]
-const AC_localidade = [...new Set(AC_localArray)]
+export const AC_localidade = [...new Set(AC_localArray)]
 
-const AC_site = [
+export const AC_site = [
     'REP',
     'RCP',
     'CRZ',

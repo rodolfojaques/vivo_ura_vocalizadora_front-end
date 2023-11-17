@@ -10,7 +10,15 @@ function ListaDeAlarmesProvider({ children }) {
   const { baseURL, usuario } = useContext(UserContext);
   const [arrAlarm, setArrAlarm] = useState([]);
   const [arrAlarmInit, setArrAlarmInit] = useState([]);
-  const filterAlarmes = (data) => {
+
+  const [pageInd, setPageInd] = useState(0)
+
+  const [linhas, setLinhas] = useState(10);
+
+  const [pag, setPag] = useState(1)
+  const [pagSiz, setPagSiz] = useState(10)
+
+  const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
       TIPO_TA: data.TIPO_TA || null,
       TIPO_REDE: data.TIPO_REDE || null,
@@ -22,20 +30,21 @@ function ListaDeAlarmesProvider({ children }) {
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
     };
+    console.log(dataFilter);
 
-    axios
-      .post(`${baseURL}/history-alarmes`, dataFilter, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setArrAlarm(res.data);
-        setArrAlarmInit(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    try {
+      const response = await axios
+        .post(`${baseURL}/history-alarmes?page=${page}&size=${pageSize}`, dataFilter, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }) 
+        setArrAlarm(response.data.data)
+        console.log(response)
+        return response.data
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   return (
@@ -46,6 +55,9 @@ function ListaDeAlarmesProvider({ children }) {
         setArrAlarm,
         arrAlarmInit,
         setArrAlarmInit,
+        pageInd, 
+        setPageInd,
+        pag, setPag, pagSiz, setPagSiz, linhas, setLinhas
       }}
     >
       {children}

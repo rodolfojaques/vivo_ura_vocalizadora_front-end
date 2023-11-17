@@ -12,7 +12,6 @@ import {
   ultAlarmesEm,
   localidade,
 } from "../../utils/pagListaAlarmes";
-import axios from "axios";
 import { UserContext } from "../../providers/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,36 +25,10 @@ function ListaDeAlarmes() {
     setArrAlarmInit,
     arrAlarm,
     setArrAlarm,
+    pageInd, setPageInd, pag, pagSiz, setPagSiz
   } = useContext(ListaDeAlarmesContext);
-  const [linhas, setLinhas] = useState(5);
-
-  const dataFilterFirstRender = {
-    TIPO_TA: null,
-    TIPO_REDE: null,
-    ESTADO: null,
-    LOCALIDADE: null,
-    SITE: null,
-    TIPO_ALARME: null,
-    CLASSIFICACAO: null,
-    DATA_INICIO: null,
-    DATA_FIM: null,
-  };
-
-  useEffect(() => {
-    axios
-      .post(`${baseURL}/history-alarmes`, dataFilterFirstRender, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setArrAlarm(res.data);
-        setArrAlarmInit(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  
+  const [totalItems, setTotalItems] = useState(20);
 
   const columns = useMemo(
     () => [
@@ -221,11 +194,12 @@ function ListaDeAlarmes() {
   } = useForm({});
 
   const formSchema = (data) => {
-    filterAlarmes(data);
+    filterAlarmes(data,pag,pagSiz);
   };
 
   const handleValueChange = (event, arr) => {
     const value = event.target.value || "";
+    console.log(arr);
 
     const newArrAlarm = arr.filter((obj) => {
       if (
@@ -405,6 +379,7 @@ function ListaDeAlarmes() {
     setArrAlarm(newArrAlarm);
   };
 
+
   return (
     <ListaDeAlarmesStl>
       <Header />
@@ -554,7 +529,7 @@ function ListaDeAlarmes() {
             Mostrar linhas
           </label>
           <input
-            onChange={(e) => setLinhas(Number(e.target.value))}
+            onChange={(e) => setPagSiz(Number(e.target.value))}
             type="number"
             min={1}
             name="quant_line"
@@ -563,7 +538,7 @@ function ListaDeAlarmes() {
           />
         </div>
       </div>
-      <TableComponent columns={columns} data={arrAlarm} exibirLinhas={linhas} />
+      <TableComponent columns={columns} total={totalItems}/>
     </ListaDeAlarmesStl>
   );
 }

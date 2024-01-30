@@ -44,6 +44,12 @@ function Header() {
               <p className="str_item_menu">Lista de Alarmes</p>
             </li>
             <li
+              onClick={() => navigate("/lista-alarmes-tems")}
+              className="item_modal-menu"
+            >
+              <p className="str_item_menu">Lista de Alarmes DL-Tems</p>
+            </li>
+            <li
               onClick={() => navigate("/grupos-atuacao")}
               className="item_modal-menu"
             >

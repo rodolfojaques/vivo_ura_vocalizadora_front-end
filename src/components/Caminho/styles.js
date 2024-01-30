@@ -9,8 +9,8 @@ export const CaminhoStl = styled.section`
     align-items: center;
     padding: 0rem 4rem;
 
-    background-color: rgb(128, 0, 128, .5);
-    color: lightgray;
+    background-color: ${({typeAlarm})=> typeAlarm==="DL"? "rgba(255,200,0,.5)" : "rgba(128, 0, 128, .5)"}; 
+    color: ${({typeAlarm})=> typeAlarm==="DL"? "gray" : "lightgray"};
 
     font-size: larger;
     font-weight: 500;

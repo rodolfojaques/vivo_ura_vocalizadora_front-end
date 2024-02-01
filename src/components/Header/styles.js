@@ -10,6 +10,11 @@ export const HeaderStl = styled.header`
 
     box-shadow: 0 0 2px 0;
 
+    .icon-style{
+        width: 20px;
+        stroke: white;
+    }
+
     .container_menu-logo{
         display: flex;
         justify-content: center;

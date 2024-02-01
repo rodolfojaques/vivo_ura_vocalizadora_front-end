@@ -14,6 +14,7 @@ import { UserContext } from "../../providers/user";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
+import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
 
 function GruposDeAtuacao() {
   const [openModalGruposAtuacao, setOpenModalGruposAtuacao] = useState(false);
@@ -123,7 +124,20 @@ function GruposDeAtuacao() {
             />
           ))}
         </ListaSG>
-        <ListaDL></ListaDL>
+        <ListaDL>
+          {grupoAtuacao.map((grupo, i) => (
+            <BoxNomeGrupoTemsComponente
+              key={i}
+              tipoGrupo={"atuação"}
+              nome={grupo.nomeGrupo}
+              grupo={grupo}
+              openModalExclude={openModalExclude}
+              setOpenModalExclude={setOpenModalExclude}
+              grupoSelecionado={grupoSelecionado}
+              setGrupoSelecionado={setGrupoSelecionado}
+            />
+          ))}
+        </ListaDL>
       </ContainerGruposComponente>
       {!!openModalGruposAtuacao ? (
         <ModalGruposAtuacaoComponente

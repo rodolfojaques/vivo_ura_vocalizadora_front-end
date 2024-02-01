@@ -13,6 +13,9 @@ function Header() {
   const [clickMenu, setClickMenu] = useState(false);
   const [clickAdm, setClickAdm] = useState(false);
 
+  const [clickItemListAlarm, setClickItemListAlarm] = useState(false);
+  const [clickItemAssociacao, setClickItemAssociacao] = useState(false);
+
   const navigate = useNavigate();
 
   const {
@@ -38,28 +41,54 @@ function Header() {
         >
           <ul className="lista_menu">
             <li
-              onClick={() => navigate("/lista-alarmes")}
+              onClick={()=> setClickItemListAlarm(!clickItemListAlarm)}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Lista de Alarmes</p>
+              {
+                clickItemListAlarm? <Icon.ChevronDown className="icon-style"/>:<Icon.ChevronLeft className="icon-style"/> 
+              }              
             </li>
+            {
+              clickItemListAlarm?
+              <div className="dropdown_item_menu">
+                <p
+                  onClick={() => navigate("/lista-alarmes")} 
+                  className="str_item_menu_dd"
+                >SG-Infra</p>
+                <p 
+                  onClick={() => navigate("/lista-alarmes-tems")}
+                  className="str_item_menu_dd"
+                >DL-Tems</p>
+              </div>:<></>
+            }   
             <li
-              onClick={() => navigate("/lista-alarmes-tems")}
+              onClick={()=> setClickItemAssociacao(!clickItemAssociacao)}
               className="item_modal-menu"
             >
-              <p className="str_item_menu">Lista de Alarmes DL-Tems</p>
+              <p className="str_item_menu">Associação</p>
+              {
+                clickItemAssociacao? <Icon.ChevronDown className="icon-style"/>:<Icon.ChevronLeft className="icon-style"/> 
+              }              
             </li>
+            {
+              clickItemAssociacao?
+              <div className="dropdown_item_menu">
+                <p
+                  onClick={() => navigate("/associacao")} 
+                  className="str_item_menu_dd"
+                >SG-Infra</p>
+                <p
+                  onClick={() => navigate("/associacao-tems")}
+                  className="str_item_menu_dd"
+                >DL-Tems</p>
+              </div>:<></>
+            }                                      
             <li
               onClick={() => navigate("/grupos-atuacao")}
               className="item_modal-menu"
             >
               <p className="str_item_menu">Grupos de Atuação</p>
-            </li>
-            <li
-              onClick={() => navigate("/associacao")}
-              className="item_modal-menu"
-            >
-              <p className="str_item_menu">Associação</p>
             </li>
             <li
               onClick={() => navigate("/grupos-alarmes")}

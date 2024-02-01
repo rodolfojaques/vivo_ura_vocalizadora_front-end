@@ -40,6 +40,29 @@ export const ModalMenuStl = styled.div`
         cursor: ${({typeModal})=> typeModal==="adm"? "":"pointer"};
     }
 
+    .dropdown_item_menu{
+        width: 70%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+
+        padding-left: 1rem;
+
+        p{
+            font-size: small;
+
+            &:hover{
+                font-weight: 600;
+            }
+
+            &:active{
+                opacity: .5;
+            }
+        }
+    }
+
     ul{
         display: flex;
         flex-direction: column;
@@ -58,6 +81,11 @@ export const ModalMenuStl = styled.div`
         li{
             width: 100%;
             height: 2.7rem;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
 
             p{
                 display: flex;

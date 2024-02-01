@@ -12,6 +12,7 @@ import { UserContext } from "../../providers/user";
 import axios from "axios";
 import ModalTiposAlarmesComponente from "../../components/ModalTiposAlarmes";
 import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
+import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
 
 function GruposDeAlarmes() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
@@ -141,7 +142,29 @@ function GruposDeAlarmes() {
             <></>
           )}
         </ListaSG>
-        <ListaDL></ListaDL>
+        <ListaDL>
+          {gruposAlarmes ? (
+            gruposAlarmes.map((grupo, i) => (
+              <BoxNomeGrupoTemsComponente
+                key={i}
+                nome={grupo.nomeGrupo}
+                grupo={grupo}
+                grupoSelecionado={grupoSelecionado}
+                setGrupoSelecionado={setGrupoSelecionado}
+                openModalExclude={openModalExclude}
+                setOpenModalExclude={setOpenModalExclude}
+                openTipoAlarme={openTipoAlarme}
+                setOpenTipoAlarme={setOpenTipoAlarme}
+                idGpAlarme={idGpAlarme}
+                setIdGpAlarme={setIdGpAlarme}
+                openExcludeAlarme={openExcludeAlarme}
+                setOpenExcludeAlarme={setOpenExcludeAlarme}
+              />
+            ))
+          ) : (
+            <></>
+          )}
+        </ListaDL>
       </ContainerGruposComponente>
       {!!openModalAlarm ? (
         <ModalGruposAlarmesComponente

@@ -5,7 +5,7 @@ import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import { AssociacaoContext } from "../../providers/associacao";
 import { UserContext } from "../../providers/user";
 
-function BoxNomeGrupoComponente({
+function BoxNomeGrupoTemsComponente({
   nome,
   grupo,
   tipoGrupo,
@@ -281,4 +281,4 @@ function BoxNomeGrupoComponente({
   );
 }
 
-export default BoxNomeGrupoComponente;
+export default BoxNomeGrupoTemsComponente;

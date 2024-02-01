@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
-import TableComponent from "../../components/tableReact";
 import { FormListAlarmTemsStl, ListaDeAlarmesTemsStl } from "./styles";
 import {
   arrSite,
@@ -15,19 +14,10 @@ import {
 import { UserContext } from "../../providers/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 import TableTemsComponent from "../../components/tableReactTems";
 
 function ListaDeAlarmesTems() {
   const { baseURL, usuario } = useContext(UserContext);
-  const {
-    filterAlarmes,
-    arrAlarmInit,
-    setArrAlarmInit,
-    arrAlarm,
-    setArrAlarm,
-    pageInd, setPageInd, pag, pagSiz, setPagSiz
-  } = useContext(ListaDeAlarmesContext);
   
   const [totalItems, setTotalItems] = useState(20);
 
@@ -38,191 +28,8 @@ function ListaDeAlarmesTems() {
   } = useForm({});
 
   const formSchema = (data) => {
-    filterAlarmes(data,pag,pagSiz);
+    console.log(data)
   };
-
-  const handleValueChange = (event, arr) => {
-    const value = event.target.value || "";
-    console.log(arr);
-
-    const newArrAlarm = arr.filter((obj) => {
-      if (
-        obj?.TIPO_TA?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_REDE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ESTADO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.LOCALIDADE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.SITE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_ALARME?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.CLASSIFICACAO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ID_EVENTO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ID_EQUIPAMENTO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.RPA_STATUS?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.SIGITM_FLUXO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_BILHETE?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_REDE_COD?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_REDE_COD_INT?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.LOCALIDADE_COD?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.MUNICIPIO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ID_SITE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.SEQUENCIA_ALARME?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.EMPRESA_MANUTENCAO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ALARME?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_FALHA?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_AFETACAO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.EQUIPAMENTO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_CORRENTE_ELETRICA?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.CAPACIDADE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.DATA_APRESENTACAO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.FABRICANTE?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.MODELO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.SALAS_AFETADAS?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.HISTORICO?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.HISTORICO_TIPO?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_PLANTA?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TIPO_PLANTA_COD?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.TA?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.ELEMENTO_SIGLA?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setArrAlarm(newArrAlarm);
-  };
-
 
   return (
     <ListaDeAlarmesTemsStl>
@@ -361,7 +168,7 @@ function ListaDeAlarmesTems() {
           </div>
           <div className="pesquisa_btnSubmit">
             <input
-              onChange={(event) => handleValueChange(event, arrAlarmInit)}
+              // onChange={(event) => handleValueChange(event, arrAlarmInit)}
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"
@@ -373,7 +180,7 @@ function ListaDeAlarmesTems() {
             Mostrar linhas
           </label>
           <input
-            onChange={(e) => setPagSiz(Number(e.target.value))}
+            // onChange={(e) => setPagSiz(Number(e.target.value))}
             type="number"
             min={1}
             name="quant_line"

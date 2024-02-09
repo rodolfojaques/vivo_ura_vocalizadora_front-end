@@ -28,9 +28,13 @@ function ModalGruposAtuacaoComponente({
     addUserGrupoAtuacao,
     setIdGrupo,
     idGrupo,
+    setTypeTeam,
+    typeTeam,
+    typeUpdateTeam,setTypeUpdateTeam
   } = useContext(GrupoAtuacaoContext);
 
   const schema = yup.object().shape({
+    typeTeam: yup.string().required("*Campo obrigatório"),
     nomeGrupo: yup.string().required("*Campo obrigatório"),
     RE1: yup.string(),
     nome1: yup.string().required("*Campo obrigatório"),
@@ -55,6 +59,7 @@ function ModalGruposAtuacaoComponente({
 
   const formSchema = async (data) => {
     const grupoAtuacao = {
+      typeTeam: data.typeTeam || 'SG',
       nomeGrupo: data.nomeGrupo,
       gerente1: data.nome1,
       contato_ger1: data.contato1,
@@ -95,18 +100,20 @@ function ModalGruposAtuacaoComponente({
   };
 
   const allUsers = async () => {
+    const URL = `${baseURL}/usuario/${typeTeam === "SG"?"infra":"tems"}`
     try {
-      const response = await axios.get(`${baseURL}/usuario`, {
+      const response = await axios.get(URL, {
         headers: {
           Authorization: `Bearer ${usuario.token}`,
         },
       });
       setUsers(response.data);
+      console.log(response.data);
     } catch (error) {}
   };
   useEffect(() => {
     allUsers();
-  }, []);
+  }, [typeUpdateTeam,typeTeam]);
 
   const handleChange = (index, selectedUserId) => {
     const updatedIdUser = [...idUser];
@@ -122,8 +129,9 @@ function ModalGruposAtuacaoComponente({
   };
   return (
     <>
-      {addContato ? (
+      {addContato ? (        
         <ModalGruposAtuacaoStl>
+          {console.log(typeTeam)}
           <h2 className="title">Adicionar novos contatos</h2>
           <form
             onSubmit={() => {
@@ -168,7 +176,9 @@ function ModalGruposAtuacaoComponente({
               <button
                 type="button"
                 className="btn_add"
-                onClick={() => adicionarSelect()}
+                onClick={() => {
+                  adicionarSelect()
+                }}
               >
                 Adicionar novo contato
               </button>
@@ -192,6 +202,21 @@ function ModalGruposAtuacaoComponente({
             action=""
             className="form_gp_atuacao"
           >
+            <div className="contCampos_nome">
+              <label htmlFor="" className="label_campos">
+                Setor
+              </label>
+              <select name="" id="" className="campos" {...register("typeTeam")} onChange={(e)=>{setTypeTeam(e.target.value)}}>
+                <option value="SG"></option>
+                <option value="SG">SG-Infra</option>
+                <option value="DL">DL-Tems</option>
+              </select>
+            </div>
+            {errors?.sector?.message ? (
+              <span className="msg_error">{errors.sector?.message}</span>
+            ) : (
+              ""
+            )}
             <div className="contCampos_nome">
               <label htmlFor="" className="label_campos">
                 Nome do Grupo

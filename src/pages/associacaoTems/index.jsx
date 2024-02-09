@@ -28,7 +28,7 @@ function AssociacaoTems() {
 
   const allGroupsAtuacao = async () => {
     try {
-      const response = await axios.get(`${baseURL}/grupos-atuacao`, {
+      const response = await axios.get(`${baseURL}/grupos-atuacao/tems`, {
         headers: {
           Authorization: `Bearer ${usuario.token}`,
         },

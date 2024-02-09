@@ -48,7 +48,13 @@ function TableUserComponent({columns,data,exibirLinhas}){
                             return (
                                 <tr {...row.getRowProps()}>
                                     {row.cells.map(cell => {
-                                        return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                        return <td {...cell.getCellProps()}>{cell.render("Cell")}{
+                                            cell.column.Header == "Perfil" && cell.row.original.typeTeam == "SG"?
+                                            <span className="sg"> - SG-INFRA</span>
+                                            :
+                                            cell.column.Header == "Perfil" && cell.row.original.typeTeam == "DL"?
+                                            <span className="dl"> - DL-TEMS</span>:<></>
+                                        }</td>;
                                     })}
                                 </tr>
                             );

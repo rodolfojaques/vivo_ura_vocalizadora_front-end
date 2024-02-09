@@ -11,6 +11,8 @@ function GrupoAtuacaoProvider({ children }) {
   const [addContato, setAddContato] = useState(false);
   const [nameUserAndRe, setNameUserAndRe] = useState({});
   const [idGrupo, setIdGrupo] = useState(0);
+  const [typeTeam, setTypeTeam] = useState('');
+  const [typeUpdateTeam, setTypeUpdateTeam] = useState(false);
   const [openInfosUp, setOpenInfosUp] = useState(false);
   const { baseURL, usuario } = useContext(UserContext);
 
@@ -69,6 +71,7 @@ function GrupoAtuacaoProvider({ children }) {
         addUserGrupoAtuacao,
         openInfosUp,
         setOpenInfosUp,
+        typeTeam, setTypeTeam,typeUpdateTeam, setTypeUpdateTeam
       }}
     >
       {children}

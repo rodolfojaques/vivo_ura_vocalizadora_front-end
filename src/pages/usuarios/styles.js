@@ -31,4 +31,16 @@ export const PaginaUsuariosStl = styled.main`
         }
     }
 
+    .sg{
+        font-size: x-small;
+        font-weight: 600;
+        color: purple;
+    }
+    
+    .dl{
+        font-size: x-small;
+        font-weight: 600;
+        color: rgba(255,200,0,1);
+    }
+
 `

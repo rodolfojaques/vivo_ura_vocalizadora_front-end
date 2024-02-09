@@ -9,14 +9,14 @@ export const TableStl = styled.div`
 
   margin-bottom: 2rem;
 
-  .tableAlarmesDiv {
+  /* .tableAlarmesDiv {
     overflow-y: hidden;
   }
 
   table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    /* width: 100%; */
+    
     margin: 0px auto;
 
     tr {
@@ -41,8 +41,8 @@ export const TableStl = styled.div`
         }
       }
     }
-  }
-  table td,
+  } */
+  /* table td,
   table th {
     border: 1px solid #ddd;
     padding: 8px;
@@ -63,7 +63,44 @@ export const TableStl = styled.div`
     text-align: left;
     background-color: purple;
     color: white;
-  }
+  } */
+
+  .tableAlarmesDiv{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        max-width: 95%;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th{
+        background-color: purple;
+        color: #f2f2f2;
+    }
+
+    th, td {
+      border: 2px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .th-class{
+      text-align: center;
+    }
+
+    table tr:nth-child(even){
+      background-color: #f2f2f2;
+    }
+
+    table tr:hover{
+        background-color:  #f0ddee;
+    }
 
   .btnPaginator {
     background-color: white;

@@ -37,6 +37,7 @@ function ModalFormCadastro({
 
   const schema = !!openModal
     ? yup.object().shape({
+        typeTeam: yup.string().required("*Campo obrigatório"),
         nome: yup.string().required("*Campo obrigatório"),
         RE: yup.string().required("*Campo obrigatório"),
         email: yup
@@ -47,6 +48,7 @@ function ModalFormCadastro({
         perfil: yup.string().required("*Campo obrigatório"),
       })
     : yup.object().shape({
+        typeTeam: yup.string(),
         nome: yup.string(),
         RE: yup.string(),
         email: yup.string().email("Formato de e-mail inválido"),
@@ -84,11 +86,10 @@ function ModalFormCadastro({
   };
 
   const schemaUpdate = (data) => {
+    !!data.typeTeam ? (data.typeTeam = data.typeTeam) : (data.typeTeam = user.typeTeam);
     !!data.nome ? (data.nome = data.nome) : (data.nome = user.nome);
     !!data.email ? (data.email = data.email) : (data.email = user.email);
-    !!data.tel_cel
-      ? (data.tel_cel = data.tel_cel)
-      : (data.tel_cel = user.tel_cel);
+    !!data.tel_cel ? (data.tel_cel = data.tel_cel) : (data.tel_cel = user.tel_cel);
     !!data.perfil ? (data.perfil = data.perfil) : (data.perfil = user.perfil);
     delete data?.password;
 
@@ -118,6 +119,24 @@ function ModalFormCadastro({
           action=""
           className="form_cadastro"
         >
+          
+          <div className="container_campos">
+            <div className="container_intern_camp">
+              <label htmlFor="" className="label_campos">
+              Setor
+              </label>
+              <select name="" id="" className="campos" {...register("typeTeam")}>
+                <option value="SG">SG-Infra</option>
+                <option value="DL">DL-Tems</option>
+              </select>
+            </div>
+            {errors?.typeTeam?.message ? (
+              <span className="msg_error">{errors.typeTeam?.message}</span>
+            ) : (
+              ""
+            )}
+          </div>
+          
           <div className="container_campos">
             <div className="container_intern_camp">
               <label htmlFor="" className="label_campos">
@@ -225,6 +244,24 @@ function ModalFormCadastro({
           action=""
           className="form_cadastro"
         >
+          
+        <div className="container_campos">
+          <div className="container_intern_camp">
+            <label htmlFor="" className="label_campos">
+            Setor
+            </label>
+            <select name="" id="" className="campos" defaultValue={user.typeTeam} {...register("typeTeam")}>
+              <option value={user.typeTeam}></option>
+              <option value="SG">SG-Infra</option>
+              <option value="DL">DL-Tems</option>
+            </select>
+          </div>
+          {errors?.typeTeam?.message ? (
+            <span className="msg_error">{errors.typeTeam?.message}</span>
+          ) : (
+            ""
+          )}
+        </div>
           <div className="container_campos">
             <div className="container_intern_camp">
               <label htmlFor="" className="label_campos">

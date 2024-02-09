@@ -22,6 +22,8 @@ function GruposDeAtuacao() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
   const [grupoAtuacaoFiltered, setGrupoAtuacaoFiltered] = useState([]);
+  const [grupoAtuacaoTems, setGrupoAtuacaoTems] = useState([]);
+  const [grupoAtuacaoTemsFiltered, setGrupoAtuacaoTemsFiltered] = useState([]);
   const [stateGrupo, setStateGrupo] = useState(false);
 
   const { baseURL, usuario } = useContext(UserContext);
@@ -84,6 +86,14 @@ function GruposDeAtuacao() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoFiltered(response.data);
+      
+      const responseTems = await axios.get(`${baseURL}/grupos-atuacao/tems`, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAtuacaoTems(responseTems.data);
+      setGrupoAtuacaoTemsFiltered(responseTems.data);
     } catch (error) {}
   };
   useEffect(() => {
@@ -125,7 +135,7 @@ function GruposDeAtuacao() {
           ))}
         </ListaSG>
         <ListaDL>
-          {grupoAtuacao.map((grupo, i) => (
+          {grupoAtuacaoTems.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
               key={i}
               tipoGrupo={"atuação"}

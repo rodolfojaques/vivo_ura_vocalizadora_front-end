@@ -34,6 +34,8 @@ function BoxNomeGrupoTemsComponente({
     setIdGrupo,
     openInfosUp,
     setOpenInfosUp,
+    setTypeTeam,
+    typeUpdateTeam, setTypeUpdateTeam
   } = useContext(GrupoAtuacaoContext);
 
   const {
@@ -133,6 +135,8 @@ function BoxNomeGrupoTemsComponente({
                   onClick={() => {
                     setAddContato(!addContato);
                     setIdGrupo(grupo.id);
+                    setTypeTeam(grupo.typeTeam)
+                    setTypeUpdateTeam(!typeUpdateTeam)
                   }}
                 >
                   Adicionar Contato

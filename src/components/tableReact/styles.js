@@ -81,5 +81,9 @@ export const TableStl = styled.div`
         height: 1.3rem;
 
         cursor: pointer;
+
+        &:disabled{
+            opacity: .5;
+        }
     }
 `

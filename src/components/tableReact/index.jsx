@@ -171,7 +171,7 @@ function TableComponent({columns,exibirLinhas,total}){
                 <span>
                     Mostrando {(pag -1) * pagSiz + 1} - {pag * pagSiz} de {totalItems} linhas
                 </span>{' '}
-                <button className="btnPaginator" onClick={() => gotoPage(0)} disabled={pag === 0}>
+                <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
                 {'<<'}
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
@@ -181,10 +181,10 @@ function TableComponent({columns,exibirLinhas,total}){
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag + 1);
-                }} disabled={pag === pageCount - 1}>
+                }} disabled={pag === pageCount}>
                 {'>'}
                 </button>{' '}
-                <button className="btnPaginator" onClick={() => gotoPage(pageOptions.length - 1)} disabled={pag === pageOptions.length - 1}>
+                <button className="btnPaginator" onClick={() => setPag(pageCount)} disabled={pag >= pageCount}>
                 {'>>'}
                 </button>
             </div>

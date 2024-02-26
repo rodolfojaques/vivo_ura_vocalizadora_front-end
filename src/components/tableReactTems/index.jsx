@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { TableStl } from "./styles"
-import { useTable, usePagination } from "react-table";
-import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 import axios from "axios";
 import { UserContext } from "../../providers/user";
+import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
 
 function TableTemsComponent({exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
@@ -14,7 +13,7 @@ function TableTemsComponent({exibirLinhas,total}){
         setArrAlarm,
         filterAlarmes,
         pagSiz, setPagSiz, pag, setPag, setArrAlarmInit
-    } = useContext(ListaDeAlarmesContext)
+    } = useContext(ListaDeAlarmesTemsContext)
 
     const [data, setData] = useState([]);
     const [pageCount, setPageCount] = useState(0);
@@ -66,125 +65,51 @@ function TableTemsComponent({exibirLinhas,total}){
                 <table>
                     <thead>
                         <tr>
-                            <th>Exemplo</th>
-                            <th>Exemplo</th>
-                            <th>Exemplo</th>
-                            <th>Exemplo</th>
-                            <th>Exemplo</th>
-                        </tr>
-                        {/* <tr>
-                            <th>Tipo TA</th>
-                            <th>Tipo Rede</th>
-                            <th>Estado</th>
-                            <th>Localidade</th>
-                            <th>Site</th>
-                            <th>Tipo Alarme</th>
-                            <th>Classificação</th>
-                            <th>ID Evento</th>
-                            <th>ID Equipamento</th>
-                            <th>RPA Status</th>
-                            <th>SIGITM Fluxo</th>
-                            <th>Tipo Bilhete</th>
-                            <th>Tipo Rede COD</th>
-                            <th>Tipo Rede COD INT</th>
-                            <th>Localidade COD</th>
-                            <th>Municipio</th>
-                            <th>ID Site</th>
-                            <th>Sequencia Alarme</th>
-                            <th>Empresa Manutenção</th>
-                            <th>Alarme</th>
-                            <th>Tipo Falha</th>
-                            <th>Tipo Afetação</th>
-                            <th>Equipamento</th>
-                            <th>Tipo Corrente Eletrica</th>
-                            <th>Capacidade</th>
-                            <th>Data Apresentação</th>
-                            <th>Fabricante</th>
-                            <th>Modelo</th>
-                            <th>Salas Afetadas</th>
-                            <th>Historico</th>
-                            <th>Historico Tipo</th>
-                            <th>Tipo Planta</th>
-                            <th>Tipo Planta COD</th>
                             <th>TA</th>
-                            <th>Elemento Sigla</th>
-                        </tr>                         */}
+                            <th>APRESENTAÇÃO</th>
+                            <th>TIPO DE ALARME</th>
+                            <th>SITE</th>
+                            <th>CLASSIFICAÇÃO</th>
+                            <th>TIPO DE PLANTA</th>
+                            <th>ESTADO</th>
+                            <th>LOCALIDADE</th>
+                            <th>MUNICIPIO</th>
+                            <th>TIPO DE REDE</th>
+                            <th>TIPO DE TA</th>
+                            <th>DESCRIÇÃO</th>
+                            <th>SISTEMA_ORIGEM</th>
+                            <th>STATUS</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_ExemploExemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo-Exemplo</td>
-                        </tr>
-                        <tr>
-                            <td>Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo-Exemplo</td>
-                            <td>Exemplo_ExemploExemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                        </tr>
-                        <tr>
-                            <td>Exemplo</td>
-                            <td>Exemplo_ExemploExemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo-Exemplo</td>
-                        </tr>
-                        <tr>
-                            <td>Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_ExemploExemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo</td>
-                            <td>Exemplo_Exemplo-Exemplo</td>
-                        </tr>
-                        {/* {
+                        {
                             arrAlarm.map(data=><tr>
-                            <td>{data.TIPO_TA}</td>
-                            <td>{data.TIPO_REDE}</td>
+                            <td>{data.TA}</td>
+                            <td>{data.DATA_APRESENTACAO}</td>
+                            <td>{data.TIPO_ALARME}</td>
+                            <td>{data.SITE}</td>
+                            <td>{data.CLASSIFICACAO}</td>
+                            <td>{data.TIPO_PLANTA}</td>
                             <td>{data.ESTADO}</td>
                             <td>{data.LOCALIDADE}</td>
-                            <td>{data.SITE}</td>
-                            <td>{data.TIPO_ALARME}</td>
-                            <td>{data.CLASSIFICACAO}</td>
-                            <td>{data.ID_EVENTO}</td>
-                            <td>{data.ID_EQUIPAMENTO}</td>
-                            <td>{data.RPA_STATUS}</td>
-                            <td>{data.SIGITM_FLUXO}</td>
-                            <td>{data.TIPO_BILHETE}</td>
-                            <td>{data.TIPO_REDE_COD}</td>
-                            <td>{data.TIPO_REDE_COD_INT}</td>
-                            <td>{data.LOCALIDADE_COD}</td>
                             <td>{data.MUNICIPIO}</td>
-                            <td>{data.ID_SITE}</td>
-                            <td>{data.SEQUENCIA_ALARME}</td>
-                            <td>{data.EMPRESA_MANUTENCAO}</td>
-                            <td>{data.ALARME}</td>
-                            <td>{data.TIPO_FALHA}</td>
-                            <td>{data.TIPO_AFETACAO}</td>
-                            <td>{data.EQUIPAMENTO}</td>
-                            <td>{data.TIPO_CORRENTE_ELETRICA}</td>
-                            <td>{data.CAPACIDADE}</td>
-                            <td>{data.DATA_APRESENTACAO}</td>
-                            <td>{data.FABRICANTE}</td>
-                            <td>{data.MODELO}</td>
-                            <td>{data.SALAS_AFETADAS}</td>
-                            <td>{data.HISTORICO}</td>
-                            <td>{data.HISTORICO_TIPO}</td>
-                            <td>{data.TIPO_PLANTA}</td>
-                            <td>{data.TIPO_PLANTA_COD}</td>
-                            <td>{data.TA}</td>
-                            <td>{data.ELEMENTO_SIGLA}</td>
+                            <td>{data.TIPO_REDE}</td>
+                            <td>{data.TIPO_TA}</td>
+                            <td>{data.DESCRICAO}</td>
+                            <td>{data.SISTEMA_ORIGEM}</td>
+                            <td>{data.STATUS}</td>
                         </tr>)
-                        }                         */}
+                        }                        
                     </tbody>
                 </table>             
             </div>
-            {/* <div> 
+            <div> 
                 <span>
-                    Mostrando {(pag -1) * pagSiz + 1} - {pag * pagSiz} de {totalItems} linhas
+                    Mostrando {(pag -1) * pagSiz + 1} - {(totalItems < pagSiz? totalItems : pag * pagSiz)} de {totalItems} linhas
                 </span>{' '}
+                <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
+                {'<<'}
+                </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag - 1);
                 }} disabled={pag === 1}>
@@ -192,10 +117,13 @@ function TableTemsComponent({exibirLinhas,total}){
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag + 1);
-                }} disabled={pag === pageCount - 1}>
+                }} disabled={pag === pageCount}>
                 {'>'}
                 </button>{' '}
-            </div> */}
+                <button className="btnPaginator" onClick={() => setPag(pageCount)} disabled={pag >= pageCount}>
+                {'>>'}
+                </button>
+            </div>
         </TableStl>
     )
 }

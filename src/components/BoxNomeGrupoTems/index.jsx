@@ -4,6 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import { AssociacaoContext } from "../../providers/associacao";
 import { UserContext } from "../../providers/user";
+import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
 function BoxNomeGrupoTemsComponente({
   nome,
@@ -16,12 +17,13 @@ function BoxNomeGrupoTemsComponente({
   setGrupoSelecionado,
   openModalExclude,
   setOpenModalExclude,
-  openTipoAlarme,
-  setOpenTipoAlarme,
+  openTipoAlarmeTems,
+  setOpenTipoAlarmeTems,
   openExcludeAlarme,
   setOpenExcludeAlarme,
   idGpAlarme,
   setIdGpAlarme,
+  setTypeGpAlarme,
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
@@ -46,6 +48,18 @@ function BoxNomeGrupoTemsComponente({
     setIdGrupoAlarme,
     listOneGrupoAlarme,
   } = useContext(AssociacaoContext);
+
+  const {
+    grupoAssociacaoTemsAdd,
+    setGrupoAssociacaoTemsAdd,
+    removeAssociacaoTems,
+    setRemoveAssociacaoTems,
+    setIdGrupoAlarmeTems,
+    listOneGrupoAlarmeTems,
+    typeGP,
+    setTypeGP,
+
+  } = useContext(AssociacaoTemsContext);
 
   const { role } = useContext(UserContext);
   return (
@@ -154,23 +168,29 @@ function BoxNomeGrupoTemsComponente({
           >
             <p className="nome">{nome}</p>
             <div className="infos_tipos">
-              <div className="chaves">
-                <p className="ttl_p">
-                  UF:{" "}
-                </p>
-                <p className="ttl_p">
-                  Site:{" "}
-                </p>
-                <p className="ttl_p">
-                  Tipo de alarme:{" "}
-                </p>
-                <p className="ttl_p">
-                  Classificação:{" "}
-                </p>
-                <p className="ttl_p">
-                  Localidade:{" "}
-                </p>                
-              </div>
+              {
+                <div className="chaves">
+                  <p className="ttl_p">
+                    UF:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    Site:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    Tipo de alarme:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    Classificação:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    Localidade:{" "}
+                  </p> 
+                  <p className="ttl_p">
+                    Tipo de planta:{" "}
+                  </p>                
+                </div>
+              }
+
               <div className="box_valores">
                 {
                   grupo.tiposAlarmes.map((tipo)=> {
@@ -180,10 +200,10 @@ function BoxNomeGrupoTemsComponente({
                             <p className="info_tp_alm">{tipo.tipoAlarme}</p>
                             <p className="info_tp_alm">{tipo.classificacao}</p>
                             <p className="info_tp_alm">{tipo.localidade}</p>
+                            <p className="info_tp_alm">{tipo.tipoPlanta}</p>
                           </div>
                   })
-                }
-                
+                }                
               </div>              
             </div>
             <p className="ttl_p">
@@ -201,8 +221,9 @@ function BoxNomeGrupoTemsComponente({
                     disabled={role}
                     type="button"
                     onClick={() => {
-                      setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
-                      setIdGrupoAlarme(grupo.id);
+                      setGrupoAssociacaoTemsAdd(!grupoAssociacaoTemsAdd);
+                      setIdGrupoAlarmeTems(grupo.id);
+                      setTypeGP(grupo.typeTeam)
                     }}
                   >
                     Adicionar Grupo de atuação
@@ -212,9 +233,10 @@ function BoxNomeGrupoTemsComponente({
                     className="excluir"
                     type="button"
                     onClick={() => {
-                      setRemoveAssociacao(!removeAssociacao);
-                      setIdGrupoAlarme(grupo.id);
-                      listOneGrupoAlarme(grupo.id);
+                      setRemoveAssociacaoTems(!removeAssociacaoTems);
+                      setIdGrupoAlarmeTems(grupo.id);
+                      listOneGrupoAlarmeTems(grupo.id);
+                      setTypeGP(grupo.typeTeam)
                     }}
                   >
                     Remover Grupo de atuação
@@ -229,7 +251,7 @@ function BoxNomeGrupoTemsComponente({
                   onClick={(e) => {
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
-                    setOpenTipoAlarme(!openTipoAlarme);
+                    setOpenTipoAlarmeTems(!openTipoAlarmeTems);
                   }}
                 >
                   Novo Tipo de Alarme
@@ -241,6 +263,7 @@ function BoxNomeGrupoTemsComponente({
                   onClick={(e) => {
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
+                    setTypeGpAlarme(grupo.typeTeam);
                     setOpenExcludeAlarme(!openExcludeAlarme);
                   }}
                 >

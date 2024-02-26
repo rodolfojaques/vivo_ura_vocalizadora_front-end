@@ -4,6 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import { AssociacaoContext } from "../../providers/associacao";
 import { UserContext } from "../../providers/user";
+import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
 function BoxNomeGrupoComponente({
   nome,
@@ -22,6 +23,7 @@ function BoxNomeGrupoComponente({
   setOpenExcludeAlarme,
   idGpAlarme,
   setIdGpAlarme,
+  setTypeGpAlarme
 }) {
   const [openInfos, setOpenInfos] = useState(false);
 
@@ -45,6 +47,11 @@ function BoxNomeGrupoComponente({
     setIdGrupoAlarme,
     listOneGrupoAlarme,
   } = useContext(AssociacaoContext);
+
+  const {
+    typeGP,
+    setTypeGP,
+  } = useContext(AssociacaoTemsContext);
 
   const { role } = useContext(UserContext);
   return (
@@ -201,6 +208,7 @@ function BoxNomeGrupoComponente({
                     onClick={() => {
                       setGrupoAssociacaoAdd(!grupoAssociacaoAdd);
                       setIdGrupoAlarme(grupo.id);
+                      setTypeGP(grupo.typeTeam)
                     }}
                   >
                     Adicionar Grupo de atuação
@@ -213,6 +221,7 @@ function BoxNomeGrupoComponente({
                       setRemoveAssociacao(!removeAssociacao);
                       setIdGrupoAlarme(grupo.id);
                       listOneGrupoAlarme(grupo.id);
+                      setTypeGP(grupo.typeTeam)
                     }}
                   >
                     Remover Grupo de atuação
@@ -239,6 +248,7 @@ function BoxNomeGrupoComponente({
                   onClick={(e) => {
                     e.preventDefault();
                     setIdGpAlarme(grupo.id);
+                    setTypeGpAlarme(grupo.typeTeam);
                     setOpenExcludeAlarme(!openExcludeAlarme);
                   }}
                 >

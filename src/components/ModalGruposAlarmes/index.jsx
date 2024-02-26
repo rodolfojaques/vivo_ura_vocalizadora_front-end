@@ -1,4 +1,3 @@
-import { arrEstado, arrSite, arrTipoAlarme } from "../../utils/pagListaAlarmes";
 import { ModalGruposAlarmesStl } from "./styles";
 
 import * as yup from 'yup';
@@ -20,8 +19,10 @@ function ModalGruposAlarmesComponente({
         usuario
     } = useContext(UserContext)
 
+    const [ typeTm, setTypeTm ] = useState("SG")
+
     const schema = yup.object().shape({
-        nomeGrupo: yup.string().required("*Campo obrigatório")
+        nomeGrupo: yup.string().required("*Campo obrigatório"),
     })
 
     const {register, handleSubmit, formState: { errors }} = useForm({
@@ -29,7 +30,10 @@ function ModalGruposAlarmesComponente({
     })
 
     const formSchema = data => {
-        axios.post(`${baseURL}/grupos-alarmes/register`,data,{
+
+        const URL = typeTm == "SG"? `${baseURL}/grupos-alarmes/register` : `${baseURL}/grupos-alarmes-tems/register`
+
+        axios.post(URL,data,{
             headers:{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${usuario?.token}`
@@ -47,6 +51,18 @@ function ModalGruposAlarmesComponente({
                 Criar Novo Grupo
             </h2>
             <form onSubmit={handleSubmit(formSchema)} action="" className="form_grp_alarme">
+                <div className="container_campos">
+                    <div className="container_intern_camp">
+                        <label htmlFor="" className="label_campos">
+                            Setor
+                        </label>
+                        <select className="campos campos_dropDown" onClick={(e)=> setTypeTm(e.target.value)}  {...register("typeTeam")}>
+                            <option value="SG"></option> 
+                            <option value="SG">SG-INFRA</option> 
+                            <option value="DL">DL-TEMS</option>                               
+                        </select>
+                    </div>
+                </div>
                 <div className="container_campos">
                     <div className="container_intern_camp">
                         <label htmlFor="" className="label_campos">

@@ -7,9 +7,9 @@ import ListaSG from "../../components/ListaSG";
 import { AssociacaoStl } from "./styles";
 import { UserContext } from "../../providers/user";
 import { useEffect, useState, useContext } from "react";
-import { AssociacaoContext } from "../../providers/associacao";
 import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
 import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
+import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
 function AssociacaoTems() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
@@ -19,12 +19,14 @@ function AssociacaoTems() {
 
   const { baseURL, usuario } = useContext(UserContext);
   const {
-    grupoAssociacaoAdd,
-    setGrupoAssociacaoAdd,
+    grupoAssociacaoTemsAdd,
+    setGrupoAssociacaoTemsAdd,
     setGrupoAtuacaoAss,
-    removeAssociacao,
+    removeAssociacaoTems,
     addDelete,
-  } = useContext(AssociacaoContext);
+    typeGP,
+    setTypeGP,
+  } = useContext(AssociacaoTemsContext);
 
   const allGroupsAtuacao = async () => {
     try {
@@ -41,7 +43,7 @@ function AssociacaoTems() {
 
   const allGroupsAlarme = async () => {
     try {
-      const response = await axios.get(`${baseURL}/grupos-alarmes`, {
+      const response = await axios.get(`${baseURL}/grupos-alarmes-tems`, {
         headers: {
           Authorization: `Bearer ${usuario.token}`,
         },
@@ -174,16 +176,16 @@ function AssociacaoTems() {
           ))}
         </ListaDL>
       </ContainerGruposComponente>
-      {grupoAssociacaoAdd && (
+      {grupoAssociacaoTemsAdd && (
         <ModalExcludeTipoAlarmeComponent
-          grupoAssosc={grupoAssociacaoAdd}
-          setGrupoAssosc={setGrupoAssociacaoAdd}
+          grupoAssosc={grupoAssociacaoTemsAdd}
+          setGrupoAssosc={setGrupoAssociacaoTemsAdd}
         />
       )}
-      {removeAssociacao && (
+      {removeAssociacaoTems && (
         <ModalExcludeTipoAlarmeComponent
-          grupoAssosc={grupoAssociacaoAdd}
-          setGrupoAssosc={setGrupoAssociacaoAdd}
+          grupoAssosc={grupoAssociacaoTemsAdd}
+          setGrupoAssosc={setGrupoAssociacaoTemsAdd}
         />
       )}
     </AssociacaoStl>

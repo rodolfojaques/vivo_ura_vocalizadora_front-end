@@ -6,6 +6,7 @@ import { UserContext } from "../../providers/user";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { AssociacaoContext } from "../../providers/associacao";
+import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
 function ModalExcludeTipoAlarmeComponent({
   openExcludeAlarme,
@@ -13,7 +14,7 @@ function ModalExcludeTipoAlarmeComponent({
   idGpAlarme,
   grupoAssosc,
   setGrupoAssosc,
-  setIdGpAlarme,
+  setIdGpAlarme,typeGpAlarme
 }) {
   const { baseURL, usuario } = useContext(UserContext);
   const {
@@ -26,14 +27,40 @@ function ModalExcludeTipoAlarmeComponent({
     idGrupoAlarme,
     listGrupoAlarme,
     deleteGrupoAtuacaoAss,
+    typeGrupoAlarme
   } = useContext(AssociacaoContext);
+
+  const {
+    grupoAssociacaoTemsAdd,
+    setGrupoAssociacaoTemsAdd,
+    grupoAtuacaoTemsAss,
+    setGrupoAtuacaoTemsAss,
+    removeAssociacaoTems,
+    setRemoveAssociacaoTems,
+    idGrupoAtuacaoTems,
+    setIdGrupoAtuacaoTems,
+    addGrupoAtuacaoTemsAss,
+    idGrupoAlarmeTems,
+    setIdGrupoAlarmeTems,
+    deleteGrupoAtuacaoTemsAss,
+    setListGrupoAlarme,
+    listOneGrupoAlarmeTems,
+    addDelete,
+    listGpAtuacaoTems,
+    typeGP,listGrupoAlarmeTems
+  } = useContext(AssociacaoTemsContext)
 
   const [alarmes, setAlarmes] = useState([]);
   const [tipoSelec, setTipoSelec] = useState([]);
 
+  const typeGpAlm = typeGpAlarme || typeGrupoAlarme
+
   useEffect(() => {
+    listGpAtuacaoTems()
+
+    const URL = typeGpAlm === "SG" ? `${baseURL}/grupos-alarmes/${idGpAlarme}`: `${baseURL}/grupos-alarmes-tems/${idGpAlarme}`
     axios
-      .get(`${baseURL}/grupos-alarmes/${idGpAlarme}`, {
+      .get(URL, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${usuario?.token}`,
@@ -42,11 +69,13 @@ function ModalExcludeTipoAlarmeComponent({
       .then((res) => {
         setAlarmes(res.data.tiposAlarmes);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err)); 
   }, []);
+  
   const excluirTipoAlarme = () => {
+    const URL = typeGpAlm === "SG" ? `${baseURL}/tipos-alarmes/delete/${tipoSelec}` : `${baseURL}/tipos-alarmes-tems/delete/${tipoSelec}`
     axios
-      .delete(`${baseURL}/tipos-alarmes/delete/${tipoSelec}`, {
+      .delete(URL, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${usuario?.token}`,
@@ -65,17 +94,25 @@ function ModalExcludeTipoAlarmeComponent({
         <ModalExcludeTipoAlarmesStl>
           <h2 className="title">Adicionar Grupo de Atuação</h2>
           <select
-            onChange={(e) => setIdGrupoAtuacao(e.target.value)}
+            onClick={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
             name=""
             id=""
             className="tipos"
           >
             <option>...</option>
-            {grupoAtuacaoAss.map((grupo, i) => (
+            {typeGP === "SG" ?
+            grupoAtuacaoAss.map((grupo, i) => (
               <option key={i} className="options" value={grupo.id}>
                 {grupo.nomeGrupo}
               </option>
-            ))}
+            ))
+            :
+            grupoAtuacaoTemsAss.map((grupo, i) => (
+              <option key={i} className="options" value={grupo.id}>
+                {grupo.nomeGrupo}
+              </option>
+            ))
+          }
           </select>
           <div className="btns">
             <button
@@ -87,7 +124,7 @@ function ModalExcludeTipoAlarmeComponent({
             <button
               className="btn adicionar"
               onClick={() => {
-                addGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao);
+                typeGP === "SG" ? addGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) : addGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems);
                 setGrupoAssosc(!grupoAssosc);
               }}
             >
@@ -124,25 +161,33 @@ function ModalExcludeTipoAlarmeComponent({
           </div>
         </ModalExcludeTipoAlarmesStl>
       )}
-      {removeAssociacao ? (
+      {removeAssociacao || removeAssociacaoTems ? (
         <ModalExcludeTipoAlarmesStl>
           <h2 className="title">Remover Grupo de Atuação</h2>
           <select
-            onChange={(e) => setIdGrupoAtuacao(e.target.value)}
+            onChange={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
             name=""
             id=""
             className="tipos"
           >
             <option>...</option>
-            {listGrupoAlarme.map((grupo, i) => (
-              <option key={i} className="options" value={grupo.id}>
-                {grupo.nomeGrupo}
-              </option>
-            ))}
+            {typeGP === "SG" ?
+              listGrupoAlarme.map((grupo, i) => (
+                <option key={i} className="options" value={grupo.id}>
+                  {grupo.nomeGrupo}
+                </option>
+              ))
+            :
+              listGrupoAlarmeTems.map((grupo, i) => (
+                <option key={i} className="options" value={grupo.id}>
+                  {grupo.nomeGrupo}
+                </option>
+              ))         
+            }
           </select>
           <div className="btns">
             <button
-              onClick={() => setRemoveAssociacao(!removeAssociacao)}
+              onClick={() =>  setRemoveAssociacao(!removeAssociacao)}
               className="btn voltar"
             >
               Voltar
@@ -150,8 +195,10 @@ function ModalExcludeTipoAlarmeComponent({
             <button
               className="btn excluir"
               onClick={() => {
-                deleteGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao);
-                setRemoveAssociacao(!removeAssociacao);
+                typeGP === "SG" ? 
+                deleteGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) && setRemoveAssociacao(!removeAssociacao) 
+                : 
+                deleteGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems) && setRemoveAssociacaoTems(!removeAssociacaoTems);
               }}
             >
               Excluir

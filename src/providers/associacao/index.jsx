@@ -16,6 +16,8 @@ function AssociacaoProvider({ children }) {
   const [listGrupoAlarme, setListGrupoAlarme] = useState([]);
   const [addDelete, setAddDelete] = useState(false);
 
+  const [typeGrupoAlarme,setTypeGrupoAlarme] = useState("SG")
+
   const { baseURL, usuario } = useContext(UserContext);
 
   const addGrupoAtuacaoAss = async (idGrupo, idAtuacao) => {
@@ -88,7 +90,7 @@ function AssociacaoProvider({ children }) {
         listGrupoAlarme,
         setListGrupoAlarme,
         listOneGrupoAlarme,
-        addDelete,
+        addDelete,typeGrupoAlarme,setTypeGrupoAlarme
       }}
     >
       {children}

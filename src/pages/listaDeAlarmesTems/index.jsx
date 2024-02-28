@@ -15,11 +15,21 @@ import { UserContext } from "../../providers/user";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TableTemsComponent from "../../components/tableReactTems";
+import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
 
 function ListaDeAlarmesTems() {
   const { baseURL, usuario } = useContext(UserContext);
   
   const [totalItems, setTotalItems] = useState(20);
+
+  const {
+    filterAlarmes,
+    arrAlarmInit,
+    setArrAlarmInit,
+    arrAlarm,
+    setArrAlarm,
+    pageInd, setPageInd, pag, pagSiz, setPagSiz
+  } = useContext(ListaDeAlarmesTemsContext);
 
   const {
     register,
@@ -28,6 +38,7 @@ function ListaDeAlarmesTems() {
   } = useForm({});
 
   const formSchema = (data) => {
+    filterAlarmes(data,pag,pagSiz)
     console.log(data)
   };
 
@@ -180,7 +191,7 @@ function ListaDeAlarmesTems() {
             Mostrar linhas
           </label>
           <input
-            // onChange={(e) => setPagSiz(Number(e.target.value))}
+            onChange={(e) => setPagSiz(Number(e.target.value))}
             type="number"
             min={1}
             name="quant_line"

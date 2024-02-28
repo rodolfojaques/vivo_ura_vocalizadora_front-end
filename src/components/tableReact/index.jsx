@@ -8,20 +8,17 @@ import { UserContext } from "../../providers/user";
 function TableComponent({columns,exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
     const {
-        pageInd, 
-        setPageInd,
+        totalItems, setTotalItems,
+        pageCount, setPageCount,
         arrAlarm,
         setArrAlarm,
         filterAlarmes,
-        pagSiz, setPagSiz, pag, setPag, setArrAlarmInit
+        pagSiz, pag, setPag, setArrAlarmInit, typeFilter,dataPesq, setDataPesq
     } = useContext(ListaDeAlarmesContext)
 
     const [data, setData] = useState([]);
-    const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSizes, setPageSizes] = useState(10);
-
-    const [totalItems, setTotalItems] = useState(20);
 
     const {
         getTableProps,
@@ -44,7 +41,9 @@ function TableComponent({columns,exibirLinhas,total}){
     usePagination
     );
 
-    const dataFilter = {
+    const dataFilter = 
+    typeFilter === 'geral'?
+    {
         TIPO_TA: null,
         TIPO_REDE:  null,
         ESTADO: null,
@@ -54,31 +53,33 @@ function TableComponent({columns,exibirLinhas,total}){
         CLASSIFICACAO: null,
         DATA_INICIO: null,
         DATA_FIM: null,
+    } : {
+        ALARME: null
     };
 
-    const fetchData = async (pageNumber, pageSize) => {
+    // const fetchData = async (pageNumber, pageSize) => {
 
-      try {
-        const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
+    //   try {
+    //     const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
 
-        console.log(response);
-        setArrAlarm(response.data);
-        setArrAlarmInit(response.data)
-        setPageCount(response.pageCount);
-        setTotalItems(response.total)
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    };
+    //     console.log(response.total);
+    //     setArrAlarm(response.data);
+    //     setArrAlarmInit(response.data)
+    //     setPageCount(response.pageCount);
+    //     setTotalItems(response.total)
+    //   } catch (error) {
+    //     console.error('Erro ao buscar dados:', error);
+    //   }
+    // };
 
     const updateData = (newData) => {
         setData(() => newData);
     };
   
     useEffect(() => {
-      fetchData(pag, pagSiz);
-      updateData(data)
-      console.log(pag);
+    //   fetchData(pag, pagSiz);
+        filterAlarmes(dataPesq,pag,pagSiz)
+        updateData(data)
     }, [pag, pagSiz]);
 
     return (
@@ -171,7 +172,7 @@ function TableComponent({columns,exibirLinhas,total}){
                 <span>
                     Mostrando {(pag -1) * pagSiz + 1} - {pag * pagSiz} de {totalItems} linhas
                 </span>{' '}
-                <button className="btnPaginator" onClick={() => gotoPage(0)} disabled={pag === 0}>
+                <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
                 {'<<'}
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
@@ -181,10 +182,10 @@ function TableComponent({columns,exibirLinhas,total}){
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag + 1);
-                }} disabled={pag === pageCount - 1}>
+                }} disabled={pag === pageCount}>
                 {'>'}
                 </button>{' '}
-                <button className="btnPaginator" onClick={() => gotoPage(pageOptions.length - 1)} disabled={pag === pageOptions.length - 1}>
+                <button className="btnPaginator" onClick={() => setPag(pageCount)} disabled={pag >= pageCount}>
                 {'>>'}
                 </button>
             </div>

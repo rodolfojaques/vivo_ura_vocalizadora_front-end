@@ -1,69 +1,62 @@
 import styled from "styled-components";
 
 export const TableStl = styled.div`
-
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
+    padding-left: 30px;
+    padding-right: 30px;
 
     margin-bottom: 2rem;
 
     .tableAlarmesDiv{
+        
+        width: 100%;
 
-        overflow-y: hidden;
-        overflow-x: scroll;
-
+        overflow-y: auto;
+        overflow-x: auto;
     }
 
     table {
-        font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
-        width: 100%;
-        
-        tr{
-            text-align: left;
-            display: flex;
-            min-height: 2.4rem;
-        }
+        margin-top: 20px;
 
-        tbody{
-            tr{
-
-                td{
-                    white-space: nowrap;
-                    width: 12rem;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-
-                    font-size: small;
-                }                
-            }
-        }
-
+        border: solid greenyellow;
+        min-width: 100%;
     }
-    table td, table th {
-        border: 1px solid #ddd;
+
+    th{
+        background-color: purple;
+        color: #f2f2f2;
+    }
+
+    th, td {
+        border: 2px solid #dddddd;
+        text-align: left;
         padding: 8px;
-        min-width: 12rem;
 
-        
 
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        font-size: small;
+
+        height: 3rem;
+
+        max-width: 30rem;
+    }
+
+    tr{
+        height: 3rem;
     }
 
     table tr:nth-child(even){
-        background-color: #f2f2f2;
+      background-color: #f2f2f2;
     }
 
-    table tr:hover {
+    table tr:hover{
         background-color: #f0ddee;
-    }
-
-    table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: purple;
-        color: white;
     }
 
     .btnPaginator{
@@ -81,5 +74,9 @@ export const TableStl = styled.div`
         height: 1.3rem;
 
         cursor: pointer;
+
+        &:disabled{
+            opacity: .5;
+        }
     }
 `

@@ -11,10 +11,10 @@ import { toast } from "react-toastify";
 
 import * as UFSL from "../../utils/grupos/index"
 
-function ModalTiposAlarmesInfraComponente({
-    openTipoAlarme,
-    setOpenTipoAlarme,
-    idGpAlarme,
+function ModalTiposAlarmesTemsComponente({
+    openTipoAlarmeTems,
+    setOpenTipoAlarmeTems,
+    idGpAlarme
 }){
     const [ufSelect, setUfSelect] = useState('AC')
 
@@ -29,6 +29,7 @@ function ModalTiposAlarmesInfraComponente({
         tipoAlarme: yup.string().required("*Campo obrigatório"),
         classificacao: yup.string().required("*Campo obrigatório"),
         localidade: yup.string().required("*Campo obrigatório"),
+        tipoPlanta: yup.string().required("*Campo obrigatório"),
     })
 
     const {register, handleSubmit, formState: { errors }} = useForm({
@@ -36,14 +37,14 @@ function ModalTiposAlarmesInfraComponente({
     })
 
     const formSchema = data => {
-        axios.post(`${baseURL}/tipos-alarmes/register/${idGpAlarme}`,data,{
+        axios.post(`${baseURL}/tipos-alarmes-tems/register/${idGpAlarme}`,data,{
             headers:{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${usuario?.token}`
             }})
         .then(res => {
             toast.success("Tipo de Alarme adicionado com sucesso!")
-            setOpenTipoAlarme(!openTipoAlarme)
+            setOpenTipoAlarmeTems(!openTipoAlarmeTems)
         })
         .catch(err => console.log(err))
     }
@@ -438,8 +439,21 @@ function ModalTiposAlarmesInfraComponente({
                         </select>
                     </div>
                 </div>
+                <div className="container_campos">
+                    <div className="container_intern_camp">
+                        <label htmlFor="" className="label_campos">
+                            Tipo de Planta
+                        </label>
+                        <select className="campos campos_dropDown" {...register("tipoPlanta")}>
+                                <option value="SLA">SLA</option>
+                                <option value="SLA2">SLA2</option>
+                                <option value="SLA3">SLA3</option>
+                                <option value="SLA4">SLA4</option>                                
+                        </select>
+                    </div>
+                </div>
                 <div className="btn_form">
-                    <button onClick={()=> setOpenTipoAlarme(!openTipoAlarme)} className="btn fechar">Fechar</button>
+                    <button onClick={()=> setOpenTipoAlarmeTems(!openTipoAlarmeTems)} className="btn fechar">Fechar</button>
                     <input className="btn salvar" type="submit" value="Salvar" />
                 </div>               
             </form>
@@ -447,4 +461,4 @@ function ModalTiposAlarmesInfraComponente({
     )
 }
 
-export default ModalTiposAlarmesInfraComponente
+export default ModalTiposAlarmesTemsComponente

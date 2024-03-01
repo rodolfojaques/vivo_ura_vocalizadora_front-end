@@ -52,93 +52,31 @@ function Associacao() {
       setGruposAlarmesInicial(response.data);
     } catch (error) {}
   };
+
+  const filterAlarmesOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAlarme(response.data);
+  }
+
+  const filterAtuacaoOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value: e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAtuacao(response.data);
+    setGrupoAtuacaoAss(response.data);
+  }
+
   useEffect(() => {
     allGroupsAtuacao();
     allGroupsAlarme();
   }, [addDelete]);
 
-  const handleValueChange = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.uf
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.site
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.tipoAlarme
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.classificacao
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.localidade
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGrupoAlarme(newListaAlarmes);
-  };
-
-  const handleValueChangeAtuacao = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente1?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGrupoAtuacao(newListaAlarmes);
-  };
   return (
     <AssociacaoStl>
       <Header />
@@ -146,8 +84,7 @@ function Associacao() {
       <ContainerGruposComponente tipoGrupo={"associacao"}>
         <ListaSG
           tipoPag={"associacao"}
-          handleValueChange={handleValueChange}
-          gruposAlarmesMock={gruposAlarmesInicial}
+          handleValueChange={filterAlarmesOnChange}
         >
           {grupoAlarme.map((grupo, i) => (
             <BoxNomeGrupoComponente
@@ -160,8 +97,7 @@ function Associacao() {
         </ListaSG>
         <ListaDL
           grupoAtuacao={"ATUAÇÃO"}
-          handleValueChange={handleValueChangeAtuacao}
-          grupoAtuacaoInicial={gruposAtuacaoInicial}
+          handleValueChange={filterAtuacaoOnChange}
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoComponente

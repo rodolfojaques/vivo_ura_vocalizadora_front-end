@@ -54,6 +54,24 @@ function PaginaUsuarios() {
       .catch((err) => console.log(err));
   }, [openModal, openModalEdit, openModalExclude]);
 
+  const filterUserOnChange = (e)=> {
+    axios
+    .post(`${baseURL}/usuario/filter`, {value: e.target.value}, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${usuario?.token}`,
+      },
+    })
+    .then((res) => {
+      res.data.map((obj) => {
+        obj["id_exclude"] = obj.id;
+        obj["id_edit"] = obj.id;
+      });
+      setUsers(res.data);
+    })
+    .catch((err) => console.log(err));
+  }
+
   const columns = useMemo(
     () => [
       {
@@ -130,6 +148,9 @@ function PaginaUsuarios() {
         <button onClick={() => setOpenModal(!openModal)} className="new-user">
           Novo Usuário
         </button>
+        <input type="text" name="pesquisa" id="pesquisa" placeholder="Buscar..."
+          onChange={(e)=> filterUserOnChange(e)}
+        />
       </div>
       <TableUserComponent columns={columns} data={users} />
       {openModal ? (

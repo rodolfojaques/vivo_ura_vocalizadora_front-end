@@ -4,6 +4,7 @@ import { useTable, usePagination } from "react-table";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 import axios from "axios";
 import { UserContext } from "../../providers/user";
+import { purple } from "@material-ui/core/colors";
 
 function TableComponent({columns,exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
@@ -147,7 +148,7 @@ function TableComponent({columns,exibirLinhas,total}){
                             <td>{data.ID_SITE}</td>
                             <td>{data.SEQUENCIA_ALARME}</td>
                             <td>{data.EMPRESA_MANUTENCAO}</td>
-                            <td>{data.ALARME}</td>
+                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(data.ALARME)}>{data.ALARME}</td>
                             <td>{data.TIPO_FALHA}</td>
                             <td>{data.TIPO_AFETACAO}</td>
                             <td>{data.EQUIPAMENTO}</td>

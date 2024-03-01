@@ -16,7 +16,7 @@ function ListaSG({
             className="pesquisa_sg"
             placeholder="Pesquisar..."
             onChange={(event) => {
-              handleValueChange(event, gruposAlarmesMock);
+              handleValueChange(event);
             }}
           />
           <h3 className="str_grup_sg">
@@ -32,8 +32,8 @@ function ListaSG({
             placeholder="Pesquisar..."
             onChange={(event) => {
               tipoPag === "atuação"
-                ? handleValueChange(event, gruposAtuacaoMock)
-                : handleValueChange(event, gruposAlarmesMock);
+                ? handleValueChange(event)
+                : handleValueChange(event);
             }}
           />
           <h3 className="str_grup_sg">

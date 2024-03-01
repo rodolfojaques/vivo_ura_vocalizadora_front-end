@@ -15,7 +15,7 @@ function ListaDL({
             className="pesquisa_dl"
             placeholder="Pesquisar..."
             onChange={(event) => {
-              handleValueChange(event, grupoAtuacaoInicial);
+              handleValueChange(event);
             }}
           />
           <h3 className="str_grup_dl">
@@ -29,6 +29,9 @@ function ListaDL({
             type="text"
             className="pesquisa_dl"
             placeholder="Pesquisar..."
+            onChange={(event) => {
+              handleValueChange(event);
+            }}
           />
           <h3 className="str_grup_dl">
             Grupos <span className="dl">DL-TEMS</span>

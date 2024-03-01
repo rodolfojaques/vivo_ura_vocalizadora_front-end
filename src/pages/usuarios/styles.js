@@ -7,9 +7,9 @@ export const PaginaUsuariosStl = styled.main`
         min-height: 5rem;
 
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
-        padding-left: 3rem;
+        padding: 0 5rem 0 3rem;
 
         .new-user{
             border-style: none;
@@ -28,6 +28,14 @@ export const PaginaUsuariosStl = styled.main`
             &:active{
                 opacity: .5;
             }
+        }
+
+        #pesquisa{
+            height: 2.5rem;
+            width: 20%;
+            padding: .5rem;
+
+            font-size: medium;
         }
     }
 

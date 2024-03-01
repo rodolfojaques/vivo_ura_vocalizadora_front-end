@@ -26,6 +26,12 @@ function GruposDeAtuacao() {
   const [grupoAtuacaoTemsFiltered, setGrupoAtuacaoTemsFiltered] = useState([]);
   const [stateGrupo, setStateGrupo] = useState(false);
 
+  const [isSearch, setIsSearch] = useState(false)
+  const [dataFilter, setDataFilter] = useState({value:null})
+
+  const [isSearchTems, setIsSearchTems] = useState(false)
+  const [dataFilterTems, setDataFilterTems] = useState({value:null})
+
   const { baseURL, usuario } = useContext(UserContext);
   const { deleteUser, addContato, openInfosUp } =
     useContext(GrupoAtuacaoContext);
@@ -42,42 +48,7 @@ function GruposDeAtuacao() {
     } catch (error) {}
   };
 
-  const handleValueChange = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente1?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGrupoAtuacao(newListaAlarmes);
-  };
-
-  const allGroupsAtuacao = async () => {
+  const groupsAtuacaoInfra = async () => {
     try {
       const response = await axios.get(`${baseURL}/grupos-atuacao`, {
         headers: {
@@ -86,18 +57,51 @@ function GruposDeAtuacao() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoFiltered(response.data);
-      
+
+    } catch (error) {
+      console.error("Erro ao buscar grupos",error);
+    }
+  };
+
+  const groupsAtuacaoTems = async () => {
+    try {
       const responseTems = await axios.get(`${baseURL}/grupos-atuacao/tems`, {
         headers: {
           Authorization: `Bearer ${usuario.token}`,
         },
       });
       setGrupoAtuacaoTems(responseTems.data);
-      setGrupoAtuacaoTemsFiltered(responseTems.data);
-    } catch (error) {}
+      setGrupoAtuacaoTemsFiltered(responseTems.data);   
+
+    } catch (error) {
+      console.error("Erro ao buscar grupos",error);
+    }
   };
+
+  const filterInfraOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value:e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAtuacao(response.data);
+    setGrupoAtuacaoFiltered(response.data);
+  }
+
+  const filterTemsOnChange = async (e)=> {
+    const responseTems = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAtuacaoTems(responseTems.data);
+    setGrupoAtuacaoTemsFiltered(responseTems.data);
+    console.log(grupoAtuacaoTems);
+  }
+
   useEffect(() => {
-    allGroupsAtuacao();
+    groupsAtuacaoInfra();
+    groupsAtuacaoTems();
   }, [
     openModalExclude,
     openModalGruposAtuacao,
@@ -118,7 +122,7 @@ function GruposDeAtuacao() {
       >
         <ListaSG
           tipoPag={"atuação"}
-          handleValueChange={handleValueChange}
+          handleValueChange={filterInfraOnChange}
           gruposAtuacaoMock={grupoAtuacaoFiltered}
         >
           {grupoAtuacao.map((grupo, i) => (
@@ -134,7 +138,10 @@ function GruposDeAtuacao() {
             />
           ))}
         </ListaSG>
-        <ListaDL>
+        <ListaDL
+          tipoPag={"atuação"}
+          handleValueChange={filterTemsOnChange}
+        >
           {grupoAtuacaoTems.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
               key={i}

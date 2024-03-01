@@ -65,6 +65,23 @@ function GruposDeAlarmes() {
       })
       .catch((err) => console.log(err));    
   }
+  const filterInfraOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGruposAlarmes(response.data);
+  }
+
+  const filterTemsOnChange = async (e)=> {
+    const responseTems = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value: e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGruposAlarmesTems(responseTems.data);
+  }
 
   useEffect(() => {
     getGpAlarmesInfra()
@@ -87,54 +104,6 @@ function GruposDeAlarmes() {
       .catch((err) => console.log(err));
   };
 
-  const handleValueChange = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.uf
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.site
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.tipoAlarme
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.classificacao
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.localidade
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGruposAlarmes(newListaAlarmes);
-  };
-
   return (
     <GruposDeAlarmesStl>
       <Header />
@@ -147,8 +116,7 @@ function GruposDeAlarmes() {
         setGruposAlarmes={setGruposAlarmes}
       >
         <ListaSG
-          handleValueChange={handleValueChange}
-          gruposAlarmes={gruposAlarmesInicial}
+          handleValueChange={filterInfraOnChange}
         >
           {gruposAlarmes ? (
             gruposAlarmes.map((grupo, i) => (
@@ -173,7 +141,9 @@ function GruposDeAlarmes() {
             <></>
           )}
         </ListaSG>
-        <ListaDL>
+        <ListaDL
+          handleValueChange={filterTemsOnChange}
+        >
           {gruposAlarmesTems ? (
             gruposAlarmesTems.map((grupo, i) => (
               <BoxNomeGrupoTemsComponente

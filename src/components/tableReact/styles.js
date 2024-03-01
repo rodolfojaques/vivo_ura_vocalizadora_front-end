@@ -15,11 +15,12 @@ export const TableStl = styled.div`
 
         overflow-y: auto;
         overflow-x: auto;
+
+        box-shadow: 0 0 5px 0 purple;
     }
 
     table {
         border-collapse: collapse;
-        margin-top: 20px;
 
         border: solid greenyellow;
         min-width: 100%;

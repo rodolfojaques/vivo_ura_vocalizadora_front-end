@@ -21,7 +21,7 @@ function AssociacaoTems() {
   const {
     grupoAssociacaoTemsAdd,
     setGrupoAssociacaoTemsAdd,
-    setGrupoAtuacaoAss,
+    setGrupoAtuacaoTemsAss,
     removeAssociacaoTems,
     addDelete,
     typeGP,
@@ -36,7 +36,7 @@ function AssociacaoTems() {
         },
       });
       setGrupoAtuacao(response.data);
-      setGrupoAtuacaoAss(response.data);
+      setGrupoAtuacaoTemsAss(response.data);
       setGruposAtuacaoInicial(response.data);
     } catch (error) {}
   };
@@ -53,93 +53,29 @@ function AssociacaoTems() {
     } catch (error) {}
   };
 
+  const filterAlarmesOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value:e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAlarme(response.data);
+  }
+
+  const filterAtuacaoOnChange = async (e)=> {
+    const response = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
+      headers: {
+        Authorization: `Bearer ${usuario.token}`,
+      },
+    });
+    setGrupoAtuacao(response.data);
+    setGrupoAtuacaoTemsAss(response.data);
+  }
+
   useEffect(() => {
     allGroupsAtuacao();
     allGroupsAlarme();
   }, [addDelete]);
-
-  const handleValueChange = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.uf
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.site
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.tipoAlarme
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.classificacao
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.tiposAlarmes?.localidade
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGrupoAlarme(newListaAlarmes);
-  };
-
-  const handleValueChangeAtuacao = (event, arr) => {
-    const value = event.target.value || "";
-
-    const newListaAlarmes = arr.filter((obj) => {
-      if (
-        obj?.nomeGrupo?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente1?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.gerente2?.toString().toLowerCase().includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      } else if (
-        obj?.contato_ger1
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      ) {
-        return obj;
-      }
-    });
-    setGrupoAtuacao(newListaAlarmes);
-  };
 
   return (
     <AssociacaoStl>
@@ -148,8 +84,7 @@ function AssociacaoTems() {
       <ContainerGruposComponente tipoGrupo={"associacao"}>
         <ListaSG
           tipoPag={"associacao"}
-          handleValueChange={handleValueChange}
-          gruposAlarmesMock={gruposAlarmesInicial}
+          handleValueChange={filterAlarmesOnChange}
         >
           {grupoAlarme.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
@@ -162,8 +97,7 @@ function AssociacaoTems() {
         </ListaSG>
         <ListaDL
           grupoAtuacao={"ATUAÇÃO"}
-          handleValueChange={handleValueChangeAtuacao}
-          grupoAtuacaoInicial={gruposAtuacaoInicial}
+          handleValueChange={filterAtuacaoOnChange}
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente

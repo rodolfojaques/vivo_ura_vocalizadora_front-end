@@ -21,8 +21,6 @@ export const TableStl = styled.div`
 
     table {
         border-collapse: collapse;
-
-        border: solid greenyellow;
         min-width: 100%;
     }
 

@@ -148,7 +148,7 @@ function Header() {
       ) : (
         ""
       )}
-      {!!editSenha ? <ModalEditSenha /> : <></>}
+      {/* {!!editSenha ? <ModalEditSenha /> : <></>} */}
       <div className="container_menu-logo">
         <button
           onPointerEnter={() => setClickMenu(!clickMenu)}

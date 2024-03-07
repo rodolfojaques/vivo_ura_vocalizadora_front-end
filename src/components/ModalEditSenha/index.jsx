@@ -1,4 +1,4 @@
-import ModalEditSenhaStl from "./styles";
+import {BackgroundStl, ModalEditSenhaStl} from "./styles";
 
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -50,6 +50,7 @@ function ModalEditSenha() {
 
 
   return(
+    <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) setEditSenha(!editSenha)}}>
       <ModalEditSenhaStl>
           <h2 className="title">Editar Senha</h2>
           <form onSubmit={handleSubmit(formSchema)} className="form_edit">
@@ -82,7 +83,9 @@ function ModalEditSenha() {
                   <input className="btn salvar" type="submit" value="Salvar" />
               </div>
           </form>
-      </ModalEditSenhaStl>
+      </ModalEditSenhaStl>      
+    </BackgroundStl>
+
   )
 }
 

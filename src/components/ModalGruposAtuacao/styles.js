@@ -1,12 +1,29 @@
 import styled from "styled-components";
 
+export const BackgroundStl = styled.div`
+background-color: rgba(0,0,0,.5);
+
+width: 100%;
+height: 100%;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+position: absolute;
+top: 0%;
+left: 0%;
+right: 0%;
+bottom: 0%;
+
+z-index: 51;
+`
+
 export const ModalGruposAtuacaoStl = styled.div`
   border: solid gray;
   border-radius: 5px;
 
-  position: fixed;
-  top: 9rem;
-  left: 15rem;
+
 
   background-color: white;
 

@@ -1,4 +1,4 @@
-import { ModalFormCadastroStl } from "./styles";
+import { BackgroundStl, ModalFormCadastroStl } from "./styles";
 
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -111,21 +111,148 @@ function ModalFormCadastro({
   };
 
   return (
-    <ModalFormCadastroStl>
-      <h2 className="title_cadastro">{title}</h2>
-      {!!openModal ? (
-        <form
-          onSubmit={handleSubmit(formSchema)}
-          action=""
-          className="form_cadastro"
-        >
-          
+    <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) !!openModal ? setOpenModal(false) : setOpenModalEdit(false)}}>
+      <ModalFormCadastroStl>
+        <h2 className="title_cadastro">{title}</h2>
+        {!!openModal ? (
+          <form
+            onSubmit={handleSubmit(formSchema)}
+            action=""
+            className="form_cadastro"
+          >
+            
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                Setor
+                </label>
+                <select name="" id="" className="campos" {...register("typeTeam")}>
+                  <option value="SG">SG-Infra</option>
+                  <option value="DL">DL-Tems</option>
+                </select>
+              </div>
+              {errors?.typeTeam?.message ? (
+                <span className="msg_error">{errors.typeTeam?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="Nome do usuário..."
+                  {...register("nome")}
+                />
+              </div>
+              {errors?.nome?.message ? (
+                <span className="msg_error">{errors.nome?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  RE
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="RE do usuário..."
+                  {...register("RE")}
+                />
+              </div>
+              {errors?.RE?.message ? (
+                <span className="msg_error">{errors.RE?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  E-mail
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="E-mail do usuário..."
+                  {...register("email")}
+                />
+              </div>
+              {errors?.email?.message ? (
+                <span className="msg_error">{errors.email?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Tel/Cel
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="Tel/Cel do usuário..."
+                  {...register("tel_cel")}
+                />
+              </div>
+              {errors?.tel_cel?.message ? (
+                <span className="msg_error">{errors.tel_cel?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Perfil
+                </label>
+                <select className="campos" {...register("perfil")}>
+                  <option value="Operador">Operador</option>
+                  <option value="Gestor">Gestor</option>
+                  <option value="Admin">Admin</option>
+                  <option value="UserAdm">UserAdm</option>
+                </select>
+                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")}/> */}
+              </div>
+              {errors?.perfil?.message ? (
+                <span className="msg_error">{errors.perfil?.message}</span>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="btn_form_cadastro">
+              <button
+                onClick={() => setOpenModal(!openModal)}
+                className="btn fechar"
+              >
+                Fechar
+              </button>
+              <input className="btn salvar" type="submit" value="Salvar" />
+            </div>
+          </form>
+        ) : (
+          <form
+            onSubmit={handleSubmit(schemaUpdate)}
+            action=""
+            className="form_cadastro"
+          >
+            
           <div className="container_campos">
             <div className="container_intern_camp">
               <label htmlFor="" className="label_campos">
               Setor
               </label>
-              <select name="" id="" className="campos" {...register("typeTeam")}>
+              <select name="" id="" className="campos" defaultValue={user.typeTeam} {...register("typeTeam")}>
+                <option value={user.typeTeam}></option>
                 <option value="SG">SG-Infra</option>
                 <option value="DL">DL-Tems</option>
               </select>
@@ -136,244 +263,120 @@ function ModalFormCadastro({
               ""
             )}
           </div>
-          
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Nome
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="Nome do usuário..."
-                {...register("nome")}
-              />
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="Nome do usuário..."
+                  {...register("nome")}
+                  defaultValue={user.nome}
+                />
+              </div>
+              {errors?.nome?.message ? (
+                <span className="msg_error">{errors.nome?.message}</span>
+              ) : (
+                ""
+              )}
             </div>
-            {errors?.nome?.message ? (
-              <span className="msg_error">{errors.nome?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                RE
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="RE do usuário..."
-                {...register("RE")}
-              />
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  RE
+                </label>
+                <input
+                  disabled
+                  type="text"
+                  className="campos"
+                  placeholder="RE do usuário..."
+                  defaultValue={user.RE}
+                />
+              </div>
+              {errors?.RE?.message ? (
+                <span className="msg_error">{errors.RE?.message}</span>
+              ) : (
+                ""
+              )}
             </div>
-            {errors?.RE?.message ? (
-              <span className="msg_error">{errors.RE?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                E-mail
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="E-mail do usuário..."
-                {...register("email")}
-              />
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  E-mail
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="E-mail do usuário..."
+                  {...register("email")}
+                  defaultValue={user.email}
+                />
+              </div>
+              {errors?.email?.message ? (
+                <span className="msg_error">{errors.email?.message}</span>
+              ) : (
+                ""
+              )}
             </div>
-            {errors?.email?.message ? (
-              <span className="msg_error">{errors.email?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Tel/Cel
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="Tel/Cel do usuário..."
-                {...register("tel_cel")}
-              />
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Tel/Cel
+                </label>
+                <input
+                  type="text"
+                  className="campos"
+                  placeholder="Tel/Cel do usuário..."
+                  {...register("tel_cel")}
+                  defaultValue={user.tel_cel}
+                />
+              </div>
+              {errors?.tel_cel?.message ? (
+                <span className="msg_error">{errors.tel_cel?.message}</span>
+              ) : (
+                ""
+              )}
             </div>
-            {errors?.tel_cel?.message ? (
-              <span className="msg_error">{errors.tel_cel?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Perfil
-              </label>
-              <select className="campos" {...register("perfil")}>
-                <option value="Operador">Operador</option>
-                <option value="Gestor">Gestor</option>
-                <option value="Admin">Admin</option>
-                <option value="UserAdm">UserAdm</option>
-              </select>
-              {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")}/> */}
+            <div className="container_campos">
+              <div className="container_intern_camp">
+                <label htmlFor="" className="label_campos">
+                  Perfil
+                </label>
+                <select
+                  className="campos"
+                  {...register("perfil")}
+                  defaultValue={user.perfil}
+                >
+                  <option value={user.perfil}></option>
+                  <option value="Operador">Operador</option>
+                  <option value="Gestor">Gestor</option>
+                  <option value="Admin">Admin</option>
+                  <option value="UserAdm">UserAdm</option>
+                </select>
+                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}
+              </div>
+              {errors?.perfil?.message ? (
+                <span className="msg_error">{errors.perfil?.message}</span>
+              ) : (
+                ""
+              )}
             </div>
-            {errors?.perfil?.message ? (
-              <span className="msg_error">{errors.perfil?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="btn_form_cadastro">
-            <button
-              onClick={() => setOpenModal(!openModal)}
-              className="btn fechar"
-            >
-              Fechar
-            </button>
-            <input className="btn salvar" type="submit" value="Salvar" />
-          </div>
-        </form>
-      ) : (
-        <form
-          onSubmit={handleSubmit(schemaUpdate)}
-          action=""
-          className="form_cadastro"
-        >
-          
-        <div className="container_campos">
-          <div className="container_intern_camp">
-            <label htmlFor="" className="label_campos">
-            Setor
-            </label>
-            <select name="" id="" className="campos" defaultValue={user.typeTeam} {...register("typeTeam")}>
-              <option value={user.typeTeam}></option>
-              <option value="SG">SG-Infra</option>
-              <option value="DL">DL-Tems</option>
-            </select>
-          </div>
-          {errors?.typeTeam?.message ? (
-            <span className="msg_error">{errors.typeTeam?.message}</span>
-          ) : (
-            ""
-          )}
-        </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Nome
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="Nome do usuário..."
-                {...register("nome")}
-                defaultValue={user.nome}
-              />
-            </div>
-            {errors?.nome?.message ? (
-              <span className="msg_error">{errors.nome?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                RE
-              </label>
-              <input
-                disabled
-                type="text"
-                className="campos"
-                placeholder="RE do usuário..."
-                defaultValue={user.RE}
-              />
-            </div>
-            {errors?.RE?.message ? (
-              <span className="msg_error">{errors.RE?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                E-mail
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="E-mail do usuário..."
-                {...register("email")}
-                defaultValue={user.email}
-              />
-            </div>
-            {errors?.email?.message ? (
-              <span className="msg_error">{errors.email?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Tel/Cel
-              </label>
-              <input
-                type="text"
-                className="campos"
-                placeholder="Tel/Cel do usuário..."
-                {...register("tel_cel")}
-                defaultValue={user.tel_cel}
-              />
-            </div>
-            {errors?.tel_cel?.message ? (
-              <span className="msg_error">{errors.tel_cel?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="container_campos">
-            <div className="container_intern_camp">
-              <label htmlFor="" className="label_campos">
-                Perfil
-              </label>
-              <select
-                className="campos"
-                {...register("perfil")}
-                defaultValue={user.perfil}
+            <div className="btn_form_cadastro">
+              <button
+                onClick={() => setOpenModalEdit(!openModalEdit)}
+                className="btn fechar"
               >
-                <option value={user.perfil}></option>
-                <option value="Operador">Operador</option>
-                <option value="Gestor">Gestor</option>
-                <option value="Admin">Admin</option>
-                <option value="UserAdm">UserAdm</option>
-              </select>
-              {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}
+                Fechar
+              </button>
+              <input className="btn salvar" type="submit" value="Salvar" />
             </div>
-            {errors?.perfil?.message ? (
-              <span className="msg_error">{errors.perfil?.message}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="btn_form_cadastro">
-            <button
-              onClick={() => setOpenModalEdit(!openModalEdit)}
-              className="btn fechar"
-            >
-              Fechar
-            </button>
-            <input className="btn salvar" type="submit" value="Salvar" />
-          </div>
-        </form>
-      )}
-    </ModalFormCadastroStl>
+          </form>
+        )}
+      </ModalFormCadastroStl>      
+    </BackgroundStl>
+
   );
 }
 

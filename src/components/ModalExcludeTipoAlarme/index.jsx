@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ModalExcludeTipoAlarmesStl } from "./styles";
+import { BackgroundStl, ModalExcludeTipoAlarmesStl } from "./styles";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../providers/user";
@@ -91,120 +91,131 @@ function ModalExcludeTipoAlarmeComponent({
   return (
     <>
       {grupoAssosc ? (
-        <ModalExcludeTipoAlarmesStl>
-          <h2 className="title">Adicionar Grupo de Atuação</h2>
-          <select
-            onClick={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
-            name=""
-            id=""
-            className="tipos"
-          >
-            <option>...</option>
-            {typeGP === "SG" ?
-            grupoAtuacaoAss.map((grupo, i) => (
-              <option key={i} className="options" value={grupo.id}>
-                {grupo.nomeGrupo}
-              </option>
-            ))
-            :
-            grupoAtuacaoTemsAss.map((grupo, i) => (
-              <option key={i} className="options" value={grupo.id}>
-                {grupo.nomeGrupo}
-              </option>
-            ))
-          }
-          </select>
-          <div className="btns">
-            <button
-              onClick={() => setGrupoAssosc(!grupoAssosc)}
-              className="btn voltar"
+        <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) setGrupoAssosc(!grupoAssosc)}}>
+          <ModalExcludeTipoAlarmesStl>
+            <h2 className="title">Adicionar Grupo de Atuação</h2>
+            <select
+              onClick={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
+              name=""
+              id=""
+              className="tipos"
             >
-              Voltar
-            </button>
-            <button
-              className="btn adicionar"
-              onClick={() => {
-                typeGP === "SG" ? addGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) : addGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems);
-                setGrupoAssosc(!grupoAssosc);
-              }}
-            >
-              Adicionar
-            </button>
-          </div>
-        </ModalExcludeTipoAlarmesStl>
-      ) : (
-        <ModalExcludeTipoAlarmesStl>
-          <h2 className="title">Excluir Tipo de Alarme</h2>
-          <select
-            onChange={(e) => setTipoSelec(e.target.value)}
-            name=""
-            id=""
-            className="tipos"
-          >
-            <option>...</option>
-            {alarmes.map((alm, i) => (
-              <option key={i} className="options" value={alm.id}>{`
-                        ${alm.uf}, ${alm.site}, ${alm.tipoAlarme}, ${alm.classificacao}, ${alm.localidade}
-                        `}</option>
-            ))}
-          </select>
-          <div className="btns">
-            <button
-              onClick={() => setOpenExcludeAlarme(!openExcludeAlarme)}
-              className="btn voltar"
-            >
-              Voltar
-            </button>
-            <button onClick={() => excluirTipoAlarme()} className="btn excluir">
-              Excluir
-            </button>
-          </div>
-        </ModalExcludeTipoAlarmesStl>
-      )}
-      {removeAssociacao || removeAssociacaoTems ? (
-        <ModalExcludeTipoAlarmesStl>
-          <h2 className="title">Remover Grupo de Atuação</h2>
-          <select
-            onChange={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
-            name=""
-            id=""
-            className="tipos"
-          >
-            <option>...</option>
-            {typeGP === "SG" ?
-              listGrupoAlarme.map((grupo, i) => (
+              <option>...</option>
+              {typeGP === "SG" ?
+              grupoAtuacaoAss.map((grupo, i) => (
                 <option key={i} className="options" value={grupo.id}>
                   {grupo.nomeGrupo}
                 </option>
               ))
-            :
-              listGrupoAlarmeTems.map((grupo, i) => (
+              :
+              grupoAtuacaoTemsAss.map((grupo, i) => (
                 <option key={i} className="options" value={grupo.id}>
                   {grupo.nomeGrupo}
                 </option>
-              ))         
+              ))
             }
-          </select>
-          <div className="btns">
-            <button
-              onClick={() =>  setRemoveAssociacao(!removeAssociacao)}
-              className="btn voltar"
+            </select>
+            <div className="btns">
+              <button
+                onClick={() => setGrupoAssosc(!grupoAssosc)}
+                className="btn voltar"
+              >
+                Voltar
+              </button>
+              <button
+                className="btn adicionar"
+                onClick={() => {
+                  typeGP === "SG" ? addGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) : addGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems);
+                  setGrupoAssosc(!grupoAssosc);
+                }}
+              >
+                Adicionar
+              </button>
+            </div>
+          </ModalExcludeTipoAlarmesStl>
+        </BackgroundStl>
+      ) : (
+        <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) setOpenExcludeAlarme(!openExcludeAlarme)}}>
+          <ModalExcludeTipoAlarmesStl>
+            <h2 className="title">Excluir Tipo de Alarme</h2>
+            <select
+              onChange={(e) => setTipoSelec(e.target.value)}
+              name=""
+              id=""
+              className="tipos"
             >
-              Voltar
-            </button>
-            <button
-              className="btn excluir"
-              onClick={() => {
-                typeGP === "SG" ? 
-                deleteGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) && setRemoveAssociacao(!removeAssociacao) 
-                : 
-                deleteGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems) && setRemoveAssociacaoTems(!removeAssociacaoTems);
-              }}
+              <option>...</option>
+              {alarmes.map((alm, i) => (
+                <option key={i} className="options" value={alm.id}>{`
+                          ${alm.uf}, ${alm.site}, ${alm.tipoAlarme}, ${alm.classificacao}, ${alm.localidade}
+                          `}</option>
+              ))}
+            </select>
+            <div className="btns">
+              <button
+                onClick={() => setOpenExcludeAlarme(!openExcludeAlarme)}
+                className="btn voltar"
+              >
+                Voltar
+              </button>
+              <button onClick={() => excluirTipoAlarme()} className="btn excluir">
+                Excluir
+              </button>
+            </div>
+          </ModalExcludeTipoAlarmesStl>          
+        </BackgroundStl>
+      )}
+      {removeAssociacao || removeAssociacaoTems ? (
+        <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) 
+        typeGP === "SG" ? 
+          setRemoveAssociacao(!removeAssociacao) 
+          : 
+          setRemoveAssociacaoTems(!removeAssociacaoTems);}
+        }>
+          <ModalExcludeTipoAlarmesStl>
+            <h2 className="title">Remover Grupo de Atuação</h2>
+            <select
+              onChange={(e) => typeGP === "SG" ? setIdGrupoAtuacao(e.target.value) : setIdGrupoAtuacaoTems(e.target.value)}
+              name=""
+              id=""
+              className="tipos"
             >
-              Excluir
-            </button>
-          </div>
-        </ModalExcludeTipoAlarmesStl>
+              <option>...</option>
+              {typeGP === "SG" ?
+                listGrupoAlarme.map((grupo, i) => (
+                  <option key={i} className="options" value={grupo.id}>
+                    {grupo.nomeGrupo}
+                  </option>
+                ))
+              :
+                listGrupoAlarmeTems.map((grupo, i) => (
+                  <option key={i} className="options" value={grupo.id}>
+                    {grupo.nomeGrupo}
+                  </option>
+                ))         
+              }
+            </select>
+            <div className="btns">
+              <button
+                onClick={() =>  setRemoveAssociacao(!removeAssociacao)}
+                className="btn voltar"
+              >
+                Voltar
+              </button>
+              <button
+                className="btn excluir"
+                onClick={() => {
+                  typeGP === "SG" ? 
+                  deleteGrupoAtuacaoAss(idGrupoAlarme, idGrupoAtuacao) && setRemoveAssociacao(!removeAssociacao) 
+                  : 
+                  deleteGrupoAtuacaoTemsAss(idGrupoAlarmeTems, idGrupoAtuacaoTems) && setRemoveAssociacaoTems(!removeAssociacaoTems);
+                }}
+              >
+                Excluir
+              </button>
+            </div>
+          </ModalExcludeTipoAlarmesStl>          
+        </BackgroundStl>
       ) : (
         <></>
       )}

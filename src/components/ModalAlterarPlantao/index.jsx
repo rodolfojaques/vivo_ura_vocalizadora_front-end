@@ -109,7 +109,7 @@ function ModalAlterarPlantao({ idUser }) {
   }
 
   return (
-    <ModalWrapper>
+    <ModalWrapper className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) {setAlterarPlantao(false);setAlterarPlantaoPagUser(false)}}}>
       <ModalContainer>
         <TitleModal>
           <h2>Alterar plantões</h2>

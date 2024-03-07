@@ -1,4 +1,4 @@
-import { ModalGruposAlarmesStl } from "./styles";
+import { BackgroundStl, ModalGruposAlarmesStl } from "./styles";
 
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
@@ -46,39 +46,41 @@ function ModalGruposAlarmesComponente({
     }
 
     return(
-        <ModalGruposAlarmesStl>
-            <h2 className="title_modal">
-                Criar Novo Grupo
-            </h2>
-            <form onSubmit={handleSubmit(formSchema)} action="" className="form_grp_alarme">
-                <div className="container_campos">
-                    <div className="container_intern_camp">
-                        <label htmlFor="" className="label_campos">
-                            Setor
-                        </label>
-                        <select className="campos campos_dropDown" onClick={(e)=> setTypeTm(e.target.value)}  {...register("typeTeam")}>
-                            <option value="SG"></option> 
-                            <option value="SG">SG-INFRA</option> 
-                            <option value="DL">DL-TEMS</option>                               
-                        </select>
+        <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) setOpenModalAlarm(!openModalAlarm)}}>
+            <ModalGruposAlarmesStl>
+                <h2 className="title_modal">
+                    Criar Novo Grupo
+                </h2>
+                <form onSubmit={handleSubmit(formSchema)} action="" className="form_grp_alarme">
+                    <div className="container_campos">
+                        <div className="container_intern_camp">
+                            <label htmlFor="" className="label_campos">
+                                Setor
+                            </label>
+                            <select className="campos campos_dropDown" onClick={(e)=> setTypeTm(e.target.value)}  {...register("typeTeam")}>
+                                <option value="SG"></option> 
+                                <option value="SG">SG-INFRA</option> 
+                                <option value="DL">DL-TEMS</option>                               
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className="container_campos">
-                    <div className="container_intern_camp">
-                        <label htmlFor="" className="label_campos">
-                            Nome do Grupo
-                        </label>
-                        <input type="text" className="campos" placeholder="Nome do grupo..." {...register("nomeGrupo")}/>
+                    <div className="container_campos">
+                        <div className="container_intern_camp">
+                            <label htmlFor="" className="label_campos">
+                                Nome do Grupo
+                            </label>
+                            <input type="text" className="campos" placeholder="Nome do grupo..." {...register("nomeGrupo")}/>
+                        </div>
+                            {errors?.nomeGrupo?.message?
+                                <span className="msg_error">{errors.nomeGrupo?.message}</span>:""}
                     </div>
-                        {errors?.nomeGrupo?.message?
-                            <span className="msg_error">{errors.nomeGrupo?.message}</span>:""}
-                </div>
-                <div className="btn_form">
-                    <button onClick={()=> setOpenModalAlarm(!openModalAlarm)} className="btn fechar">Fechar</button>
-                    <input className="btn salvar" type="submit" value="Salvar" />
-                </div>                
-            </form>
-        </ModalGruposAlarmesStl>
+                    <div className="btn_form">
+                        <button onClick={()=> setOpenModalAlarm(!openModalAlarm)} className="btn fechar">Fechar</button>
+                        <input className="btn salvar" type="submit" value="Salvar" />
+                    </div>                
+                </form>
+            </ModalGruposAlarmesStl>            
+        </BackgroundStl>
     )
 }
 

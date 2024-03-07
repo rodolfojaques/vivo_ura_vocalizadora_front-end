@@ -1,14 +1,32 @@
 import styled from "styled-components";
 
+export const BackgroundStl = styled.div`
+background-color: rgba(0,0,0,.5);
+
+width: 100%;
+height: 100%;
+
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 6rem;
+
+position: absolute;
+top: 0%;
+left: 0%;
+right: 0%;
+bottom: 0%;
+
+z-index: 51;
+`
+
 export const ModalExcludeTipoAlarmesStl = styled.div`
   border: solid gray;
   border-radius: 5px;
 
   background-color: white;
 
-  position: fixed;
-  top: 18rem;
-  left: 8rem;
+
 
   display: flex;
   flex-direction: column;

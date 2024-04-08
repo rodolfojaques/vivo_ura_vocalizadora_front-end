@@ -1,10 +1,8 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TableStl } from "./styles"
 import { useTable, usePagination } from "react-table";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
-import axios from "axios";
 import { UserContext } from "../../providers/user";
-import { purple } from "@material-ui/core/colors";
 
 function TableComponent({columns,exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
@@ -171,7 +169,7 @@ function TableComponent({columns,exibirLinhas,total}){
             </div>
             <div> 
                 <span>
-                    Mostrando {(pag -1) * pagSiz + 1} - {pag * pagSiz} de {totalItems} linhas
+                    Mostrando {(pag -1) * pagSiz + 1} - {totalItems < pag * pagSiz? totalItems : pag * pagSiz} de {totalItems} linhas
                 </span>{' '}
                 <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
                 {'<<'}

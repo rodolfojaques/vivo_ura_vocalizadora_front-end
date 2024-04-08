@@ -141,7 +141,7 @@ export const FormListAlarmStl = styled.form`
       .placeDataInicio {
         position: absolute;
         top: 0.45rem;
-        right: 0.5rem;
+        left: 0.5rem;
 
         font-size: medium;
         font-weight: 600;
@@ -152,7 +152,7 @@ export const FormListAlarmStl = styled.form`
       .placeDataFim {
         position: absolute;
         top: 0.45rem;
-        right: 1rem;
+        left: 1rem;
 
         font-size: medium;
         font-weight: 600;

@@ -321,7 +321,8 @@ function ListaDeAlarmes() {
                 <label htmlFor="" className="label_dropDown">
                   Ultimos alarmes em
                 </label>
-                <select className="campos_dropDown">
+                <select className="campos_dropDown" {...register("ULTIMOS_EM")}>
+                  <option value={null}>{null}</option>
                   {ultAlarmesEm.map((item, i) => (
                     <option key={i} value={item}>
                       {item}

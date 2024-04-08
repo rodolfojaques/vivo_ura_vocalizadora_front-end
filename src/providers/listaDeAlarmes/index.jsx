@@ -36,6 +36,7 @@ function ListaDeAlarmesProvider({ children }) {
       CLASSIFICACAO: data.CLASSIFICACAO || null,
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
+      ULTIMOS_EM: data.ULTIMOS_EM || null,
     };
 
     const dataFilterSpecific = {
@@ -89,7 +90,6 @@ function ListaDeAlarmesProvider({ children }) {
       {children}
     </ListaDeAlarmesContext.Provider>
   );
-  //TODO: continuar dos ajustes finais dos filtros de lista de alarmes SG// entender bug de total de pags.
 }
 
 export default ListaDeAlarmesProvider;

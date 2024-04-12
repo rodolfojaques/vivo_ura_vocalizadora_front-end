@@ -36,6 +36,18 @@ export const ContainerGruposStl = styled.section`
         }
     }
 
+    .btn_filter{
+        width: auto;
+
+        color: white;
+        background-color: rgba(255,200,0,1);
+        padding: 1rem;
+
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+    }
+
     .container_SG_DL{
         display: flex;
         justify-content: space-between;
@@ -44,4 +56,11 @@ export const ContainerGruposStl = styled.section`
         width: 100%;
     }
 
+    .container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+    }
 `

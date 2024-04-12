@@ -18,6 +18,8 @@ function UserProvider({ children }) {
   const [role, setRole] = useState(false);
 
   const [idUser, setIdUser] = useState({});
+  
+  const [openFilterInput, setOpenFilterInput] = useState(false);  
 
   useEffect(() => {
     if (usuario?.user?.perfil?.toLowerCase() === "operador") {
@@ -45,6 +47,8 @@ function UserProvider({ children }) {
         setIdUser,
         role,
         setRole,
+        openFilterInput, 
+        setOpenFilterInput
       }}
     >
       {children}

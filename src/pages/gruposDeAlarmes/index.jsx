@@ -14,6 +14,7 @@ import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAl
 import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
 import ModalTiposAlarmesTemsComponente from "../../components/ModalTiposAlarmesTems";
 import ModalTiposAlarmesInfraComponente from "../../components/ModalTiposAlarmes";
+import ModalFilterInput from "../../components/ModalFilterInput";
 
 function GruposDeAlarmes() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
@@ -34,7 +35,7 @@ function GruposDeAlarmes() {
   const [gruposAlarmesTems, setGruposAlarmesTems] = useState([]);
   const [gruposAlarmesTemsInicial, setGruposAlarmesTemsInicial] = useState([]);
 
-  const { baseURL, usuario } = useContext(UserContext);
+  const { baseURL, usuario, openFilterInput, setOpenFilterInput } = useContext(UserContext);
 
   const getGpAlarmesInfra = () => {
     axios
@@ -220,6 +221,10 @@ function GruposDeAlarmes() {
       ) : (
         <></>
       )}
+      {
+        !!openFilterInput?
+        <ModalFilterInput></ModalFilterInput>:<></>
+      }
     </GruposDeAlarmesStl>
   );
 }

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ContainerGruposStl } from "./styles";
 import { UserContext } from "../../providers/user";
-import { useEffect } from "react";
+import * as Icon from "react-bootstrap-icons";
 
 function ContainerGruposComponente({
   children,
@@ -19,7 +19,7 @@ function ContainerGruposComponente({
     }
   };
 
-  const { role } = useContext(UserContext);
+  const { role, openFilterInput, setOpenFilterInput } = useContext(UserContext);
 
   return (
     <>
@@ -29,13 +29,23 @@ function ContainerGruposComponente({
         </ContainerGruposStl>
       ) : (
         <ContainerGruposStl>
-          <button
-            disabled={role}
-            onClick={() => openOnclick()}
-            className="btn_novoGrupo"
-          >
-            Novo Grupo
-          </button>
+          <div className="container">
+            <button
+              disabled={role}
+              onClick={() => openOnclick()}
+              className="btn_novoGrupo"
+            >
+              Novo Grupo
+            </button>
+            <button
+              disabled={role}
+              className="btn_novoGrupo btn_filter"
+              onClick={()=> setOpenFilterInput(!openFilterInput)}
+            >
+              <span><b><Icon.Funnel size={20}/></b></span> Filtragem de Entrada TEMS
+            </button>                         
+          </div>
+
           <section className="container_SG_DL">{children}</section>
         </ContainerGruposStl>
       )}

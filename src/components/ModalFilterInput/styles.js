@@ -29,7 +29,6 @@ export const ModalFilterInputStl = styled.div`
     background-color: white;
 
     display: flex;
-    gap: 1rem;
 
     padding: 1rem;
 
@@ -39,7 +38,7 @@ export const ModalFilterInputStl = styled.div`
 
         padding: 1rem;
 
-        width: 35%;
+        width: 30%;
     }
 
     .form-parametros{
@@ -48,7 +47,7 @@ export const ModalFilterInputStl = styled.div`
 
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .title{
@@ -69,7 +68,7 @@ export const ModalFilterInputStl = styled.div`
     }
 
     .inputs{
-        height: 2rem;
+        height: 4rem;
         border-radius: 5px;
 
         padding: 0 .5rem;
@@ -87,7 +86,7 @@ export const ModalFilterInputStl = styled.div`
         border: solid grey;
         border-radius: 5px;
 
-        width: 65%;
+        width: 70%;
 
         ul{
             overflow: auto;
@@ -104,18 +103,22 @@ export const ModalFilterInputStl = styled.div`
         li{
             display: flex;
             justify-content: space-between;
-            gap: .5rem;
+            align-items: center;
+            gap: 1rem;
 
             border: solid  rgba(255,200,0,1);
             border-radius: 5px;
-            padding: .5rem;
+            padding: 1rem;
             
             white-space: nowrap;
             min-width: max-content;
+            height: 3rem;
+
+            position: relative;
         }
 
         .line-param{
-            font-size: small;
+            font-size: large;
             font-weight: 600;
             color: purple;
 
@@ -123,6 +126,57 @@ export const ModalFilterInputStl = styled.div`
                 font-weight: 400;
                 color: gray;
             }
+        }
+    }
+
+    .exclude-line{
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        right: 0%;
+        bottom: 0%;
+
+        background-color: rgba(255,0,0,.8);
+        border-radius: 5px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        padding: 0 2rem;
+
+        p{
+            color: white;
+        }
+
+        .btn-exclude{
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            border-style: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            width: 5rem;
+            height: 1.7rem;
+
+            color: white;
+            font-weight: 600;
+
+            &:active {
+                opacity: 0.5;
+            }
+        }
+
+        .fechar {
+            background-color: darkslategray;
+        }
+
+        .excluir {
+            background-color: brown;
         }
     }
 
@@ -139,8 +193,8 @@ export const ModalFilterInputStl = styled.div`
             border-style: none;
             border-radius: 5px;
 
-            width: 6rem;
-            height: 2.5rem;
+            width: 8rem;
+            height: 3.5rem;
 
             font-size: small;
             font-weight: bold;

@@ -35,7 +35,7 @@ function GruposDeAlarmes() {
   const [gruposAlarmesTems, setGruposAlarmesTems] = useState([]);
   const [gruposAlarmesTemsInicial, setGruposAlarmesTemsInicial] = useState([]);
 
-  const { baseURL, usuario, openFilterInput, setOpenFilterInput } = useContext(UserContext);
+  const { baseURL, usuario, openFilterInput } = useContext(UserContext);
 
   const getGpAlarmesInfra = () => {
     axios

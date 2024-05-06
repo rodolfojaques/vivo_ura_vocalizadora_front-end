@@ -7,12 +7,28 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import * as Icon from "react-bootstrap-icons";
 
 function ModalFilterInput(){
-    const {baseURL, usuario, openFilterInput, setOpenFilterInput} = useContext(UserContext)
+    const {baseURL, usuario, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
 
     const [parametros, setParametros] = useState([])
-    const [atualizarParametros, setAtualizarParametros] = useState(false)
+    const [atualizarParametros, setAtualizarParametros] = useState([])
+    const [dadosExclude, setDadosExclude] = useState({})
+
+    const excludeParams = ()=>{
+        axios.delete(`${baseURL}/filter-input/${dadosExclude?.id}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${usuario?.token}`,
+            }
+        })
+        .then((res)=> {
+            setAtualizarParametros([...atualizarParametros])
+            toast.success("Parametro de filtragem excluído com sucesso!")
+        })
+        .catch((err)=> console.error("erro ao excluir parametro: ",err))
+    }
 
     const listParam = ()=> {
         axios.get(`${baseURL}/filter-input`,
@@ -29,7 +45,7 @@ function ModalFilterInput(){
 
     useEffect(()=>{
         listParam()
-    },[atualizarParametros])
+    },[atualizarParametros,parametros])
 
 
     const {register, handleSubmit, formState: { errors }} = useForm({})
@@ -53,7 +69,7 @@ function ModalFilterInput(){
         }
     )
     .then(resp=> {
-        setAtualizarParametros(!!resp)
+        setAtualizarParametros([...atualizarParametros])
         toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
         })
     .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!"))
@@ -69,12 +85,6 @@ function ModalFilterInput(){
                             Parâmetros de Filtragem
                         </h2>
                         <div className="line-input">
-                            <label htmlFor="" className="label-inputs">tipoTA</label>
-                            <select name="" id="" className="inputs" {...register("tipoTA")}>
-                                <option value={null}>Selecionar...</option>
-                            </select>
-                        </div>
-                        <div className="line-input">
                             <label htmlFor="" className="label-inputs">estadoSigla</label>
                             <select name="" id="" className="inputs" {...register("estadoSigla")}>
                                 <option value={null}>Selecionar...</option>
@@ -84,26 +94,8 @@ function ModalFilterInput(){
                             </select>
                         </div>
                         <div className="line-input">
-                            <label htmlFor="" className="label-inputs">tipoPlanta</label>
-                            <select name="" id="" className="inputs" {...register("tipoPlanta")}>
-                                <option value={null}>Selecionar...</option>
-                            </select>
-                        </div>
-                        <div className="line-input">
                             <label htmlFor="" className="label-inputs">specificProblem</label>
                             <input type="text" className="inputs" placeholder="(Ex: SETOR FORA DE SERVICO)" {...register("specificProblem")}/>
-                        </div>
-                        <div className="line-input">
-                            <label htmlFor="" className="label-inputs">familia</label>
-                            <select name="" id="" className="inputs" {...register("familia")}>
-                                <option value={null}>Selecionar...</option>
-                            </select>
-                        </div>
-                        <div className="line-input">
-                            <label htmlFor="" className="label-inputs">tipoFalha</label>
-                            <select name="" id="" className="inputs" {...register("tipoFalha")}>
-                                <option value={null}>Selecionar...</option>
-                            </select>
                         </div>
                         <div className="line-input">
                             <label htmlFor="" className="label-inputs">manager</label>
@@ -130,14 +122,30 @@ function ModalFilterInput(){
                         {
                             parametros.map((prm,i)=>{
                                 return <li key={i} className="line-list">
-                                    <p className="line-param">tipoTA: <span className="value-param">{!!prm.tipoTA?prm.tipoTA:"N/D"}</span></p>
                                     <p className="line-param">estadoSigla: <span className="value-param">{!!prm.estadoSigla?prm.estadoSigla:"N/D"}</span></p>
-                                    <p className="line-param">tipoPlanta: <span className="value-param">{!!prm.tipoPlanta?prm.tipoPlanta:"N/D"}</span></p>
                                     <p className="line-param">specificProblem: <span className="value-param">{!!prm.specificProblem?prm.specificProblem:"N/D"}</span></p>
-                                    <p className="line-param">familia: <span className="value-param">{!!prm.familia?prm.familia:"N/D"}</span></p>
-                                    <p className="line-param">tipoFalha: <span className="value-param">{!!prm.tipoFalha?prm.tipoFalha:"N/D"}</span></p>
                                     <p className="line-param">manager: <span className="value-param">{!!prm.manager?prm.manager:"N/D"}</span></p>
                                     <p className="line-param">severity: <span className="value-param">{prm.severity?prm.severity:"N/D"}</span></p>
+                                    <Icon.XCircleFill
+                                    color="darkorange"
+                                    className="custom-icon"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setDadosExclude(prm)
+                                        setOpenExcludeFilterInput(!openExcludeFilterInput)
+                                    }}
+                                    />
+                                    {
+                                        openExcludeFilterInput && prm.id === dadosExclude.id?
+                                        <div className="exclude-line">
+                                            <p><b>Atenção!</b><span> - Você tem certeza que quer excluir esse parametro de filtragem?</span></p>                                            
+                                            <div className="btn-exclude">
+                                                <button onClick={()=> setOpenExcludeFilterInput(!openExcludeFilterInput)} className="btn fechar">cancelar</button>
+                                                <button onClick={()=> excludeParams()} className="btn excluir">excluir</button>
+                                            </div>
+                                        </div>
+                                        :<></>
+                                    }
                                 </li>
                             })
                         }

@@ -87,7 +87,7 @@ function GruposDeAlarmes() {
   useEffect(() => {
     getGpAlarmesInfra()
     getGpAlarmesTems()
-  }, [openModalExclude, openModalAlarm, openTipoAlarme, openExcludeAlarme]);
+  }, [openModalExclude, openModalAlarm, openTipoAlarme, openExcludeAlarme, openTipoAlarmeTems]);
 
   const deleteOnClick = (grp) => {
     const URL = grp.typeTeam === "SG"? `${baseURL}/grupos-alarmes/delete/${grp.id}` : `${baseURL}/grupos-alarmes-tems/delete/${grp.id}`

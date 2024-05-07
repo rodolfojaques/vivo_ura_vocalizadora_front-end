@@ -13,7 +13,7 @@ function ModalFilterInput(){
     const {baseURL, usuario, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
 
     const [parametros, setParametros] = useState([])
-    const [atualizarParametros, setAtualizarParametros] = useState([])
+    const [atualizarParametros, setAtualizarParametros] = useState(false)
     const [dadosExclude, setDadosExclude] = useState({})
 
     const excludeParams = ()=>{
@@ -24,7 +24,8 @@ function ModalFilterInput(){
             }
         })
         .then((res)=> {
-            setAtualizarParametros([...atualizarParametros])
+            setOpenExcludeFilterInput(!openExcludeFilterInput)
+            listParam()
             toast.success("Parametro de filtragem excluído com sucesso!")
         })
         .catch((err)=> console.error("erro ao excluir parametro: ",err))
@@ -45,7 +46,7 @@ function ModalFilterInput(){
 
     useEffect(()=>{
         listParam()
-    },[atualizarParametros,parametros])
+    },[atualizarParametros,openExcludeFilterInput])
 
 
     const {register, handleSubmit, formState: { errors }} = useForm({})
@@ -69,7 +70,8 @@ function ModalFilterInput(){
         }
     )
     .then(resp=> {
-        setAtualizarParametros([...atualizarParametros])
+        // setAtualizarParametros(!atualizarParametros)
+        listParam()
         toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
         })
     .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!"))

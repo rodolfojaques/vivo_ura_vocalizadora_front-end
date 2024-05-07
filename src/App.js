@@ -16,8 +16,6 @@ function App() {
       <RoutesMain />
     </div>
   );
-
-  // subindo para o git tech
 }
 
 export default App;

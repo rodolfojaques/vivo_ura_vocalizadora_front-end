@@ -24,12 +24,14 @@ function ModalTiposAlarmesTemsComponente({
     } = useContext(UserContext)
 
     const schema = yup.object().shape({
-        uf: yup.string().required("*Campo obrigatório"),
-        site: yup.string().required("*Campo obrigatório"),
-        tipoAlarme: yup.string().required("*Campo obrigatório"),
-        classificacao: yup.string().required("*Campo obrigatório"),
-        localidade: yup.string().required("*Campo obrigatório"),
+        estadoSigla: yup.string().required("*Campo obrigatório"),
+        specificProblem: yup.string().required("*Campo obrigatório"),
+        manager: yup.string().required("*Campo obrigatório"),
+        tipoTA: yup.string().required("*Campo obrigatório"),
+        tipoDeAlarme: yup.string().required("*Campo obrigatório"),
+        tipoRede: yup.string().required("*Campo obrigatório"),
         tipoPlanta: yup.string().required("*Campo obrigatório"),
+        tipoFalha: yup.string().required("*Campo obrigatório"),
     })
 
     const {register, handleSubmit, formState: { errors }} = useForm({
@@ -118,9 +120,9 @@ function ModalTiposAlarmesTemsComponente({
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                UF
+                                estadoSigla
                             </label>
-                            <select  className="campos campos_dropDown" {...register("uf")}>
+                            <select  className="campos campos_dropDown" {...register("estadoSigla")}>
                                 {
                                     arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                
@@ -130,322 +132,87 @@ function ModalTiposAlarmesTemsComponente({
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                Site
+                                specificProblem
                             </label>
-                            <select className="campos campos_dropDown" {...register("site")}>
-                                {
-                                    ufSelect === 'AC' ?
-                                    UFSL.AC_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AL' ?
-                                    UFSL.AL_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AM' ?
-                                    UFSL.AM_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AP' ?
-                                    UFSL.AP_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'BA' ?
-                                    UFSL.BA_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'CE' ?
-                                    UFSL.CE_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'DF' ?
-                                    UFSL.DF_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'ES' ?
-                                    UFSL.ES_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'GO' ?
-                                    UFSL.GO_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MA' ?
-                                    UFSL.MA_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MG' ?
-                                    UFSL.MG_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MS' ?
-                                    UFSL.MS_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MT' ?
-                                    UFSL.MT_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PA' ?
-                                    UFSL.PA_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PB' ?
-                                    UFSL.PB_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PE' ?
-                                    UFSL.PE_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PI' ?
-                                    UFSL.PI_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PR' ?
-                                    UFSL.PR_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RJ' ?
-                                    UFSL.RJ_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RR' ?
-                                    UFSL.RR_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RO' ?
-                                    UFSL.RO_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RN' ?
-                                    UFSL.RN_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RS' ?
-                                    UFSL.RS_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SC' ?
-                                    UFSL.SC_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SE' ?
-                                    UFSL.SE_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SP' ?
-                                    UFSL.SP_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'TO' ?
-                                    UFSL.TO_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }                                
+                            <select  className="campos campos_dropDown" {...register("specificProblem")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                    
                             </select>
                         </div>
                     </div>
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                Tipo de Alarme
+                                manager
                             </label>
-                            <select className="campos campos_dropDown" {...register("tipoAlarme")}>
-                                {
-                                    arrTipoAlarme.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                }                                
+                            <select  className="campos campos_dropDown" {...register("manager")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                    
                             </select>
                         </div>
                     </div>
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                Classificação
+                                tipoDeAlarme
                             </label>
-                            <select className="campos campos_dropDown" {...register("classificacao")}>
-                                    <option value="MAJORITARIO">MAJORITARIO</option>
-                                    <option value="MINORITARIO">MINORITARIO</option>
-                                    <option value="CRITICO">CRITICO</option>
-                                    <option value="MESA DE CONTROLE">MESA DE CONTROLE</option>                                
+                            <select className="campos campos_dropDown" {...register("tipoDeAlarme")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                    
                             </select>
                         </div>
                     </div>
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                Localidade
+                                tipoTA
                             </label>
-                            <select className="campos campos_dropDown" {...register("localidade")}>
-                                {
-                                    ufSelect === 'AC' ?
-                                    UFSL.AC_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AL' ?
-                                    UFSL.AL_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AM' ?
-                                    UFSL.AM_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'AP' ?
-                                    UFSL.AP_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'BA' ?
-                                    UFSL.BA_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'CE' ?
-                                    UFSL.CE_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'DF' ?
-                                    UFSL.DF_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'ES' ?
-                                    UFSL.ES_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'GO' ?
-                                    UFSL.GO_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MA' ?
-                                    UFSL.MA_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MG' ?
-                                    UFSL.MG_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MS' ?
-                                    UFSL.MS_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'MT' ?
-                                    UFSL.MT_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PA' ?
-                                    UFSL.PA_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PB' ?
-                                    UFSL.PB_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PE' ?
-                                    UFSL.PE_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PI' ?
-                                    UFSL.PI_site.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'PR' ?
-                                    UFSL.PR_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RJ' ?
-                                    UFSL.RJ_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RR' ?
-                                    UFSL.RR_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RO' ?
-                                    UFSL.RO_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RN' ?
-                                    UFSL.RN_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'RS' ?
-                                    UFSL.RS_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SC' ?
-                                    UFSL.SC_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SE' ?
-                                    UFSL.SE_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'SP' ?
-                                    UFSL.SP_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }
-                                {
-                                    ufSelect === 'TO' ?
-                                    UFSL.TO_localidade.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                    :<></>
-                                }                               
+                            <select className="campos campos_dropDown" {...register("tipoTA")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                    
                             </select>
                         </div>
                     </div>
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                Tipo de Planta
+                                tipoPlanta
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoPlanta")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div className="container_campos">
+                        <div className="container_intern_camp">
+                            <label htmlFor="" className="label_campos">
+                                tipoRede
+                            </label>
+                            <select className="campos campos_dropDown" {...register("tipoRede")}>
+                                    <option value="SLA">SLA</option>
+                                    <option value="SLA2">SLA2</option>
+                                    <option value="SLA3">SLA3</option>
+                                    <option value="SLA4">SLA4</option>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div className="container_campos">
+                        <div className="container_intern_camp">
+                            <label htmlFor="" className="label_campos">
+                                tipoFalha
+                            </label>
+                            <select className="campos campos_dropDown" {...register("tipoFalha")}>
                                     <option value="SLA">SLA</option>
                                     <option value="SLA2">SLA2</option>
                                     <option value="SLA3">SLA3</option>

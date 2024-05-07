@@ -29,6 +29,7 @@ export const ModalFilterInputStl = styled.div`
     background-color: white;
 
     display: flex;
+    gap: 1rem;
 
     padding: 1rem;
 
@@ -47,7 +48,7 @@ export const ModalFilterInputStl = styled.div`
 
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .title{
@@ -68,7 +69,7 @@ export const ModalFilterInputStl = styled.div`
     }
 
     .inputs{
-        height: 4rem;
+        height: 3rem;
         border-radius: 5px;
 
         padding: 0 .5rem;
@@ -194,7 +195,7 @@ export const ModalFilterInputStl = styled.div`
             border-radius: 5px;
 
             width: 8rem;
-            height: 3.5rem;
+            height: 3rem;
 
             font-size: small;
             font-weight: bold;

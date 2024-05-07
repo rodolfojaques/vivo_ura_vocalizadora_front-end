@@ -171,22 +171,28 @@ function BoxNomeGrupoTemsComponente({
               {
                 <div className="chaves">
                   <p className="ttl_p">
-                    UF:{" "}
+                    estadoSigla:{" "}
                   </p>
                   <p className="ttl_p">
-                    Site:{" "}
+                    specificProblem:{" "}
                   </p>
                   <p className="ttl_p">
-                    Tipo de alarme:{" "}
+                    manager:{" "}
                   </p>
                   <p className="ttl_p">
-                    Classificação:{" "}
-                  </p>
-                  <p className="ttl_p">
-                    Localidade:{" "}
+                    tipoDeAlarme:{" "}
                   </p> 
                   <p className="ttl_p">
-                    Tipo de planta:{" "}
+                    tipoPlanta:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    tipoRede:{" "}
+                  </p> 
+                  <p className="ttl_p">
+                    tipoFalha:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    tipoTA:{" "}
                   </p>                
                 </div>
               }
@@ -195,12 +201,14 @@ function BoxNomeGrupoTemsComponente({
                 {
                   grupo.tiposAlarmes.map((tipo)=> {
                     return<div className="alm_tipo_infos">
-                            <p className="info_tp_alm">{tipo.uf}</p>
-                            <p className="info_tp_alm">{tipo.site}</p>
-                            <p className="info_tp_alm">{tipo.tipoAlarme}</p>
-                            <p className="info_tp_alm">{tipo.classificacao}</p>
-                            <p className="info_tp_alm">{tipo.localidade}</p>
+                            <p className="info_tp_alm">{tipo.estadoSigla}</p>
+                            <p className="info_tp_alm">{tipo.specificProblem}</p>
+                            <p className="info_tp_alm">{tipo.manager}</p>
+                            <p className="info_tp_alm">{tipo.tipoDeAlarme}</p>
                             <p className="info_tp_alm">{tipo.tipoPlanta}</p>
+                            <p className="info_tp_alm">{tipo.tipoRede}</p>
+                            <p className="info_tp_alm">{tipo.tipoFalha}</p>
+                            <p className="info_tp_alm">{tipo.tipoTA}</p>
                           </div>
                   })
                 }                

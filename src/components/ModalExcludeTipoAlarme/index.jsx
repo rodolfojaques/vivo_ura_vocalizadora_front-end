@@ -147,7 +147,7 @@ function ModalExcludeTipoAlarmeComponent({
               <option>...</option>
               {alarmes.map((alm, i) => (
                 <option key={i} className="options" value={alm.id}>{`
-                          ${alm.uf}, ${alm.site}, ${alm.tipoAlarme}, ${alm.classificacao}, ${alm.localidade}
+                          ${alm.uf || alm.estadoSigla}, ${alm.site || alm.specificProblem}, ${alm.tipoAlarme || alm.tipoDeAlarme}, ${alm.classificacao || alm.manager}, ${alm.localidade || alm.tipoPlanta}
                           `}</option>
               ))}
             </select>

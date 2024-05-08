@@ -100,6 +100,7 @@ function GruposDeAlarmes() {
         },
       })
       .then((res) => {
+        setOpenExcludeAlarme(!openExcludeAlarme)
         console.log(res.status);
       })
       .catch((err) => console.log(err));

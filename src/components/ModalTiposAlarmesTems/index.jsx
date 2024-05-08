@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import * as UFSL from "../../utils/grupos/index"
+import { setSpecificProblem, setTipoDeAlarme, setTipoFalha, setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
 
 function ModalTiposAlarmesTemsComponente({
     openTipoAlarmeTems,
@@ -123,6 +124,7 @@ function ModalTiposAlarmesTemsComponente({
                                 estadoSigla
                             </label>
                             <select  className="campos campos_dropDown" {...register("estadoSigla")}>
+                                <option value={null}>Selecione...</option>
                                 {
                                     arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                
@@ -135,10 +137,10 @@ function ModalTiposAlarmesTemsComponente({
                                 specificProblem
                             </label>
                             <select  className="campos campos_dropDown" {...register("specificProblem")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                    
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setSpecificProblem.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                     
                             </select>
                         </div>
                     </div>
@@ -148,7 +150,7 @@ function ModalTiposAlarmesTemsComponente({
                                 manager
                             </label>
                             <select  className="campos campos_dropDown" {...register("manager")}>
-                                    <option value="SLA">SLA</option>
+                                    <option value={null}>Selecione...</option>
                                     <option value="SLA2">SLA2</option>
                                     <option value="SLA3">SLA3</option>
                                     <option value="SLA4">SLA4</option>                                    
@@ -161,10 +163,10 @@ function ModalTiposAlarmesTemsComponente({
                                 tipoDeAlarme
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoDeAlarme")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                    
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setTipoDeAlarme.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                    
                             </select>
                         </div>
                     </div>
@@ -174,10 +176,10 @@ function ModalTiposAlarmesTemsComponente({
                                 tipoTA
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoTA")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                    
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setTipoTA.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                    
                             </select>
                         </div>
                     </div>
@@ -187,10 +189,10 @@ function ModalTiposAlarmesTemsComponente({
                                 tipoPlanta
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoPlanta")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setTipoPlanta.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                
                             </select>
                         </div>
                     </div>
@@ -200,10 +202,10 @@ function ModalTiposAlarmesTemsComponente({
                                 tipoRede
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoRede")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setTipoRede.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                               
                             </select>
                         </div>
                     </div>
@@ -213,10 +215,10 @@ function ModalTiposAlarmesTemsComponente({
                                 tipoFalha
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoFalha")}>
-                                    <option value="SLA">SLA</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                
+                                <option value={null}>Selecione...</option>
+                                {
+                                    setTipoFalha.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                }                                
                             </select>
                         </div>
                     </div>

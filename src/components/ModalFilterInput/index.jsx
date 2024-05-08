@@ -25,6 +25,7 @@ function ModalFilterInput(){
         })
         .then((res)=> {
             setOpenExcludeFilterInput(!openExcludeFilterInput)
+            setAtualizarParametros(!atualizarParametros)
             listParam()
             toast.success("Parametro de filtragem excluído com sucesso!")
         })
@@ -70,7 +71,7 @@ function ModalFilterInput(){
         }
     )
     .then(resp=> {
-        // setAtualizarParametros(!atualizarParametros)
+        setAtualizarParametros(!atualizarParametros)
         listParam()
         toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
         })

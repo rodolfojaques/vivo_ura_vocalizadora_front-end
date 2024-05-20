@@ -29,23 +29,37 @@ function ContainerGruposComponente({
         </ContainerGruposStl>
       ) : (
         <ContainerGruposStl>
-          <div className="container">
-            <button
-              disabled={role}
-              onClick={() => openOnclick()}
-              className="btn_novoGrupo"
-            >
-              Novo Grupo
-            </button>
-            <button
-              disabled={role}
-              className="btn_novoGrupo btn_filter"
-              onClick={()=> setOpenFilterInput(!openFilterInput)}
-            >
-              <span><b><Icon.Funnel size={20}/></b></span> Filtragem de Entrada TEMS
-            </button>                         
-          </div>
+          
+          {
+            tipoGrupo === "alarmes" ? 
+            <div className="container">
+              <button
+                disabled={role}
+                onClick={() => openOnclick()}
+                className="btn_novoGrupo"
+              >
+                Novo Grupo
+              </button>
+              <button
+                disabled={role}
+                className="btn_novoGrupo btn_filter"
+                onClick={()=> setOpenFilterInput(!openFilterInput)}
+              >
+                <span><b><Icon.Funnel size={20}/></b></span> Filtragem de Entrada TEMS
+              </button>                         
+            </div>
+            :
+            <div className="container">
+              <button
+                disabled={role}
+                onClick={() => openOnclick()}
+                className="btn_novoGrupo"
+              >
+                Novo Grupo
+              </button>                        
+            </div>
 
+          }
           <section className="container_SG_DL">{children}</section>
         </ContainerGruposStl>
       )}

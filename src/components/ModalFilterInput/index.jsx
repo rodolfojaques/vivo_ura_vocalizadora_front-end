@@ -58,24 +58,29 @@ function ModalFilterInput(){
             if(data[key] == "Selecionar..." || data[key] == "" || data[key] == null){
                 console.log("sem informações");
             } else {
-                newData[key] = data[key]
+                if(key === "specificProblem"){
+                    newData[key] = data[key]
+                    newData["frontSpecificProblem"] = data[key]
+                } else {
+                    newData[key] = data[key]
+                }
             }            
         }
         console.log(newData);
         axios.post(`${baseURL}/filter-input`, newData,
-        {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${usuario.token}`,
-        },
-        }
-    )
-    .then(resp=> {
-        setAtualizarParametros(!atualizarParametros)
-        listParam()
-        toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
-        })
-    .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!"))
+            {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${usuario.token}`,
+            },
+            }
+        )
+        .then(resp=> {
+            setAtualizarParametros(!atualizarParametros)
+            listParam()
+            toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
+            })
+        .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!"))
     }
 
 

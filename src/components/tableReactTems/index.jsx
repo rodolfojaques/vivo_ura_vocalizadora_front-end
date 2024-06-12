@@ -65,39 +65,51 @@ function TableTemsComponent({exibirLinhas,total}){
                 <table>
                     <thead>
                         <tr>
-                            <th>TA</th>
-                            <th>APRESENTAÇÃO</th>
-                            <th>TIPO DE ALARME</th>
-                            <th>SITE</th>
-                            <th>CLASSIFICAÇÃO</th>
-                            <th>TIPO DE PLANTA</th>
-                            <th>ESTADO</th>
-                            <th>LOCALIDADE</th>
-                            <th>MUNICIPIO</th>
-                            <th>TIPO DE REDE</th>
-                            <th>TIPO DE TA</th>
-                            <th>DESCRIÇÃO</th>
-                            <th>SISTEMA_ORIGEM</th>
-                            <th>STATUS</th>
+                            <th>firstSeen</th>
+                            <th>frontTypeTa</th>
+                            <th>frontNetworkType</th>
+                            <th>estadoSigla</th>
+                            <th>localidadeSigla</th>
+                            <th>frontAlarmId</th>
+                            <th>frontTypeFailure</th>
+                            <th>frontPlantType</th>
+                            <th>classificacao</th>
+                            <th>severity</th>
+                            <th>frontSpecificProblem</th>
+                            <th>specificProblem</th>
+                            <th>frontDomain</th>
+                            <th>familia</th>
+                            <th>frontProblemCause</th>
+                            <th>manager</th>
+                            <th>frontVendor</th>
+                            <th>identifier</th>
+                            <th>lastSeen</th>
+                            <th>ta</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             arrAlarm.map(data=><tr>
-                            <td>{data.TA}</td>
-                            <td>{data.DATA_APRESENTACAO}</td>
-                            <td>{data.TIPO_ALARME}</td>
-                            <td>{data.SITE}</td>
-                            <td>{data.CLASSIFICACAO}</td>
-                            <td>{data.TIPO_PLANTA}</td>
-                            <td>{data.ESTADO}</td>
-                            <td>{data.LOCALIDADE}</td>
-                            <td>{data.MUNICIPIO}</td>
-                            <td>{data.TIPO_REDE}</td>
-                            <td>{data.TIPO_TA}</td>
-                            <td>{data.DESCRICAO}</td>
-                            <td>{data.SISTEMA_ORIGEM}</td>
-                            <td>{data.STATUS}</td>
+                            <td>{data.firstSeen}</td>
+                            <td>{data.persistent_frontTypeTa}</td>
+                            <td>{data.persistent_frontNetworkType}</td>
+                            <td>{data.persistent_estadoSigla}</td>
+                            <td>{data.persistent_localidadeSigla}</td>
+                            <td>{data.persistent_frontAlarmId}</td>
+                            <td>{data.persistent_frontTypeFailure}</td>
+                            <td>{data.persistent_frontPlantType}</td>
+                            <td>{data.persistent_classificacao}</td>
+                            <td>{data.severity}</td>
+                            <td>{data.persistent_frontSpecificProblem}</td>
+                            <td>{data.persistent_specificProblem}</td>
+                            <td>{data.persistent_frontDomain}</td>
+                            <td>{data.persistent_familia}</td>
+                            <td>{data.persistent_frontProblemCause}</td>
+                            <td>{data.manager}</td>
+                            <td>{data.persistent_frontVendor}</td>
+                            <td>{data.identifier}</td>
+                            <td>{data.lastSeen}</td>
+                            <td>{data.persistent_ta}</td>
                         </tr>)
                         }                        
                     </tbody>

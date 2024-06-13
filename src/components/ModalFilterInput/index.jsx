@@ -113,10 +113,11 @@ function ModalFilterInput(){
                             <label htmlFor="" className="label-inputs">severity</label>
                             <select name="" id="" className="inputs" {...register("severity")}>
                                 <option value={null}>Selecionar...</option>
-                                <option value={1}>CRITICO</option>
-                                <option value={2}>MAJORITARIO</option>
-                                <option value={3}>MEDIO</option>
-                                <option value={4}>MINORITARIO</option>
+                                <option value={5}>CRITICO</option>
+                                <option value={4}>MAJORITARIO</option>
+                                <option value={3}>MINORITARIO</option>
+                                <option value={2}>??</option>
+                                <option value={1}>?</option>
                             </select>
                         </div>
                         <div className="btn_form">

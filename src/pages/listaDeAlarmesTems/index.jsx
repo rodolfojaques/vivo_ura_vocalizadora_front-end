@@ -25,11 +25,9 @@ function ListaDeAlarmesTems() {
 
   const {
     filterAlarmes,
-    arrAlarmInit,
-    setArrAlarmInit,
-    arrAlarm,
-    setArrAlarm,
-    pageInd, setPageInd, pag, pagSiz, setPagSiz
+    setPag,
+    pag, pagSiz, setPagSiz, setTypeFilter,
+    dataPesq, setDataPesq
   } = useContext(ListaDeAlarmesTemsContext);
 
   const {
@@ -39,8 +37,18 @@ function ListaDeAlarmesTems() {
   } = useForm({});
 
   const formSchema = (data) => {
-    filterAlarmes(data,pag,pagSiz)
-    console.log(data)
+    console.log(data);
+    setDataPesq(data)
+    setTypeFilter("geral")
+    filterAlarmes(data,pag,pagSiz);
+  };
+
+  const handleValueChange = (event) => {
+    const data = {ALARME: event.target.value};
+    setDataPesq(data)
+    setTypeFilter("specifc")
+    setPag(1)
+    filterAlarmes(data,pag,pagSiz);
   };
 
   return (
@@ -52,9 +60,9 @@ function ListaDeAlarmesTems() {
           <div className="campos_principais">
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Tipo TA
+                frontTypeTa
               </label>
-              <select className="campos_dropDown" {...register("tipoTA")}>
+              <select className="campos_dropDown" {...register("frontTypeTa")}>
                 <option value={null}>{null}</option>
                 {setTipoTA.map((item, i) => (
                   <option key={i} value={item}>
@@ -65,9 +73,9 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Tipo Rede
+                frontNetworkType
               </label>
-              <select className="campos_dropDown" {...register("tipoRede")}>
+              <select className="campos_dropDown" {...register("frontNetworkType")}>
                 <option value={null}>{null}</option>
                 {setTipoRede.map((item, i) => (
                   <option key={i} value={item}>
@@ -78,7 +86,7 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Estado
+                estadoSigla
               </label>
               <select className="campos_dropDown" {...register("estadoSigla")}>
                 <option value={null}>{null}</option>
@@ -91,9 +99,9 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                  Tipo Planta
+                  frontPlantType
               </label>
-              <select className="campos_dropDown" {...register("tipoPlanta")}>
+              <select className="campos_dropDown" {...register("frontPlantType")}>
                 <option value={null}>{null}</option>
                 {setTipoPlanta.map((item, i) => (
                   <option key={i} value={item}>
@@ -104,9 +112,9 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Specific Problem
+                specificProblem
               </label>
-              <select className="campos_dropDown" {...register("frontSpecificProblem")}>
+              <select className="campos_dropDown" {...register("frontspecificProblem")}>
                 <option value={null}>{null}</option>
                 {setSpecificProblem.map((item, i) => (
                   <option key={i} value={item}>
@@ -117,9 +125,9 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Tipo Alarme
+                frontAlarmId
               </label>
-              <select className="campos_dropDown" {...register("tipoDeAlarme")}>
+              <select className="campos_dropDown" {...register("frontAlarmId")}>
                 <option value={null}>{null}</option>
                 {setTipoDeAlarme.map((item, i) => (
                   <option key={i} value={item}>
@@ -130,17 +138,18 @@ function ListaDeAlarmesTems() {
             </div>
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
-                Classificação
+                severity
               </label>
               <select
                 className="campos_dropDown"
                 {...register("severity")}
               >
                 <option value={null}>{null}</option>
-                <option value={1}>CRITICAL</option>
-                <option value={2}>MAJORITARIO</option>
-                <option value={3}>MEDIO</option>
-                <option value={4}>MINORITARIO</option>
+                <option value={5}>CRITICO</option>
+                <option value={4}>MAJORITARIO</option>
+                <option value={3}>MINORITARIO</option>
+                <option value={2}>??</option>
+                <option value={1}>?</option>
               </select>
             </div>
           </div>
@@ -171,7 +180,7 @@ function ListaDeAlarmesTems() {
                 <label htmlFor="" className="label_dropDown">
                   Ultimos alarmes em
                 </label>
-                <select className="campos_dropDown">
+                <select className="campos_dropDown" {...register("ULTIMOS_EM")}>
                   <option value={null}>{null}</option>
                   {ultAlarmesEm.map((item, i) => (
                     <option key={i} value={item}>
@@ -189,7 +198,7 @@ function ListaDeAlarmesTems() {
           </div>
           <div className="pesquisa_btnSubmit">
             <input
-              // onChange={(event) => handleValueChange(event, arrAlarmInit)}
+              onChange={(event) => handleValueChange(event)}
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"

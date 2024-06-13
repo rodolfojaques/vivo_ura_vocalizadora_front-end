@@ -7,56 +7,51 @@ import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
 function TableTemsComponent({exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
     const {
-        pageInd, 
-        setPageInd,
+        totalItems, setTotalItems,
+        pageCount, setPageCount,
         arrAlarm,
         setArrAlarm,
         filterAlarmes,
-        pagSiz, setPagSiz, pag, setPag, setArrAlarmInit
+        pagSiz, pag, setPag, setArrAlarmInit, typeFilter,dataPesq, setDataPesq
     } = useContext(ListaDeAlarmesTemsContext)
 
     const [data, setData] = useState([]);
-    const [pageCount, setPageCount] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSizes, setPageSizes] = useState(10);
 
-    const [totalItems, setTotalItems] = useState(20);
+    // const dataFilter = {
+    //     TIPO_TA: null,
+    //     TIPO_REDE:  null,
+    //     ESTADO: null,
+    //     LOCALIDADE: null,
+    //     SITE: null,
+    //     TIPO_ALARME: null,
+    //     CLASSIFICACAO: null,
+    //     DATA_INICIO: null,
+    //     DATA_FIM: null,
+    // };
 
-    const dataFilter = {
-        TIPO_TA: null,
-        TIPO_REDE:  null,
-        ESTADO: null,
-        LOCALIDADE: null,
-        SITE: null,
-        TIPO_ALARME: null,
-        CLASSIFICACAO: null,
-        DATA_INICIO: null,
-        DATA_FIM: null,
-    };
+    // const fetchData = async (pageNumber, pageSize) => {
 
-    const fetchData = async (pageNumber, pageSize) => {
+    //   try {
+    //     const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
 
-      try {
-        const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
-
-        console.log(response);
-        setArrAlarm(response.data);
-        setArrAlarmInit(response.data)
-        setPageCount(response.pageCount);
-        setTotalItems(response.total)
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    };
+    //     console.log(response);
+    //     setArrAlarm(response.data);
+    //     setArrAlarmInit(response.data)
+    //     setPageCount(response.pageCount);
+    //     setTotalItems(response.total)
+    //   } catch (error) {
+    //     console.error('Erro ao buscar dados:', error);
+    //   }
+    // };
 
     const updateData = (newData) => {
         setData(() => newData);
     };
   
     useEffect(() => {
-      fetchData(pag, pagSiz);
-      updateData(data)
-      console.log(pag);
+    //   fetchData(pag, pagSiz);
+        filterAlarmes(dataPesq,pag,pagSiz)
+        updateData(data)
     }, [pag, pagSiz]);
 
     return (
@@ -117,7 +112,7 @@ function TableTemsComponent({exibirLinhas,total}){
             </div>
             <div> 
                 <span>
-                    Mostrando {(pag -1) * pagSiz + 1} - {(totalItems < pagSiz? totalItems : pag * pagSiz)} de {totalItems} linhas
+                    Mostrando {(pag -1) * pagSiz + 1} - {totalItems < pag * pagSiz? totalItems : pag * pagSiz} de {totalItems} linhas
                 </span>{' '}
                 <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
                 {'<<'}

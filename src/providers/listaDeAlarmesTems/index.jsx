@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 export const ListaDeAlarmesTemsContext = createContext();
 
-function ListaDeAlarmesProvider({ children }) {
+function ListaDeAlarmesTemsProvider({ children }) {
   const { baseURL, usuario } = useContext(UserContext);
   const [arrAlarm, setArrAlarm] = useState([]);
   const [arrAlarmInit, setArrAlarmInit] = useState([]);
@@ -18,30 +18,56 @@ function ListaDeAlarmesProvider({ children }) {
   const [pag, setPag] = useState(1)
   const [pagSiz, setPagSiz] = useState(10)
 
+  const [typeFilter, setTypeFilter] = useState("geral")
+
+  const [totalItems, setTotalItems] = useState(20);
+  const [pageCount, setPageCount] = useState(0);
+
+  const [dataPesq, setDataPesq] = useState({})
+
   const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
-      TIPO_TA: data.TIPO_TA || null,
-      TIPO_REDE: data.TIPO_REDE || null,
-      ESTADO: data.ESTADO || null,
-      LOCALIDADE: data.LOCALIDADE || null,
-      SITE: data.SITE || null,
-      TIPO_ALARME: data.TIPO_ALARME || null,
-      CLASSIFICACAO: data.CLASSIFICACAO || null,
+      frontTypeTa: data.frontTypeTa || null,
+      frontNetworkType: data.frontNetworkType || null,
+      estadoSigla: data.estadoSigla || null,
+      frontPlantType: data.frontPlantType || null,
+      specificProblem: data.specificProblem || null,
+      frontAlarmId: data.frontAlarmId || null,
+      severity: data.severity || null,
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
+      ULTIMOS_EM: data.ULTIMOS_EM || null,
     };
-    console.log(dataFilter);
+
+    const dataFilterSpecific = {
+      ALARME: data.ALARME || null,
+    };
 
     try {
-      const response = await axios
-        .post(`${baseURL}/alarmes-tems?page=${page}&size=${pageSize}`, dataFilter, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }) 
-        setArrAlarm(response.data.data)
-        console.log(response)
-        return response.data
+      if(typeFilter === "geral"){
+        const response = await axios
+          .post(`${baseURL}/alarmes-tems?page=${page}&size=${pageSize}`, dataFilter, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }) 
+          setArrAlarm(response.data.data)
+          setPageCount(response.data.pageCount)
+          setTotalItems(response.data.total)
+          return response.data        
+      } else {
+        const response = await axios
+          .post(`${baseURL}/alarmes-tems/filter?page=${page}&size=${pageSize}`, dataFilterSpecific, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }) 
+          setArrAlarm(response.data.data)
+          setPageCount(response.data.pageCount)
+          setTotalItems(response.data.total)
+          return response.data         
+      }
+
     } catch (error) {
       console.error(error)
     }
@@ -57,7 +83,8 @@ function ListaDeAlarmesProvider({ children }) {
         setArrAlarmInit,
         pageInd, 
         setPageInd,
-        pag, setPag, pagSiz, setPagSiz, linhas, setLinhas
+        pag, setPag, pagSiz, setPagSiz, linhas, setLinhas, typeFilter, setTypeFilter,
+        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq
       }}
     >
       {children}
@@ -65,4 +92,4 @@ function ListaDeAlarmesProvider({ children }) {
   );
 }
 
-export default ListaDeAlarmesProvider;
+export default ListaDeAlarmesTemsProvider;

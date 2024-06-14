@@ -87,6 +87,8 @@ function TableComponent({columns,exibirLinhas,total}){
                 <table>
                     <thead>
                         <tr>
+                            <th>Data Apresentação</th>
+                            <th>TA</th>
                             <th>Tipo TA</th>
                             <th>Tipo Rede</th>
                             <th>Estado</th>
@@ -112,7 +114,6 @@ function TableComponent({columns,exibirLinhas,total}){
                             <th>Equipamento</th>
                             <th>Tipo Corrente Eletrica</th>
                             <th>Capacidade</th>
-                            <th>Data Apresentação</th>
                             <th>Fabricante</th>
                             <th>Modelo</th>
                             <th>Salas Afetadas</th>
@@ -120,13 +121,14 @@ function TableComponent({columns,exibirLinhas,total}){
                             <th>Historico Tipo</th>
                             <th>Tipo Planta</th>
                             <th>Tipo Planta COD</th>
-                            <th>TA</th>
                             <th>Elemento Sigla</th>
                         </tr>                        
                     </thead>
                     <tbody>
                         {
                             arrAlarm.map(data=><tr>
+                            <td>{data.DATA_APRESENTACAO}</td>
+                            <td>{data.TA}</td>
                             <td>{data.TIPO_TA}</td>
                             <td>{data.TIPO_REDE}</td>
                             <td>{data.ESTADO}</td>
@@ -152,7 +154,6 @@ function TableComponent({columns,exibirLinhas,total}){
                             <td>{data.EQUIPAMENTO}</td>
                             <td>{data.TIPO_CORRENTE_ELETRICA}</td>
                             <td>{data.CAPACIDADE}</td>
-                            <td>{data.DATA_APRESENTACAO}</td>
                             <td>{data.FABRICANTE}</td>
                             <td>{data.MODELO}</td>
                             <td>{data.SALAS_AFETADAS}</td>
@@ -160,7 +161,6 @@ function TableComponent({columns,exibirLinhas,total}){
                             <td>{data.HISTORICO_TIPO}</td>
                             <td>{data.TIPO_PLANTA}</td>
                             <td>{data.TIPO_PLANTA_COD}</td>
-                            <td>{data.TA}</td>
                             <td>{data.ELEMENTO_SIGLA}</td>
                         </tr>)
                         }                        

@@ -144,12 +144,12 @@ function ListaDeAlarmesTems() {
                 className="campos_dropDown"
                 {...register("severity")}
               >
-                <option value={null}>{null}</option>
+                <option value={null}>Selecionar...</option>
                 <option value={5}>CRITICO</option>
                 <option value={4}>MAJORITARIO</option>
                 <option value={3}>MINORITARIO</option>
-                <option value={2}>??</option>
-                <option value={1}>?</option>
+                <option value={2}>AVISO</option>
+                <option value={1}>INDETERMINADO</option>
               </select>
             </div>
           </div>

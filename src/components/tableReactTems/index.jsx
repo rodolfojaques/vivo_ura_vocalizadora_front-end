@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react"
 import { TableStl } from "./styles"
-import axios from "axios";
-import { UserContext } from "../../providers/user";
-import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
+import { UserContext } from "../../providers/user"
+import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems"
 
 function TableTemsComponent({exibirLinhas,total}){
     const {baseURL} = useContext(UserContext)
@@ -17,39 +16,11 @@ function TableTemsComponent({exibirLinhas,total}){
 
     const [data, setData] = useState([]);
 
-    // const dataFilter = {
-    //     TIPO_TA: null,
-    //     TIPO_REDE:  null,
-    //     ESTADO: null,
-    //     LOCALIDADE: null,
-    //     SITE: null,
-    //     TIPO_ALARME: null,
-    //     CLASSIFICACAO: null,
-    //     DATA_INICIO: null,
-    //     DATA_FIM: null,
-    // };
-
-    // const fetchData = async (pageNumber, pageSize) => {
-
-    //   try {
-    //     const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
-
-    //     console.log(response);
-    //     setArrAlarm(response.data);
-    //     setArrAlarmInit(response.data)
-    //     setPageCount(response.pageCount);
-    //     setTotalItems(response.total)
-    //   } catch (error) {
-    //     console.error('Erro ao buscar dados:', error);
-    //   }
-    // };
-
     const updateData = (newData) => {
         setData(() => newData);
     };
   
     useEffect(() => {
-    //   fetchData(pag, pagSiz);
         filterAlarmes(dataPesq,pag,pagSiz)
         updateData(data)
     }, [pag, pagSiz]);

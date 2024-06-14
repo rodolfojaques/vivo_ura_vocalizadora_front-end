@@ -142,6 +142,9 @@ function ModalAlterarPlantao({ idUser }) {
                   <div className="info_turn">
                     <p className="turn">
                       Turno: {dateTurn.turno}
+                      {dateTurn.turno === "T1" ? " - Início: 07h | Fim: 15h" : ""}
+                      {dateTurn.turno === "T2" ? " - Início: 15h | Fim: 23h" : ""}
+                      {dateTurn.turno === "T3" ? " - Início: 23h | Fim: 07h" : ""}
                     </p>
                   </div>
                   :
@@ -155,9 +158,9 @@ function ModalAlterarPlantao({ idUser }) {
                       }}
                     >
                       <option value="T3">Selecione...</option>
-                      <option value="T1">T1</option>
-                      <option value="T2">T2</option>
-                      <option value="T3">T3</option>
+                      <option value="T1">T1 - <span><b style={{color: "purple"}}>Início: </b><b>07h</b> | <b style={{color: "purple"}}>Fim: </b><b>15h</b></span></option>
+                      <option value="T2">T2 - <span><b style={{color: "purple"}}>Início: </b><b>15h</b> | <b style={{color: "purple"}}>Fim: </b><b>23h</b></span></option>
+                      <option value="T3">T3 - <span><b style={{color: "purple"}}>Início: </b><b>23h</b> | <b style={{color: "purple"}}>Fim: </b><b>07h</b></span></option>
                     </select>
                   </div>                  
                 }

@@ -3,7 +3,6 @@ import { useEffect, useState, useMemo, useContext } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import TableUserComponent from "../../components/TableUsuarios";
-import { mockJsonUsers } from "../../utils/pagListaAlarmes";
 import { PaginaUsuariosStl } from "./styles";
 import * as Icon from "react-bootstrap-icons";
 import ModalFormCadastro from "../../components/ModalFormCadastro";
@@ -25,7 +24,6 @@ function PaginaUsuarios() {
     setAlterarPlantaoPagUser,
     idUser,
     setIdUser,
-    setUsuarioClicado,
   } = useContext(UserContext);
 
   const navigate = useNavigate();

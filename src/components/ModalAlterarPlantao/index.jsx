@@ -13,8 +13,7 @@ function ModalAlterarPlantao({ idUser }) {
     usuario,
     usuarioClicado,
     setUsuarioClicado,
-    alterarPlantao,
-    setAlterarPlantao,alterarPlantaoPagUser, setAlterarPlantaoPagUser
+    setAlterarPlantao, setAlterarPlantaoPagUser
   } = useContext(UserContext)
 
   const [dateTurnsSubmmit, setDateTurnsSubmmit] = useState([]);

@@ -23,14 +23,7 @@ function GruposDeAtuacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
   const [grupoAtuacaoFiltered, setGrupoAtuacaoFiltered] = useState([]);
   const [grupoAtuacaoTems, setGrupoAtuacaoTems] = useState([]);
-  const [grupoAtuacaoTemsFiltered, setGrupoAtuacaoTemsFiltered] = useState([]);
   const [stateGrupo, setStateGrupo] = useState(false);
-
-  const [isSearch, setIsSearch] = useState(false)
-  const [dataFilter, setDataFilter] = useState({value:null})
-
-  const [isSearchTems, setIsSearchTems] = useState(false)
-  const [dataFilterTems, setDataFilterTems] = useState({value:null})
 
   const { baseURL, usuario } = useContext(UserContext);
   const { deleteUser, addContato, openInfosUp } =
@@ -70,8 +63,7 @@ function GruposDeAtuacao() {
           Authorization: `Bearer ${usuario.token}`,
         },
       });
-      setGrupoAtuacaoTems(responseTems.data);
-      setGrupoAtuacaoTemsFiltered(responseTems.data);   
+      setGrupoAtuacaoTems(responseTems.data);   
 
     } catch (error) {
       console.error("Erro ao buscar grupos",error);
@@ -95,7 +87,6 @@ function GruposDeAtuacao() {
       },
     });
     setGrupoAtuacaoTems(responseTems.data);
-    setGrupoAtuacaoTemsFiltered(responseTems.data);
     console.log(grupoAtuacaoTems);
   }
 

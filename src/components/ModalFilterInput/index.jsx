@@ -66,7 +66,7 @@ function ModalFilterInput(){
                 }
             }            
         }
-        console.log(newData);
+        
         axios.post(`${baseURL}/filter-input`, newData,
             {
             headers: {

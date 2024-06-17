@@ -15,9 +15,7 @@ import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAl
 
 function Associacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
-  const [gruposAtuacaoInicial, setGruposAtuacaoInicial] = useState([]);
   const [grupoAlarme, setGrupoAlarme] = useState([]);
-  const [gruposAlarmesInicial, setGruposAlarmesInicial] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
   const {
@@ -37,7 +35,6 @@ function Associacao() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoAss(response.data);
-      setGruposAtuacaoInicial(response.data);
     } catch (error) {}
   };
 
@@ -49,7 +46,6 @@ function Associacao() {
         },
       });
       setGrupoAlarme(response.data);
-      setGruposAlarmesInicial(response.data);
     } catch (error) {}
   };
 

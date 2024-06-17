@@ -1,33 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import { FormListAlarmTemsStl, ListaDeAlarmesTemsStl } from "./styles";
-import {
-  arrSite,
-  siglaSite,
-  mockJson,
-  arrEstado,
-  arrTipoAlarme,
-  ultAlarmesEm,
-  localidade,
-} from "../../utils/pagListaAlarmes";
-import { UserContext } from "../../providers/user";
+import { arrEstado, ultAlarmesEm } from "../../utils/pagListaAlarmes";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import TableTemsComponent from "../../components/tableReactTems";
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
 import { setSpecificProblem, setTipoDeAlarme, setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
 
 function ListaDeAlarmesTems() {
-  const { baseURL, usuario } = useContext(UserContext);
-  
-  const [totalItems, setTotalItems] = useState(20);
 
   const {
     filterAlarmes,
     setPag,
-    pag, pagSiz, setPagSiz, setTypeFilter,
-    dataPesq, setDataPesq
+    pag, 
+    pagSiz, 
+    setPagSiz, 
+    setTypeFilter,
+    setDataPesq
   } = useContext(ListaDeAlarmesTemsContext);
 
   const {
@@ -37,7 +27,6 @@ function ListaDeAlarmesTems() {
   } = useForm({});
 
   const formSchema = (data) => {
-    console.log(data);
     setDataPesq(data)
     setTypeFilter("geral")
     filterAlarmes(data,pag,pagSiz);
@@ -219,7 +208,7 @@ function ListaDeAlarmesTems() {
           />
         </div>
       </div>
-      <TableTemsComponent total={totalItems}/>
+      <TableTemsComponent />
     </ListaDeAlarmesTemsStl>
   );
 }

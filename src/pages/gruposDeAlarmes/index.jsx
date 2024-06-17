@@ -30,10 +30,8 @@ function GruposDeAlarmes() {
   
 
   const [gruposAlarmes, setGruposAlarmes] = useState([]);
-  const [gruposAlarmesInicial, setGruposAlarmesInicial] = useState([]);
 
   const [gruposAlarmesTems, setGruposAlarmesTems] = useState([]);
-  const [gruposAlarmesTemsInicial, setGruposAlarmesTemsInicial] = useState([]);
 
   const { baseURL, usuario, openFilterInput } = useContext(UserContext);
 
@@ -47,7 +45,6 @@ function GruposDeAlarmes() {
       })
       .then((res) => {
         setGruposAlarmes(res.data);
-        setGruposAlarmesInicial(res.data);
       })
       .catch((err) => console.log(err));    
   }
@@ -62,7 +59,6 @@ function GruposDeAlarmes() {
       })
       .then((res) => {
         setGruposAlarmesTems(res.data);
-        setGruposAlarmesTemsInicial(res.data);
       })
       .catch((err) => console.log(err));    
   }

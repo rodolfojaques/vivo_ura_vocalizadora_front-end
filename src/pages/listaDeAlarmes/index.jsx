@@ -1,15 +1,9 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import TableComponent from "../../components/tableReact";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
-import {
-  siglaSite,
-  arrEstado,
-  arrTipoAlarme,
-  ultAlarmesEm,
-  localidade,
-} from "../../utils/pagListaAlarmes";
+import { siglaSite, arrEstado, arrTipoAlarme, ultAlarmesEm, localidade } from "../../utils/pagListaAlarmes";
 import { useForm } from "react-hook-form";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 
@@ -17,168 +11,12 @@ function ListaDeAlarmes() {
   const {
     filterAlarmes,
     setPag,
-    pag, pagSiz, setPagSiz, setTypeFilter,
-    dataPesq, setDataPesq
+    pag, 
+    pagSiz, 
+    setPagSiz, 
+    setTypeFilter, 
+    setDataPesq
   } = useContext(ListaDeAlarmesContext);
-  
-  const [totalItems, setTotalItems] = useState(20);
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Tipo TA",
-        accessor: "TIPO_TA",
-      },
-      {
-        Header: "Tipo Rede",
-        accessor: "TIPO_REDE",
-      },
-      {
-        Header: "Estado",
-        accessor: "ESTADO",
-      },
-      {
-        Header: "Localidade",
-        accessor: "LOCALIDADE",
-      },
-      {
-        Header: "Site",
-        accessor: "SITE",
-      },
-      {
-        Header: "Tipo Alarme",
-        accessor: "TIPO_ALARME",
-      },
-      {
-        Header: "Classificação",
-        accessor: "CLASSIFICACAO",
-      },
-      {
-        Header: "ID Evento",
-        accessor: "ID_EVENTO",
-      },
-      {
-        Header: "ID Equipamento",
-        accessor: "ID_EQUIPAMENTO",
-      },
-      {
-        Header: "RPA Status",
-        accessor: "RPA_STATUS",
-      },
-      {
-        Header: "SIGITM Fluxo",
-        accessor: "SIGITM_FLUXO",
-      },
-      {
-        Header: "Tipo Bilhete",
-        accessor: "TIPO_BILHETE",
-      },
-      {
-        Header: "Tipo Rede COD",
-        accessor: "TIPO_REDE_COD",
-      },
-      {
-        Header: "Tipo Rede COD INT",
-        accessor: "TIPO_REDE_COD_INT",
-      },
-      {
-        Header: "Localidade COD",
-        accessor: "LOCALIDADE_COD",
-      },
-      {
-        Header: "Municipio",
-        accessor: "MUNICIPIO",
-      },
-      {
-        Header: "ID Site",
-        accessor: "ID_SITE",
-      },
-      {
-        Header: "Sequencia Alarme",
-        accessor: "SEQUENCIA_ALARME",
-      },
-      {
-        Header: "Empresa Manutenção",
-        accessor: "EMPRESA_MANUTENCAO",
-      },
-      {
-        Header: "Alarme",
-        accessor: "ALARME",
-        Cell: ({ value }) => (
-          <a
-            href={`#/${value}`}
-            onClick={(e) => {
-              e.preventDefault();
-              alert(value);
-            }}
-          >
-            Detalhes do alarme
-          </a>
-        ),
-      },
-      {
-        Header: "Tipo Falha",
-        accessor: "TIPO_FALHA",
-      },
-      {
-        Header: "Tipo Afetação",
-        accessor: "TIPO_AFETACAO",
-      },
-      {
-        Header: "Equipamento",
-        accessor: "EQUIPAMENTO",
-      },
-      {
-        Header: "Tipo Corrente Eletrica",
-        accessor: "TIPO_CORRENTE_ELETRICA",
-      },
-      {
-        Header: "Capacidade",
-        accessor: "CAPACIDADE",
-      },
-      {
-        Header: "Data Apresentação",
-        accessor: "DATA_APRESENTACAO",
-      },
-      {
-        Header: "Fabricante",
-        accessor: "FABRICANTE",
-      },
-      {
-        Header: "Modelo",
-        accessor: "MODELO",
-      },
-      {
-        Header: "Salas Afetadas",
-        accessor: "SALAS_AFETADAS",
-      },
-      {
-        Header: "Historico",
-        accessor: "HISTORICO",
-      },
-      {
-        Header: "Historico Tipo",
-        accessor: "HISTORICO_TIPO",
-      },
-      {
-        Header: "Tipo Planta",
-        accessor: "TIPO_PLANTA",
-      },
-      {
-        Header: "Tipo Planta COD",
-        accessor: "TIPO_PLANTA_COD",
-      },
-      {
-        Header: "TA",
-        accessor: "TA",
-      },
-      {
-        Header: "Elemento Sigla",
-        accessor: "ELEMENTO_SIGLA",
-      },
-    ],
-    []
-  );
 
   const {
     register,
@@ -360,7 +198,7 @@ function ListaDeAlarmes() {
           />
         </div>
       </div>
-      <TableComponent columns={columns} total={totalItems}/>
+      <TableComponent />
     </ListaDeAlarmesStl>
   );
 }

@@ -1,17 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { TableStl } from "./styles"
-import { UserContext } from "../../providers/user"
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems"
 
-function TableTemsComponent({exibirLinhas,total}){
-    const {baseURL} = useContext(UserContext)
+function TableTemsComponent(){
     const {
-        totalItems, setTotalItems,
-        pageCount, setPageCount,
+        totalItems,
+        pageCount,
         arrAlarm,
-        setArrAlarm,
         filterAlarmes,
-        pagSiz, pag, setPag, setArrAlarmInit, typeFilter,dataPesq, setDataPesq
+        pagSiz, pag, setPag, dataPesq
     } = useContext(ListaDeAlarmesTemsContext)
 
     const [data, setData] = useState([]);

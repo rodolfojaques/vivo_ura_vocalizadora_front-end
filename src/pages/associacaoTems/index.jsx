@@ -13,9 +13,7 @@ import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
 function AssociacaoTems() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
-  const [gruposAtuacaoInicial, setGruposAtuacaoInicial] = useState([]);
   const [grupoAlarme, setGrupoAlarme] = useState([]);
-  const [gruposAlarmesInicial, setGruposAlarmesInicial] = useState([]);
 
   const { baseURL, usuario } = useContext(UserContext);
   const {
@@ -23,9 +21,7 @@ function AssociacaoTems() {
     setGrupoAssociacaoTemsAdd,
     setGrupoAtuacaoTemsAss,
     removeAssociacaoTems,
-    addDelete,
-    typeGP,
-    setTypeGP,
+    addDelete
   } = useContext(AssociacaoTemsContext);
 
   const allGroupsAtuacao = async () => {
@@ -37,7 +33,6 @@ function AssociacaoTems() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoTemsAss(response.data);
-      setGruposAtuacaoInicial(response.data);
     } catch (error) {}
   };
 
@@ -49,7 +44,6 @@ function AssociacaoTems() {
         },
       });
       setGrupoAlarme(response.data);
-      setGruposAlarmesInicial(response.data);
     } catch (error) {}
   };
 

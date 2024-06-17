@@ -1,82 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { TableStl } from "./styles"
-import { useTable, usePagination } from "react-table";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
-import { UserContext } from "../../providers/user";
 
-function TableComponent({columns,exibirLinhas,total}){
-    const {baseURL} = useContext(UserContext)
+function TableComponent(){
     const {
-        totalItems, setTotalItems,
-        pageCount, setPageCount,
+        totalItems,
+        pageCount,
         arrAlarm,
-        setArrAlarm,
         filterAlarmes,
-        pagSiz, pag, setPag, setArrAlarmInit, typeFilter,dataPesq, setDataPesq
+        pagSiz, pag, setPag, dataPesq
     } = useContext(ListaDeAlarmesContext)
 
     const [data, setData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSizes, setPageSizes] = useState(10);
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        // rows,
-        page,
-        pageOptions,
-        state: { pageIndex, pageSize },
-        gotoPage,
-        nextPage,
-        previousPage,
-        setPageSize,
-    } = useTable({
-        columns,
-        data: arrAlarm,
-        initialState: { pageIndex: currentPage, pageSize: pageSizes },
-    },
-    usePagination
-    );
-
-    const dataFilter = 
-    typeFilter === 'geral'?
-    {
-        TIPO_TA: null,
-        TIPO_REDE:  null,
-        ESTADO: null,
-        LOCALIDADE: null,
-        SITE: null,
-        TIPO_ALARME: null,
-        CLASSIFICACAO: null,
-        DATA_INICIO: null,
-        DATA_FIM: null,
-    } : {
-        ALARME: null
-    };
-
-    // const fetchData = async (pageNumber, pageSize) => {
-
-    //   try {
-    //     const response = await filterAlarmes(dataFilter,pageNumber,pageSize)
-
-    //     console.log(response.total);
-    //     setArrAlarm(response.data);
-    //     setArrAlarmInit(response.data)
-    //     setPageCount(response.pageCount);
-    //     setTotalItems(response.total)
-    //   } catch (error) {
-    //     console.error('Erro ao buscar dados:', error);
-    //   }
-    // };
 
     const updateData = (newData) => {
         setData(() => newData);
     };
   
     useEffect(() => {
-    //   fetchData(pag, pagSiz);
         filterAlarmes(dataPesq,pag,pagSiz)
         updateData(data)
     }, [pag, pagSiz]);

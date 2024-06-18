@@ -45,7 +45,10 @@ function ModalEditSenha() {
         toast.success("Senha alterada com sucesso!");
         setEditSenha(!editSenha);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        toast.error("Erro ao alterar senha")
+      });
   };
 
 

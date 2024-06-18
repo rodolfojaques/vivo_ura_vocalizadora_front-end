@@ -14,7 +14,7 @@ function ModalExcludeTipoAlarmeComponent({
   idGpAlarme,
   grupoAssosc,
   setGrupoAssosc,
-  setIdGpAlarme,typeGpAlarme
+  typeGpAlarme
 }) {
   const { baseURL, usuario } = useContext(UserContext);
   const {
@@ -31,21 +31,14 @@ function ModalExcludeTipoAlarmeComponent({
   } = useContext(AssociacaoContext);
 
   const {
-    grupoAssociacaoTemsAdd,
-    setGrupoAssociacaoTemsAdd,
     grupoAtuacaoTemsAss,
-    setGrupoAtuacaoTemsAss,
     removeAssociacaoTems,
     setRemoveAssociacaoTems,
     idGrupoAtuacaoTems,
     setIdGrupoAtuacaoTems,
     addGrupoAtuacaoTemsAss,
     idGrupoAlarmeTems,
-    setIdGrupoAlarmeTems,
     deleteGrupoAtuacaoTemsAss,
-    setListGrupoAlarme,
-    listOneGrupoAlarmeTems,
-    addDelete,
     listGpAtuacaoTems,
     typeGP,listGrupoAlarmeTems
   } = useContext(AssociacaoTemsContext)
@@ -83,9 +76,12 @@ function ModalExcludeTipoAlarmeComponent({
       })
       .then((res) => {
         setOpenExcludeAlarme(!openExcludeAlarme);
-        toast.success("Tipo de Alarme excluído com sucesso!");
+        toast.success("Tipo de Alarme excluído com sucesso!")
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err)
+        toast.error("Erro ao excluir tipo de alarme")
+      });
   };
 
   return (

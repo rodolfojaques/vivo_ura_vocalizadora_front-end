@@ -1,4 +1,4 @@
-import { arrEstado, arrSite, siglaSite, arrTipoAlarme, localidade } from "../../utils/pagListaAlarmes";
+import { arrEstado } from "../../utils/pagListaAlarmes";
 import { BackgroundStl, ModalTiposAlarmesStl } from "./styles";
 
 import * as yup from 'yup';
@@ -9,7 +9,6 @@ import { UserContext } from "../../providers/user";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import * as UFSL from "../../utils/grupos/index"
 import { setSpecificProblem, setTipoDeAlarme, setTipoFalha, setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
 
 function ModalTiposAlarmesTemsComponente({
@@ -49,7 +48,10 @@ function ModalTiposAlarmesTemsComponente({
             toast.success("Tipo de Alarme adicionado com sucesso!")
             setOpenTipoAlarmeTems(!openTipoAlarmeTems)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            toast.error("Erro ao adicionar tipo de alarme")
+        })
     }
 
     const handleUfChange = (event) => {

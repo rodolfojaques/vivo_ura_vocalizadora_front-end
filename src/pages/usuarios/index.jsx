@@ -34,22 +34,24 @@ function PaginaUsuarios() {
       usuario?.user?.perfil?.toLowerCase() === "gestor"
     ) {
       navigate("/home");
+    } else {
+      axios
+        .get(`${baseURL}/usuario`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${usuario?.token}`,
+          },
+        })
+        .then((res) => {
+          res.data.map((obj) => {
+            obj["id_exclude"] = obj.id;
+            obj["id_edit"] = obj.id;
+          });
+          setUsers(res.data);
+        })
+        .catch((err) => console.error(err));      
     }
-    axios
-      .get(`${baseURL}/usuario`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${usuario?.token}`,
-        },
-      })
-      .then((res) => {
-        res.data.map((obj) => {
-          obj["id_exclude"] = obj.id;
-          obj["id_edit"] = obj.id;
-        });
-        setUsers(res.data);
-      })
-      .catch((err) => console.log(err));
+
   }, [openModal, openModalEdit, openModalExclude]);
 
   const filterUserOnChange = (e)=> {
@@ -67,7 +69,7 @@ function PaginaUsuarios() {
       });
       setUsers(res.data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.error(err));
   }
 
   const columns = useMemo(

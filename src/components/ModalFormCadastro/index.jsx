@@ -32,6 +32,7 @@ function ModalFormCadastro({
       })
       .catch((err) => {
         console.error(err);
+        toast.error("Usuário sem permissão para esta ação!");
       });
   }, []);
 
@@ -106,7 +107,7 @@ function ModalFormCadastro({
       })
       .catch((err) => {
         console.error(err);
-        toast.error("Usuário sem permissão para esta ação!");
+        toast.error("Usuário sem permissão para esta ação!");
       });
   };
 

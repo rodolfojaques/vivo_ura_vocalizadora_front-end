@@ -4,8 +4,6 @@ function ListaSG({
   children,
   tipoPag,
   handleValueChange,
-  gruposAlarmesMock,
-  gruposAtuacaoMock,
 }) {
   return (
     <>

@@ -70,6 +70,7 @@ function ListaDeAlarmesTemsProvider({ children }) {
 
     } catch (error) {
       console.error(error)
+      toast.error("Erro ao listar alarmes!");
     }
   };
 

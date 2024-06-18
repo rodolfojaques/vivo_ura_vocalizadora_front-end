@@ -32,7 +32,9 @@ function GrupoAtuacaoProvider({ children }) {
       );
 
       toast.success("Usuário excluído com sucesso!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao excluir usuário!");
+    }
   };
 
   const addUserGrupoAtuacao = (idUser, idGrupoAtuacao) => {
@@ -53,7 +55,9 @@ function GrupoAtuacaoProvider({ children }) {
         );
       });
       toast.success("Usuário adicionado ao grupo!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao adicionar usuário ao grupo!");
+    }
   };
 
   return (

@@ -11,8 +11,6 @@ import { toast } from "react-toastify";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 
 function ModalGruposAtuacaoComponente({
-  grupoAtuacao,
-  setGrupoAtuacao,
   openModalGruposAtuacao,
   setOpenModalGruposAtuacao,
 }) {
@@ -30,7 +28,7 @@ function ModalGruposAtuacaoComponente({
     idGrupo,
     setTypeTeam,
     typeTeam,
-    typeUpdateTeam,setTypeUpdateTeam
+    typeUpdateTeam
   } = useContext(GrupoAtuacaoContext);
 
   const schema = yup.object().shape({
@@ -83,7 +81,8 @@ function ModalGruposAtuacaoComponente({
 
       toast.success("Grupo de Atuação criado com sucesso!");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast.error("Erro ao criar grupo de atuação");
     }
     setOpenModalGruposAtuacao(!openModalGruposAtuacao);
   };
@@ -108,7 +107,6 @@ function ModalGruposAtuacaoComponente({
         },
       });
       setUsers(response.data);
-      console.log(response.data);
     } catch (error) {}
   };
   useEffect(() => {
@@ -132,7 +130,6 @@ function ModalGruposAtuacaoComponente({
       {addContato ? (  
         <BackgroundStl className="div_fechar" onClick={(e)=>{if(e.target.className.includes("div_fechar")) setAddContato(!addContato)}}>
           <ModalGruposAtuacaoStl>
-            {console.log(typeTeam)}
             <h2 className="title">Adicionar novos contatos</h2>
             <form
               onSubmit={() => {

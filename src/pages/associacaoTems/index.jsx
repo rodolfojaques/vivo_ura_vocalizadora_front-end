@@ -10,6 +10,7 @@ import { useEffect, useState, useContext } from "react";
 import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
 import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
 import { AssociacaoTemsContext } from "../../providers/associacaoTems";
+import { toast } from "react-toastify";
 
 function AssociacaoTems() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
@@ -33,7 +34,9 @@ function AssociacaoTems() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoTemsAss(response.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupos de atuação!");
+    }
   };
 
   const allGroupsAlarme = async () => {
@@ -44,26 +47,38 @@ function AssociacaoTems() {
         },
       });
       setGrupoAlarme(response.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupos de alarme!");
+    }
   };
 
   const filterAlarmesOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value:e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAlarme(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value:e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAlarme(response.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de alarme!");
+    }
+
   }
 
   const filterAtuacaoOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAtuacao(response.data);
-    setGrupoAtuacaoTemsAss(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAtuacao(response.data);
+      setGrupoAtuacaoTemsAss(response.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de atuação!");
+    }
+
   }
 
   useEffect(() => {

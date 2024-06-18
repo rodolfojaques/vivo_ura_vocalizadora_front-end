@@ -37,7 +37,9 @@ function AssociacaoProvider({ children }) {
       );
       setAddDelete(!addDelete);
       toast.success("Grupo de atuação adicionado!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao adicionar grupo de atuação!");
+    }
   };
 
   const deleteGrupoAtuacaoAss = async (idGrupo, idAtuacao) => {
@@ -57,7 +59,9 @@ function AssociacaoProvider({ children }) {
       );
       setAddDelete(!addDelete);
       toast.success("Grupo de atuação deletado!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao deletar grupo de atuação!");
+    }
   };
 
   const listOneGrupoAlarme = async (idGrupo) => {
@@ -69,7 +73,9 @@ function AssociacaoProvider({ children }) {
         },
       });
       setListGrupoAlarme(response.data.gruposAtuacao);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupo de alarme!");
+    }
   };
 
   return (

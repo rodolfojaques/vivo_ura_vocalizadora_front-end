@@ -31,7 +31,9 @@ function AssociacaoTemsProvider({ children }) {
         }
       ).then(resp=>setGrupoAtuacaoTemsAss(resp.data))
       
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupos de atuação!");
+    }
   };
 
   const addGrupoAtuacaoTemsAss = async (idGrupo, idAtuacao) => {
@@ -51,7 +53,9 @@ function AssociacaoTemsProvider({ children }) {
       );
       setAddDelete(!addDelete);
       toast.success("Grupo de atuação adicionado!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao adicionar grupo de atuação!");
+    }
   };
 
   const deleteGrupoAtuacaoTemsAss = async (idGrupo, idAtuacao) => {
@@ -71,7 +75,9 @@ function AssociacaoTemsProvider({ children }) {
       );
       setAddDelete(!addDelete);
       toast.success("Grupo de atuação deletado!");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao deletar grupo de atuação!");
+    }
   };
 
   const listOneGrupoAlarmeTems = async (idGrupo) => {
@@ -83,7 +89,9 @@ function AssociacaoTemsProvider({ children }) {
         },
       });
       setListGrupoAlarmeTems(response.data.gruposAtuacao);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupo de alarme!");
+    }
   };
 
   return (

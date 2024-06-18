@@ -10,9 +10,7 @@ import { toast } from "react-toastify";
 
 function ModalGruposAlarmesComponente({
     openModalAlarm,
-    setOpenModalAlarm,
-    gruposAlarmes,
-    setGruposAlarmes
+    setOpenModalAlarm
 }){
     const {
         baseURL,
@@ -42,7 +40,10 @@ function ModalGruposAlarmesComponente({
             toast.success("Grupo de Alarme criado com sucesso!")
             setOpenModalAlarm(!openModalAlarm)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.error(err)
+            toast.error("Erro ao criar grupo de alarme")
+        })
     }
 
     return(

@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { BoxNomeGrupoStl, DivButtonAddContato } from "./styles";
 import * as Icon from "react-bootstrap-icons";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
-import { AssociacaoContext } from "../../providers/associacao";
 import { UserContext } from "../../providers/user";
 import { AssociacaoTemsContext } from "../../providers/associacaoTems";
 
@@ -11,9 +10,6 @@ function BoxNomeGrupoTemsComponente({
   grupo,
   tipoGrupo,
   tipoAssociacao,
-  listaGruposAlarmes,
-  setListaGruposAlarmes,
-  grupoSelecionado,
   setGrupoSelecionado,
   openModalExclude,
   setOpenModalExclude,
@@ -21,7 +17,6 @@ function BoxNomeGrupoTemsComponente({
   setOpenTipoAlarmeTems,
   openExcludeAlarme,
   setOpenExcludeAlarme,
-  idGpAlarme,
   setIdGpAlarme,
   setTypeGpAlarme,
 }) {
@@ -41,22 +36,12 @@ function BoxNomeGrupoTemsComponente({
   } = useContext(GrupoAtuacaoContext);
 
   const {
-    grupoAssociacaoAdd,
-    setGrupoAssociacaoAdd,
-    removeAssociacao,
-    setRemoveAssociacao,
-    setIdGrupoAlarme,
-    listOneGrupoAlarme,
-  } = useContext(AssociacaoContext);
-
-  const {
     grupoAssociacaoTemsAdd,
     setGrupoAssociacaoTemsAdd,
     removeAssociacaoTems,
     setRemoveAssociacaoTems,
     setIdGrupoAlarmeTems,
     listOneGrupoAlarmeTems,
-    typeGP,
     setTypeGP,
 
   } = useContext(AssociacaoTemsContext);

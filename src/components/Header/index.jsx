@@ -4,7 +4,6 @@ import ModalMenu from "../ModalMenu";
 import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../../providers/user";
-import ModalEditSenha from "../ModalEditSenha";
 
 import * as Icon from "react-bootstrap-icons";
 import ModalAlterarPlantao from "../ModalAlterarPlantao";
@@ -148,7 +147,6 @@ function Header() {
       ) : (
         ""
       )}
-      {/* {!!editSenha ? <ModalEditSenha /> : <></>} */}
       <div className="container_menu-logo">
         <button
           onPointerEnter={() => setClickMenu(!clickMenu)}

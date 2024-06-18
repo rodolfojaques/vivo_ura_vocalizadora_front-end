@@ -1,7 +1,7 @@
 import { ModalMenuStl } from "./styles";
 import * as Icon from "react-bootstrap-icons"
 
-function ModalMenu({title, children, typeModal, setClickMenu, clickMenu, onPointerLeave}){
+function ModalMenu({title, children, typeModal, onPointerLeave}){
     return (
         <ModalMenuStl onPointerLeave={onPointerLeave} typeModal={typeModal}>
             {

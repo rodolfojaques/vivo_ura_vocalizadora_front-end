@@ -38,7 +38,9 @@ function GruposDeAtuacao() {
       });
       toast.success("Grupo de atuação excluído com sucesso!");
       setStateGrupo(!stateGrupo);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao excluir grupo de atuação!");
+    }
   };
 
   const groupsAtuacaoInfra = async () => {
@@ -53,6 +55,7 @@ function GruposDeAtuacao() {
 
     } catch (error) {
       console.error("Erro ao buscar grupos",error);
+      toast.error("Erro ao listar grupos de atuação!");
     }
   };
 
@@ -67,27 +70,38 @@ function GruposDeAtuacao() {
 
     } catch (error) {
       console.error("Erro ao buscar grupos",error);
+      toast.error("Erro ao listar grupos de atuação!");
     }
   };
 
   const filterInfraOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value:e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAtuacao(response.data);
-    setGrupoAtuacaoFiltered(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value:e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAtuacao(response.data);
+      setGrupoAtuacaoFiltered(response.data);      
+    } catch (error) {
+      console.error("Erro ao filtrar grupos",error);
+      toast.error("Erro ao filtrar grupos de atuação!");
+    }
+
   }
 
   const filterTemsOnChange = async (e)=> {
-    const responseTems = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAtuacaoTems(responseTems.data);
-    console.log(grupoAtuacaoTems);
+    try {
+      const responseTems = await axios.post(`${baseURL}/grupos-atuacao/tems/filter`, {value: e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAtuacaoTems(responseTems.data);     
+    } catch (error) {
+      console.error("Erro ao filtrar grupos",error);
+      toast.error("Erro ao filtrar grupos de atuação TEMS!");
+    }
   }
 
   useEffect(() => {

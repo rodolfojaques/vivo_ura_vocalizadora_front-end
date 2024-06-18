@@ -29,7 +29,10 @@ function ModalFilterInput(){
             listParam()
             toast.success("Parametro de filtragem excluído com sucesso!")
         })
-        .catch((err)=> console.error("erro ao excluir parametro: ",err))
+        .catch((err)=> {
+            console.error("erro ao excluir parametro: ",err)
+            toast.error("Erro ao excluir parametro de filtragem!")
+        })
     }
 
     const listParam = ()=> {

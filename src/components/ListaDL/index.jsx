@@ -4,7 +4,6 @@ function ListaDL({
   children,
   grupoAtuacao,
   handleValueChange,
-  grupoAtuacaoInicial,
 }) {
   return (
     <>

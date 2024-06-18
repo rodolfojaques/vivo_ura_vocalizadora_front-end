@@ -1,4 +1,4 @@
-import { arrEstado, arrSite, siglaSite, arrTipoAlarme, localidade } from "../../utils/pagListaAlarmes";
+import { arrEstado, arrTipoAlarme } from "../../utils/pagListaAlarmes";
 import { BackgroundStl, ModalTiposAlarmesStl } from "./styles";
 
 import * as yup from 'yup';
@@ -45,7 +45,10 @@ function ModalTiposAlarmesInfraComponente({
             toast.success("Tipo de Alarme adicionado com sucesso!")
             setOpenTipoAlarme(!openTipoAlarme)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.error(err)
+            toast.error("Erro ao adicionar Tipo de Alarme!")
+        })
     }
 
     const handleUfChange = (event) => {

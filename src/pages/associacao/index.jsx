@@ -12,6 +12,7 @@ import { useState } from "react";
 import BoxNomeGrupoComponente from "../../components/BoxNomeGrupo";
 import { AssociacaoContext } from "../../providers/associacao";
 import ModalExcludeTipoAlarmeComponent from "../../components/ModalExcludeTipoAlarme";
+import { toast } from "react-toastify";
 
 function Associacao() {
   const [grupoAtuacao, setGrupoAtuacao] = useState([]);
@@ -35,7 +36,9 @@ function Associacao() {
       });
       setGrupoAtuacao(response.data);
       setGrupoAtuacaoAss(response.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupos de atuação!");
+    }
   };
 
   const allGroupsAlarme = async () => {
@@ -46,26 +49,36 @@ function Associacao() {
         },
       });
       setGrupoAlarme(response.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Erro ao listar grupos de alarme!");
+    }
   };
 
   const filterAlarmesOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAlarme(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAlarme(response.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de alarme!");
+    }
   }
 
   const filterAtuacaoOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value: e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGrupoAtuacao(response.data);
-    setGrupoAtuacaoAss(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-atuacao/filter`, {value: e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGrupoAtuacao(response.data);
+      setGrupoAtuacaoAss(response.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de atuação!");
+    }
   }
 
   useEffect(() => {

@@ -35,7 +35,10 @@ function ModalAlterarPlantao({ idUser }) {
         setDateTurns(res.data.datas)
         setDateTurnsOld(res.data.datas)
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.error(err)
+      toast.error("Erro ao buscar usuários!");
+    })
   },[setDateTurns,setDateTurnsOld])
 
   const handleDateChange = (date) => {
@@ -83,7 +86,10 @@ function ModalAlterarPlantao({ idUser }) {
         setAlterarPlantao(false)
         setAlterarPlantaoPagUser(false)
       })
-      .catch(err => console.log(err))      
+      .catch(err => {
+        console.error("Erro ao criar plantão.",err)
+        toast.error("Erro ao criar plantão.")
+      })      
     })
 
     dateTurnsSubmmit.forEach((data)=>{
@@ -101,7 +107,10 @@ function ModalAlterarPlantao({ idUser }) {
         setAlterarPlantao(false)
         setAlterarPlantaoPagUser(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.error("Erro ao submeter datas de plantão",err)
+        toast.error("Erro ao submeter datas de plantão")
+      })
     })
                     
     

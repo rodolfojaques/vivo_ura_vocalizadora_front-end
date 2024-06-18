@@ -15,6 +15,7 @@ import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
 import ModalTiposAlarmesTemsComponente from "../../components/ModalTiposAlarmesTems";
 import ModalTiposAlarmesInfraComponente from "../../components/ModalTiposAlarmes";
 import ModalFilterInput from "../../components/ModalFilterInput";
+import { toast } from "react-toastify";
 
 function GruposDeAlarmes() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
@@ -46,7 +47,10 @@ function GruposDeAlarmes() {
       .then((res) => {
         setGruposAlarmes(res.data);
       })
-      .catch((err) => console.log(err));    
+      .catch((err) => {
+        console.error(err)
+        toast.error("Erro ao listar grupos de alarme!");
+      });    
   }
 
   const getGpAlarmesTems = () => {
@@ -60,24 +64,37 @@ function GruposDeAlarmes() {
       .then((res) => {
         setGruposAlarmesTems(res.data);
       })
-      .catch((err) => console.log(err));    
+      .catch((err) => {
+        console.error(err)
+        toast.error("Erro ao listar grupos de alarme!");
+      });    
   }
   const filterInfraOnChange = async (e)=> {
-    const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGruposAlarmes(response.data);
+    try {
+      const response = await axios.post(`${baseURL}/grupos-alarmes/filter`, {value:e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGruposAlarmes(response.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de alarme!");
+    }
+
   }
 
   const filterTemsOnChange = async (e)=> {
-    const responseTems = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value: e.target.value}, {
-      headers: {
-        Authorization: `Bearer ${usuario.token}`,
-      },
-    });
-    setGruposAlarmesTems(responseTems.data);
+    try {
+      const responseTems = await axios.post(`${baseURL}/grupos-alarmes-tems/filter`, {value: e.target.value}, {
+        headers: {
+          Authorization: `Bearer ${usuario.token}`,
+        },
+      });
+      setGruposAlarmesTems(responseTems.data);      
+    } catch (error) {
+      toast.error("Erro ao filtrar grupos de alarme!");
+    }
+
   }
 
   useEffect(() => {
@@ -97,9 +114,11 @@ function GruposDeAlarmes() {
       })
       .then((res) => {
         setOpenExcludeAlarme(!openExcludeAlarme)
-        console.log(res.status);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err)
+        toast.error("Erro ao deletar grupo de alarme!");
+      });
   };
 
   return (

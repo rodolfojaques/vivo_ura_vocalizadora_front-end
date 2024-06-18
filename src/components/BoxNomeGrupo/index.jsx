@@ -11,9 +11,6 @@ function BoxNomeGrupoComponente({
   grupo,
   tipoGrupo,
   tipoAssociacao,
-  listaGruposAlarmes,
-  setListaGruposAlarmes,
-  grupoSelecionado,
   setGrupoSelecionado,
   openModalExclude,
   setOpenModalExclude,
@@ -21,7 +18,6 @@ function BoxNomeGrupoComponente({
   setOpenTipoAlarme,
   openExcludeAlarme,
   setOpenExcludeAlarme,
-  idGpAlarme,
   setIdGpAlarme,
   setTypeGpAlarme
 }) {
@@ -49,7 +45,6 @@ function BoxNomeGrupoComponente({
   } = useContext(AssociacaoContext);
 
   const {
-    typeGP,
     setTypeGP,
   } = useContext(AssociacaoTemsContext);
 

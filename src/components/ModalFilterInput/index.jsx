@@ -98,7 +98,7 @@ function ModalFilterInput(){
                         <div className="line-input">
                             <label htmlFor="" className="label-inputs">estadoSigla</label>
                             <select name="" id="" className="inputs" {...register("estadoSigla")}>
-                                <option value={null}>Selecionar...</option>
+                                <option value={null}>{null}</option>
                                 {arrEstado.map((uf,i)=>{
                                     return <option key={i} value={uf}>{uf}</option>
                                 })}                                
@@ -113,14 +113,12 @@ function ModalFilterInput(){
                             <input type="text" className="inputs" placeholder="(Ex: U2020_HUAWEI_TAISHANCOREVIVO1)"  {...register("manager")}/>
                         </div>
                         <div className="line-input">
-                            <label htmlFor="" className="label-inputs">severity</label>
-                            <select name="" id="" className="inputs" {...register("severity")}>
-                                <option value={null}>Selecionar...</option>
-                                <option value={5}>CRITICO</option>
-                                <option value={4}>MAJORITARIO</option>
-                                <option value={3}>MINORITARIO</option>
-                                <option value={2}>AVISO</option>
-                                <option value={1}>INDETERMINADO</option>
+                            <label htmlFor="" className="label-inputs">classificacao</label>
+                            <select name="" id="" className="inputs" {...register("classificacao")}>
+                                <option value={null}>{null}</option>
+                                <option value={"5CRITICO"}>CRITICO</option>
+                                <option value={"4MAJORITARIO"}>MAJORITARIO</option>
+                                <option value={"3MINORITARIO"}>MINORITARIO</option>
                             </select>
                         </div>
                         <div className="btn_form">

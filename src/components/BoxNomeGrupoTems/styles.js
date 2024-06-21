@@ -53,7 +53,7 @@ export const BoxNomeGrupoStl = styled.li`
     border: solid white;
     border-radius: 5px;
     width: 100%;
-    height: 12rem;
+    height: 10.2rem;
 
     display: flex;
     justify-content: flex-start;

@@ -33,7 +33,7 @@ function ListaDeAlarmesTemsProvider({ children }) {
       frontPlantType: data.frontPlantType || null,
       specificProblem: data.specificProblem || null,
       frontAlarmId: data.frontAlarmId || null,
-      severity: data.severity || null,
+      classificacao: data.classificacao || null,
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
       ULTIMOS_EM: data.ULTIMOS_EM || null,

@@ -23,22 +23,23 @@ function ModalTiposAlarmesTemsComponente({
         usuario
     } = useContext(UserContext)
 
-    const schema = yup.object().shape({
-        estadoSigla: yup.string().required("*Campo obrigatório"),
-        specificProblem: yup.string().required("*Campo obrigatório"),
-        manager: yup.string().required("*Campo obrigatório"),
-        tipoTA: yup.string().required("*Campo obrigatório"),
-        tipoDeAlarme: yup.string().required("*Campo obrigatório"),
-        tipoRede: yup.string().required("*Campo obrigatório"),
-        tipoPlanta: yup.string().required("*Campo obrigatório"),
-        tipoFalha: yup.string().required("*Campo obrigatório"),
-    })
+    // const schema = yup.object().shape({
+    //     estadoSigla: yup.string().required("*Campo obrigatório"),
+    //     specificProblem: yup.string().required("*Campo obrigatório"),
+    //     manager: yup.string().required("*Campo obrigatório"),
+    //     frontTypeTa: yup.string().required("*Campo obrigatório"),
+    //     // tipoDeAlarme: yup.string().required("*Campo obrigatório"),
+    //     frontNetworkType: yup.string().required("*Campo obrigatório"),
+    //     frontPlantType: yup.string().required("*Campo obrigatório"),
+    //     frontTypeFailure: yup.string().required("*Campo obrigatório"),
+    // })
 
     const {register, handleSubmit, formState: { errors }} = useForm({
-        resolver: yupResolver(schema)
+        // resolver: yupResolver(schema)
     })
 
     const formSchema = data => {
+        console.log(data);
         axios.post(`${baseURL}/tipos-alarmes-tems/register/${idGpAlarme}`,data,{
             headers:{
                 'Content-Type': 'application/json',
@@ -126,7 +127,7 @@ function ModalTiposAlarmesTemsComponente({
                                 estadoSigla
                             </label>
                             <select  className="campos campos_dropDown" {...register("estadoSigla")}>
-                                <option value={null}>Selecione...</option>
+                                <option value={null}>{null}</option>
                                 {
                                     arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                
@@ -139,7 +140,7 @@ function ModalTiposAlarmesTemsComponente({
                                 specificProblem
                             </label>
                             <select  className="campos campos_dropDown" {...register("specificProblem")}>
-                                <option value={null}>Selecione...</option>
+                                <option value={null}>{null}</option>
                                 {
                                     setSpecificProblem.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                     
@@ -152,33 +153,33 @@ function ModalTiposAlarmesTemsComponente({
                                 manager
                             </label>
                             <select  className="campos campos_dropDown" {...register("manager")}>
-                                    <option value={null}>Selecione...</option>
+                                    <option value={null}>{null}</option>
                                     <option value="SLA2">SLA2</option>
                                     <option value="SLA3">SLA3</option>
                                     <option value="SLA4">SLA4</option>                                    
                             </select>
                         </div>
                     </div>
-                    <div className="container_campos">
+                    {/* <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
                                 tipoDeAlarme
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoDeAlarme")}>
-                                <option value={null}>Selecione...</option>
+                                <option value={null}>{null}</option>
                                 {
                                     setTipoDeAlarme.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                    
                             </select>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                tipoTA
+                                frontTypeTa
                             </label>
-                            <select className="campos campos_dropDown" {...register("tipoTA")}>
-                                <option value={null}>Selecione...</option>
+                            <select className="campos campos_dropDown" {...register("frontTypeTa")}>
+                                <option value={null}>{null}</option>
                                 {
                                     setTipoTA.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                    
@@ -188,10 +189,10 @@ function ModalTiposAlarmesTemsComponente({
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                tipoPlanta
+                                frontPlantType
                             </label>
-                            <select className="campos campos_dropDown" {...register("tipoPlanta")}>
-                                <option value={null}>Selecione...</option>
+                            <select className="campos campos_dropDown" {...register("frontPlantType")}>
+                                <option value={null}>{null}</option>
                                 {
                                     setTipoPlanta.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                
@@ -201,10 +202,10 @@ function ModalTiposAlarmesTemsComponente({
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                tipoRede
+                                frontNetworkType
                             </label>
-                            <select className="campos campos_dropDown" {...register("tipoRede")}>
-                                <option value={null}>Selecione...</option>
+                            <select className="campos campos_dropDown" {...register("frontNetworkType")}>
+                                <option value={null}>{null}</option>
                                 {
                                     setTipoRede.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                               
@@ -214,10 +215,10 @@ function ModalTiposAlarmesTemsComponente({
                     <div className="container_campos">
                         <div className="container_intern_camp">
                             <label htmlFor="" className="label_campos">
-                                tipoFalha
+                                frontTypeFailure
                             </label>
-                            <select className="campos campos_dropDown" {...register("tipoFalha")}>
-                                <option value={null}>Selecione...</option>
+                            <select className="campos campos_dropDown" {...register("frontTypeFailure")}>
+                                <option value={null}>{null}</option>
                                 {
                                     setTipoFalha.map((item,i)=> <option key={i} value={item}>{item}</option>)
                                 }                                

@@ -116,9 +116,9 @@ function ModalFilterInput(){
                             <label htmlFor="" className="label-inputs">classificacao</label>
                             <select name="" id="" className="inputs" {...register("classificacao")}>
                                 <option value={null}>{null}</option>
-                                <option value={"5CRITICO"}>CRITICO</option>
-                                <option value={"4MAJORITARIO"}>MAJORITARIO</option>
-                                <option value={"3MINORITARIO"}>MINORITARIO</option>
+                                <option value={"5-CRITICO"}>CRITICO</option>
+                                <option value={"4-MAJORITARIO"}>MAJORITARIO</option>
+                                <option value={"3-MINORITARIO"}>MINORITARIO</option>
                             </select>
                         </div>
                         <div className="btn_form">
@@ -135,7 +135,7 @@ function ModalFilterInput(){
                                     <p className="line-param">estadoSigla: <span className="value-param">{!!prm.estadoSigla?prm.estadoSigla:"N/D"}</span></p>
                                     <p className="line-param">specificProblem: <span className="value-param">{!!prm.specificProblem?prm.specificProblem:"N/D"}</span></p>
                                     <p className="line-param">manager: <span className="value-param">{!!prm.manager?prm.manager:"N/D"}</span></p>
-                                    <p className="line-param">severity: <span className="value-param">{prm.severity?prm.severity:"N/D"}</span></p>
+                                    <p className="line-param">classificação: <span className="value-param">{prm.classificacao?prm.classificacao:"N/D"}</span></p>
                                     <Icon.XCircleFill
                                     color="darkorange"
                                     className="custom-icon"

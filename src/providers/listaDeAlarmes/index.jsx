@@ -25,6 +25,9 @@ function ListaDeAlarmesProvider({ children }) {
 
   const [dataPesq, setDataPesq] = useState({})
 
+  const [cols, setCols] = useState([]);
+  const [rows, setRows] = useState([]);
+
   const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
       TIPO_TA: data.TIPO_TA || null,
@@ -54,6 +57,10 @@ function ListaDeAlarmesProvider({ children }) {
           setArrAlarm(response.data.data)
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
+
+          setCols(Object.keys(response.data.data[0]))
+          setRows(response.data.data)
+
           return response.data        
       } else {
         const response = await axios
@@ -65,6 +72,10 @@ function ListaDeAlarmesProvider({ children }) {
           setArrAlarm(response.data.data)
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
+
+          setCols(Object.keys(response.data.data[0]))
+          setRows(response.data.data)
+
           return response.data         
       }
 
@@ -85,7 +96,8 @@ function ListaDeAlarmesProvider({ children }) {
         pageInd, 
         setPageInd,
         pag, setPag, pagSiz, setPagSiz, linhas, setLinhas, typeFilter, setTypeFilter,
-        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq
+        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq,
+        cols, setCols, rows, setRows
       }}
     >
       {children}

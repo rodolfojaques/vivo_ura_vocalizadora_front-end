@@ -6,6 +6,7 @@ import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
 import { siglaSite, arrEstado, arrTipoAlarme, ultAlarmesEm, localidade } from "../../utils/pagListaAlarmes";
 import { useForm } from "react-hook-form";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
+import TableDragTest from "../../components/tableDragTest";
 
 function ListaDeAlarmes() {
   const {
@@ -198,7 +199,8 @@ function ListaDeAlarmes() {
           />
         </div>
       </div>
-      <TableComponent />
+      {/* <TableComponent /> */}
+      <TableDragTest />
     </ListaDeAlarmesStl>
   );
 }

@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import { UserContext } from "../user";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { DtoSG } from "../../utils/pagListaAlarmes/dtos";
 
 export const ListaDeAlarmesContext = createContext();
 
@@ -57,9 +58,11 @@ function ListaDeAlarmesProvider({ children }) {
           setArrAlarm(response.data.data)
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
+          
+          const dto = await DtoSG(response.data.data)
 
-          setCols(Object.keys(response.data.data[0]))
-          setRows(response.data.data)
+          setCols(Object.keys(dto[0]))
+          setRows(dto)
 
           return response.data        
       } else {
@@ -73,8 +76,10 @@ function ListaDeAlarmesProvider({ children }) {
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
 
-          setCols(Object.keys(response.data.data[0]))
-          setRows(response.data.data)
+          const dto = await DtoSG(response.data.data)
+
+          setCols(Object.keys(dto[0]))
+          setRows(dto)
 
           return response.data         
       }

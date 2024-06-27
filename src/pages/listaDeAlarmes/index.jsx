@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
-import TableComponent from "../../components/tableReact";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
 import { siglaSite, arrEstado, arrTipoAlarme, ultAlarmesEm, localidade } from "../../utils/pagListaAlarmes";
 import { useForm } from "react-hook-form";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
-import TableDragTest from "../../components/tableDragTest";
+import TableDragSGInfra from "../../components/tableSGInfra";
 
 function ListaDeAlarmes() {
   const {
@@ -199,8 +198,7 @@ function ListaDeAlarmes() {
           />
         </div>
       </div>
-      {/* <TableComponent /> */}
-      <TableDragTest />
+      <TableDragSGInfra />
     </ListaDeAlarmesStl>
   );
 }

@@ -25,21 +25,22 @@ function TableDragSGInfra(){
     };
 
     const handleDragOver = e => e.preventDefault();
+
     const handleDragEnter = e => {
-    const { id } = e.target;
-    setDragOver(id);
+        const { id } = e.target;
+        setDragOver(id);
     };
 
     const handleOnDrop = e => {
-    const { id } = e.target;
-    const droppedColIdx = cols.indexOf(id);
-    const draggedColIdx = e.dataTransfer.getData("colIdx");
-    const tempCols = [...cols];
+        const { id } = e.target;
+        const droppedColIdx = cols.indexOf(id);
+        const draggedColIdx = e.dataTransfer.getData("colIdx");
+        const tempCols = [...cols];
 
-    tempCols[draggedColIdx] = cols[droppedColIdx];
-    tempCols[droppedColIdx] = cols[draggedColIdx];
-    setCols(tempCols);
-    setDragOver("");
+        tempCols[draggedColIdx] = cols[droppedColIdx];
+        tempCols[droppedColIdx] = cols[draggedColIdx];
+        setCols(tempCols);
+        setDragOver("");
     };
 
     useEffect(() => {
@@ -76,11 +77,11 @@ function TableDragSGInfra(){
                         {Object.entries(row).map(([k, v], idx) => (
                             k === "ALARME"?
                             <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={idx}>
-                            {row[cols[idx]]}
+                                {row[cols[idx]]}
                             </td>
                             :
                             <td key={idx}>
-                            {row[cols[idx]]}
+                                {row[cols[idx]]}
                             </td>
                         ))}
                         </tr>

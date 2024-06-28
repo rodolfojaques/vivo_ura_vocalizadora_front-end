@@ -6,15 +6,41 @@ function TableTemsComponent(){
     const {
         totalItems,
         pageCount,
-        arrAlarm,
         filterAlarmes,
-        pagSiz, pag, setPag, dataPesq
+        pagSiz, pag, setPag, dataPesq,
+        cols, setCols, rows
     } = useContext(ListaDeAlarmesTemsContext)
 
     const [data, setData] = useState([]);
+    const [dragOver, setDragOver] = useState("");
 
     const updateData = (newData) => {
         setData(() => newData);
+    };
+
+    const handleDragStart = e => {
+        const { id } = e.target;
+        const idx = cols.indexOf(id);
+        e.dataTransfer.setData("colIdx", idx);
+    };
+
+    const handleDragOver = e => e.preventDefault();
+
+    const handleDragEnter = e => {
+        const { id } = e.target;
+        setDragOver(id);
+    };
+
+    const handleOnDrop = e => {
+        const { id } = e.target;
+        const droppedColIdx = cols.indexOf(id);
+        const draggedColIdx = e.dataTransfer.getData("colIdx");
+        const tempCols = [...cols];
+
+        tempCols[draggedColIdx] = cols[droppedColIdx];
+        tempCols[droppedColIdx] = cols[draggedColIdx];
+        setCols(tempCols);
+        setDragOver("");
     };
   
     useEffect(() => {
@@ -28,53 +54,36 @@ function TableTemsComponent(){
                 <table>
                     <thead>
                         <tr>
-                            <th>firstSeen</th>
-                            <th>frontTypeTa</th>
-                            <th>frontNetworkType</th>
-                            <th>estadoSigla</th>
-                            <th>localidadeSigla</th>
-                            <th>frontAlarmId</th>
-                            <th>frontTypeFailure</th>
-                            <th>frontPlantType</th>
-                            <th>classificacao</th>
-                            <th>severity</th>
-                            <th>frontSpecificProblem</th>
-                            <th>specificProblem</th>
-                            <th>frontDomain</th>
-                            <th>familia</th>
-                            <th>frontProblemCause</th>
-                            <th>manager</th>
-                            <th>frontVendor</th>
-                            <th>identifier</th>
-                            <th>lastSeen</th>
-                            <th>ta</th>
+                            {cols.map((col,i) => (
+                            <th
+                                id={col}
+                                key={i}
+                                draggable
+                                onDragStart={handleDragStart}
+                                onDragOver={handleDragOver}
+                                onDrop={handleOnDrop}
+                                onDragEnter={handleDragEnter}
+                            >
+                                {col}
+                            </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            arrAlarm.map(data=><tr>
-                            <td>{data.firstSeen}</td>
-                            <td>{data.persistent_frontTypeTa}</td>
-                            <td>{data.persistent_frontNetworkType}</td>
-                            <td>{data.persistent_estadoSigla}</td>
-                            <td>{data.persistent_localidadeSigla}</td>
-                            <td>{data.persistent_frontAlarmId}</td>
-                            <td>{data.persistent_frontTypeFailure}</td>
-                            <td>{data.persistent_frontPlantType}</td>
-                            <td>{data.persistent_classificacao}</td>
-                            <td>{data.severity}</td>
-                            <td>{data.persistent_frontSpecificProblem}</td>
-                            <td>{data.persistent_specificProblem}</td>
-                            <td>{data.persistent_frontDomain}</td>
-                            <td>{data.persistent_familia}</td>
-                            <td>{data.persistent_frontProblemCause}</td>
-                            <td>{data.manager}</td>
-                            <td>{data.persistent_frontVendor}</td>
-                            <td>{data.identifier}</td>
-                            <td>{data.lastSeen}</td>
-                            <td>{data.persistent_ta}</td>
-                        </tr>)
-                        }                        
+                    {rows.map((row, i) => (
+                        <tr key={i}>
+                        {Object.entries(row).map(([k, v], idx) => (
+                            k === "ALARME"?
+                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={idx}>
+                                {row[cols[idx]]}
+                            </td>
+                            :
+                            <td key={idx}>
+                                {row[cols[idx]]}
+                            </td>
+                        ))}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>             
             </div>

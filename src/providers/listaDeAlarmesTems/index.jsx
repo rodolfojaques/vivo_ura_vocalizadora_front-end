@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import { UserContext } from "../user";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { DtoDL } from "../../utils/pagListaAlarmes/dtos";
 
 export const ListaDeAlarmesTemsContext = createContext();
 
@@ -24,6 +25,9 @@ function ListaDeAlarmesTemsProvider({ children }) {
   const [pageCount, setPageCount] = useState(0);
 
   const [dataPesq, setDataPesq] = useState({})
+
+  const [cols, setCols] = useState([]);
+  const [rows, setRows] = useState([]);
 
   const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
@@ -54,6 +58,12 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setArrAlarm(response.data.data)
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
+          
+          const dto = await DtoDL(response.data.data)
+
+          setCols(Object.keys(dto[0]))
+          setRows(dto)
+
           return response.data        
       } else {
         const response = await axios
@@ -65,6 +75,12 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setArrAlarm(response.data.data)
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
+          
+          const dto = await DtoDL(response.data.data)
+
+          setCols(Object.keys(dto[0]))
+          setRows(dto)
+
           return response.data         
       }
 
@@ -85,7 +101,7 @@ function ListaDeAlarmesTemsProvider({ children }) {
         pageInd, 
         setPageInd,
         pag, setPag, pagSiz, setPagSiz, linhas, setLinhas, typeFilter, setTypeFilter,
-        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq
+        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq, cols, setCols, rows, setRows
       }}
     >
       {children}

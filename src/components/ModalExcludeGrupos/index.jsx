@@ -58,7 +58,6 @@ function ModalExcludeGruposComponent({
               <button
                 onClick={() => {
                   deleteOnClick(grupo);
-                  setOpenModalExclude(!openModalExclude);
                 }}
                 className="btn excluir"
               >

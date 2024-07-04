@@ -16,6 +16,8 @@ import ModalTiposAlarmesTemsComponente from "../../components/ModalTiposAlarmesT
 import ModalTiposAlarmesInfraComponente from "../../components/ModalTiposAlarmes";
 import ModalFilterInput from "../../components/ModalFilterInput";
 import { toast } from "react-toastify";
+import ModalCargaMassiva from "../../components/ModalCargaMassivaSG";
+import ModalCargaMassivaDL from "../../components/ModalCargaMassivaDL";
 
 function GruposDeAlarmes() {
   const [grupoSelecionado, setGrupoSelecionado] = useState({});
@@ -34,7 +36,7 @@ function GruposDeAlarmes() {
 
   const [gruposAlarmesTems, setGruposAlarmesTems] = useState([]);
 
-  const { baseURL, usuario, openFilterInput } = useContext(UserContext);
+  const { baseURL, usuario, openFilterInput, openCargaMassiva, openCargaMassivaDL } = useContext(UserContext);
 
   const getGpAlarmesInfra = () => {
     axios
@@ -100,7 +102,7 @@ function GruposDeAlarmes() {
   useEffect(() => {
     getGpAlarmesInfra()
     getGpAlarmesTems()
-  }, [openModalExclude, openModalAlarm, openTipoAlarme, openExcludeAlarme, openTipoAlarmeTems]);
+  }, [openModalExclude, openModalAlarm, openTipoAlarme, openExcludeAlarme, openTipoAlarmeTems, openFilterInput, openCargaMassiva, openCargaMassivaDL]);
 
   const deleteOnClick = (grp) => {
     const URL = grp.typeTeam === "SG"? `${baseURL}/grupos-alarmes/delete/${grp.id}` : `${baseURL}/grupos-alarmes-tems/delete/${grp.id}`
@@ -113,7 +115,7 @@ function GruposDeAlarmes() {
         },
       })
       .then((res) => {
-        setOpenExcludeAlarme(!openExcludeAlarme)
+        setOpenModalExclude(!openModalExclude);
       })
       .catch((err) => {
         console.error(err)
@@ -240,6 +242,14 @@ function GruposDeAlarmes() {
       {
         !!openFilterInput?
         <ModalFilterInput></ModalFilterInput>:<></>
+      }
+      {
+        !!openCargaMassiva?
+        <ModalCargaMassiva></ModalCargaMassiva>:<></>
+      }
+      {
+        !!openCargaMassivaDL?
+        <ModalCargaMassivaDL></ModalCargaMassivaDL>:<></>
       }
     </GruposDeAlarmesStl>
   );

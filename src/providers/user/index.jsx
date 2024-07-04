@@ -23,6 +23,9 @@ function UserProvider({ children }) {
   const [openExcludeFilterInput, setOpenExcludeFilterInput] = useState(false);  
   const [dadosExclude, setDadosExclude] = useState({});  
 
+  const [openCargaMassiva, setOpenCargaMassiva] = useState(false);
+  const [openCargaMassivaDL, setOpenCargaMassivaDL] = useState(false);
+
   useEffect(() => {
     if (usuario?.user?.perfil?.toLowerCase() === "operador") {
       setRole(true);
@@ -52,7 +55,9 @@ function UserProvider({ children }) {
         openFilterInput, 
         setOpenFilterInput,
         dadosExclude, setDadosExclude,
-        openExcludeFilterInput, setOpenExcludeFilterInput
+        openExcludeFilterInput, setOpenExcludeFilterInput,
+        openCargaMassiva, setOpenCargaMassiva,
+        openCargaMassivaDL, setOpenCargaMassivaDL
       }}
     >
       {children}

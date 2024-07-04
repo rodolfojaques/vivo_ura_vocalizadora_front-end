@@ -36,6 +36,63 @@ export const ContainerGruposStl = styled.section`
         }
     }
 
+    .div_cargaMassiva{
+        height: 3rem;
+        width: 10rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .15rem;
+
+        border: solid purple;
+        border-radius: 50px;
+        background-color: purple;
+    }
+
+    .cm{
+        height: 2.7rem;
+        width: 5rem;
+        border-style: none;
+        background-color: white;
+
+        font-weight: 600;
+
+        cursor: pointer;
+        &:active{
+            opacity: .5;
+        }
+    }
+
+    .cm_sg{
+        border-radius: 50px 0 0 50px;
+        color: purple;
+    }
+
+    .cm_dl{
+        border-radius: 0 50px 50px 0;
+        color: rgba(255,200,0,1);
+    }
+
+    .btn_cargaMassiva{
+        border-style: none;
+        border-radius: 50px;
+
+        height: 3rem;
+        width: 10rem;
+
+        color:  rgba(255,200,0,1);
+        background-color: purple;
+
+        font-size: medium;
+        font-weight: bold;
+
+        cursor: pointer;
+        &:active{
+            opacity: .5;
+        }
+    }
+
     .btn_filter{
         width: auto;
 

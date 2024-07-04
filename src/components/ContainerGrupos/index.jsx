@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ContainerGruposStl } from "./styles";
 import { UserContext } from "../../providers/user";
 import * as Icon from "react-bootstrap-icons";
@@ -19,7 +19,9 @@ function ContainerGruposComponente({
     }
   };
 
-  const { role, openFilterInput, setOpenFilterInput } = useContext(UserContext);
+  const { role, openFilterInput, setOpenFilterInput, openCargaMassiva, setOpenCargaMassiva, openCargaMassivaDL, setOpenCargaMassivaDL } = useContext(UserContext);
+
+  const [openTransformBtnCargaMassiva, setOpenTransformBtnCargaMassiva] = useState(false)
 
   return (
     <>
@@ -40,6 +42,33 @@ function ContainerGruposComponente({
               >
                 Novo Grupo
               </button>
+              {
+                openTransformBtnCargaMassiva?
+                <div className="div_cargaMassiva"
+                  onPointerLeave={() => setOpenTransformBtnCargaMassiva(!openTransformBtnCargaMassiva)}
+                >
+                  <button className="cm cm_sg"
+                    onClick={() => setOpenCargaMassiva(!openCargaMassiva)}
+                  >
+                    SG-Infra
+                  </button>
+                  <button className="cm cm_dl"
+                    onClick={() => setOpenCargaMassivaDL(!openCargaMassivaDL)}
+                  >
+                    DL-TEMS
+                  </button>
+                </div>
+                :
+                <button
+                  disabled={role}
+                  onClick={() => ""}
+                  className="btn_cargaMassiva"
+                  onPointerEnter={() => setOpenTransformBtnCargaMassiva(!openTransformBtnCargaMassiva)}
+                >
+                  Carga Massiva
+                </button>                
+              }
+
               <button
                 disabled={role}
                 className="btn_novoGrupo btn_filter"

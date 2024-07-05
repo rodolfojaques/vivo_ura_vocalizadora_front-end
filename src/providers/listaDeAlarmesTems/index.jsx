@@ -60,9 +60,32 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setTotalItems(response.data.total)
           
           const dto = await DtoDL(response.data.data)
+          const cols = [
+            "firstSeen",
+            "frontTypeTa",
+            "frontNetworkType",
+            "estadoSigla",
+            "localidadeSigla",
+            "frontAlarmId",
+            "frontTypeFailure",
+            "frontPlantType",
+            "classificacao",
+            "severity",
+            "frontSpecificProblem",
+            "specificProblem",
+            "frontDomain",
+            "familia",
+            "frontProblemCause",
+            "manager",
+            "frontVendor",
+            "identifier",
+            "lastSeen",
+            "ta"
+          ]
 
-          setCols(Object.keys(dto[0]))
+          setCols(cols)
           setRows(dto)
+          setPag(response.data.currentPage)
 
           return response.data        
       } else {
@@ -76,10 +99,33 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
           
-          const dto = await DtoDL(response.data.data)
+          const dto = await DtoDL(response?.data?.data)
+          const cols = [
+            "firstSeen",
+            "frontTypeTa",
+            "frontNetworkType",
+            "estadoSigla",
+            "localidadeSigla",
+            "frontAlarmId",
+            "frontTypeFailure",
+            "frontPlantType",
+            "classificacao",
+            "severity",
+            "frontSpecificProblem",
+            "specificProblem",
+            "frontDomain",
+            "familia",
+            "frontProblemCause",
+            "manager",
+            "frontVendor",
+            "identifier",
+            "lastSeen",
+            "ta"
+          ]
 
-          setCols(Object.keys(dto[0]))
+          setCols(cols)
           setRows(dto)
+          setPag(response.data.currentPage)
 
           return response.data         
       }

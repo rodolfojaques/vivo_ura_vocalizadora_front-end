@@ -1,6 +1,8 @@
 export async function DtoSG(data) { 
     const transfer = []
 
+    if(data.length === 0) return transfer
+
     await data.forEach(async(el) => {
         const {
             DATA_APRESENTACAO,
@@ -84,6 +86,8 @@ export async function DtoSG(data) {
 
 export async function DtoDL(data) { 
   const transfer = []
+
+  if(data.length === 0) return transfer
 
   await data.forEach(async(el) => {
       const {

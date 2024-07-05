@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
+import { set } from "react-hook-form";
 
 function GruposDeAtuacao() {
   const [openModalGruposAtuacao, setOpenModalGruposAtuacao] = useState(false);
@@ -37,6 +38,7 @@ function GruposDeAtuacao() {
         },
       });
       toast.success("Grupo de atuação excluído com sucesso!");
+      setOpenModalExclude(!openModalExclude);
       setStateGrupo(!stateGrupo);
     } catch (error) {
       toast.error("Erro ao excluir grupo de atuação!");

@@ -37,7 +37,7 @@ function ModalCargaMassivaDL(){
             <ModalCargaMassivaStl onSubmit={handleSubmit(formSchema)}>
                 <h2 className="title">Carga Massiva Grupos de Alarmes DL-TEMS</h2>
                 <p className="text-info">
-                    {`" Para realizar o processo de carga massiva de grupos e tipos de alarmes, é necessário que o arquivo CSV esteja no seguinte formato: \n`} 
+                    <b>"</b>{` Para realizar o processo de carga massiva de grupos e tipos de alarmes, é necessário que o arquivo CSV esteja no seguinte formato: \n`} 
                     <br />
                     <br />
                     <b>NOME_GRUPO,estadoSigla,manager,specificProblem,frontNetworkType,frontTypeTa,frontPlantType,frontTypeFailure</b>
@@ -50,9 +50,7 @@ function ModalCargaMassivaDL(){
                     <span style={{color: "red"}}><b>{"Para valores que não serão declarados deixe o espaço em BRANCO mas respeite as virgulas (são 8 espaços, 7 vírgulas)"}</b></span>
                     <br />
                     <br />
-                    {`Os campos do documento devem ser separados por vírgula, tanto "CABEÇALHO" quanto as "LINHAS", os`}
-                    <br />
-                    {`campos 'estadoSigla' e 'specificProblem' DEVEM ser preenchidos, o restante dos campos são opcionais. "`}
+                    {`Os campos do documento devem ser separados por vírgula, tanto "CABEÇALHO" quanto as "LINHAS", os campos 'estadoSigla' e 'specificProblem' DEVEM ser preenchidos, o restante dos campos são opcionais. `}<b>"</b>
                 </p>
                 <form action="" className="form_carga_massiva">
                     <div className="line-input">

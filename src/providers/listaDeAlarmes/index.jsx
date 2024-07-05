@@ -60,9 +60,47 @@ function ListaDeAlarmesProvider({ children }) {
           setTotalItems(response.data.total)
           
           const dto = await DtoSG(response.data.data)
+          const cols = [
+            "DATA_APRESENTACAO",
+            "TA",
+            "TIPO_TA",
+            "TIPO_REDE",
+            "ESTADO",
+            "LOCALIDADE",
+            "SITE",
+            "TIPO_ALARME",
+            "CLASSIFICACAO",
+            "ID_EVENTO",
+            "ID_EQUIPAMENTO",
+            "RPA_STATUS",
+            "SIGITM_FLUXO",
+            "TIPO_BILHETE",
+            "TIPO_REDE_COD",
+            "TIPO_REDE_COD_INT",
+            "LOCALIDADE_COD",
+            "MUNICIPIO",
+            "ID_SITE",
+            "SEQUENCIA_ALARME",
+            "EMPRESA_MANUTENCAO",
+            "ALARME",
+            "TIPO_FALHA",
+            "TIPO_AFETACAO",
+            "EQUIPAMENTO",
+            "TIPO_CORRENTE_ELETRICA",
+            "CAPACIDADE",
+            "FABRICANTE",
+            "MODELO",
+            "SALAS_AFETADAS",
+            "HISTORICO",
+            "HISTORICO_TIPO",
+            "TIPO_PLANTA",
+            "TIPO_PLANTA_COD",
+            "ELEMENTO_SIGLA",
+          ]
 
-          setCols(Object.keys(dto[0]))
+          setCols(cols)
           setRows(dto)
+          setPag(response.data.currentPage)
 
           return response.data        
       } else {
@@ -76,17 +114,54 @@ function ListaDeAlarmesProvider({ children }) {
           setPageCount(response.data.pageCount)
           setTotalItems(response.data.total)
 
-          const dto = await DtoSG(response.data.data)
+          const dto = await DtoSG(response?.data?.data)
+          const cols = [
+            "DATA_APRESENTACAO",
+            "TA",
+            "TIPO_TA",
+            "TIPO_REDE",
+            "ESTADO",
+            "LOCALIDADE",
+            "SITE",
+            "TIPO_ALARME",
+            "CLASSIFICACAO",
+            "ID_EVENTO",
+            "ID_EQUIPAMENTO",
+            "RPA_STATUS",
+            "SIGITM_FLUXO",
+            "TIPO_BILHETE",
+            "TIPO_REDE_COD",
+            "TIPO_REDE_COD_INT",
+            "LOCALIDADE_COD",
+            "MUNICIPIO",
+            "ID_SITE",
+            "SEQUENCIA_ALARME",
+            "EMPRESA_MANUTENCAO",
+            "ALARME",
+            "TIPO_FALHA",
+            "TIPO_AFETACAO",
+            "EQUIPAMENTO",
+            "TIPO_CORRENTE_ELETRICA",
+            "CAPACIDADE",
+            "FABRICANTE",
+            "MODELO",
+            "SALAS_AFETADAS",
+            "HISTORICO",
+            "HISTORICO_TIPO",
+            "TIPO_PLANTA",
+            "TIPO_PLANTA_COD",
+            "ELEMENTO_SIGLA",
+          ]
 
-          setCols(Object.keys(dto[0]))
+          setCols(cols)
           setRows(dto)
+          setPag(response.data.currentPage)
 
           return response.data         
       }
 
     } catch (error) {
       console.error(error)
-      toast.error("Erro ao filtrar alarmes!");
     }
   };
 

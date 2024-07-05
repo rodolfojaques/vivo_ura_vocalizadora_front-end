@@ -46,6 +46,8 @@ export const ModalCargaMassivaStl = styled.div`
         line-height: 1.4;
         letter-spacing: 0.3px;
         word-spacing: 1.4px;
+
+        text-align: start;
     }
 
     .form_carga_massiva{

@@ -22,7 +22,7 @@ export const ContainerGruposStl = styled.section`
         border-radius: 50px;
 
         height: 3rem;
-        width: 10rem;
+        width: 18rem;
 
         color: white;
         background-color: rgba(0,130,255,1);
@@ -38,7 +38,7 @@ export const ContainerGruposStl = styled.section`
 
     .div_cargaMassiva{
         height: 3rem;
-        width: 10rem;
+        width: 18rem;
 
         display: flex;
         align-items: center;
@@ -52,7 +52,7 @@ export const ContainerGruposStl = styled.section`
 
     .cm{
         height: 2.7rem;
-        width: 5rem;
+        width: 9rem;
         border-style: none;
         background-color: white;
 
@@ -79,7 +79,7 @@ export const ContainerGruposStl = styled.section`
         border-radius: 50px;
 
         height: 3rem;
-        width: 10rem;
+        width: 18rem;
 
         color:  rgba(255,200,0,1);
         background-color: purple;
@@ -95,6 +95,7 @@ export const ContainerGruposStl = styled.section`
 
     .btn_filter{
         width: auto;
+        min-width: 18rem;
 
         color: white;
         background-color: rgba(255,200,0,1);

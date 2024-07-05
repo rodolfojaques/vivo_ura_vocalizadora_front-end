@@ -37,7 +37,7 @@ function ModalCargaMassiva(){
             <ModalCargaMassivaStl onSubmit={handleSubmit(formSchema)}>
                 <h2 className="title">Carga Massiva Grupos de Alarmes SG-Infra</h2>
                 <p className="text-info">
-                    {`" Para realizar o processo de carga massiva de grupos e tipos de alarmes, é necessário que o arquivo CSV esteja no seguinte formato: \n`} 
+                    <b>"</b>{` Para realizar o processo de carga massiva de grupos e tipos de alarmes, é necessário que o arquivo CSV esteja no seguinte formato: \n`} 
                     <br />
                     <br />
                     <b>NOME_GRUPO,UF,SITE,TIPO_ALARME,CLASSIFICACAO,LOCALIDADE</b>
@@ -47,7 +47,7 @@ function ModalCargaMassiva(){
                     O&M Y,RJ,RBD,BAT. DESC.,MAJORITARIO,RJO
                     <br />
                     <br />
-                    {`Os campos do documento devem ser separados por vírgula, tanto "CABEÇALHO" quanto as "LINHAS", e todos os campos DEVEM ser preenchidos. "`}
+                    {`Os campos do documento devem ser separados por vírgula, tanto "CABEÇALHO" quanto as "LINHAS", e todos os campos DEVEM ser preenchidos. `}<b>"</b>
                 </p>
                 <form action="" className="form_carga_massiva">
                     <div className="line-input">

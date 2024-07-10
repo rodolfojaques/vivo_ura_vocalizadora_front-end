@@ -10,17 +10,17 @@ import { toast } from "react-toastify";
 import * as Icon from "react-bootstrap-icons";
 
 function ModalFilterInput(){
-    const {baseURL, usuario, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
+    const {baseURL, msFilterURL, usuario, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
 
     const [parametros, setParametros] = useState([])
     const [atualizarParametros, setAtualizarParametros] = useState(false)
     const [dadosExclude, setDadosExclude] = useState({})
 
     const excludeParams = ()=>{
-        axios.delete(`${baseURL}/filter-input/${dadosExclude?.id}`,{
+        axios.delete(`${msFilterURL}/filter-input/${dadosExclude?.id}`,{
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${usuario?.token}`,
+            //   Authorization: `Bearer ${usuario?.token}`,
             }
         })
         .then((res)=> {
@@ -36,11 +36,11 @@ function ModalFilterInput(){
     }
 
     const listParam = ()=> {
-        axios.get(`${baseURL}/filter-input`,
+        axios.get(`${msFilterURL}/filter-input`,
         {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${usuario.token}`,
+            // Authorization: `Bearer ${usuario.token}`,
         },
         }
     )
@@ -70,11 +70,11 @@ function ModalFilterInput(){
             }            
         }
         
-        axios.post(`${baseURL}/filter-input`, newData,
+        axios.post(`${msFilterURL}/filter-input`, newData,
             {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${usuario.token}`,
+                // Authorization: `Bearer ${usuario.token}`,
             },
             }
         )

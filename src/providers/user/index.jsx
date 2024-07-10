@@ -4,7 +4,8 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const baseURL = "http://localhost:3000";
+  const baseURL = "http://localhost:3000"; // 10.215.19.183:443
+  const msFilterURL = "http://localhost:3002"; // 10.215.19.183:445
 
   const [usuario, setUsuario] = useState(
     JSON.parse(localStorage.getItem("usuario"))
@@ -38,6 +39,7 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         baseURL,
+        msFilterURL,
         usuario,
         usuarioClicado,
         setUsuarioClicado,

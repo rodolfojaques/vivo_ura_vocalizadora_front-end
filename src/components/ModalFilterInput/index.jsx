@@ -20,7 +20,6 @@ function ModalFilterInput(){
         axios.delete(`${msFilterURL}/filter-input/${dadosExclude?.id}`,{
             headers: {
               "Content-Type": "application/json",
-            //   Authorization: `Bearer ${usuario?.token}`,
             }
         })
         .then((res)=> {
@@ -40,7 +39,6 @@ function ModalFilterInput(){
         {
         headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${usuario.token}`,
         },
         }
     )
@@ -74,7 +72,6 @@ function ModalFilterInput(){
             {
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${usuario.token}`,
             },
             }
         )

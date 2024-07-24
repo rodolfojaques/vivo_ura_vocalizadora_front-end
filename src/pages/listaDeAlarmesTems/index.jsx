@@ -102,15 +102,8 @@ function ListaDeAlarmesTems() {
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
                 specificProblem
-              </label>
-              <select className="campos_dropDown" {...register("frontspecificProblem")}>
-                <option value={null}>{null}</option>
-                {setSpecificProblem.map((item, i) => (
-                  <option key={i} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
+              </label>              
+              <input type="text" className="campos_dropDown" placeholder="Ex: FALHA MONITORACAO REDE" {...register("specificProblem")}/>
             </div>
             {/* <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">

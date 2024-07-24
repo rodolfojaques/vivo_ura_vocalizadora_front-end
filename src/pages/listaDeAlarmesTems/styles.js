@@ -80,6 +80,11 @@ export const FormListAlarmTemsStl = styled.form`
         background-color: white;
 
         color: gray;
+
+        &::placeholder {
+          color: gray;
+          font-size: 12px;
+        }
       }
     }
   }

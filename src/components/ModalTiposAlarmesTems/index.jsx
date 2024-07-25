@@ -139,12 +139,7 @@ function ModalTiposAlarmesTemsComponente({
                             <label htmlFor="" className="label_campos">
                                 specificProblem
                             </label>
-                            <select  className="campos campos_dropDown" {...register("specificProblem")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    setSpecificProblem.map((item,i)=> <option key={i} value={item}>{item}</option>)
-                                }                                     
-                            </select>
+                            <input type="text" className="campos campos_dropDown" placeholder="Ex: FALHA MONITORACAO REDE" {...register("specificProblem")}/>
                         </div>
                     </div>
                     <div className="container_campos">

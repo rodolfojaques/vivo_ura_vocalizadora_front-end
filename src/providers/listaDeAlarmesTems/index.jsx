@@ -19,7 +19,7 @@ function ListaDeAlarmesTemsProvider({ children }) {
   const [pag, setPag] = useState(1)
   const [pagSiz, setPagSiz] = useState(10)
 
-  const [typeFilter, setTypeFilter] = useState("geral")
+  const [typeFilter, setTypeFilter] = useState([])
 
   const [totalItems, setTotalItems] = useState(20);
   const [pageCount, setPageCount] = useState(0);

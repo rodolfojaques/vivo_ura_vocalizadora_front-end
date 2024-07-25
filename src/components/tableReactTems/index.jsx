@@ -42,11 +42,6 @@ function TableTemsComponent(){
         setCols(tempCols);
         setDragOver("");
     };
-  
-    useEffect(() => {
-        filterAlarmes(dataPesq,pag,pagSiz)
-        updateData(data)
-    }, [pag, pagSiz]);
 
     return (
         <TableStl>

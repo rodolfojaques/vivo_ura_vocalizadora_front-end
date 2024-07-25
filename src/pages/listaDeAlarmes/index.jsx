@@ -34,8 +34,7 @@ function ListaDeAlarmes() {
     const data = {ALARME: event.target.value};
     setDataPesq(data)
     setTypeFilter("specifc")
-    setPag(1)
-    filterAlarmes(data,pag,pagSiz);
+    filterAlarmes(data,1,pagSiz);
   };
 
 

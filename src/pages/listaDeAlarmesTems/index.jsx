@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import { FormListAlarmTemsStl, ListaDeAlarmesTemsStl } from "./styles";
@@ -17,7 +17,8 @@ function ListaDeAlarmesTems() {
     pagSiz, 
     setPagSiz, 
     setTypeFilter,
-    setDataPesq
+    setDataPesq,
+    dataPesq,
   } = useContext(ListaDeAlarmesTemsContext);
 
   const {
@@ -36,9 +37,12 @@ function ListaDeAlarmesTems() {
     const data = {ALARME: event.target.value};
     setDataPesq(data)
     setTypeFilter("specifc")
-    setPag(1)
-    filterAlarmes(data,pag,pagSiz);
+    filterAlarmes(data,1,pagSiz);
   };
+
+  useEffect(() => {
+    filterAlarmes(dataPesq,pag,pagSiz)
+  }, [pag]);
 
   return (
     <ListaDeAlarmesTemsStl> 

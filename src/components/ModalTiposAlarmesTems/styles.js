@@ -65,6 +65,11 @@ export const ModalTiposAlarmesStl = styled.div`
                 border-style: none;
                 border: solid gray;
                 border-radius: 5px;
+
+                &::placeholder {
+                    color: gray;
+                    font-size: 12px;
+                }
             }
         }
     }

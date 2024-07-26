@@ -147,12 +147,7 @@ function ModalTiposAlarmesTemsComponente({
                             <label htmlFor="" className="label_campos">
                                 manager
                             </label>
-                            <select  className="campos campos_dropDown" {...register("manager")}>
-                                    <option value={null}>{null}</option>
-                                    <option value="SLA2">SLA2</option>
-                                    <option value="SLA3">SLA3</option>
-                                    <option value="SLA4">SLA4</option>                                    
-                            </select>
+                            <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSS_ATLAS" {...register("manager")}/>
                         </div>
                     </div>
                     {/* <div className="container_campos">

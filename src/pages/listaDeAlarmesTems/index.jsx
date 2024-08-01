@@ -42,7 +42,7 @@ function ListaDeAlarmesTems() {
 
   useEffect(() => {
     filterAlarmes(dataPesq,pag,pagSiz)
-  }, [pag]);
+  }, [pag,pagSiz]);
 
   return (
     <ListaDeAlarmesTemsStl> 

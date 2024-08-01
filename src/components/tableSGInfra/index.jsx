@@ -46,7 +46,7 @@ function TableDragSGInfra(){
     useEffect(() => {
         filterAlarmes(dataPesq,pag,pagSiz)
         updateData(data)
-    }, [pag]);
+    }, [pag,pagSiz]);
 
 
 

@@ -48,11 +48,13 @@ function ContainerGruposComponente({
                   onPointerLeave={() => setOpenTransformBtnCargaMassiva(!openTransformBtnCargaMassiva)}
                 >
                   <button className="cm cm_sg"
+                    disabled={role}
                     onClick={() => setOpenCargaMassiva(!openCargaMassiva)}
                   >
                     SG-Infra
                   </button>
                   <button className="cm cm_dl"
+                    disabled={role}
                     onClick={() => setOpenCargaMassivaDL(!openCargaMassivaDL)}
                   >
                     DL-TEMS

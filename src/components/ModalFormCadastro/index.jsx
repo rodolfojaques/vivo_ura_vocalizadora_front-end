@@ -87,11 +87,11 @@ function ModalFormCadastro({
   };
 
   const schemaUpdate = (data) => {
-    !!data.typeTeam ? (data.typeTeam = data.typeTeam) : (data.typeTeam = user.typeTeam);
-    !!data.nome ? (data.nome = data.nome) : (data.nome = user.nome);
-    !!data.email ? (data.email = data.email) : (data.email = user.email);
-    !!data.tel_cel ? (data.tel_cel = data.tel_cel) : (data.tel_cel = user.tel_cel);
-    !!data.perfil ? (data.perfil = data.perfil) : (data.perfil = user.perfil);
+    data.typeTeam = data.typeTeam || user.typeTeam;
+    data.nome = data.nome || user.nome;
+    data.email = data.email || user.email;
+    data.tel_cel = data.tel_cel || user.tel_cel;
+    data.perfil = data.perfil || user.perfil;
     delete data?.password;
 
     axios
@@ -132,11 +132,7 @@ function ModalFormCadastro({
                   <option value="DL">DL-Tems</option>
                 </select>
               </div>
-              {errors?.typeTeam?.message ? (
-                <span className="msg_error">{errors.typeTeam?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.typeTeam?.message)}
             </div>
             
             <div className="container_campos">
@@ -151,11 +147,7 @@ function ModalFormCadastro({
                   {...register("nome")}
                 />
               </div>
-              {errors?.nome?.message ? (
-                <span className="msg_error">{errors.nome?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.nome?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -169,11 +161,7 @@ function ModalFormCadastro({
                   {...register("RE")}
                 />
               </div>
-              {errors?.RE?.message ? (
-                <span className="msg_error">{errors.RE?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.RE?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -187,11 +175,7 @@ function ModalFormCadastro({
                   {...register("email")}
                 />
               </div>
-              {errors?.email?.message ? (
-                <span className="msg_error">{errors.email?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.email?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -205,11 +189,7 @@ function ModalFormCadastro({
                   {...register("tel_cel")}
                 />
               </div>
-              {errors?.tel_cel?.message ? (
-                <span className="msg_error">{errors.tel_cel?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.tel_cel?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -222,13 +202,8 @@ function ModalFormCadastro({
                   <option value="Admin">Admin</option>
                   <option value="UserAdm">UserAdm</option>
                 </select>
-                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")}/> */}
               </div>
-              {errors?.perfil?.message ? (
-                <span className="msg_error">{errors.perfil?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.perfil?.message)}
             </div>
             <div className="btn_form_cadastro">
               <button
@@ -258,11 +233,7 @@ function ModalFormCadastro({
                 <option value="DL">DL-Tems</option>
               </select>
             </div>
-            {errors?.typeTeam?.message ? (
-              <span className="msg_error">{errors.typeTeam?.message}</span>
-            ) : (
-              ""
-            )}
+            {showError(errors?.typeTeam?.message)}
           </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -277,11 +248,7 @@ function ModalFormCadastro({
                   defaultValue={user.nome}
                 />
               </div>
-              {errors?.nome?.message ? (
-                <span className="msg_error">{errors.nome?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.nome?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -296,11 +263,7 @@ function ModalFormCadastro({
                   defaultValue={user.RE}
                 />
               </div>
-              {errors?.RE?.message ? (
-                <span className="msg_error">{errors.RE?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.RE?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -315,11 +278,7 @@ function ModalFormCadastro({
                   defaultValue={user.email}
                 />
               </div>
-              {errors?.email?.message ? (
-                <span className="msg_error">{errors.email?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.email?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -334,11 +293,7 @@ function ModalFormCadastro({
                   defaultValue={user.tel_cel}
                 />
               </div>
-              {errors?.tel_cel?.message ? (
-                <span className="msg_error">{errors.tel_cel?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.tel_cel?.message)}
             </div>
             <div className="container_campos">
               <div className="container_intern_camp">
@@ -356,13 +311,8 @@ function ModalFormCadastro({
                   <option value="Admin">Admin</option>
                   <option value="UserAdm">UserAdm</option>
                 </select>
-                {/* <input type="text" className="campos" placeholder="Perfil do usuário..." {...register("perfil")} defaultValue={user.perfil}/> */}
               </div>
-              {errors?.perfil?.message ? (
-                <span className="msg_error">{errors.perfil?.message}</span>
-              ) : (
-                ""
-              )}
+              {showError(errors?.perfil?.message)}
             </div>
             <div className="btn_form_cadastro">
               <button
@@ -379,6 +329,10 @@ function ModalFormCadastro({
     </BackgroundStl>
 
   );
+}
+
+function showError(err){
+  if(!!err) return (<span className="msg_error">{err}</span>)  
 }
 
 export default ModalFormCadastro;

@@ -29,9 +29,7 @@ function ListaSG({
             className="pesquisa_sg"
             placeholder="Pesquisar..."
             onChange={(event) => {
-              tipoPag === "atuação"
-                ? handleValueChange(event)
-                : handleValueChange(event);
+              handleValueChange(event)
             }}
           />
           <h3 className="str_grup_sg">

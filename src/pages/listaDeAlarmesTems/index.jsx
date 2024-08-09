@@ -6,13 +6,12 @@ import { arrEstado, ultAlarmesEm } from "../../utils/pagListaAlarmes";
 import { useForm } from "react-hook-form";
 import TableTemsComponent from "../../components/tableReactTems";
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
-import { setSpecificProblem, setTipoDeAlarme, setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
+import { setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
 
 function ListaDeAlarmesTems() {
 
   const {
     filterAlarmes,
-    setPag,
     pag, 
     pagSiz, 
     setPagSiz, 

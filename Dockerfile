@@ -8,6 +8,12 @@ COPY package*.json ./
 
 RUN yarn
 
+# Copy SSL certificates to the container
+COPY app.ura.noc.redestlf.br.cer /usr/local/share/ca-certificates/
+
+# Update SSL certificates in the container
+RUN update-ca-certificates
+
 COPY . .
 
 RUN yarn build

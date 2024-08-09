@@ -69,7 +69,7 @@ export const ModalMenuStl = styled.div`
         align-items: flex-start;
         justify-content: flex-start;
         gap: .65rem;
-        padding: ${({typeModal})=> typeModal==="adm"? "1rem .8rem":"1rem .8rem"};
+        padding: 1rem .8rem;
 
         width: 100%;
         height: ${({typeModal})=> typeModal==="adm"? "4rem":"47rem"};

@@ -186,14 +186,13 @@ function BoxNomeGrupoTemsComponente({
                 {
                   grupo.tiposAlarmes.map((tipo)=> {
                     return<div className="alm_tipo_infos">
-                            <p className="info_tp_alm">{tipo.estadoSigla? tipo.estadoSigla : "N/D"}</p>
-                            <p className="info_tp_alm">{tipo.specificProblem? tipo.specificProblem : "N/D"}</p>
-                            <p className="info_tp_alm">{tipo.manager? tipo.manager : "N/D"}</p>
-                            {/* <p className="info_tp_alm">{tipo.tipoDeAlarme? tipo.tipoDeAlarme : "N/D"}</p> */}
-                            <p className="info_tp_alm">{tipo.frontPlantType? tipo.frontPlantType : "N/D"}</p>
-                            <p className="info_tp_alm">{tipo.frontNetworkType? tipo.frontNetworkType : "N/D"}</p>
-                            <p className="info_tp_alm">{tipo.frontTypeFailure? tipo.frontTypeFailure : "N/D"}</p>
-                            <p className="info_tp_alm">{tipo.frontTypeTa? tipo.frontTypeTa : "N/D"}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.estadoSigla)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.specificProblem)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.manager)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontPlantType)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontNetworkType)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontTypeFailure)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontTypeTa)}</p>
                           </div>
                   })
                 }                
@@ -299,6 +298,11 @@ function BoxNomeGrupoTemsComponente({
       )}
     </BoxNomeGrupoStl>
   );
+}
+
+function valueExists(str) {
+  const returnFunc = !!str? str : "N/D"
+  return returnFunc
 }
 
 export default BoxNomeGrupoTemsComponente;

@@ -48,7 +48,7 @@ function ListaDeAlarmesTemsProvider({ children }) {
     };
 
     try {
-      if(typeFilter === "geral"){
+      if(typeFilter == "geral"){
         const response = await axios
           .post(`${baseURL}/alarmes-tems?page=${page}&size=${pageSize}`, dataFilter, {
             headers: {

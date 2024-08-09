@@ -21,7 +21,7 @@ function AssociacaoTemsProvider({ children }) {
 
   const listGpAtuacaoTems = async () => {
     try {
-      axios.get(
+      await axios.get(
         `${baseURL}/grupos-atuacao/tems`,
         {
           headers: {

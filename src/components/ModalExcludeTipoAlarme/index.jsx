@@ -98,14 +98,14 @@ function ModalExcludeTipoAlarmeComponent({
             >
               <option>...</option>
               {typeGP === "SG" ?
-              grupoAtuacaoAss.map((grupo, i) => (
-                <option key={i} className="options" value={grupo.id}>
+              grupoAtuacaoAss.map((grupo) => (
+                <option key={grupo.id} className="options" value={grupo.id}>
                   {grupo.nomeGrupo}
                 </option>
               ))
               :
-              grupoAtuacaoTemsAss.map((grupo, i) => (
-                <option key={i} className="options" value={grupo.id}>
+              grupoAtuacaoTemsAss.map((grupo) => (
+                <option key={grupo.id} className="options" value={grupo.id}>
                   {grupo.nomeGrupo}
                 </option>
               ))
@@ -141,8 +141,8 @@ function ModalExcludeTipoAlarmeComponent({
               className="tipos"
             >
               <option>...</option>
-              {alarmes.map((alm, i) => (
-                <option key={i} className="options" value={alm.id}>{`
+              {alarmes.map((alm) => (
+                <option key={alm.id} className="options" value={alm.id}>{`
                           ${alm.uf || alm.estadoSigla}, ${alm.site || alm.specificProblem}, ${alm.tipoAlarme || alm.tipoDeAlarme}, ${alm.classificacao || alm.manager}, ${alm.localidade || alm.tipoPlanta}
                           `}</option>
               ))}
@@ -179,13 +179,13 @@ function ModalExcludeTipoAlarmeComponent({
               <option>...</option>
               {typeGP === "SG" ?
                 listGrupoAlarme.map((grupo, i) => (
-                  <option key={i} className="options" value={grupo.id}>
+                  <option key={grupo.id} className="options" value={grupo.id}>
                     {grupo.nomeGrupo}
                   </option>
                 ))
               :
                 listGrupoAlarmeTems.map((grupo, i) => (
-                  <option key={i} className="options" value={grupo.id}>
+                  <option key={grupo.id} className="options" value={grupo.id}>
                     {grupo.nomeGrupo}
                   </option>
                 ))         

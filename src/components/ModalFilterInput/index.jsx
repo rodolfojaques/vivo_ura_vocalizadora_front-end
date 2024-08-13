@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import * as Icon from "react-bootstrap-icons";
 
 function ModalFilterInput(){
-    const {baseURL, msFilterURL, usuario, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
+    const {msFilterURL, openFilterInput, setOpenFilterInput, openExcludeFilterInput, setOpenExcludeFilterInput} = useContext(UserContext)
 
     const [parametros, setParametros] = useState([])
     const [atualizarParametros, setAtualizarParametros] = useState(false)
@@ -51,7 +51,7 @@ function ModalFilterInput(){
     },[atualizarParametros,openExcludeFilterInput])
 
 
-    const {register, handleSubmit, formState: { errors }} = useForm({})
+    const {register, handleSubmit} = useForm({})
 
     const formSchema = async (data)=> {
         let newData = {}
@@ -96,8 +96,8 @@ function ModalFilterInput(){
                             <label htmlFor="" className="label-inputs">estadoSigla</label>
                             <select name="" id="" className="inputs" {...register("estadoSigla")}>
                                 <option value={null}>{null}</option>
-                                {arrEstado.map((uf,i)=>{
-                                    return <option key={i} value={uf}>{uf}</option>
+                                {arrEstado.map((uf)=>{
+                                    return <option key={uf} value={uf}>{uf}</option>
                                 })}                                
                             </select>
                         </div>
@@ -127,8 +127,8 @@ function ModalFilterInput(){
                 <section className="parametros-list">
                     <ul className="list-param">
                         {
-                            parametros.map((prm,i)=>{
-                                return <li key={i} className="line-list">
+                            parametros.map((prm)=>{
+                                return <li key={prm.id} className="line-list">
                                     <p className="line-param">estadoSigla: <span className="value-param">{!!prm.estadoSigla?prm.estadoSigla:"N/D"}</span></p>
                                     <p className="line-param">specificProblem: <span className="value-param">{!!prm.specificProblem?prm.specificProblem:"N/D"}</span></p>
                                     <p className="line-param">manager: <span className="value-param">{!!prm.manager?prm.manager:"N/D"}</span></p>

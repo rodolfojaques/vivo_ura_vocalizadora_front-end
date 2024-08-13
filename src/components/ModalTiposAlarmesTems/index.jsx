@@ -20,7 +20,7 @@ function ModalTiposAlarmesTemsComponente({
         usuario
     } = useContext(UserContext)
 
-    const {register, handleSubmit, formState: { errors }} = useForm({})
+    const {register, handleSubmit} = useForm({})
 
     const formSchema = data => {
         console.log(data);
@@ -54,7 +54,7 @@ function ModalTiposAlarmesTemsComponente({
                             <select  className="campos campos_dropDown" {...register("estadoSigla")}>
                                 <option value={null}>{null}</option>
                                 {
-                                    arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    arrEstado.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                                
                             </select>
                         </div>
@@ -83,7 +83,7 @@ function ModalTiposAlarmesTemsComponente({
                             <select className="campos campos_dropDown" {...register("frontTypeTa")}>
                                 <option value={null}>{null}</option>
                                 {
-                                    setTipoTA.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    setTipoTA.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                                    
                             </select>
                         </div>
@@ -96,7 +96,7 @@ function ModalTiposAlarmesTemsComponente({
                             <select className="campos campos_dropDown" {...register("frontPlantType")}>
                                 <option value={null}>{null}</option>
                                 {
-                                    setTipoPlanta.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    setTipoPlanta.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                
                             </select>
                         </div>
@@ -109,7 +109,7 @@ function ModalTiposAlarmesTemsComponente({
                             <select className="campos campos_dropDown" {...register("frontNetworkType")}>
                                 <option value={null}>{null}</option>
                                 {
-                                    setTipoRede.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    setTipoRede.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                               
                             </select>
                         </div>
@@ -122,7 +122,7 @@ function ModalTiposAlarmesTemsComponente({
                             <select className="campos campos_dropDown" {...register("frontTypeFailure")}>
                                 <option value={null}>{null}</option>
                                 {
-                                    setTipoFalha.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    setTipoFalha.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                                
                             </select>
                         </div>

@@ -91,7 +91,7 @@ function ModalTiposAlarmesInfraComponente({
         localidade: yup.string().required("*Campo obrigatório"),
     })
 
-    const {register, handleSubmit, formState: { errors }} = useForm({
+    const {register, handleSubmit} = useForm({
         resolver: yupResolver(schema)
     })
 
@@ -129,7 +129,7 @@ function ModalTiposAlarmesInfraComponente({
                             </label>
                             <select onClick={(e)=> handleUfClick(e.target.value)} className="campos campos_dropDown" {...register("uf")}>
                                 {
-                                    arrEstado.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    arrEstado.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                                
                             </select>
                         </div>
@@ -141,7 +141,7 @@ function ModalTiposAlarmesInfraComponente({
                             </label>
                             <select className="campos campos_dropDown" {...register("site")}>
                                 {
-                                    objSite[ufSelect].map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    objSite[ufSelect].map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                            
                             </select>
                         </div>
@@ -153,7 +153,7 @@ function ModalTiposAlarmesInfraComponente({
                             </label>
                             <select className="campos campos_dropDown" {...register("tipoAlarme")}>
                                 {
-                                    arrTipoAlarme.map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    arrTipoAlarme.map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                                
                             </select>
                         </div>
@@ -178,7 +178,7 @@ function ModalTiposAlarmesInfraComponente({
                             </label>
                             <select className="campos campos_dropDown" {...register("localidade")}>
                                 {
-                                    objLocal[ufSelect].map((item,i)=> <option key={i} value={item}>{item}</option>)
+                                    objLocal[ufSelect].map((item)=> <option key={item} value={item}>{item}</option>)
                                 }                               
                             </select>
                         </div>

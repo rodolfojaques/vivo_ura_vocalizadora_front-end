@@ -52,7 +52,7 @@ function TableUserComponent({columns,data,exibirLinhas}){
                                             cell.column.Header == "Perfil" && cell.row.original.typeTeam == "SG"?
                                             <span className="sg"> - SG-INFRA</span>
                                             :
-                                            cell.column.Header == "Perfil" && cell.row.original.typeTeam == "DL"?
+                                            cell.column.Header == "Perfil"?
                                             <span className="dl"> - DL-TEMS</span>:<></>
                                         }</td>;
                                     })}

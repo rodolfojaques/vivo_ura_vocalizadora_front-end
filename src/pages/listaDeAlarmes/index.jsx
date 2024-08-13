@@ -10,7 +10,6 @@ import TableDragSGInfra from "../../components/tableSGInfra";
 function ListaDeAlarmes() {
   const {
     filterAlarmes,
-    setPag,
     pag, 
     pagSiz, 
     setPagSiz, 
@@ -21,7 +20,6 @@ function ListaDeAlarmes() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm({});
 
   const formSchema = (data) => {
@@ -69,8 +67,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("ESTADO")}>
                 <option value={null}>{null}</option>
-                {arrEstado.map((item, i) => (
-                  <option key={i} value={item}>
+                {arrEstado.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -82,8 +80,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("LOCALIDADE")}>
                 <option value={null}>{null}</option>
-                {localidade.map((item, i) => (
-                  <option key={i} value={item}>
+                {localidade.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -95,8 +93,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("SITE")}>
                 <option value={null}>{null}</option>
-                {siglaSite.map((item, i) => (
-                  <option key={i} value={item}>
+                {siglaSite.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -108,8 +106,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("TIPO_ALARME")}>
                 <option value={null}>{null}</option>
-                {arrTipoAlarme.map((item, i) => (
-                  <option key={i} value={item}>
+                {arrTipoAlarme.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -160,8 +158,8 @@ function ListaDeAlarmes() {
                 </label>
                 <select className="campos_dropDown" {...register("ULTIMOS_EM")}>
                   <option value={null}>{null}</option>
-                  {ultAlarmesEm.map((item, i) => (
-                    <option key={i} value={item}>
+                  {ultAlarmesEm.map((item) => (
+                    <option key={item} value={item}>
                       {item}
                     </option>
                   ))}

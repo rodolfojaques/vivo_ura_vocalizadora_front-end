@@ -8,7 +8,7 @@ import { DtoDL } from "../../utils/pagListaAlarmes/dtos";
 export const ListaDeAlarmesTemsContext = createContext();
 
 function ListaDeAlarmesTemsProvider({ children }) {
-  const { baseURL, usuario } = useContext(UserContext);
+  const { baseURL } = useContext(UserContext);
   const [arrAlarm, setArrAlarm] = useState([]);
   const [arrAlarmInit, setArrAlarmInit] = useState([]);
 

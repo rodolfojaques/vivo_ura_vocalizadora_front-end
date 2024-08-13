@@ -174,7 +174,7 @@ function BoxNomeGrupoComponente({
               <div className="box_valores">
                 {
                   grupo.tiposAlarmes.map((tipo)=> {
-                    return<div className="alm_tipo_infos">
+                    return<div key={tipo?.id} className="alm_tipo_infos">
                             <p className="info_tp_alm">{tipo.uf}</p>
                             <p className="info_tp_alm">{tipo.site}</p>
                             <p className="info_tp_alm">{tipo.tipoAlarme}</p>

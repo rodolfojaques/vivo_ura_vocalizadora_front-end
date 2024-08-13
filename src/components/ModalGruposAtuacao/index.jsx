@@ -139,7 +139,7 @@ function ModalGruposAtuacaoComponente({
               className="form_gp_atuacao"
             >
               {selects.map((elem, index) => (
-                <div key={index} className="contCampos">
+                <div key={elem[0]?.RE} className="contCampos">
                   <label htmlFor="" className="label_campos">
                     Contato {index + 3}
                   </label>
@@ -317,7 +317,7 @@ function ModalGruposAtuacaoComponente({
                   </div>
                 </div>
                 {selects.map((elem, index) => (
-                  <div key={index} className="contCampos">
+                  <div key={elem[0]?.RE} className="contCampos">
                     <label htmlFor="" className="label_campos">
                       Contato {index + 3}
                     </label>

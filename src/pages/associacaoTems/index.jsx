@@ -97,7 +97,7 @@ function AssociacaoTems() {
         >
           {grupoAlarme.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
-              key={i}
+              key={grupo?.id}
               nome={grupo.nomeGrupo}
               grupo={grupo}
               tipoAssociacao={"associacao"}
@@ -110,7 +110,7 @@ function AssociacaoTems() {
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
-              key={i}
+              key={grupo?.id}
               tipoGrupo={"atuação"}
               nome={grupo.nomeGrupo}
               grupo={grupo}

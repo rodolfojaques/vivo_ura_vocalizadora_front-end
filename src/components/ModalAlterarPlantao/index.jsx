@@ -131,7 +131,7 @@ function ModalAlterarPlantao({ idUser }) {
           <Calendar onChange={handleDateChange} />
           <section className="list-datas">
             {dateTurns?.map((dateTurn, index) => (
-              <div className="div-datas" key={index} id={dateTurn?.id}>
+              <div className="div-datas" key={dateTurn?.id} id={dateTurn?.id}>
                 <p>
                   Data: {new Date(dateTurn.dia).toLocaleDateString()}
                   <button

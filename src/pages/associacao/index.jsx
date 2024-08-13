@@ -97,7 +97,7 @@ function Associacao() {
         >
           {grupoAlarme.map((grupo, i) => (
             <BoxNomeGrupoComponente
-              key={i}
+              key={grupo?.id}
               nome={grupo.nomeGrupo}
               grupo={grupo}
               tipoAssociacao={"associacao"}
@@ -110,7 +110,7 @@ function Associacao() {
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoComponente
-              key={i}
+              key={grupo?.id}
               tipoGrupo={"atuação"}
               nome={grupo.nomeGrupo}
               grupo={grupo}

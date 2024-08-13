@@ -23,7 +23,6 @@ function ListaDeAlarmesTems() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm({});
 
   const formSchema = (data) => {
@@ -56,8 +55,8 @@ function ListaDeAlarmesTems() {
               </label>
               <select className="campos_dropDown" {...register("frontTypeTa")}>
                 <option value={null}>{null}</option>
-                {setTipoTA.map((item, i) => (
-                  <option key={i} value={item}>
+                {setTipoTA.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -69,8 +68,8 @@ function ListaDeAlarmesTems() {
               </label>
               <select className="campos_dropDown" {...register("frontNetworkType")}>
                 <option value={null}>{null}</option>
-                {setTipoRede.map((item, i) => (
-                  <option key={i} value={item}>
+                {setTipoRede.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -82,8 +81,8 @@ function ListaDeAlarmesTems() {
               </label>
               <select className="campos_dropDown" {...register("estadoSigla")}>
                 <option value={null}>{null}</option>
-                {arrEstado.map((item, i) => (
-                  <option key={i} value={item}>
+                {arrEstado.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -95,8 +94,8 @@ function ListaDeAlarmesTems() {
               </label>
               <select className="campos_dropDown" {...register("frontPlantType")}>
                 <option value={null}>{null}</option>
-                {setTipoPlanta.map((item, i) => (
-                  <option key={i} value={item}>
+                {setTipoPlanta.map((item) => (
+                  <option key={item} value={item}>
                     {item}
                   </option>
                 ))}
@@ -108,19 +107,6 @@ function ListaDeAlarmesTems() {
               </label>              
               <input type="text" className="campos_dropDown" placeholder="Ex: FALHA MONITORACAO REDE" {...register("specificProblem")}/>
             </div>
-            {/* <div className="divDrop_down">
-              <label htmlFor="" className="label_dropDown">
-                frontAlarmId
-              </label>
-              <select className="campos_dropDown" {...register("frontAlarmId")}>
-                <option value={null}>{null}</option>
-                {setTipoDeAlarme.map((item, i) => (
-                  <option key={i} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div> */}
             <div className="divDrop_down">
               <label htmlFor="" className="label_dropDown">
                 classificacao
@@ -165,8 +151,8 @@ function ListaDeAlarmesTems() {
                 </label>
                 <select className="campos_dropDown" {...register("ULTIMOS_EM")}>
                   <option value={null}>{null}</option>
-                  {ultAlarmesEm.map((item, i) => (
-                    <option key={i} value={item}>
+                  {ultAlarmesEm.map((item) => (
+                    <option key={item} value={item}>
                       {item}
                     </option>
                   ))}

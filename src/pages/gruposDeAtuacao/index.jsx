@@ -15,7 +15,6 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { GrupoAtuacaoContext } from "../../providers/gruposAtuacao";
 import BoxNomeGrupoTemsComponente from "../../components/BoxNomeGrupoTems";
-import { set } from "react-hook-form";
 
 function GruposDeAtuacao() {
   const [openModalGruposAtuacao, setOpenModalGruposAtuacao] = useState(false);
@@ -134,7 +133,7 @@ function GruposDeAtuacao() {
         >
           {grupoAtuacao.map((grupo, i) => (
             <BoxNomeGrupoComponente
-              key={i}
+              key={grupo?.id}
               tipoGrupo={"atuação"}
               nome={grupo.nomeGrupo}
               grupo={grupo}
@@ -151,7 +150,7 @@ function GruposDeAtuacao() {
         >
           {grupoAtuacaoTems.map((grupo, i) => (
             <BoxNomeGrupoTemsComponente
-              key={i}
+              key={grupo?.id}
               tipoGrupo={"atuação"}
               nome={grupo.nomeGrupo}
               grupo={grupo}

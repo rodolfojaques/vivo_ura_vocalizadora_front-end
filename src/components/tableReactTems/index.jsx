@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { TableStl } from "./styles"
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems"
 
@@ -6,17 +6,9 @@ function TableTemsComponent(){
     const {
         totalItems,
         pageCount,
-        filterAlarmes,
-        pagSiz, pag, setPag, dataPesq,
+        pagSiz, pag, setPag,
         cols, setCols, rows
     } = useContext(ListaDeAlarmesTemsContext)
-
-    const [data, setData] = useState([]);
-    const [dragOver, setDragOver] = useState("");
-
-    const updateData = (newData) => {
-        setData(() => newData);
-    };
 
     const handleDragStart = e => {
         const { id } = e.target;
@@ -25,11 +17,6 @@ function TableTemsComponent(){
     };
 
     const handleDragOver = e => e.preventDefault();
-
-    const handleDragEnter = e => {
-        const { id } = e.target;
-        setDragOver(id);
-    };
 
     const handleOnDrop = e => {
         const { id } = e.target;
@@ -40,7 +27,6 @@ function TableTemsComponent(){
         tempCols[draggedColIdx] = cols[droppedColIdx];
         tempCols[droppedColIdx] = cols[draggedColIdx];
         setCols(tempCols);
-        setDragOver("");
     };
 
     return (
@@ -49,15 +35,14 @@ function TableTemsComponent(){
                 <table>
                     <thead>
                         <tr>
-                            {cols.map((col,i) => (
+                            {cols.map((col) => (
                             <th
                                 id={col}
-                                key={i}
+                                key={col}
                                 draggable
                                 onDragStart={handleDragStart}
                                 onDragOver={handleDragOver}
                                 onDrop={handleOnDrop}
-                                onDragEnter={handleDragEnter}
                             >
                                 {col}
                             </th>
@@ -65,15 +50,15 @@ function TableTemsComponent(){
                         </tr>
                     </thead>
                     <tbody>
-                    {rows.map((row, i) => (
-                        <tr key={i}>
+                    {rows.map((row) => (
+                        <tr key={row?.id}>
                         {Object.entries(row).map(([k, v], idx) => (
                             k === "ALARME"?
-                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={idx}>
+                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={v}>
                                 {row[cols[idx]]}
                             </td>
                             :
-                            <td key={idx}>
+                            <td key={v}>
                                 {row[cols[idx]]}
                             </td>
                         ))}

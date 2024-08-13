@@ -9,7 +9,7 @@ import axios from "axios";
 function ModalCargaMassiva(){
     const { usuario, baseURL, openCargaMassiva, setOpenCargaMassiva } = useContext(UserContext);
     
-    const {register, handleSubmit, formState: { errors }} = useForm({})
+    const {register, handleSubmit} = useForm({})
 
     const formSchema = async (data)=> {
         const formData = new FormData();

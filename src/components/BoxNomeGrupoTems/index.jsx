@@ -185,7 +185,7 @@ function BoxNomeGrupoTemsComponente({
               <div className="box_valores">
                 {
                   grupo.tiposAlarmes.map((tipo)=> {
-                    return<div className="alm_tipo_infos">
+                    return<div key={tipo?.id} className="alm_tipo_infos">
                             <p className="info_tp_alm">{valueExists(tipo.estadoSigla)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.specificProblem)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.manager)}</p>

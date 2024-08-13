@@ -140,7 +140,7 @@ function GruposDeAlarmes() {
           {gruposAlarmes ? (
             gruposAlarmes.map((grupo, i) => (
               <BoxNomeGrupoComponente
-                key={i}
+                key={grupo?.id}
                 nome={grupo.nomeGrupo}
                 grupo={grupo}
                 grupoSelecionado={grupoSelecionado}
@@ -166,7 +166,7 @@ function GruposDeAlarmes() {
           {gruposAlarmesTems ? (
             gruposAlarmesTems.map((grupo, i) => (
               <BoxNomeGrupoTemsComponente
-                key={i}
+                key={grupo?.id}
                 nome={grupo.nomeGrupo}
                 grupo={grupo}
                 grupoSelecionado={grupoSelecionado}

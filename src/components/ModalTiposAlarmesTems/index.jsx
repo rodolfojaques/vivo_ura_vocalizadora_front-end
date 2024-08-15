@@ -24,6 +24,10 @@ function ModalTiposAlarmesTemsComponente({
 
     const formSchema = data => {
         console.log(data);
+        Object.entries(data).forEach(([k,v]) => {
+            if(!v) delete data[k]
+        });
+        console.log("depois: ",data);
         axios.post(`${baseURL}/tipos-alarmes-tems/register/${idGpAlarme}`,data,{
             headers:{
                 'Content-Type': 'application/json',

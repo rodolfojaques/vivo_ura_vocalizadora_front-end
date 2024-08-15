@@ -80,7 +80,7 @@ function ModalFilterInput(){
             listParam()
             toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
             })
-        .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!"))
+        .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!  -  Todos os Campos devem ser preenchidos!"))
     }
 
 

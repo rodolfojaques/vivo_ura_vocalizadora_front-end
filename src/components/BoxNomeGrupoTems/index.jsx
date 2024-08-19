@@ -279,8 +279,8 @@ function BoxNomeGrupoTemsComponente({
           {tipoAssociacao === "associacao" ? (
             <></>
           ) : (
-            <>
-              {role ? (
+            <div className="div_limit">
+              {role ? ( 
                 <> </>
               ) : (
                 <Icon.XCircleFill
@@ -292,7 +292,7 @@ function BoxNomeGrupoTemsComponente({
                   }}
                 />
               )}
-            </>
+            </div>
           )}
         </div>
       )}

@@ -4,8 +4,8 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const baseURL = process.env.REACT_APP_API_URL_LOCAL; 
-  const msFilterURL = process.env.REACT_APP_MS_URL_LOCAL; 
+  const baseURL = process.env.REACT_APP_API_URL; 
+  const msFilterURL = process.env.REACT_APP_MS_URL; 
 
   const [usuario, setUsuario] = useState(
     JSON.parse(localStorage.getItem("usuario"))

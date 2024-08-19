@@ -44,9 +44,17 @@ export const BoxNomeGrupoStl = styled.li`
       align-items: center;
     }
 
-    .custom-icon {
-      cursor: pointer;
-    }
+
+  }
+
+  .div_limit{
+    display: flex;
+    gap: .5rem;
+    max-width: 10rem;
+  }
+
+  .custom-icon {
+    cursor: pointer;;
   }
 
   .infos_tipos{
@@ -115,7 +123,10 @@ export const BoxNomeGrupoStl = styled.li`
 
     .nome {
       font-size: small;
-      font-weight: 600;
+      font-weight: 600;  
+      width: 14ch;
+      word-wrap: break-word;
+      white-space: pre-wrap;
 
       cursor: pointer;
     }

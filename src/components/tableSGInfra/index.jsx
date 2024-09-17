@@ -12,6 +12,7 @@ function TableDragSGInfra(){
     } = useContext(ListaDeAlarmesContext)
 
     const [data, setData] = useState([]);
+    const [dragOver, setDragOver] = useState("");
 
     const updateData = (newData) => {
         setData(() => newData);
@@ -25,6 +26,11 @@ function TableDragSGInfra(){
 
     const handleDragOver = e => e.preventDefault();
 
+    const handleDragEnter = e => {
+        const { id } = e.target;
+        setDragOver(id);
+    };
+
     const handleOnDrop = e => {
         const { id } = e.target;
         const droppedColIdx = cols.indexOf(id);
@@ -34,6 +40,7 @@ function TableDragSGInfra(){
         tempCols[draggedColIdx] = cols[droppedColIdx];
         tempCols[droppedColIdx] = cols[draggedColIdx];
         setCols(tempCols);
+        setDragOver("");
     };
 
     useEffect(() => {
@@ -49,14 +56,15 @@ function TableDragSGInfra(){
                 <table>
                     <thead>
                     <tr>
-                        {cols.map((col) => (
+                        {cols.map((col,i) => (
                         <th
                             id={col}
-                            key={col}
+                            key={i}
                             draggable
                             onDragStart={handleDragStart}
                             onDragOver={handleDragOver}
                             onDrop={handleOnDrop}
+                            onDragEnter={handleDragEnter}
                         >
                             {col}
                         </th>
@@ -64,15 +72,15 @@ function TableDragSGInfra(){
                     </tr>
                     </thead>
                     <tbody>
-                    {rows.map((row) => (
-                        <tr key={row?.id}>
+                    {rows.map((row, i) => (
+                        <tr key={i}>
                         {Object.entries(row).map(([k, v], idx) => (
                             k === "ALARME"?
-                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={v}>
+                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={idx}>
                                 {row[cols[idx]]}
                             </td>
                             :
-                            <td key={v}>
+                            <td key={idx}>
                                 {row[cols[idx]]}
                             </td>
                         ))}

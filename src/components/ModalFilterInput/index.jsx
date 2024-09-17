@@ -59,12 +59,7 @@ function ModalFilterInput(){
             if(data[key] == "Selecionar..." || data[key] == "" || data[key] == null){
                 console.log("sem informações");
             } else {
-                if(key === "specificProblem"){
-                    newData[key] = data[key]
-                    newData["frontSpecificProblem"] = data[key]
-                } else {
-                    newData[key] = data[key]
-                }
+                newData[key] = data[key]
             }            
         }
         
@@ -80,7 +75,7 @@ function ModalFilterInput(){
             listParam()
             toast.success("Filtro de Entrada de Alarmes TEMS, criado com sucesso!")
             })
-        .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!  -  Todos os Campos devem ser preenchidos!"))
+        .catch(err=> toast.error("Erro ao criar Filtro de Entrada de Alarmes TEMS!  -  Os campos 'familia' e 'manager' são obrigatórios!"))
     }
 
 
@@ -93,6 +88,19 @@ function ModalFilterInput(){
                             Parâmetros de Filtragem
                         </h2>
                         <div className="line-input">
+                            <label htmlFor="" className="label-inputs">manager *</label>
+                            <input type="text" className="inputs" placeholder="(Ex: U2020_HUAWEI_TAISHANCOREVIVO1)"  {...register("manager")}/>
+                        </div>
+                        <div className="line-input">
+                            <label htmlFor="" className="label-inputs">classificacao *</label>
+                            <select name="" id="" className="inputs" {...register("classificacao")}>
+                                <option value={null}>{null}</option>
+                                <option value={"5-CRITICO"}>CRITICO</option>
+                                <option value={"4-MAJORITARIO"}>MAJORITARIO</option>
+                                <option value={"3-MINORITARIO"}>MINORITARIO</option>
+                            </select>
+                        </div>
+                        <div className="line-input">
                             <label htmlFor="" className="label-inputs">estadoSigla</label>
                             <select name="" id="" className="inputs" {...register("estadoSigla")}>
                                 <option value={null}>{null}</option>
@@ -102,21 +110,8 @@ function ModalFilterInput(){
                             </select>
                         </div>
                         <div className="line-input">
-                            <label htmlFor="" className="label-inputs">specificProblem</label>
-                            <input type="text" className="inputs" placeholder="(Ex: SETOR FORA DE SERVICO)" {...register("specificProblem")}/>
-                        </div>
-                        <div className="line-input">
-                            <label htmlFor="" className="label-inputs">manager</label>
-                            <input type="text" className="inputs" placeholder="(Ex: U2020_HUAWEI_TAISHANCOREVIVO1)"  {...register("manager")}/>
-                        </div>
-                        <div className="line-input">
-                            <label htmlFor="" className="label-inputs">classificacao</label>
-                            <select name="" id="" className="inputs" {...register("classificacao")}>
-                                <option value={null}>{null}</option>
-                                <option value={"5-CRITICO"}>CRITICO</option>
-                                <option value={"4-MAJORITARIO"}>MAJORITARIO</option>
-                                <option value={"3-MINORITARIO"}>MINORITARIO</option>
-                            </select>
+                            <label htmlFor="" className="label-inputs">familia</label>
+                            <input type="text" className="inputs" placeholder="(Ex: ESIGHT)" {...register("familia")}/>
                         </div>
                         <div className="btn_form">
                             <button onClick={()=> setOpenFilterInput(!openFilterInput)} className="btn fechar">Fechar</button>
@@ -129,10 +124,10 @@ function ModalFilterInput(){
                         {
                             parametros.map((prm)=>{
                                 return <li key={prm.id} className="line-list">
-                                    <p className="line-param">estadoSigla: <span className="value-param">{!!prm.estadoSigla?prm.estadoSigla:"N/D"}</span></p>
-                                    <p className="line-param">specificProblem: <span className="value-param">{!!prm.specificProblem?prm.specificProblem:"N/D"}</span></p>
                                     <p className="line-param">manager: <span className="value-param">{!!prm.manager?prm.manager:"N/D"}</span></p>
                                     <p className="line-param">classificação: <span className="value-param">{prm.classificacao?prm.classificacao:"N/D"}</span></p>
+                                    <p className="line-param">estadoSigla: <span className="value-param">{!!prm.estadoSigla?prm.estadoSigla:"N/D"}</span></p>
+                                    <p className="line-param">familia: <span className="value-param">{!!prm.familia?prm.familia:"N/D"}</span></p>
                                     <Icon.XCircleFill
                                     color="darkorange"
                                     className="custom-icon"

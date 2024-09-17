@@ -9,7 +9,7 @@ height: 100%;
 display: flex;
 justify-content: center;
 align-items: flex-start;
-padding: 6rem;
+padding: 4rem;
 
 position: absolute;
 top: 0%;
@@ -22,7 +22,7 @@ z-index: 51;
 
 export const ModalFilterInputStl = styled.div`
 
-    width: 97%;
+    width: 100%;
     height: 100%;
 
     border-radius: 5px;
@@ -40,6 +40,8 @@ export const ModalFilterInputStl = styled.div`
         padding: 1rem;
 
         width: 30%;
+
+        overflow: auto;
     }
 
     .form-parametros{
@@ -124,6 +126,7 @@ export const ModalFilterInputStl = styled.div`
             color: purple;
 
             span{
+                font-size: small;
                 font-weight: 400;
                 color: gray;
             }

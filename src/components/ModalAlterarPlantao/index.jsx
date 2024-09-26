@@ -6,7 +6,6 @@ import { UserContext } from "../../providers/user";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 function ModalAlterarPlantao({ idUser }) {
   const {
     baseURL,
@@ -42,13 +41,23 @@ function ModalAlterarPlantao({ idUser }) {
   },[setDateTurns,setDateTurnsOld])
 
   const handleDateChange = (date) => {
+    console.log('date',date);
+    
+    /**
+     * 
+     * CONTINUAR EM SETAR OS HORARIOS / OLHAR PESQUISA GPT
+     */
     
     const newDateTurn = {
-      dia: date,
-      turno: "",
+      inicio: date[0].toISOString(),
+      fim: date[1].toISOString(),
     };
     setDateTurns([...dateTurns, newDateTurn]);
     setDateTurnsSubmmit([...dateTurnsSubmmit, newDateTurn]);
+
+
+
+    console.log('dateTurns',dateTurns);
   };
 
   const handleTurnChange = (event, index) => {
@@ -128,53 +137,59 @@ function ModalAlterarPlantao({ idUser }) {
         </TitleModal>
         <FormModal>
           <p>Para alterar o plantão, selecione uma data e um turno.</p>
-          <Calendar onChange={handleDateChange} />
-          <section className="list-datas">
-            {dateTurns?.map((dateTurn, index) => (
-              <div className="div-datas" key={dateTurn?.id} id={dateTurn?.id}>
-                <p>
-                  Data: {new Date(dateTurn.dia).toLocaleDateString()}
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      datasForDelete(e.target.parentNode.parentNode.id);
-                      removeDateTurn(index);
-                    }}
-                    className="btn remover"
-                  >
-                    Remover
-                  </button>
-                </p>
-                {
-                  !!dateTurn.id ? 
-                  <div className="info_turn">
-                    <p className="turn">
-                      Turno: {dateTurn.turno}
-                      {dateTurn.turno === "T1" ? " - Início: 07h | Fim: 15h" : ""}
-                      {dateTurn.turno === "T2" ? " - Início: 15h | Fim: 23h" : ""}
-                      {dateTurn.turno === "T3" ? " - Início: 23h | Fim: 07h" : ""}
-                    </p>
-                  </div>
-                  :
-                  <div className="div-select-turn">
-                    <label>Selecione o turno:</label>
-                    <select
-                      default={"T3"}
-                      onChange={(event) => {
-                        handleTurnChange(event, index)
-                        handleTurnChangeSub(event, index)
+          <div className="container">
+            <Calendar 
+              onChange={handleDateChange}
+              selectRange={true}
+            />
+            <section className="list-datas">
+              {dateTurns?.map((dateTurn, index) => (
+                <div className="div-datas" key={dateTurn?.id} id={dateTurn?.id}>
+                  <p>
+                    Data: {new Date(dateTurn.dia).toLocaleDateString()}
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        datasForDelete(e.target.parentNode.parentNode.id);
+                        removeDateTurn(index);
                       }}
+                      className="btn remover"
                     >
-                      <option value="T3">Selecione...</option>
-                      <option value="T1">T1 - <span><b style={{color: "purple"}}>Início: </b><b>07h</b> | <b style={{color: "purple"}}>Fim: </b><b>15h</b></span></option>
-                      <option value="T2">T2 - <span><b style={{color: "purple"}}>Início: </b><b>15h</b> | <b style={{color: "purple"}}>Fim: </b><b>23h</b></span></option>
-                      <option value="T3">T3 - <span><b style={{color: "purple"}}>Início: </b><b>23h</b> | <b style={{color: "purple"}}>Fim: </b><b>07h</b></span></option>
-                    </select>
-                  </div>                  
-                }
-              </div>
-            ))}
-          </section>
+                      Remover
+                    </button>
+                  </p>
+                  {
+                    !!dateTurn.id ? 
+                    <div className="info_turn">
+                      <p className="turn">
+                        Turno: {dateTurn.turno}
+                        {dateTurn.turno === "T1" ? " - Início: 07h | Fim: 15h" : ""}
+                        {dateTurn.turno === "T2" ? " - Início: 15h | Fim: 23h" : ""}
+                        {dateTurn.turno === "T3" ? " - Início: 23h | Fim: 07h" : ""}
+                      </p>
+                    </div>
+                    :
+                    <div className="div-select-turn">
+                      <label>Selecione o turno:</label>
+                      <select
+                        default={"T3"}
+                        onChange={(event) => {
+                          handleTurnChange(event, index)
+                          handleTurnChangeSub(event, index)
+                        }}
+                      >
+                        <option value="T3">Selecione...</option>
+                        <option value="T1">T1 - <span><b style={{color: "purple"}}>Início: </b><b>07h</b> | <b style={{color: "purple"}}>Fim: </b><b>15h</b></span></option>
+                        <option value="T2">T2 - <span><b style={{color: "purple"}}>Início: </b><b>15h</b> | <b style={{color: "purple"}}>Fim: </b><b>23h</b></span></option>
+                        <option value="T3">T3 - <span><b style={{color: "purple"}}>Início: </b><b>23h</b> | <b style={{color: "purple"}}>Fim: </b><b>07h</b></span></option>
+                      </select>
+                    </div>                  
+                  }
+                </div>
+              ))}
+            </section>            
+          </div>
+
           <div className="div-buttons">
             <button onClick={(e)=> {
               e.preventDefault()

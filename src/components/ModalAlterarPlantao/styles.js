@@ -26,16 +26,16 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  width: 100%;
-  height: 700px;
+  width: 95%;
+  height: 80%;
   background-color: white;
   border-radius: 8px;
 
   animation: ${slideDown} 1s ease-in-out;
 
   @media (min-width: 768px) {
-    width: 450px;
-    height: auto;
+    width: 80%;
+    height: 80%;
   }
 `;
 
@@ -65,10 +65,11 @@ export const TitleModal = styled.header`
 
 export const FormModal = styled.form`
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 14px;
   padding-top: 20px;
   height: auto;
@@ -76,59 +77,57 @@ export const FormModal = styled.form`
   border-radius: 5px;
   border: 2px solid var(--gray-0);
 
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+
+    width: 100%;
+    height: 25rem;
+
+    border: solid 1px greenyellow;
+  }
+
+  .react-calendar {
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+
+    height: 100%;
+    width: 50%;
+  }
+
+  .react-calendar__tile--range {
+    background-color: #3b5998;
+    color: white;
+  }
+
+  .react-calendar__tile--active {
+    background-color: #1c87c9;
+    color: white;
+  }
+
   p {
     font-weight: 600;
     margin-bottom: 16px;
   }
 
-  .btn {
-    border-style: none;
-    border-radius: 5px;
-
-    width: 6rem;
-    height: 2.5rem;
-
-    font-size: small;
-    font-weight: bold;
-
-    color: white;
-    cursor: pointer;
-
-    &:active {
-      opacity: 0.5;
-    }
-  }
-
-  .remover {
-    width: 5rem;
-    height: 24px;
-    background-color: red;
-  }
-
-  .alterar {
-    background-color: purple;
-  }
-
-  .cancelar {
-    background-color: gray;
-  }
-
   .list-datas {
-    width: 100%;
-    max-height: 250px;
+    width: 50%;
+    height: 100%;
     overflow-y: auto;
-    margin-top: 20px;
-    padding-left: 16px;
-    padding-right: 16px;
+    /* margin-top: 20px; */
+    padding: .5rem;
+
+    border: solid 1px red;
   }
 
   .div-datas {
-    margin-top: 12px;
-    margin-bottom: 18px;
     width: 100%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    gap: .5rem;
 
     padding: .5rem;
     border-radius: 5px;
@@ -166,6 +165,38 @@ export const FormModal = styled.form`
     border-radius: 5px;
   }
 
+  .btn {
+    border-style: none;
+    border-radius: 5px;
+
+    width: 6rem;
+    height: 2.5rem;
+
+    font-size: small;
+    font-weight: bold;
+
+    color: white;
+    cursor: pointer;
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  .remover {
+    width: 5rem;
+    height: 24px;
+    background-color: red;
+  }
+
+  .alterar {
+    background-color: purple;
+  }
+
+  .cancelar {
+    background-color: gray;
+  }
+
   .div-buttons {
     margin-top: 12px;
     display: flex;
@@ -173,4 +204,7 @@ export const FormModal = styled.form`
     flex-direction: row;
     gap: 4px;
   }
+
+
+
 `;

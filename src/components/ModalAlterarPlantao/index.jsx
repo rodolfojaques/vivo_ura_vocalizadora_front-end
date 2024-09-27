@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { date } from "yup";
 
 function ModalAlterarPlantao({ idUser }) {
   const {
@@ -45,12 +46,12 @@ function ModalAlterarPlantao({ idUser }) {
     
     /**
      * 
-     * CONTINUAR EM SETAR OS HORARIOS / OLHAR PESQUISA GPT
+     * CONTINUAR EM SETAR OS HORARIOS / será onChange
      */
     
     const newDateTurn = {
-      inicio: date[0].toISOString(),
-      fim: date[1].toISOString(),
+      dtInicio: date[0].toISOString(),
+      dtFim: date[1].toISOString(),
     };
     setDateTurns([...dateTurns, newDateTurn]);
     setDateTurnsSubmmit([...dateTurnsSubmmit, newDateTurn]);
@@ -73,6 +74,13 @@ function ModalAlterarPlantao({ idUser }) {
   };
 
   const removeDateTurn = (index) => {
+    const dtt = dateTurns[index]
+    dateTurnsSubmmit.forEach((dt,i)=>{
+      if(dtt.dtInicio === dt.dtInicio && dtt.dtFim === dt.dtFim){
+        dateTurnsSubmmit.splice(i, 1);
+      }
+    });
+    
     dateTurns.splice(index, 1);
     setDateTurns([...dateTurns]);
   };
@@ -103,8 +111,8 @@ function ModalAlterarPlantao({ idUser }) {
 
     dateTurnsSubmmit.forEach((data)=>{
 
-      const data2 = new Date(data.dia.toDateString())
-      data.dia = data2.toISOString()
+      // const data2 = new Date(data.dia.toDateString())
+      // data.dia = data2.toISOString()
       
       axios.post(`${baseURL}/datas/register/${idUser}`,data,{
           headers:{
@@ -136,7 +144,6 @@ function ModalAlterarPlantao({ idUser }) {
           }}>X</span>
         </TitleModal>
         <FormModal>
-          <p>Para alterar o plantão, selecione uma data e um turno.</p>
           <div className="container">
             <Calendar 
               onChange={handleDateChange}
@@ -144,49 +151,59 @@ function ModalAlterarPlantao({ idUser }) {
             />
             <section className="list-datas">
               {dateTurns?.map((dateTurn, index) => (
-                <div className="div-datas" key={dateTurn?.id} id={dateTurn?.id}>
-                  <p>
-                    Data: {new Date(dateTurn.dia).toLocaleDateString()}
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        datasForDelete(e.target.parentNode.parentNode.id);
-                        removeDateTurn(index);
-                      }}
-                      className="btn remover"
-                    >
-                      Remover
-                    </button>
-                  </p>
-                  {
-                    !!dateTurn.id ? 
-                    <div className="info_turn">
-                      <p className="turn">
-                        Turno: {dateTurn.turno}
-                        {dateTurn.turno === "T1" ? " - Início: 07h | Fim: 15h" : ""}
-                        {dateTurn.turno === "T2" ? " - Início: 15h | Fim: 23h" : ""}
-                        {dateTurn.turno === "T3" ? " - Início: 23h | Fim: 07h" : ""}
+                <div key={index} id={dateTurn?.id} className="items">
+                  <div className="subitems">
+                    <div className="div-datas">
+                      <p>
+                        Início: <span className="value">{new Date(dateTurn.dtInicio).toLocaleDateString()}</span> 
                       </p>
+                      {
+                        !!dateTurn.id ? 
+                        <div className="info_turn">
+                          <p className="turn">
+                            Hora: <span className="value">{new Date(dateTurn.dtInicio).toLocaleTimeString()}</span>
+                          </p>
+                        </div>
+                        :
+                        <div className="div-select-turn">
+                          <label>Hora:</label>
+                          <input type="time" className="time-input" onChange={(e)=> console.log(e.target.value)}/>
+                        </div>                  
+                      }
                     </div>
-                    :
-                    <div className="div-select-turn">
-                      <label>Selecione o turno:</label>
-                      <select
-                        default={"T3"}
-                        onChange={(event) => {
-                          handleTurnChange(event, index)
-                          handleTurnChangeSub(event, index)
-                        }}
-                      >
-                        <option value="T3">Selecione...</option>
-                        <option value="T1">T1 - <span><b style={{color: "purple"}}>Início: </b><b>07h</b> | <b style={{color: "purple"}}>Fim: </b><b>15h</b></span></option>
-                        <option value="T2">T2 - <span><b style={{color: "purple"}}>Início: </b><b>15h</b> | <b style={{color: "purple"}}>Fim: </b><b>23h</b></span></option>
-                        <option value="T3">T3 - <span><b style={{color: "purple"}}>Início: </b><b>23h</b> | <b style={{color: "purple"}}>Fim: </b><b>07h</b></span></option>
-                      </select>
-                    </div>                  
-                  }
+                    <div className="div-datas">
+                      <p>
+                        Fim: <span className="value">{new Date(dateTurn.dtFim).toLocaleDateString()}</span> 
+                      </p>
+                      {
+                        !!dateTurn.id ? 
+                        <div className="info_turn">
+                          <p className="turn">
+                            Hora: <span className="value">{new Date(dateTurn.dtFim).toLocaleTimeString()}</span>
+                          </p>
+                        </div>
+                        :
+                        <div className="div-select-turn">
+                          <label>Hora:</label>
+                          <input type="time" className="time-input" onChange={(e)=> console.log(e.target.value)}/>
+                        </div>                  
+                      }
+                    </div>                     
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      console.log('e.target.parentNode.id',e.target.parentNode.id);
+                      
+                      datasForDelete(e.target.parentNode.id);
+                      removeDateTurn(index);
+                    }}
+                    className="btn remover"
+                  >
+                    Remover
+                  </button>               
                 </div>
-              ))}
+              )).reverse()}
             </section>            
           </div>
 

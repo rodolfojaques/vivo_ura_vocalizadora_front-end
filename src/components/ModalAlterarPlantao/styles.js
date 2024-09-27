@@ -30,6 +30,7 @@ export const ModalContainer = styled.div`
   height: 80%;
   background-color: white;
   border-radius: 8px;
+  border: 1px solid purple;
 
   animation: ${slideDown} 1s ease-in-out;
 
@@ -40,7 +41,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const TitleModal = styled.header`
-  height: 59px;
+  height: 10%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +50,7 @@ export const TitleModal = styled.header`
   padding-right: 16px;
   padding-bottom: 8px;
   background-color: purple;
-  border-radius: 8px 8px 0 0;
+  border-radius: 5px 5px 0 0;
 
   h2 {
     font-size: 18px;
@@ -65,14 +66,13 @@ export const TitleModal = styled.header`
 
 export const FormModal = styled.form`
   width: 100%;
-  height: 100vh;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
   padding: 14px;
-  padding-top: 20px;
-  height: auto;
   box-shadow: 0px 0px 30px -20px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   border: 2px solid var(--gray-0);
@@ -83,18 +83,19 @@ export const FormModal = styled.form`
     align-items: center;
     gap: .5rem;
 
+    padding-bottom: 1.5rem;
+
     width: 100%;
     height: 25rem;
-
-    border: solid 1px greenyellow;
+    border-bottom: solid 2px lightgray;
   }
 
   .react-calendar {
-    border: 1px solid #f0f0f0;
+    border: 3px solid #f0f0f0;
     border-radius: 10px;
 
     height: 100%;
-    width: 50%;
+    width: 45%;
   }
 
   .react-calendar__tile--range {
@@ -107,42 +108,83 @@ export const FormModal = styled.form`
     color: white;
   }
 
-  p {
-    font-weight: 600;
-    margin-bottom: 16px;
+  .time-input {
+    font-size: small;
+    padding: 0px 5px;
+    border: 2px solid gray; /* Cor da borda */
+    border-radius: 5px;         /* Bordas arredondadas */
+    background-color: #f1f1f1;  /* Cor de fundo */
+    color: #333;                /* Cor do texto */
+    width: 6rem; 
+    
+    &:focus {
+      border-color: #3e8e41;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Sombra ao focar */
+    }
   }
 
+  /* p {
+    font-weight: 600;
+    margin-bottom: 16px;
+  } */
+
   .list-datas {
-    width: 50%;
+    width: 55%;
     height: 100%;
     overflow-y: auto;
     /* margin-top: 20px; */
     padding: .5rem;
 
-    border: solid 1px red;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px lightgray;
+
+    padding-right: 8px;
+
+    &:hover{
+      background-color: antiquewhite;
+    }
+  }
+
+  .subitems{
+
   }
 
   .div-datas {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: .5rem;
+    justify-content: space-between;
+    align-items: baseline;
+    /* flex-direction: column; */
+    gap: 2rem;
 
     padding: .5rem;
     border-radius: 5px;
-
-    &:hover{
-      background-color: antiquewhite;
-    }
 
     p {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      font-weight: 600;
+      /* margin-bottom: 16px; */
+      font-size: medium;
+      font-weight: bolder;
+      color: purple;
     }
+  }
+
+  .value{
+    color: gray;
+    margin-left: 5px;
+    font-size: small;
+    font-weight: bold;
   }
 
   .div-select-turn {
@@ -156,14 +198,14 @@ export const FormModal = styled.form`
     }
   }
 
-  select {
+  /* select {
     width: 50%;
     height: 2rem;
     padding-left: 0.5rem;
     border-style: none;
     border: solid gray;
     border-radius: 5px;
-  }
+  } */
 
   .btn {
     border-style: none;
@@ -185,7 +227,7 @@ export const FormModal = styled.form`
 
   .remover {
     width: 5rem;
-    height: 24px;
+    height: 2.5rem;
     background-color: red;
   }
 
@@ -198,13 +240,11 @@ export const FormModal = styled.form`
   }
 
   .div-buttons {
-    margin-top: 12px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: flex-end;
     flex-direction: row;
-    gap: 4px;
+    gap: .6rem;
+    width: 98%;
   }
-
-
-
 `;

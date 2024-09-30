@@ -6,6 +6,7 @@ import { UserContext } from "../../providers/user";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { date } from "yup";
+import { log } from "react-to/Logger";
 
 function ModalAlterarPlantao({ idUser }) {
   const {
@@ -44,11 +45,6 @@ function ModalAlterarPlantao({ idUser }) {
   const handleDateChange = (date) => {
     console.log('date',date);
     
-    /**
-     * 
-     * CONTINUAR EM SETAR OS HORARIOS / será onChange
-     */
-    
     const newDateTurn = {
       dtInicio: date[0].toISOString(),
       dtFim: date[1].toISOString(),
@@ -56,21 +52,55 @@ function ModalAlterarPlantao({ idUser }) {
     setDateTurns([...dateTurns, newDateTurn]);
     setDateTurnsSubmmit([...dateTurnsSubmmit, newDateTurn]);
 
-
-
     console.log('dateTurns',dateTurns);
   };
 
-  const handleTurnChange = (event, index) => {
-    const updatedDateTurns = [...dateTurns];
-    updatedDateTurns[index].turno = event.target.value;
-    setDateTurns(updatedDateTurns);
-  };
+  /**
+   * TODO:
+   * logica de setar os horarios deve ser alterada para o array.reverse()
+   */
 
   const handleTurnChangeSub = (event, index) => {
+    
+    console.log('index',index);
     const updatedDateTurnsSub = [...dateTurnsSubmmit];
-    updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].turno = event.target.value;
-    setDateTurnsSubmmit(updatedDateTurnsSub);
+    const inicio = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtInicio
+
+
+    const dt = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)]
+
+
+    updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtInicio = (
+      `${inicio.slice(0,11)}${event}${inicio.slice(16)}`
+    )
+
+    console.log('dt',dt);
+    console.log('inicio',inicio);
+    console.log(updatedDateTurnsSub);
+    
+
+    // setDateTurnsSubmmit(updatedDateTurnsSub);
+  };
+
+  const handleTurnFimChangeSub = (event, index) => {
+    
+    console.log('index',index);
+    const updatedDateTurnsSub = [...dateTurnsSubmmit];
+    const fim = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtFim
+
+
+    const dt = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)]
+
+    updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtFim = (
+      `${fim.slice(0,11)}${event}${fim.slice(16)}`
+    )
+
+    console.log('dt',dt);
+    console.log('fim',fim);
+    console.log(updatedDateTurnsSub);
+    
+
+    // setDateTurnsSubmmit(updatedDateTurnsSub);
   };
 
   const removeDateTurn = (index) => {
@@ -110,9 +140,13 @@ function ModalAlterarPlantao({ idUser }) {
     })
 
     dateTurnsSubmmit.forEach((data)=>{
-
-      // const data2 = new Date(data.dia.toDateString())
-      // data.dia = data2.toISOString()
+      
+      data.dtInicio = new Date(data.dtInicio)
+      data.dtFim = new Date(data.dtFim)
+      
+      data.dtInicio.setHours(data.dtInicio.getHours() + 3)
+      data.dtFim.setDate(data.dtFim.getDate() - 1)
+      data.dtFim.setHours(data.dtFim.getHours() + 3)
       
       axios.post(`${baseURL}/datas/register/${idUser}`,data,{
           headers:{
@@ -128,9 +162,7 @@ function ModalAlterarPlantao({ idUser }) {
         console.error("Erro ao submeter datas de plantão",err)
         toast.error("Erro ao submeter datas de plantão")
       })
-    })
-                    
-    
+    })    
   }
 
   return (
@@ -167,7 +199,7 @@ function ModalAlterarPlantao({ idUser }) {
                         :
                         <div className="div-select-turn">
                           <label>Hora:</label>
-                          <input type="time" className="time-input" onChange={(e)=> console.log(e.target.value)}/>
+                          <input type="time" className="time-input" onChange={(e)=> handleTurnChangeSub(e.target.value, index)}/>
                         </div>                  
                       }
                     </div>
@@ -185,7 +217,7 @@ function ModalAlterarPlantao({ idUser }) {
                         :
                         <div className="div-select-turn">
                           <label>Hora:</label>
-                          <input type="time" className="time-input" onChange={(e)=> console.log(e.target.value)}/>
+                          <input type="time" className="time-input" onChange={(e)=> handleTurnFimChangeSub(e.target.value, index)}/>
                         </div>                  
                       }
                     </div>                     

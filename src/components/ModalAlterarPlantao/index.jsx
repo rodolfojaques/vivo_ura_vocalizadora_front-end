@@ -5,8 +5,6 @@ import "react-calendar/dist/Calendar.css";
 import { UserContext } from "../../providers/user";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { date } from "yup";
-import { log } from "react-to/Logger";
 
 function ModalAlterarPlantao({ idUser }) {
   const {
@@ -55,52 +53,23 @@ function ModalAlterarPlantao({ idUser }) {
     console.log('dateTurns',dateTurns);
   };
 
-  /**
-   * TODO:
-   * logica de setar os horarios deve ser alterada para o array.reverse()
-   */
-
   const handleTurnChangeSub = (event, index) => {
-    
-    console.log('index',index);
-    const updatedDateTurnsSub = [...dateTurnsSubmmit];
-    const inicio = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtInicio
+    const updatedDateTurnsSub = [...dateTurnsSubmmit.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))];
 
+    const inicio = updatedDateTurnsSub[index].dtInicio
 
-    const dt = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)]
-
-
-    updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtInicio = (
+    updatedDateTurnsSub[index].dtInicio = (
       `${inicio.slice(0,11)}${event}${inicio.slice(16)}`
     )
-
-    console.log('dt',dt);
-    console.log('inicio',inicio);
-    console.log(updatedDateTurnsSub);
-    
-
-    // setDateTurnsSubmmit(updatedDateTurnsSub);
   };
 
   const handleTurnFimChangeSub = (event, index) => {
-    
-    console.log('index',index);
-    const updatedDateTurnsSub = [...dateTurnsSubmmit];
-    const fim = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtFim
+    const updatedDateTurnsSub = [...dateTurnsSubmmit.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))];
+    const fim = updatedDateTurnsSub[index].dtFim
 
-
-    const dt = updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)]
-
-    updatedDateTurnsSub[(!!dateForDelete? (index + 1) - dateTurns.length : index - dateTurnsOld.length)].dtFim = (
+    updatedDateTurnsSub[index].dtFim = (
       `${fim.slice(0,11)}${event}${fim.slice(16)}`
     )
-
-    console.log('dt',dt);
-    console.log('fim',fim);
-    console.log(updatedDateTurnsSub);
-    
-
-    // setDateTurnsSubmmit(updatedDateTurnsSub);
   };
 
   const removeDateTurn = (index) => {
@@ -121,7 +90,7 @@ function ModalAlterarPlantao({ idUser }) {
     ])
   }
 
-  const createPlantoes = () => {
+  const createPlantoes = async () => {
     dateForDelete?.forEach(id => {
       axios.delete(`${baseURL}/datas/delete/${id}`,{
         headers:{
@@ -137,18 +106,18 @@ function ModalAlterarPlantao({ idUser }) {
         console.error("Erro ao criar plantão.",err)
         toast.error("Erro ao criar plantão.")
       })      
-    })
-
-    dateTurnsSubmmit.forEach((data)=>{
+    })  
+    
+    dateTurnsSubmmit.forEach(async(data)=>{
       
       data.dtInicio = new Date(data.dtInicio)
       data.dtFim = new Date(data.dtFim)
       
-      data.dtInicio.setHours(data.dtInicio.getHours() + 3)
-      data.dtFim.setDate(data.dtFim.getDate() - 1)
-      data.dtFim.setHours(data.dtFim.getHours() + 3)
+      await data.dtInicio.setHours(data.dtInicio.getHours() + 3)
+      await data.dtFim.setDate(data.dtFim.getDate() - 1)
+      await data.dtFim.setHours(data.dtFim.getHours() + 3)
       
-      axios.post(`${baseURL}/datas/register/${idUser}`,data,{
+      await axios.post(`${baseURL}/datas/register/${idUser}`,data,{
           headers:{
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${usuario?.token}`
@@ -162,7 +131,9 @@ function ModalAlterarPlantao({ idUser }) {
         console.error("Erro ao submeter datas de plantão",err)
         toast.error("Erro ao submeter datas de plantão")
       })
-    })    
+    })  
+    console.log('dateTurnsSubmmit',dateTurnsSubmmit);
+      
   }
 
   return (
@@ -182,7 +153,7 @@ function ModalAlterarPlantao({ idUser }) {
               selectRange={true}
             />
             <section className="list-datas">
-              {dateTurns?.map((dateTurn, index) => (
+              {dateTurns?.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))?.map((dateTurn, index) => (
                 <div key={index} id={dateTurn?.id} className="items">
                   <div className="subitems">
                     <div className="div-datas">
@@ -231,11 +202,12 @@ function ModalAlterarPlantao({ idUser }) {
                       removeDateTurn(index);
                     }}
                     className="btn remover"
+                    type="button"
                   >
                     Remover
                   </button>               
                 </div>
-              )).reverse()}
+              ))}
             </section>            
           </div>
 

@@ -164,9 +164,6 @@ function BoxNomeGrupoTemsComponente({
                   <p className="ttl_p">
                     manager:{" "}
                   </p>
-                  {/* <p className="ttl_p">
-                    tipoDeAlarme:{" "}
-                  </p>  */}
                   <p className="ttl_p">
                     frontPlantType:{" "}
                   </p>
@@ -178,7 +175,31 @@ function BoxNomeGrupoTemsComponente({
                   </p>
                   <p className="ttl_p">
                     frontTypeTa:{" "}
-                  </p>                
+                  </p>
+                  <p className="ttl_p">
+                    familia:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    identifier:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontNodeReference:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontDomain:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontElementType:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontScriptProbe:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontAlarmId:{" "}
+                  </p>
+                  <p className="ttl_p">
+                    frontPodName:{" "}
+                  </p>              
                 </div>
               }
 
@@ -193,6 +214,14 @@ function BoxNomeGrupoTemsComponente({
                             <p className="info_tp_alm">{valueExists(tipo.frontNetworkType)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.frontTypeFailure)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.frontTypeTa)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.familia)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.identifier)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontNodeReference)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontDomain)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontElementType)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontScriptProbe)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontAlarmId)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.frontPodName)}</p>
                           </div>
                   })
                 }                
@@ -301,8 +330,9 @@ function BoxNomeGrupoTemsComponente({
 }
 
 function valueExists(str) {
-  const returnFunc = !!str? str : "N/D"
-  return returnFunc
+  const value = !!str? str : "N/D"
+  const limitedText = value.length > 35 ? value.substring(0, 35) + "..." : value;
+  return limitedText
 }
 
 export default BoxNomeGrupoTemsComponente;

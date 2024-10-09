@@ -50,95 +50,165 @@ function ModalTiposAlarmesTemsComponente({
                     Tipo de Alarme
                 </h2>
                 <form onSubmit={handleSubmit(formSchema)} action="" className="form_grp_alarme">
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                estadoSigla
-                            </label>
-                            <select  className="campos campos_dropDown" {...register("estadoSigla")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    arrEstado.map((item)=> <option key={item} value={item}>{item}</option>)
-                                }                                
-                            </select>
+                    <div className="flex-row">
+                        <div className="div-flex">
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        estadoSigla
+                                    </label>
+                                    <select  className="campos campos_dropDown" {...register("estadoSigla")}>
+                                        <option value={null}>{null}</option>
+                                        {
+                                            arrEstado.map((item)=> <option key={item} value={item}>{item}</option>)
+                                        }                                
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        specificProblem
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: FALHA MONITORACAO REDE" {...register("specificProblem")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        manager
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSS_ATLAS" {...register("manager")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontTypeTa
+                                    </label>
+                                    <select className="campos campos_dropDown" {...register("frontTypeTa")}>
+                                        <option value={null}>{null}</option>
+                                        {
+                                            setTipoTA.map((item)=> <option key={item} value={item}>{item}</option>)
+                                        }                                    
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontPlantType
+                                    </label>
+                                    <select className="campos campos_dropDown" {...register("frontPlantType")}>
+                                        <option value={null}>{null}</option>
+                                        {
+                                            setTipoPlanta.map((item)=> <option key={item} value={item}>{item}</option>)
+                                        }                
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontNetworkType
+                                    </label>
+                                    <select className="campos campos_dropDown" {...register("frontNetworkType")}>
+                                        <option value={null}>{null}</option>
+                                        {
+                                            setTipoRede.map((item)=> <option key={item} value={item}>{item}</option>)
+                                        }                               
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontTypeFailure
+                                    </label>
+                                    <select className="campos campos_dropDown" {...register("frontTypeFailure")}>
+                                        <option value={null}>{null}</option>
+                                        {
+                                            setTipoFalha.map((item)=> <option key={item} value={item}>{item}</option>)
+                                        }                                
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        familia
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: ESIGHT" {...register("familia")}/>
+                                </div>
+                            </div>
+                            
                         </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                specificProblem
-                            </label>
-                            <input type="text" className="campos campos_dropDown" placeholder="Ex: FALHA MONITORACAO REDE" {...register("specificProblem")}/>
-                        </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                manager
-                            </label>
-                            <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSS_ATLAS" {...register("manager")}/>
-                        </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                frontTypeTa
-                            </label>
-                            <select className="campos campos_dropDown" {...register("frontTypeTa")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    setTipoTA.map((item)=> <option key={item} value={item}>{item}</option>)
-                                }                                    
-                            </select>
-                        </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                frontPlantType
-                            </label>
-                            <select className="campos campos_dropDown" {...register("frontPlantType")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    setTipoPlanta.map((item)=> <option key={item} value={item}>{item}</option>)
-                                }                
-                            </select>
-                        </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                frontNetworkType
-                            </label>
-                            <select className="campos campos_dropDown" {...register("frontNetworkType")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    setTipoRede.map((item)=> <option key={item} value={item}>{item}</option>)
-                                }                               
-                            </select>
-                        </div>
-                    </div>
-                    <div className="container_campos">
-                        <div className="container_intern_camp">
-                            <label htmlFor="" className="label_campos">
-                                frontTypeFailure
-                            </label>
-                            <select className="campos campos_dropDown" {...register("frontTypeFailure")}>
-                                <option value={null}>{null}</option>
-                                {
-                                    setTipoFalha.map((item)=> <option key={item} value={item}>{item}</option>)
-                                }                                
-                            </select>
+                        <div className="div-flex">
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        identifier
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: V04HUA_BLD_12289_RJ..." {...register("identifier")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontNodeReference
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SPCTP-V40HPP-SVT201-01" {...register("frontNodeReference")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontDomain
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: Sistema Gerencia" {...register("frontDomain")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontElementType
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSS_ATLAS" {...register("frontElementType")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontScriptProbe
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSSGenericProc.groovy" {...register("frontScriptProbe")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontAlarmId
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: CEPH_OSD_LATENCY" {...register("frontAlarmId")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
+                                        frontPodName
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SMARTOSS_ATLAS" {...register("frontPodName")}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="btn_form">
                         <button onClick={()=> setOpenTipoAlarmeTems(!openTipoAlarmeTems)} className="btn fechar">Fechar</button>
                         <input className="btn salvar" type="submit" value="Salvar" />
-                    </div>               
+                    </div>                                   
                 </form>
             </ModalTiposAlarmesStl>            
         </BackgroundStl>
-
     )
 }
 

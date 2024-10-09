@@ -40,6 +40,17 @@ export const ModalTiposAlarmesStl = styled.div`
         gap: 1rem;
     }
 
+    .flex-row{
+        display: flex;
+        gap: 1rem;
+    }
+
+    .div-flex{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .container_campos{
         width: 100%;
 

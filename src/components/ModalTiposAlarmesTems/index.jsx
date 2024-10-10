@@ -86,12 +86,7 @@ function ModalTiposAlarmesTemsComponente({
                                     <label htmlFor="" className="label_campos">
                                         frontTypeTa
                                     </label>
-                                    <select className="campos campos_dropDown" {...register("frontTypeTa")}>
-                                        <option value={null}>{null}</option>
-                                        {
-                                            setTipoTA.map((item)=> <option key={item} value={item}>{item}</option>)
-                                        }                                    
-                                    </select>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: Plataforma" {...register("frontTypeTa")}/>
                                 </div>
                             </div>
                             <div className="container_campos">
@@ -99,12 +94,7 @@ function ModalTiposAlarmesTemsComponente({
                                     <label htmlFor="" className="label_campos">
                                         frontPlantType
                                     </label>
-                                    <select className="campos campos_dropDown" {...register("frontPlantType")}>
-                                        <option value={null}>{null}</option>
-                                        {
-                                            setTipoPlanta.map((item)=> <option key={item} value={item}>{item}</option>)
-                                        }                
-                                    </select>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: Movel" {...register("frontPlantType")}/>
                                 </div>
                             </div>
                             <div className="container_campos">
@@ -112,12 +102,7 @@ function ModalTiposAlarmesTemsComponente({
                                     <label htmlFor="" className="label_campos">
                                         frontNetworkType
                                     </label>
-                                    <select className="campos campos_dropDown" {...register("frontNetworkType")}>
-                                        <option value={null}>{null}</option>
-                                        {
-                                            setTipoRede.map((item)=> <option key={item} value={item}>{item}</option>)
-                                        }                               
-                                    </select>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: SERVICO_DE_INTERNET" {...register("frontNetworkType")}/>
                                 </div>
                             </div>
                             <div className="container_campos">
@@ -125,12 +110,7 @@ function ModalTiposAlarmesTemsComponente({
                                     <label htmlFor="" className="label_campos">
                                         frontTypeFailure
                                     </label>
-                                    <select className="campos campos_dropDown" {...register("frontTypeFailure")}>
-                                        <option value={null}>{null}</option>
-                                        {
-                                            setTipoFalha.map((item)=> <option key={item} value={item}>{item}</option>)
-                                        }                                
-                                    </select>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: Equipment Alarm" {...register("frontTypeFailure")}/>
                                 </div>
                             </div>
                             <div className="container_campos">
@@ -140,8 +120,7 @@ function ModalTiposAlarmesTemsComponente({
                                     </label>
                                     <input type="text" className="campos campos_dropDown" placeholder="Ex: ESIGHT" {...register("familia")}/>
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </div>
                         <div className="div-flex">
                             <div className="container_campos">

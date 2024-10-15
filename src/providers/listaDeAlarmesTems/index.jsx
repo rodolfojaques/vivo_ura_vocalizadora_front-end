@@ -4,6 +4,7 @@ import { UserContext } from "../user";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { DtoDL } from "../../utils/pagListaAlarmes/dtos";
+import { set } from "react-hook-form";
 
 export const ListaDeAlarmesTemsContext = createContext();
 
@@ -29,6 +30,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
 
+  const [lodding, setLodding] = useState(false);
+
   const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
       frontTypeTa: data.frontTypeTa || null,
@@ -48,6 +51,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
     };
 
     try {
+      setLodding(true)
+
       if(typeFilter == "geral"){
         const response = await axios
           .post(`${baseURL}/alarmes-tems?page=${page}&size=${pageSize}`, dataFilter, {
@@ -86,6 +91,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setCols(cols)
           setRows(dto)
           setPag(response.data.currentPage)
+
+          setLodding(false)
 
           return response.data        
       } else {
@@ -127,10 +134,13 @@ function ListaDeAlarmesTemsProvider({ children }) {
           setRows(dto)
           setPag(response.data.currentPage)
 
+          setLodding(false)
+
           return response.data         
       }
 
     } catch (error) {
+      setLodding(false)
       console.error(error)
       toast.error("Erro ao listar alarmes!");
     }
@@ -147,7 +157,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
         pageInd, 
         setPageInd,
         pag, setPag, pagSiz, setPagSiz, linhas, setLinhas, typeFilter, setTypeFilter,
-        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq, cols, setCols, rows, setRows
+        totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq, cols, setCols, rows, setRows,
+        lodding, setLodding
       }}
     >
       {children}

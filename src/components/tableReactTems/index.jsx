@@ -2,13 +2,15 @@ import { useContext, useEffect, useState } from "react"
 import { TableStl } from "./styles"
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems"
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 function TableTemsComponent(){
     const {
         totalItems,
         pageCount,
         filterAlarmes,
         pagSiz, pag, setPag, dataPesq,
-        cols, setCols, rows
+        cols, setCols, rows, lodding
     } = useContext(ListaDeAlarmesTemsContext)
 
     const [data, setData] = useState([]);
@@ -86,23 +88,31 @@ function TableTemsComponent(){
                 <span>
                     Mostrando {(pag -1) * pagSiz + 1} - {totalItems < pag * pagSiz? totalItems : pag * pagSiz} de {totalItems} linhas
                 </span>{' '}
-                <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1}>
+                <button className="btnPaginator" onClick={() => setPag(1)} disabled={pag <= 1 || lodding}>
                 {'<<'}
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag - 1);
-                }} disabled={pag === 1}>
+                }} disabled={pag === 1 || lodding}>
                 {'<'}
                 </button>{' '}
                 <button className="btnPaginator" onClick={() => {
                     setPag(pag + 1);
-                }} disabled={pag === pageCount}>
+                }} disabled={pag === pageCount || lodding}>
                 {'>'}
                 </button>{' '}
-                <button className="btnPaginator" onClick={() => setPag(pageCount)} disabled={pag >= pageCount}>
+                <button className="btnPaginator" onClick={() => setPag(pageCount)} disabled={pag >= pageCount || lodding}>
                 {'>>'}
                 </button>
             </div>
+            {lodding?
+                <div className="fundo">
+                    <CircularProgress 
+                        size={100}
+                        color="inherit"
+                    />
+                </div> : <></>
+            }
         </TableStl>
     )
 }

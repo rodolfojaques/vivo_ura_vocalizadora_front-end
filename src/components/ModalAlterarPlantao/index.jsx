@@ -19,6 +19,10 @@ function ModalAlterarPlantao({ idUser }) {
   const [dateForDelete, setDateForDelete] = useState([]);
   const [dateTurns, setDateTurns] = useState(usuarioClicado?.datas);
   const [dateTurnsOld, setDateTurnsOld] = useState(usuarioClicado?.datas);
+
+  const [setarDT, setSetarDT] = useState(true);
+
+  const [newDateTurn, setNewDateTurn] = useState({})
   
   idUser = idUser || usuario.user.id
 
@@ -43,15 +47,28 @@ function ModalAlterarPlantao({ idUser }) {
   const handleDateChange = (date) => {
     console.log('date',date);
     
-    const newDateTurn = {
+    setNewDateTurn({
       dtInicio: date[0].toISOString(),
       dtFim: date[1].toISOString(),
-    };
+    });
+
     setDateTurns([...dateTurns, newDateTurn]);
     setDateTurnsSubmmit([...dateTurnsSubmmit, newDateTurn]);
 
     console.log('dateTurns',dateTurns);
   };
+
+  const turnChangeSubInicio = (e,dt) => {
+    dt.dtInico = `${dt.dtInico.slice(0,11)}${e}${dt.dtInico.slice(16)}`
+  }
+
+  const turnChangeSubFim = (e,dt) => {
+    dt.dtFim = `${dt.dtFim.slice(0,11)}${e}${dt.dtFim.slice(16)}`
+  }
+
+  const turnChangeSub = () => {
+    
+  }
 
   const handleTurnChangeSub = (event, index) => {
     const updatedDateTurnsSub = [...dateTurnsSubmmit.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))];
@@ -220,6 +237,31 @@ function ModalAlterarPlantao({ idUser }) {
             </button>
             <button className="btn cancelar">Cancelar</button>
           </div>
+        {
+          setarDT?
+            <div className="fundo">
+              <div className="cont">
+                <div className="div-datas">
+                  <p>
+                    Início: <span className="value">{new Date(newDateTurn.dtInicio).toLocaleDateString()}</span> 
+                  </p>
+                  <div className="div-select-turn">
+                    <label>Hora:</label>
+                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubInicio(e.target.value, newDateTurn)}/>
+                  </div>  
+                </div>
+                <div className="div-datas">
+                  <p>
+                    Fim: <span className="value">{new Date(newDateTurn.dtFim).toLocaleDateString()}</span> 
+                  </p>
+                  <div className="div-select-turn">
+                    <label>Hora:</label>
+                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubFim(e.target.value, newDateTurn)}/>
+                  </div> 
+                </div>                
+              </div>                              
+            </div> : <></>
+        }
         </FormModal>
       </ModalContainer>
     </ModalWrapper>

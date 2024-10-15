@@ -77,6 +77,40 @@ export const FormModal = styled.form`
   border-radius: 5px;
   border: 2px solid var(--gray-0);
 
+  position: relative;
+
+  .fundo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0,0,0,0.5);
+    color: purple;
+
+    .cont{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 5px;
+      background-color: white;
+    }
+  }
+
+
+  /* 
+    CONTINUAR DO UPDATE EM PLANTÕES, CONCLUIR LOGICA E FUNCIONALIDADE
+  */
+  
+
   .container{
     display: flex;
     justify-content: center;
@@ -247,4 +281,5 @@ export const FormModal = styled.form`
     gap: .6rem;
     width: 98%;
   }
+
 `;

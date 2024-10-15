@@ -61,7 +61,7 @@ export const BoxNomeGrupoStl = styled.li`
     border: solid white;
     border-radius: 5px;
     width: 100%;
-    height: 20.2rem;
+    height: 21.2rem;
 
     display: flex;
     justify-content: flex-start;
@@ -92,7 +92,7 @@ export const BoxNomeGrupoStl = styled.li`
         padding: .25rem;
         gap: .5rem;
         
-        max-height: 18rem;
+        max-height: 19.15rem;
         border-radius: 5px;
         
         .info_tp_alm{

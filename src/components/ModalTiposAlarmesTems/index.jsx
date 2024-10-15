@@ -126,6 +126,14 @@ function ModalTiposAlarmesTemsComponente({
                             <div className="container_campos">
                                 <div className="container_intern_camp">
                                     <label htmlFor="" className="label_campos">
+                                        node
+                                    </label>
+                                    <input type="text" className="campos campos_dropDown" placeholder="Ex: RJBAR_V04HUA_BLD14" {...register("node")}/>
+                                </div>
+                            </div>
+                            <div className="container_campos">
+                                <div className="container_intern_camp">
+                                    <label htmlFor="" className="label_campos">
                                         identifier
                                     </label>
                                     <input type="text" className="campos campos_dropDown" placeholder="Ex: V04HUA_BLD_12289_RJ..." {...register("identifier")}/>

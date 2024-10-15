@@ -180,6 +180,9 @@ function BoxNomeGrupoTemsComponente({
                     familia:{" "}
                   </p>
                   <p className="ttl_p">
+                    node:{" "}
+                  </p>
+                  <p className="ttl_p">
                     identifier:{" "}
                   </p>
                   <p className="ttl_p">
@@ -215,6 +218,7 @@ function BoxNomeGrupoTemsComponente({
                             <p className="info_tp_alm">{valueExists(tipo.frontTypeFailure)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.frontTypeTa)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.familia)}</p>
+                            <p className="info_tp_alm">{valueExists(tipo.node)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.identifier)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.frontNodeReference)}</p>
                             <p className="info_tp_alm">{valueExists(tipo.frontDomain)}</p>

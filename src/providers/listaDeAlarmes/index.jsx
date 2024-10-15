@@ -29,6 +29,8 @@ function ListaDeAlarmesProvider({ children }) {
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
 
+  const [lodding, setLodding] = useState(false);
+
   const filterAlarmes = async (data, page, pageSize) => {
     const dataFilter = {
       TIPO_TA: data.TIPO_TA || null,
@@ -48,6 +50,8 @@ function ListaDeAlarmesProvider({ children }) {
     };
 
     try {
+      setLodding(true)
+
       if(typeFilter === "geral"){
         const response = await axios
           .post(`${baseURL}/history-alarmes?page=${page}&size=${pageSize}`, dataFilter, {
@@ -101,6 +105,8 @@ function ListaDeAlarmesProvider({ children }) {
           setCols(cols)
           setRows(dto)
           setPag(response.data.currentPage)
+
+          setLodding(false)
 
           return response.data        
       } else {
@@ -157,11 +163,14 @@ function ListaDeAlarmesProvider({ children }) {
           setRows(dto)
           setPag(response.data.currentPage)
 
+          setLodding(false)
+
           return response.data         
       }
 
     } catch (error) {
       console.error(error)
+      setLodding(false)
     }
   };
 
@@ -177,7 +186,7 @@ function ListaDeAlarmesProvider({ children }) {
         setPageInd,
         pag, setPag, pagSiz, setPagSiz, linhas, setLinhas, typeFilter, setTypeFilter,
         totalItems, setTotalItems, pageCount, setPageCount, dataPesq, setDataPesq,
-        cols, setCols, rows, setRows
+        cols, setCols, rows, setRows, lodding, setLodding
       }}
     >
       {children}

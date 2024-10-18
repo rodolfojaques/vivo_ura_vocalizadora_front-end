@@ -228,7 +228,16 @@ export const FormModal = styled.form`
     gap: 15px;
 
     label {
-      font-size: 18px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+  }
+
+  .info_turn{
+    p{
+      font-size: 17px;
+      font-weight: bold;
+      color: purple;
     }
   }
 

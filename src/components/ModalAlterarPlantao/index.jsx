@@ -15,12 +15,10 @@ function ModalAlterarPlantao({ idUser }) {
     setAlterarPlantao, setAlterarPlantaoPagUser
   } = useContext(UserContext)
 
-  const [dateTurnsSubmmit, setDateTurnsSubmmit] = useState([]);
   const [dateForDelete, setDateForDelete] = useState([]);
   const [dateTurns, setDateTurns] = useState(usuarioClicado?.datas);
-  const [dateTurnsOld, setDateTurnsOld] = useState(usuarioClicado?.datas);
 
-  const [setarDT, setSetarDT] = useState(true);
+  const [setarDT, setSetarDT] = useState(false);
 
   const [newDateTurn, setNewDateTurn] = useState({})
   
@@ -36,13 +34,12 @@ function ModalAlterarPlantao({ idUser }) {
     .then(res => {
         setUsuarioClicado(res.data)
         setDateTurns(res.data.datas)
-        setDateTurnsOld(res.data.datas)
     })
     .catch(err => {
       console.error(err)
       toast.error("Erro ao buscar usuários!");
     })
-  },[setDateTurns,setDateTurnsOld])
+  },[setDateTurns,newDateTurn])
 
   const handleDateChange = (date) => {
     console.log('date',date);
@@ -52,51 +49,31 @@ function ModalAlterarPlantao({ idUser }) {
       dtFim: date[1].toISOString(),
     });
 
-    setDateTurns([...dateTurns, newDateTurn]);
-    setDateTurnsSubmmit([...dateTurnsSubmmit, newDateTurn]);
+    setSetarDT(true);
 
     console.log('dateTurns',dateTurns);
   };
 
-  const turnChangeSubInicio = (e,dt) => {
-    dt.dtInico = `${dt.dtInico.slice(0,11)}${e}${dt.dtInico.slice(16)}`
-  }
+  const turnChangeSubInicio = (e) => {
 
-  const turnChangeSubFim = (e,dt) => {
-    dt.dtFim = `${dt.dtFim.slice(0,11)}${e}${dt.dtFim.slice(16)}`
-  }
-
-  const turnChangeSub = () => {
-    
-  }
-
-  const handleTurnChangeSub = (event, index) => {
-    const updatedDateTurnsSub = [...dateTurnsSubmmit.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))];
-
-    const inicio = updatedDateTurnsSub[index].dtInicio
-
-    updatedDateTurnsSub[index].dtInicio = (
-      `${inicio.slice(0,11)}${event}${inicio.slice(16)}`
-    )
-  };
-
-  const handleTurnFimChangeSub = (event, index) => {
-    const updatedDateTurnsSub = [...dateTurnsSubmmit.sort((a,b)=> new Date(b?.dtInicio?.slice(0,10)) - new Date(a?.dtInicio?.slice(0,10)))];
-    const fim = updatedDateTurnsSub[index].dtFim
-
-    updatedDateTurnsSub[index].dtFim = (
-      `${fim.slice(0,11)}${event}${fim.slice(16)}`
-    )
-  };
-
-  const removeDateTurn = (index) => {
-    const dtt = dateTurns[index]
-    dateTurnsSubmmit.forEach((dt,i)=>{
-      if(dtt.dtInicio === dt.dtInicio && dtt.dtFim === dt.dtFim){
-        dateTurnsSubmmit.splice(i, 1);
-      }
+    setNewDateTurn({
+      dtInicio: `${newDateTurn.dtInicio.slice(0,11)}${e}${newDateTurn.dtInicio.slice(16)}`,
+      dtFim: newDateTurn.dtFim
     });
     
+  }
+
+  const turnChangeSubFim = (e) => {
+
+    setNewDateTurn({
+      dtInicio: newDateTurn.dtInicio,
+      dtFim: `${newDateTurn.dtFim.slice(0,11)}${e}${newDateTurn.dtFim.slice(16)}`,
+    });
+
+    console.log('newDateTurn =>>',newDateTurn);
+  }
+
+  const removeDateTurn = (index) => {
     dateTurns.splice(index, 1);
     setDateTurns([...dateTurns]);
   };
@@ -107,7 +84,7 @@ function ModalAlterarPlantao({ idUser }) {
     ])
   }
 
-  const createPlantoes = async () => {
+  const createPlantoes = async (data) => {
     dateForDelete?.forEach(id => {
       axios.delete(`${baseURL}/datas/delete/${id}`,{
         headers:{
@@ -116,8 +93,7 @@ function ModalAlterarPlantao({ idUser }) {
         }})
       .then(res => {
         toast.success("Plantões removidos com sucesso!")
-        setAlterarPlantao(false)
-        setAlterarPlantaoPagUser(false)
+        setDateForDelete([])
       })
       .catch(err => {
         console.error("Erro ao criar plantão.",err)
@@ -125,7 +101,7 @@ function ModalAlterarPlantao({ idUser }) {
       })      
     })  
     
-    dateTurnsSubmmit.forEach(async(data)=>{
+    if(!!data.dtInicio && !!data.dtFim){
       
       data.dtInicio = new Date(data.dtInicio)
       data.dtFim = new Date(data.dtFim)
@@ -140,17 +116,22 @@ function ModalAlterarPlantao({ idUser }) {
               'Authorization': `Bearer ${usuario?.token}`
           }})
       .then(res => {
-        toast.success("Plantões adicionados com sucesso!")
-        setAlterarPlantao(false)
-        setAlterarPlantaoPagUser(false)
+        toast.success("Plantão adicionado com sucesso!")
+        setNewDateTurn({})
       })
       .catch(err => {
         console.error("Erro ao submeter datas de plantão",err)
         toast.error("Erro ao submeter datas de plantão")
+        setNewDateTurn({})
       })
-    })  
-    console.log('dateTurnsSubmmit',dateTurnsSubmmit);
+    }
       
+  }
+
+  const turnChangeSub = async () => {
+    await createPlantoes(newDateTurn);
+
+    setSetarDT(false);    
   }
 
   return (
@@ -176,38 +157,22 @@ function ModalAlterarPlantao({ idUser }) {
                     <div className="div-datas">
                       <p>
                         Início: <span className="value">{new Date(dateTurn.dtInicio).toLocaleDateString()}</span> 
-                      </p>
-                      {
-                        !!dateTurn.id ? 
+                      </p> 
                         <div className="info_turn">
                           <p className="turn">
-                            Hora: <span className="value">{new Date(dateTurn.dtInicio).toLocaleTimeString()}</span>
+                            hora: <span className="value">{new Date(dateTurn.dtInicio).toLocaleTimeString()}</span>
                           </p>
                         </div>
-                        :
-                        <div className="div-select-turn">
-                          <label>Hora:</label>
-                          <input type="time" className="time-input" onChange={(e)=> handleTurnChangeSub(e.target.value, index)}/>
-                        </div>                  
-                      }
                     </div>
                     <div className="div-datas">
                       <p>
                         Fim: <span className="value">{new Date(dateTurn.dtFim).toLocaleDateString()}</span> 
-                      </p>
-                      {
-                        !!dateTurn.id ? 
+                      </p> 
                         <div className="info_turn">
                           <p className="turn">
-                            Hora: <span className="value">{new Date(dateTurn.dtFim).toLocaleTimeString()}</span>
+                            hora: <span className="value">{new Date(dateTurn.dtFim).toLocaleTimeString()}</span>
                           </p>
                         </div>
-                        :
-                        <div className="div-select-turn">
-                          <label>Hora:</label>
-                          <input type="time" className="time-input" onChange={(e)=> handleTurnFimChangeSub(e.target.value, index)}/>
-                        </div>                  
-                      }
                     </div>                     
                   </div>
                   <button
@@ -231,11 +196,22 @@ function ModalAlterarPlantao({ idUser }) {
           <div className="div-buttons">
             <button onClick={(e)=> {
               e.preventDefault()
-              createPlantoes()
-              }} className="btn alterar" type="submit">
+              createPlantoes({})
+              setAlterarPlantao(false)
+              setAlterarPlantaoPagUser(false)
+              }} 
+              className="btn alterar" 
+              type="submit"
+            >
               Alterar
             </button>
-            <button className="btn cancelar">Cancelar</button>
+            <button className="btn cancelar"
+              onClick={() => {
+                setNewDateTurn({})
+                setAlterarPlantao(false)
+                setAlterarPlantaoPagUser(false)
+              }}
+            >Cancelar</button>
           </div>
         {
           setarDT?
@@ -246,8 +222,8 @@ function ModalAlterarPlantao({ idUser }) {
                     Início: <span className="value">{new Date(newDateTurn.dtInicio).toLocaleDateString()}</span> 
                   </p>
                   <div className="div-select-turn">
-                    <label>Hora:</label>
-                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubInicio(e.target.value, newDateTurn)}/>
+                    <label className="hr">hora:</label>
+                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubInicio(e.target.value)}/>
                   </div>  
                 </div>
                 <div className="div-datas">
@@ -255,10 +231,31 @@ function ModalAlterarPlantao({ idUser }) {
                     Fim: <span className="value">{new Date(newDateTurn.dtFim).toLocaleDateString()}</span> 
                   </p>
                   <div className="div-select-turn">
-                    <label>Hora:</label>
-                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubFim(e.target.value, newDateTurn)}/>
+                    <label className="hr">hora:</label>
+                    <input type="time" className="time-input" onChange={(e)=> turnChangeSubFim(e.target.value)}/>
                   </div> 
-                </div>                
+                </div>
+                <div className="div-datas">
+                  <button
+                    className="btn cancelar"
+                    type="button"
+                    onClick={() => {
+                      setNewDateTurn({})
+                      setSetarDT(false);
+                    }}
+                  >
+                    Cancelar
+                  </button> 
+                  <button
+                    onClick={() => {
+                      turnChangeSub();                      
+                    }}
+                    className="btn alterar"
+                    type="button"
+                  >
+                    Adicionar
+                  </button>  
+                </div>               
               </div>                              
             </div> : <></>
         }

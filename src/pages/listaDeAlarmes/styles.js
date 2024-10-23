@@ -209,6 +209,29 @@ export const FormListAlarmStl = styled.form`
     }
   }
 
+  .btn_search {
+    background-color: purple;
+    color: #fff;
+    border-style: none;
+    margin-top: 0.9rem;
+
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
   .pesquisa_btnSubmit {
     height: 3rem;
     width: 70%;
@@ -217,7 +240,7 @@ export const FormListAlarmStl = styled.form`
     justify-content: flex-start;
     align-items: flex-end;
     padding-left: 1rem;
-    gap: 1rem;
+    gap: .5rem;
 
     .barra_pesquisa {
       width: 18rem;

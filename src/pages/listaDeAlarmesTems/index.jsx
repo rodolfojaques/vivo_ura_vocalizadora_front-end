@@ -1,4 +1,4 @@
-import { useContext,useEffect } from "react";
+import { useContext,useEffect,useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import { FormListAlarmTemsStl, ListaDeAlarmesTemsStl } from "./styles";
@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import TableTemsComponent from "../../components/tableReactTems";
 import { ListaDeAlarmesTemsContext } from "../../providers/listaDeAlarmesTems";
 import { setTipoPlanta, setTipoRede, setTipoTA } from "../../utils/mocks/tems";
+
+import * as Icon from "react-bootstrap-icons";
 
 function ListaDeAlarmesTems() {
 
@@ -20,6 +22,8 @@ function ListaDeAlarmesTems() {
     dataPesq,
   } = useContext(ListaDeAlarmesTemsContext);
 
+  const [ valuePesq, setValuePesq ] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -31,8 +35,8 @@ function ListaDeAlarmesTems() {
     filterAlarmes(data,pag,pagSiz);
   };
 
-  const handleValueChange = (event) => {
-    const data = {ALARME: event.target.value};
+  const handleValueClick = () => {
+    const data = {ALARME: valuePesq};
     setDataPesq(data)
     setTypeFilter("specifc")
     filterAlarmes(data,1,pagSiz);
@@ -167,11 +171,16 @@ function ListaDeAlarmesTems() {
           </div>
           <div className="pesquisa_btnSubmit">
             <input
-              onChange={(event) => handleValueChange(event)}
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"
+              onChange={(e) => setValuePesq(e.target.value)}
             />
+            <span className="btn_search"
+              onClick={() => handleValueClick()}
+            >
+              <Icon.Search/>
+            </span>
           </div>
         </FormListAlarmTemsStl>
         <div className="quantidade_linhas">

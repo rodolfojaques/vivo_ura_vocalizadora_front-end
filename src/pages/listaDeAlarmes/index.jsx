@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import CaminhoComponent from "../../components/Caminho";
 import Header from "../../components/Header";
 import { FormListAlarmStl, ListaDeAlarmesStl } from "./styles";
 import { siglaSite, arrEstado, arrTipoAlarme, ultAlarmesEm, localidade } from "../../utils/pagListaAlarmes";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { ListaDeAlarmesContext } from "../../providers/listaDeAlarmes";
 import TableDragSGInfra from "../../components/tableSGInfra";
+
+import * as Icon from "react-bootstrap-icons";
 
 function ListaDeAlarmes() {
   const {
@@ -16,6 +18,8 @@ function ListaDeAlarmes() {
     setTypeFilter, 
     setDataPesq
   } = useContext(ListaDeAlarmesContext);
+
+  const [ valuePesq, setValuePesq ] = useState("");
 
   const {
     register,
@@ -28,8 +32,8 @@ function ListaDeAlarmes() {
     filterAlarmes(data,pag,pagSiz);
   };
 
-  const handleValueChange = (event) => {
-    const data = {ALARME: event.target.value};
+  const handleValueClick = () => {
+    const data = {ALARME: valuePesq};
     setDataPesq(data)
     setTypeFilter("specifc")
     filterAlarmes(data,1,pagSiz);
@@ -67,8 +71,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("ESTADO")}>
                 <option value={null}>{null}</option>
-                {arrEstado.map((item) => (
-                  <option key={item} value={item}>
+                {arrEstado.map((item,i) => (
+                  <option key={i} value={item}>
                     {item}
                   </option>
                 ))}
@@ -80,8 +84,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("LOCALIDADE")}>
                 <option value={null}>{null}</option>
-                {localidade.map((item) => (
-                  <option key={item} value={item}>
+                {localidade.map((item,i) => (
+                  <option key={i} value={item}>
                     {item}
                   </option>
                 ))}
@@ -93,8 +97,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("SITE")}>
                 <option value={null}>{null}</option>
-                {siglaSite.map((item) => (
-                  <option key={item} value={item}>
+                {siglaSite.map((item,i) => (
+                  <option key={i} value={item}>
                     {item}
                   </option>
                 ))}
@@ -106,8 +110,8 @@ function ListaDeAlarmes() {
               </label>
               <select className="campos_dropDown" {...register("TIPO_ALARME")}>
                 <option value={null}>{null}</option>
-                {arrTipoAlarme.map((item) => (
-                  <option key={item} value={item}>
+                {arrTipoAlarme.map((item,i) => (
+                  <option key={i} value={item}>
                     {item}
                   </option>
                 ))}
@@ -158,8 +162,8 @@ function ListaDeAlarmes() {
                 </label>
                 <select className="campos_dropDown" {...register("ULTIMOS_EM")}>
                   <option value={null}>{null}</option>
-                  {ultAlarmesEm.map((item) => (
-                    <option key={item} value={item}>
+                  {ultAlarmesEm.map((item,i) => (
+                    <option key={i} value={item}>
                       {item}
                     </option>
                   ))}
@@ -174,11 +178,16 @@ function ListaDeAlarmes() {
           </div>
           <div className="pesquisa_btnSubmit">
             <input
-              onChange={(event) => handleValueChange(event)}
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"
+              onChange={(event) => setValuePesq(event.target.value)}
             />
+            <span className="btn_search"
+              onClick={() => handleValueClick()}
+            >
+              <Icon.Search/>
+            </span>
           </div>
         </FormListAlarmStl>
         <div className="quantidade_linhas">

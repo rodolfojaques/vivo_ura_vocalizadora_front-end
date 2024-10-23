@@ -70,8 +70,15 @@ function TableTemsComponent(){
                     {rows.map((row, i) => (
                         <tr key={i}>
                         {Object.entries(row).map(([k, v], idx) => (
-                            k === "ALARME"?
-                            <td style={{color:'purple', cursor: 'pointer'}} onClick={()=> alert(row[cols[idx]])} key={idx}>
+                            k === "description" || k === "frontProblemCause"?
+                            <td className="info-alert" style={{
+                                color: 'purple', 
+                                cursor: 'pointer',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                maxWidth: '300px'
+                            }} onClick={()=> alert(row[cols[idx]])} key={idx}>
                                 {row[cols[idx]]}
                             </td>
                             :

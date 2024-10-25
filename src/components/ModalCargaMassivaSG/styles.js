@@ -22,9 +22,6 @@ z-index: 51;
 
 export const ModalCargaMassivaStl = styled.div`
 
-    width: 50%;
-    height: 100%;
-
     border-radius: 5px;
     background-color: white;
 

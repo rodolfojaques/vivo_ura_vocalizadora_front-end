@@ -68,7 +68,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
           const cols = [
             "firstSeen",
             "frontTypeTa",
-            "frontTypeTA",
+            "tipoTa",
+            "tipoTA",
             "frontNetworkType",
             "tipoRede",
             "estadoSigla",
@@ -120,7 +121,8 @@ function ListaDeAlarmesTemsProvider({ children }) {
           const cols = [
             "firstSeen",
             "frontTypeTa",
-            "frontTypeTA",
+            "tipoTa",
+            "tipoTA",
             "frontNetworkType",
             "tipoRede",
             "estadoSigla",

@@ -93,7 +93,8 @@ export async function DtoDL(data) {
       const {
         firstSeen,
         persistent_frontTypeTa,
-        persistent_frontTypeTA,
+        persistent_tipoTa,
+        persistent_tipoTA,
         persistent_frontNetworkType,
         persistent_tipoRede,
         persistent_estadoSigla,
@@ -126,7 +127,8 @@ export async function DtoDL(data) {
       transfer.push({
         firstSeen: firstSeen,
         frontTypeTa: persistent_frontTypeTa,
-        frontTypeTA: persistent_frontTypeTA,
+        tipoTa: persistent_tipoTa,
+        tipoTA: persistent_tipoTA,
         frontNetworkType: persistent_frontNetworkType,
         tipoRede: persistent_tipoRede,
         estadoSigla: persistent_estadoSigla,

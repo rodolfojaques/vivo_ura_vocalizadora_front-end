@@ -22,9 +22,6 @@ z-index: 51;
 
 export const ModalCargaMassivaStl = styled.div`
 
-    width: 70%;
-    height: 100%;
-
     border-radius: 5px;
     background-color: white;
 
@@ -48,6 +45,18 @@ export const ModalCargaMassivaStl = styled.div`
         word-spacing: 1.4px;
 
         text-align: start;
+    }
+
+    .text-info-2{
+        color: gray;
+        font-size: x-small;
+
+        line-height: 1.4;
+        letter-spacing: 0.3px;
+        word-spacing: 1.4px;
+
+        text-align: start;
+        line-height: 1.7;
     }
 
     .form_carga_massiva{
@@ -124,4 +133,6 @@ export const ModalCargaMassivaStl = styled.div`
             background-color: green;
         }
     }
-`;
+
+
+    `;

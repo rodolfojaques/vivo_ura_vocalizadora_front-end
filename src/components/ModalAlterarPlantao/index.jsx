@@ -21,6 +21,7 @@ function ModalAlterarPlantao({ idUser }) {
   const [setarDT, setSetarDT] = useState(false);
 
   const [newDateTurn, setNewDateTurn] = useState({})
+  const [displayFim, setDisplayFim] = useState({})
   
   idUser = idUser || usuario.user.id
 
@@ -48,6 +49,8 @@ function ModalAlterarPlantao({ idUser }) {
       dtInicio: date[0].toISOString(),
       dtFim: date[1].toISOString(),
     });
+
+    setDisplayFim({dtFim: date[1].toISOString()})
 
     setSetarDT(true);
 
@@ -228,7 +231,7 @@ function ModalAlterarPlantao({ idUser }) {
                 </div>
                 <div className="div-datas">
                   <p>
-                    Fim: <span className="value">{new Date(newDateTurn.dtFim).toLocaleDateString()}</span> 
+                    Fim: <span className="value">{new Date(displayFim.dtFim).toLocaleDateString()}</span> 
                   </p>
                   <div className="div-select-turn">
                     <label className="hr">hora:</label>

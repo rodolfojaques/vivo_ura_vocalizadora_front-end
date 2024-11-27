@@ -22,7 +22,7 @@
 
 # CMD ["yarn", "start"]
 
-FROM node:latest as node
+FROM node:18 as node
 WORKDIR /app
 COPY . .
 RUN yarn install

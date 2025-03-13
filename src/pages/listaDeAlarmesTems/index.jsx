@@ -35,13 +35,6 @@ function ListaDeAlarmesTems() {
     filterAlarmes(data,pag,pagSiz);
   };
 
-  const handleValueClick = () => {
-    const data = {ALARME: valuePesq};
-    setDataPesq(data)
-    setTypeFilter("specifc")
-    filterAlarmes(data,1,pagSiz);
-  };
-
   useEffect(() => {
     filterAlarmes(dataPesq,pag,pagSiz)
   }, [pag,pagSiz]);
@@ -49,7 +42,7 @@ function ListaDeAlarmesTems() {
   return (
     <ListaDeAlarmesTemsStl> 
       <Header />
-      <CaminhoComponent path={"Lista de Alarmes DL-Tems"} typeAlarm={"DL"}/>
+      <CaminhoComponent path={"Histórico de Alarmes DL-Tems"} typeAlarm={"DL"}/>
       <div className="cabListAlarm">
         <FormListAlarmTemsStl onSubmit={handleSubmit(formSchema)}>
           <div className="campos_principais">
@@ -169,19 +162,23 @@ function ListaDeAlarmesTems() {
               </div>
             </div>
           </div>
-          <div className="pesquisa_btnSubmit">
+          <form className="pesquisa_btnSubmit" onSubmit={handleSubmit(formSchema)}>
             <input
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"
               onChange={(e) => setValuePesq(e.target.value)}
+              {...register("ALARME")}
             />
-            <span className="btn_search"
-              onClick={() => handleValueClick()}
+            <button type="submit" className="btn_search"  
+              onClick={(event) => {
+                event.preventDefault(); // Evita o reload da página
+                handleSubmit(formSchema)();
+              }}
             >
               <Icon.Search/>
-            </span>
-          </div>
+            </button>
+          </form>
         </FormListAlarmTemsStl>
         <div className="quantidade_linhas">
           <label htmlFor="" className="quant_lin_label">

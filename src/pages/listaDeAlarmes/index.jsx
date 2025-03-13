@@ -32,18 +32,10 @@ function ListaDeAlarmes() {
     filterAlarmes(data,pag,pagSiz);
   };
 
-  const handleValueClick = () => {
-    const data = {ALARME: valuePesq};
-    setDataPesq(data)
-    setTypeFilter("specifc")
-    filterAlarmes(data,1,pagSiz);
-  };
-
-
   return (
     <ListaDeAlarmesStl>
       <Header />
-      <CaminhoComponent path={"Lista de Alarmes"} />
+      <CaminhoComponent path={"Histórico de Alarmes"} />
       <div className="cabListAlarm">
         <FormListAlarmStl onSubmit={handleSubmit(formSchema)}>
           <div className="campos_principais">
@@ -181,13 +173,18 @@ function ListaDeAlarmes() {
               placeholder="Pesquisar"
               type="text"
               className="barra_pesquisa"
-              onChange={(event) => setValuePesq(event.target.value)}
+              onChange={(e) => setValuePesq(e.target.value)}
+              {...register("ALARME")}
             />
-            <span className="btn_search"
-              onClick={() => handleValueClick()}
+            <button type="submit" className="btn_search"  
+              onClick={(event) => {
+                event.preventDefault(); // Evita o reload da página
+                handleSubmit(formSchema)();
+              }}
+              // onClick={() => handleValueClick()}
             >
               <Icon.Search/>
-            </span>
+            </button>
           </div>
         </FormListAlarmStl>
         <div className="quantidade_linhas">

@@ -43,7 +43,7 @@ function Header() {
               onClick={()=> setClickItemListAlarm(!clickItemListAlarm)}
               className="item_modal-menu"
             >
-              <p className="str_item_menu">Lista de Alarmes</p>
+              <p className="str_item_menu">Histórico de Alarmes</p>
               {
                 clickItemListAlarm? <Icon.ChevronDown className="icon-style"/>:<Icon.ChevronLeft className="icon-style"/> 
               }              

@@ -44,122 +44,63 @@ function ListaDeAlarmesTemsProvider({ children }) {
       DATA_INICIO: data.DATA_INICIO || null,
       DATA_FIM: data.DATA_FIM || null,
       ULTIMOS_EM: data.ULTIMOS_EM || null,
-    };
-
-    const dataFilterSpecific = {
       ALARME: data.ALARME || null,
     };
 
     try {
       setLodding(true)
+      const response = await axios
+        .post(`${baseURL}/alarmes-tems/filter-general?page=${page}&size=${pageSize}`, dataFilter, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }) 
+        setArrAlarm(response.data.data)
+        setPageCount(response.data.pageCount)
+        setTotalItems(response.data.total)
+        
+      const dto = await DtoDL(response.data.data)
+      const cols = [
+        "firstSeen",
+        "frontTypeTa",
+        "tipoTa",
+        "tipoTA",
+        "frontNetworkType",
+        "tipoRede",
+        "estadoSigla",
+        "localidadeSigla",
+        "frontAlarmId",
+        "frontTypeFailure",
+        "tipoFalha",
+        "frontPlantType",
+        "tipoPlanta",
+        "classificacao",
+        "severity",
+        "frontSpecificProblem",
+        "specificProblem",
+        "tipoAlarme",
+        "tipoDeAlarme",
+        "frontDomain",
+        "familia",
+        "frontProblemCause",
+        "manager",
+        "node",
+        "frontVendor",
+        "matchedCounter",
+        "identifier",
+        "description",
+        "lastSeen",
+        "type",
+        "ta"
+      ]
 
-      if(typeFilter == "geral"){
-        const response = await axios
-          .post(`${baseURL}/alarmes-tems?page=${page}&size=${pageSize}`, dataFilter, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }) 
-          setArrAlarm(response.data.data)
-          setPageCount(response.data.pageCount)
-          setTotalItems(response.data.total)
-          
-          const dto = await DtoDL(response.data.data)
-          const cols = [
-            "firstSeen",
-            "frontTypeTa",
-            "tipoTa",
-            "tipoTA",
-            "frontNetworkType",
-            "tipoRede",
-            "estadoSigla",
-            "localidadeSigla",
-            "frontAlarmId",
-            "frontTypeFailure",
-            "tipoFalha",
-            "frontPlantType",
-            "tipoPlanta",
-            "classificacao",
-            "severity",
-            "frontSpecificProblem",
-            "specificProblem",
-            "tipoAlarme",
-            "tipoDeAlarme",
-            "frontDomain",
-            "familia",
-            "frontProblemCause",
-            "manager",
-            "node",
-            "frontVendor",
-            "matchedCounter",
-            "identifier",
-            "description",
-            "lastSeen",
-            "type",
-            "ta"
-          ]
+      setCols(cols)
+      setRows(dto)
+      setPag(response.data.currentPage)
 
-          setCols(cols)
-          setRows(dto)
-          setPag(response.data.currentPage)
+      setLodding(false)
 
-          setLodding(false)
-
-          return response.data        
-      } else {
-        const response = await axios
-          .post(`${baseURL}/alarmes-tems/filter?page=${page}&size=${pageSize}`, dataFilterSpecific, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }) 
-          setArrAlarm(response.data.data)
-          setPageCount(response.data.pageCount)
-          setTotalItems(response.data.total)
-          
-          const dto = await DtoDL(response?.data?.data)
-          const cols = [
-            "firstSeen",
-            "frontTypeTa",
-            "tipoTa",
-            "tipoTA",
-            "frontNetworkType",
-            "tipoRede",
-            "estadoSigla",
-            "localidadeSigla",
-            "frontAlarmId",
-            "frontTypeFailure",
-            "tipoFalha",
-            "frontPlantType",
-            "tipoPlanta",
-            "classificacao",
-            "severity",
-            "frontSpecificProblem",
-            "specificProblem",
-            "tipoAlarme",
-            "tipoDeAlarme",
-            "frontDomain",
-            "familia",
-            "frontProblemCause",
-            "manager",
-            "node",
-            "frontVendor",
-            "matchedCounter",
-            "identifier",
-            "description",
-            "lastSeen",
-            "type",
-            "ta"
-          ]
-
-          setCols(cols)
-          setRows(dto)
-          setPag(response.data.currentPage)
-
-          setLodding(false)
-
-          return response.data         
-      }
+      return response.data   
 
     } catch (error) {
       setLodding(false)
